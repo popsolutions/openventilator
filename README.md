@@ -17,6 +17,6 @@ To join the whatsappgroup: https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 <p float="left">
 	<img src="https://www.popsolutions.co/web/image/64905/img1.jpeg" alt="OpenVentilator" height="200">
 	<img src="https://www.popsolutions.co/web/image/64901/Img3.JPG.png" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64904/Img6.png" alt="OpenVentilator" height="">
+	<img src="https://www.popsolutions.co/web/image/64904/Img6.png" alt="OpenVentilator" height="200">
 </p>
 
