@@ -1,4 +1,4 @@
-# openventilator
+# OpenVentilator
 
 Welcome to the openventilator project.
 
