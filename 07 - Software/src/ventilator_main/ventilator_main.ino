@@ -2,6 +2,8 @@
   This is a software developed by Juan Luis Méndez for the project Open Ventilator, please follow the license GNU GPLv3
   Also notice that doc and development is going on and we need help.
   This idea does not go beyond an idea. It has not been tested! It only serves to start, in any way can be interpreted as more than this.
+  Although electronic volume control is implemented. At this stage and to vary the project, when not using a second motor, it should be done mechanically by changing the distance to the fole, ambu or other compressor that is implemented.
+  then we will plan the same mechanized
 
   The project is based on the tension control (PWM) of the speed of a hypothetical VCC glass-lifting motor.
   Assume that the motor runs at 30 RPM with 10 Vdc. (factor 212 PWM) and at 3 RPm 6Vcc. (Factor 127 PWM).
@@ -44,8 +46,8 @@ void loop() {
 
 //if (val == LOW) 
 
-RPm = map (sensorValue_RPM,1,1023,5,30);// variables to be displayed 
-Vol = map (sensorValue_Vol,1,1023,50,900);// variables to be displayed
+RPm = map (sensorValue_RPM,1,1023,5,30);// variables to be displayed " IPM 5 to 30 "
+Vol = map (sensorValue_Vol,1,1023,50,900);// variables to be displayed " volume 50 to 900 ml "
 Re = map (sensorValue_Re,1,1023,5,-5);//variables to be displayed.. variable that is also used to calculate the inspiratory / expiration ratio 
  
 if (val == LOW) // establishes expiration portion when it passes 180º
