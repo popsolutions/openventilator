@@ -1,3 +1,0 @@
-/*
- * Funtions for the LCD
- */
