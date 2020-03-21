@@ -13,6 +13,8 @@ For more information: https://www.popsolutions.co/openventilator?#scrollTop=0
 
 To join the whatsappgroup: https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
+Slack Channel for Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg
+
 
 <p float="left">
 	<img src="https://www.popsolutions.co/web/image/64905/img1.jpeg" alt="OpenVentilator" height="200">
