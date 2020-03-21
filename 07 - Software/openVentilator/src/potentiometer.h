@@ -10,12 +10,14 @@ class potentiometer {
  * private Variables and Functions (only for use in the class)
  */
 private:
-void getPosition();
+uint8_t gradiations;
+uint8_t potiPin;
 /*
  * public Variables and Functions (for use outside the class)
  */
 public:
 potentiometer(uint8_t potiPin, uint8_t gradiations);
-void getValue();
+uint8_t getValue();
+bool isTurned();
 };
 #endif
