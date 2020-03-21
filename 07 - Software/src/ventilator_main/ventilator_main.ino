@@ -1,6 +1,13 @@
 /*
   This is a software developed by Juan Luis Méndez for the project Open Ventilator, please follow the license GNU GPLv3
-  Also notice that doc and development is going on and we need help
+  Also notice that doc and development is going on and we need help.
+  This idea does not go beyond an idea. It has not been tested! It only serves to start, in any way can be interpreted as more than this.
+
+  The project is based on the tension control (PWM) of the speed of a hypothetical VCC glass-lifting motor.
+  Assume that the motor runs at 30 RPM with 10 Vdc. (factor 212 PWM) and at 3 RPm 6Vcc. (Factor 127 PWM).
+  As a hypothesis, use a variation of +/- 2 volts (+/- 25 PWM) to correct the expiratory / expiratory relationship.They are added or subtracted depending on the control reading. (Analog A1)
+  "All these values ​​will have to be adjusted for the choice of a standard motor."
+  To determine when we go from inspiration to expiration. Create a crazy reading on pine 12. 
   
 Connection to the IBT-2 board:
 
@@ -45,14 +52,14 @@ if (val == LOW) // establishes expiration portion when it passes 180º
       
   {
     // forward rotation
-   int forward_RPM = (sensorValue_RPM/8 +(Re * 5)+43); 
-    analogWrite(LPWM_Output, forward_RPM);
-    analogWrite(RPWM_Output, 0);
+   int forward_RPM = (sensorValue_RPM/8 +(Re * 5)+43);// This equation allows us to control the speed and change the INSP / EXPI relationship. 
+    analogWrite(LPWM_Output, forward_RPM);// H bridge control
+    analogWrite(RPWM_Output, 0);//H bridge control
 
   } else {
     // forward rotation
-    int forward_RPM = (sensorValue_RPM/8 - (Re * 5)+43);
-    analogWrite(LPWM_Output, forward_RPM);
-    analogWrite(RPWM_Output, 0);
+    int forward_RPM = (sensorValue_RPM/8 - (Re * 5)+43); // This equation allows us to control the speed and change the INSP / EXPI relationship.
+    analogWrite(LPWM_Output, forward_RPM);//H bridge control
+    analogWrite(RPWM_Output, 0);//H bridge control
   }
 }
