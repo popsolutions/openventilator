@@ -1,4 +1,6 @@
 /*
+  This is a software developed by Juan Luis Méndez for the project Open Ventilator, please follow the license GNU GPLv3
+  Also notice that doc and development is going on and we need help
   
 Connection to the IBT-2 board:
 
