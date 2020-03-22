@@ -26,9 +26,8 @@ Documentation, Hardware, Design and Code discussions: https://bit.ly/2xdUap2
 Do you want to know in what point is the project? Please check the [#TakenDecision Channel on OurSlack](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
 <p float="left">
-	<img src="https://www.popsolutions.co/web/image/64905/img1.jpeg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64901/Img3.JPG.png" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64904/Img6.png" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64924/WhatsApp%20Image%202020-03-22%20at%2012.30.25.jpeg" alt="OpenVentilator" height="400">
+	
 </p>
 
 ### If I have seen further it is by standing on the shoulders of Giants.
