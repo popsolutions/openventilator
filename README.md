@@ -9,7 +9,11 @@ The parts are made to be easilly found, thechnical features are still being deci
 
 This initiative was taken by Jeremias who I Contacted for information on the project and that asked me on a way of making the project OpenSource.
 
-## For more information: 
+# Do you want to help? 
+[Please follow the rules of the community](https://www.popsolutions.co/community-guidelines?#scrollTop=0)
+Also don't forget that many questions have been asked before you had the same question, so please check our [FAQ](https://www.popsolutions.co/forum/comunidade-aberta-1/faq)
+
+## For more information this is the official page: 
 https://www.popsolutions.co/openventilator?#scrollTop=0
 
 ### To join the whatsappgroup: 
