@@ -5,15 +5,23 @@
 #ifndef PRESSURESENSOR_H
 #define PRESSURESENSOR_H
 
-class pressureSensor {
-/*
+class pressureSensor
+{
+    /*
  * private Variables and Functions (only for use in the class)
  */
 private:
-/*
+    uint8_t electrodePin;
+    uint8_t topIndicator;
+    uint8_t bottomIndicator;
+
+    /*
  * public Variables and Functions (for use outside the class)
  */
 public:
-pressureSensor(uint8_t anodePin, uint8_t cathodePin, uint8_t topIndicator, uint8_t bottomIndicator);
+    pressureSensor(uint8_t electrodePin, uint8_t topIndicatorPin, uint8_t bottomIndicatorPin);
+    bool stateOf(uint8_t indicator);
+    uint16_t getPressure();
+    bool error();
 };
 #endif
