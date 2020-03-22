@@ -22,6 +22,9 @@ https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 ### Slack Channel
 Documentation, Hardware, Design and Code discussions: https://bit.ly/2xdUap2
 
+##Taken decisions
+Do you want to know in what point is the project? Please check the [#TakenDecision Channel on OurSlack](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
+
 <p float="left">
 	<img src="https://www.popsolutions.co/web/image/64905/img1.jpeg" alt="OpenVentilator" height="200">
 	<img src="https://www.popsolutions.co/web/image/64901/Img3.JPG.png" alt="OpenVentilator" height="200">
