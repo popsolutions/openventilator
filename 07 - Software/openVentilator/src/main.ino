@@ -10,9 +10,9 @@
  */
 #define DEBUG true
 // Ranges for the Parameters
-#define RANGE_VOLUME 10
-#define RANGE_BREATHS 10
-#define RANGE_PROPORTION 10
+#define RANGE_VOLUME 5
+#define RANGE_BREATHS 5
+#define RANGE_PROPORTION 5
 // LCD defines
 #define LCD_ADRESS 0x27
 #define LCD_COLUMNS 16
@@ -55,6 +55,9 @@ void loop() {
 	if(poti3.isTurned()) {
 		showProportions(proportions);
 	}
+	delay(200);
+	Serial.print("Messwert: ");
+	Serial.println(analogRead(A3));
 }
 
 void showVolume(uint8_t value){
