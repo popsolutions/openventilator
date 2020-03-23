@@ -25,9 +25,11 @@ Regardless of your expertise all help is welcome!
 > - [**Portuguese**](https://www.popsolutions.co/community-guidelines?#scrollTop=0)
 
 - **WhatsApp group:** General chat relating the project
+
   -- **https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3**
 
 - **Slack Channel:** Documentation, Hardware, Design and Code discussions:
+
   -- **https://bit.ly/2xdUap2**
 
 ## Please follow the [Contributing Guidelines](./github/CONTRIBUTING.md)
