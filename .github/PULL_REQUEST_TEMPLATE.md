@@ -1,5 +1,3 @@
-# Pull request Template
-
 ### Proposed Changes
 
 Describe the big picture of your changes here.
