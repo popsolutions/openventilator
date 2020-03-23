@@ -1,7 +1,3 @@
-# Issue Template
-
----
-
 ## The problem
 
 Briefly describe the issue Problem to discuss here
