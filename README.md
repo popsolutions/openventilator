@@ -2,7 +2,7 @@
 
 ### Welcome to the OpenVentilator project!
 
-Based on the information given by Jeremias Almada from Argentina we are developing an OpenSource Ventilator for the Covid-19 Crisis.
+> Based on the information given by Jeremias Almada from Argentina we are developing an OpenSource Ventilator for the Covid-19 Crisis.
 
 The idea is to provide a **reliable source of ventilation for people in dificult economical situations.**  
 The parts are made to be easilly found, thechnical features are still being decided, the ventilator has not being validated yet.
@@ -21,7 +21,7 @@ Regardless of your expertise all help is welcome!
 
 > **Please follow the rules of the community**
 >
-> - [**English**](https://github.com/popsolutions/openventilator/blob/master/CODE_OF_CONDUCT.md)
+> - [**English**](.github/CODE_OF_CONDUCT.md)
 > - [**Portuguese**](https://www.popsolutions.co/community-guidelines?#scrollTop=0)
 
 - **WhatsApp group:** General chat relating the project
@@ -30,7 +30,7 @@ Regardless of your expertise all help is welcome!
 - **Slack Channel:** Documentation, Hardware, Design and Code discussions:
   -- **https://bit.ly/2xdUap2**
 
-### If contributing, please follow the [Contributing Guidelines]()
+## Please follow the [Contributing Guidelines](./github/CONTRIBUTING.md)
 
 ## Taken decisions
 
