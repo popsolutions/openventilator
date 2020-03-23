@@ -32,7 +32,7 @@ Regardless of your expertise all help is welcome!
 
   -- **https://bit.ly/2xdUap2**
 
-## Please follow the [Contributing Guidelines](./github/CONTRIBUTING.md)
+## Please follow the [Contributing Guidelines](.github/CONTRIBUTING.md)
 
 ## Taken decisions
 
