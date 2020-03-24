@@ -63,7 +63,6 @@ Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/o
 
 Speciall thanks to:
  - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
- - [Juan Luis Méndez Ambrosio]
  - Fabian Franz
  - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
  - [Washington Perez](https://www.linkedin.com/in/washingtonperez/) 
