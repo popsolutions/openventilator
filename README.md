@@ -68,11 +68,11 @@ Speciall thanks to:
  - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
  - [Washington Perez Designer](https://www.linkedin.com/in/washingtonperez/) 
  - [Jaqueline Passos](https://www.linkedin.com/in/jaquelinepassos/)
- - [Amanda Pellini] (https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
+ - [Amanda Pellini](https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
  - Marguelgtz from Mexico leading the Scrum project
  - Henrique Aguilar funding and commercial operation
  - Rodrigo Borges 
- - [Henrique Nery] (https://www.linkedin.com/in/henrique-nery-650216a2/) 
+ - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
  - Carlos Delfino</br>
  - <a href="https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf">The MIT guys from this paper</a>: Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil,
 Alexander Slocum, Jussi Saukkonen. 
