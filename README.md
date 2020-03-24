@@ -28,6 +28,7 @@ Thechnical features are still being decided, the ventilator has not being valida
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
 - Mechanical Volumetric Ventilation Adjustment
 - Contagion reduction by contaminated air
+- Sanitary Regulation [Brazil Regulations](http://www.in.gov.br/en/web/dou/-/resolucao-rdc-n-356-de-23-de-marco-de-2020-249317437?fbclid=IwAR3tQyhVUPMqrTcX5HAW9Tq7MfYLCYCk8IwH2yqnO6RuaKEyzOCC9ImPHMI)
 
 ## Success Criteria
 Validated Prototype (Looking for partners for testing on Lung Simulators)
