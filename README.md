@@ -63,14 +63,16 @@ Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/o
 
 Speciall thanks to:
  - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
- - Juan Luis Méndez Ambrosio (my father and ethernal mentor) & Electronics
+ - [Juan Luis Méndez Ambrosio]
  - Fabian Franz
  - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
- - [Washington Perez Designer](https://www.linkedin.com/in/washingtonperez/) 
+ - [Washington Perez](https://www.linkedin.com/in/washingtonperez/) 
  - [Jaqueline Passos](https://www.linkedin.com/in/jaquelinepassos/)
  - [Amanda Pellini](https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
- - Marguelgtz from Mexico leading the Scrum project
- - Henrique Aguilar funding and commercial operation
+ - [Marguel Gutierrez](https://www.linkedin.com/in/marguelgtz/)
+ - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
+ - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
+ - [Wendell Mendes](https://www.linkedin.com/in/1endell)
  - Rodrigo Borges 
  - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
  - Carlos Delfino</br>
