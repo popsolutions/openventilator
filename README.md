@@ -62,13 +62,13 @@ Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/o
 ### If I have seen further it is by standing on the shoulders of Giants.
 
 Speciall thanks to:
- - Jeremias Almada (Project Designer)
+ - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
  - Juan Luis Méndez Ambrosio (my father and ethernal mentor) & Electronics
- - Fabian Franz (developer from Germany)
- - Jose Ignácio Méndez
- - Washington Perez Designer from Argentina
- - Jaqueline Passos Programmer and Developer
- - Amanda Pellini Marketing and PR
+ - Fabian Franz
+ - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
+ - [Washington Perez Designer](https://www.linkedin.com/in/washingtonperez/) 
+ - [Jaqueline Passos](https://www.linkedin.com/in/jaquelinepassos/)
+ - [Amanda Pellini] (https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
  - Marguelgtz from Mexico leading the Scrum project
  - Henrique Aguilar funding and commercial operation
  - Rodrigo Borges 
