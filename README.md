@@ -72,6 +72,7 @@ Speciall thanks to:
  - Marguelgtz from Mexico leading the Scrum project
  - Henrique Aguilar funding and commercial operation
  - Rodrigo Borges 
+ - [Henrique Nery] (https://www.linkedin.com/in/henrique-nery-650216a2/) 
  - Carlos Delfino</br>
  - <a href="https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf">The MIT guys from this paper</a>: Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil,
 Alexander Slocum, Jussi Saukkonen. 
