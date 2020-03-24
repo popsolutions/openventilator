@@ -21,3 +21,6 @@ uint16_t pressureSensor::getPressure()
 {
 	return analogRead(electrodePin);
 }
+bool pressureSensor::handleSensor()
+{
+}

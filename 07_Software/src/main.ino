@@ -1,14 +1,15 @@
 /*
- * This is the main Programm of the Ventilator
+ * This is the main Programm of the Ventilator.
  */
 #include <Arduino.h>
 #include "potentiometer.h"
 #include "pressureSensor.h"
 #include <LiquidCrystal_I2C.h> // By Frank The Brabaner
 #include "EEPROM.h"
+#include "dcMotor.h"
 
-/* defines for the ventilator
-   fill in your spezific parameters here
+/* 
+ * Defines for the ventilator, fill in your spezific parameters here.
  */
 #define DEBUG true
 // ranges for the parameters
@@ -28,23 +29,32 @@
 #define ADRESS_BREATHS 1
 #define ADRESS_PROPORTIONS 2
 // pressure sensor pin defines
-#define PRESSURE_UPPERSENSOR
-#define PRESSURE_LOWERSENSOR
-#define PRESSURE_ELECTRODE
+#define PRESSURE_ELECTRODE A3
+#define PRESSURE_TOPSENSOR 5
+#define PRESSURE_BOTTOMENSOR 6
+// motor pin defines
+#define MOTOR_POWER 4
+#define MOTOR_TOPSENSOR 2
+#define MOTOR_BOTTOMSENSOR 3
+#define MOTOR_TOPSWITCH 11
+#define MOTOR_BOTTOMSWITCH 12
 
 // construktors for the parts
 potentiometer poti1(A0, RANGE_VOLUME); // poti(pin, range);
 potentiometer poti2(A1, RANGE_BREATHS);
 potentiometer poti3(A2, RANGE_PROPORTION);
 LiquidCrystal_I2C display(LCD_ADRESS, LCD_COLUMNS, LCD_ROWS); // display(adress, columns, rows);
-pressureSensor sensor(3, 3, 3);								  // sensor(electodePin, topPin, bottomPin);
+dcMotor motor(MOTOR_POWER, MOTOR_TOPSENSOR, MOTOR_BOTTOMSENSOR, MOTOR_TOPSWITCH, MOTOR_BOTTOMSWITCH);
+pressureSensor sensor(PRESSURE_ELECTRODE, PRESSURE_TOPSENSOR, PRESSURE_BOTTOMENSOR); // sensor(electodePin, topPin, bottomPin);
 
 // variables for the Program sequence
 
+// function for code validating
+void testEndSwitch();
+void testEndSensor();
 // funtions for programm sequence
 void show(String topic, uint8_t value);
 void handlePotentiometers(uint8_t &volume, uint8_t &breath, uint8_t &proportions);
-void pressureTest();
 
 void setup()
 {
@@ -63,21 +73,30 @@ void setup()
 	while (true)
 	{
 		handlePotentiometers(volume, breath, proportions);
-		pressureTest();
+		testEndSwitch();
+		testEndSensor();
 	}
 }
 
 // test functions
-void pressureTest()
+void testEndSwitch()
 {
-	bool currState = sensor.stateOf(3);
-	static bool prevState;
-
-	if (currState != prevState)
+	static int count = 0;
+	if (motor.endSwitch())
 	{
-		Serial.print("state: ");
-		Serial.println(currState);
-		prevState = currState;
+		Serial.print("endSwitch: ");
+		count++;
+		Serial.println(count);
+	}
+}
+void testEndSensor()
+{
+	static int count = 0;
+	if (motor.endSensor())
+	{
+		Serial.print("endSensor: ");
+		count++;
+		Serial.println(count);
 	}
 }
 // head functions
