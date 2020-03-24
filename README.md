@@ -17,12 +17,12 @@ The equipment can be built with as few tools as possible, and even with the use 
 Thechnical features are still being decided, the ventilator has not being validated yet.
 
 ### Technical & Medical Requirments (MVP)
-[x] Adjusting the ventilation volume 200ml ~ 900ml 
-[x] Ventilation frequency adjustment 10~25/min
-[x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6
-[x] Inlet air filtration
-[x] Inlet air humidification
-[x] Filtration of the exhaust air system with anti-contamination sanitary standards
+[x] Adjusting the ventilation volume 200ml ~ 900ml </br>
+[x] Ventilation frequency adjustment 10~25/min </br>
+[x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6 </br>
+[x] Inlet air filtration </br> 
+[x] Inlet air humidification </br>
+[x] Filtration of the exhaust air system with anti-contamination sanitary standards </br>
 
 ## Risk Control
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
