@@ -39,7 +39,7 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 - **Humidifier**  Status:  `Design`
 - **Filtering** status `Implementing`
 - **Peep Valve** Status:  `Adopted` - Thanks to [ProjectOpenAir](https://www.youtube.com/watch?v=HEfCRcew_pk)
--  **Breathing tube** Status:  `Not Started`
+-  **Breathing tube** Status:  `Testing`
 ​
 
 ### [Research we based on]()
