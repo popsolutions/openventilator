@@ -34,6 +34,7 @@ The equipment should be built independent of the main motor or the ventilation t
 
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
 - Mechanical Volumetric Ventilation Adjustment
+- Patient Ventilation Trigger
 - Filtration of air to reduce contagion risk
 - Sanitary Regulation [Brazil Regulations](http://www.in.gov.br/en/web/dou/-/resolucao-rdc-n-356-de-23-de-marco-de-2020-249317437?fbclid=IwAR3tQyhVUPMqrTcX5HAW9Tq7MfYLCYCk8IwH2yqnO6RuaKEyzOCC9ImPHMI)
 
