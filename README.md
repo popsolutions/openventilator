@@ -71,7 +71,7 @@ Regardless of your expertise all help is welcome!
 - **Slack Channel:** Documentation, Hardware, Design and Code discussions:
 - -- **https://bit.ly/2xdUap2**
 
-## Please follow the [Contributing Guidelines](.github/CONTRIBUTING.md)
+### Please follow the [Contributing Guidelines](.github/CONTRIBUTING.md)
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
