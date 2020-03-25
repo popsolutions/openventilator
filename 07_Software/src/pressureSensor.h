@@ -14,14 +14,13 @@ private:
     uint8_t electrodePin;
     uint8_t topIndicator;
     uint8_t bottomIndicator;
-
+    bool stateOf(uint8_t indicator);
     /*
  * public Variables and Functions (for use outside the class)
  */
 public:
     pressureSensor(uint8_t electrodePin, uint8_t topIndicatorPin, uint8_t bottomIndicatorPin);
-    bool stateOf(uint8_t indicator);
+    bool handleSensor(); // alarm if false
     uint16_t getPressure();
-    bool error();
 };
 #endif
