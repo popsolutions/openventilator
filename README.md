@@ -54,9 +54,9 @@ Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/o
 
 
 <p float="left">
-	<img src="https://www.popsolutions.co/web/image/64944/WhatsApp%20Image%202020-03-24%20at%2015.12.42.jpeg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64930/WhatsApp%20Image%202020-03-24%20at%2001.57.38.jpeg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64933/WhatsApp%20Image%202020-03-24%20at%2001.42.24.jpeg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64981/open%20respirator%20v1.11.jpg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64982/open%20respirator%20v1.12.jpg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64987/open%20respirator%20v1.17.jpg" alt="OpenVentilator" height="200">
 </p>
 
 ### If I have seen further it is by standing on the shoulders of Giants.
