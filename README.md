@@ -17,17 +17,18 @@ The equipment can be built with as few tools as possible, and even with the use 
 Thechnical features are still being decided, the ventilator has not being validated yet.
 
 ### Technical & Medical Requirments (MVP)
-[x] Adjusting the ventilation volume 200ml ~ 900ml 
-[x] Ventilation frequency adjustment 10~25/min
-[x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6
-[x] Inlet air filtration
-[x] Inlet air humidification
-[x] Filtration of the exhaust air system with anti-contamination sanitary standards
+[x] Adjusting the ventilation volume 200ml ~ 900ml </br>
+[x] Ventilation frequency adjustment 10~25/min </br>
+[x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6 </br>
+[x] Inlet air filtration </br> 
+[x] Inlet air humidification </br>
+[x] Filtration of the exhaust air system with anti-contamination sanitary standards </br>
 
 ## Risk Control
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
 - Mechanical Volumetric Ventilation Adjustment
 - Contagion reduction by contaminated air
+- Sanitary Regulation [Brazil Regulations](http://www.in.gov.br/en/web/dou/-/resolucao-rdc-n-356-de-23-de-marco-de-2020-249317437?fbclid=IwAR3tQyhVUPMqrTcX5HAW9Tq7MfYLCYCk8IwH2yqnO6RuaKEyzOCC9ImPHMI)
 
 ## Success Criteria
 Validated Prototype (Looking for partners for testing on Lung Simulators)
@@ -39,7 +40,7 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 - **Humidifier**  Status:  `Design`
 - **Filtering** status `Implementing`
 - **Peep Valve** Status:  `Adopted` - Thanks to [ProjectOpenAir](https://www.youtube.com/watch?v=HEfCRcew_pk)
--  **Breathing tube** Status:  `Not Started`
+-  **Breathing tube** Status:  `Testing`
 ​
 
 ### [Research we based on]()
@@ -53,24 +54,28 @@ Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/o
 
 
 <p float="left">
-	<img src="https://www.popsolutions.co/web/image/64905/img1.jpeg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64901/Img3.JPG.png" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64904/Img6.png" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64944/WhatsApp%20Image%202020-03-24%20at%2015.12.42.jpeg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64930/WhatsApp%20Image%202020-03-24%20at%2001.57.38.jpeg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64933/WhatsApp%20Image%202020-03-24%20at%2001.42.24.jpeg" alt="OpenVentilator" height="200">
 </p>
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
 Speciall thanks to:
- - Jeremias Almada (Project Designer)
- - Juan Luis Méndez Ambrosio (my father and ethernal mentor) & Electronics
- - Fabian Franz (developer from Germany)
- - Jose Ignácio Méndez
- - Washington Perez Designer from Argentina
- - Jaqueline Passos Programmer and Developer
- - Amanda Pellini Marketing and PR
- - Marguelgtz from Mexico leading the Scrum project
- - Henrique Aguilar funding and commercial operation
- -<a href="https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf">The MIT guys from this paper</a>: Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil,
+ - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
+ - Fabian Franz
+ - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
+ - [Washington Perez](https://www.linkedin.com/in/washingtonperez/) 
+ - [Jaqueline Passos](https://www.linkedin.com/in/jaquelinepassos/)
+ - [Amanda Pellini](https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
+ - [Marguel Gutierrez](https://www.linkedin.com/in/marguelgtz/)
+ - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
+ - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
+ - [Wendell Mendes](https://www.linkedin.com/in/1endell)
+ - [Rodrigo Borges](http://linkedin.com/in/rborges111)
+ - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
+ - Carlos Delfino</br>
+ - <a href="https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf">The MIT guys from this paper</a>: Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil,
 Alexander Slocum, Jussi Saukkonen. 
 
 
