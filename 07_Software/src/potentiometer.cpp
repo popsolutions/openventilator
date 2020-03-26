@@ -24,7 +24,7 @@ bool potentiometer::isTurned()
 	// this function detects a turn of the potentiometer
 	this->value = analogRead(potiPin);
 	// prevent signal noice
-	if (value > prevValue + (1023 / gradiations) || value < prevValue - (1023 / gradiations))
+	if (value > prevValue + ((1023 / 2) / gradiations) || value < prevValue - ((1023 / 2) / gradiations))
 	{
 		this->prevValue = value;
 		return true;

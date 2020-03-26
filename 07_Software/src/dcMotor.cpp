@@ -4,76 +4,48 @@
 
 #include "dcMotor.h"
 
-dcMotor::dcMotor(uint8_t motorPin, uint8_t topSensorPin, uint8_t bottomSensorPin, uint8_t topEndSwitch, uint8_t bottomEndSwitch)
+dcMotor *elapsedPointer;
+
+static void elapsedInterrupt() // global int. function needed for class internal int. funcion
+{
+    elapsedPointer->detectElapsedTime();
+}
+
+dcMotor::dcMotor(uint8_t motorPin, uint8_t sensorPin)
 {
     pinMode(motorPin, OUTPUT);
-    pinMode(topSensorPin, INPUT);
-    pinMode(bottomSensorPin, INPUT);
-    pinMode(topEndSwitch, INPUT);
-    pinMode(bottomEndSwitch, INPUT);
+    pinMode(sensorPin, INPUT_PULLUP);
     this->motorPin = motorPin;
-    this->topSensorPin = topSensorPin;
-    this->bottomSensorPin = bottomSensorPin;
-    this->topEndSwitch = topEndSwitch;
-    this->bottomEndSwitch = bottomEndSwitch;
+    this->sensorPin = sensorPin;
+    elapsedPointer = this;
+    attachInterrupt(digitalPinToInterrupt(sensorPin), elapsedInterrupt, RISING);
 }
-bool dcMotor::endSwitch()
+void dcMotor::detectElapsedTime() // class internal int. function
 {
-    uint32_t currentTime = millis();
-    static boolean triggerOnce = false;
-    static boolean mindLoop = false;
-
-    if (condition && mindLoop)
-        return false;
-    else
-        mindLoop = false;
-    if (condition && !triggerOnce)
-    {
-        triggerOnce = true;
-        this->prevMillis = millis();
-    }
-    if (condition && (currentTime - prevMillis) > DEBOUNCE_TIME)
-    {
-        mindLoop = true;
+    this->prevTime = micros();
+}
+uint32_t dcMotor::getElapsedTime()
+{
+    uint32_t currentTime = micros();
+    return (currentTime - this->prevTime);
+}
+bool dcMotor::rotate() // detects if the motor rotates with a minimum rpm
+{
+    float minRpm = getRpm();
+    if (minRpm > RPM_MIN)
         return true;
-    }
     else
         return false;
 }
-bool dcMotor::endSensor()
+double dcMotor::getRpm() // get the current rpm
 {
-    bool absorbed;
-
-    if (!digitalRead(topSensorPin) && !digitalRead(bottomSensorPin))
-        absorbed = true;
-    else
-        absorbed = false;
-    if (absorbed != prevEmitted)
-    {
-        this->prevEmitted = absorbed;
-        return absorbed;
-    }
-    else
-        return false;
+    return 1 / ((double)getElapsedTime() / ((double)1000000 * (double)ENCODER_HOLES) * (double)60);
 }
-uint8_t dcMotor::getDirection()
-{
-    uint8_t direction;
-
-    return direction;
-}
-uint8_t dcMotor::getSpeed()
-{
-    uint8_t speed;
-
-    return speed;
-}
-void dcMotor::setSpeed(uint8_t speed)
+void dcMotor::setRpm(uint16_t speed)
 {
     this->commandVariable = speed;
 }
 bool dcMotor::handleMotor()
 {
-
     return false;
 }
