@@ -5,6 +5,7 @@ This initiative as well as [OpenLung](https://gitlab.com/open-source-ventilator/
 
 Since than we tryied to stablish some development and community standards and changed several times the project
 
+
 ## Main Goal
 Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in dificult economical situations. (That's is why we didn't continued putting efforts on the projects being developed by other teams who have a different society and economical reality)
 
@@ -33,7 +34,15 @@ Thechnical features are still being decided, the ventilator has not being valida
 ## Success Criteria
 Validated Prototype (Looking for partners for testing on Lung Simulators)
 
-## Modules
+## Current Status
+
+<p float="left">
+	<img src="https://www.popsolutions.co/web/image/64981/open%20respirator%20v1.11.jpg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64982/open%20respirator%20v1.12.jpg" alt="OpenVentilator" height="200">
+	<img src="https://www.popsolutions.co/web/image/64987/open%20respirator%20v1.17.jpg" alt="OpenVentilator" height="200">
+</p>
+
+## Modules 
 - **Electronic Controller** Status `Testing`
 - **Mechanical Motor** Status `Implementing`
 - **Ventilator** Status:  `Validation`
@@ -43,21 +52,19 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 -  **Breathing tube** Status:  `Testing`
 ​
 
+![Software Hardware overview](07_Software/OpenVentilator25_03.png)
+
+
+
 ### [Research we based on]()
 
 ### For more information: https://www.popsolutions.co/openventilator
+
 
 ### To join the whatsappgroup: https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
 ### Slack Channel
 Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg
-
-
-<p float="left">
-	<img src="https://www.popsolutions.co/web/image/64981/open%20respirator%20v1.11.jpg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64982/open%20respirator%20v1.12.jpg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64987/open%20respirator%20v1.17.jpg" alt="OpenVentilator" height="200">
-</p>
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
@@ -81,7 +88,3 @@ Alexander Slocum, Jussi Saukkonen.
 
 All our families, wifes and husbands that for the last days have been supporting us on our crazyness
 All the doctors, nurses and paramedics on the field fighting this common enemy
-
-
-
-
