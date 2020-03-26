@@ -65,7 +65,7 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ![Software Hardware overview](07_Software/OpenVentilator25_03.png)
 
-### [Research we based on]()
+### [Research we based on](https://github.com/popsolutions/openventilator/tree/folder-structure/00_Documentation/Research)
 
 ### For more information: https://www.popsolutions.co/openventilator
 
@@ -73,7 +73,8 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ### Slack Channel
 
-Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg
+[Documentation, Hardware, Design and Code discussions]:(https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg)
+[Check the decissions ALREADY TAKEN]:(https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
