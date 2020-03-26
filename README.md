@@ -6,6 +6,12 @@ This initiative as well as [OpenLung](https://gitlab.com/open-source-ventilator/
 
 Since than we tryied to stablish some development and community standards and changed several times the project
 
+# :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
+**PROJECT STATUS:** validation with health regulatory institutions and compliance with clinical requirements.
+
+:warning: WE DO NOT YET GUARANTEE THE OPERATION OF THIS MACHINE
+
+
 
 ## Main Goal
 
