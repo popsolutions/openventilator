@@ -2,17 +2,22 @@
  * header for the motor functions
  */
 #include <Arduino.h>
+#include <PID_v1.h>
+
 #ifndef DCMOTOR_H
 #define DCMOTOR_H
 
-#define LEFT 0
-#define RIGHT 1
-#define ENCODER_HOLES 32
-#define RPM_MIN 10
+// motor defines
+#define ENCODER_INCREMENTS 4.0 // number of increments on the disc
+#define RPM_MIN 5              // minimum speed to detect motor failures
+#define STARTUP_SPEED 20
+#define REVERSED_MOSFET true
+// regulator defines
+#define KP 1   // amplifier part
+#define KI 1   // integrating part
+#define KD 0.0 // differentiating part
 
-#define condition (digitalRead(topEndSwitch) || digitalRead(bottomEndSwitch))
-
-class dcMotor
+class dcMotor : public PID
 {
     /*
  * private variables and functions (only for use in the class)
@@ -25,19 +30,24 @@ private:
     bool emitted;
     uint32_t prevTime;
     // regulator variables
-    uint16_t commandVariable;
+    double stateVariable;
+    double commandVariable;     // the given rpm's
+    double controlledVariable;  // the actual rpm's
+    double manipulatedVariable; // the motor PWM
+    uint32_t incrementCount;
     // functions
-
+    double calculate();
     /*
  * public variables and functions (for use outside the class)
  */
 public:
-    uint32_t getElapsedTime();
     dcMotor(uint8_t motorPin, uint8_t sensorPin);
-    void detectElapsedTime();
-    bool rotate();
+    void regulate();
+    void setRpm(double commandVariable);
+    uint32_t getIncrementCount();
     double getRpm();
-    void setRpm(uint16_t rpm);
-    bool handleMotor(); // alarm if false
+    bool rotate();
+    void start();
+    void stop();
 };
 #endif

@@ -9,6 +9,7 @@
             "includePath": [
                 "/Users/FabianFranz/Development/github/openVentilator/07_Software/src",
                 "/Users/FabianFranz/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "/Users/FabianFranz/.platformio/lib/PID_ID2",
                 "/Users/FabianFranz/.platformio/lib/LiquidCrystal_I2C_ID576",
                 "/Users/FabianFranz/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 "/Users/FabianFranz/.platformio/packages/framework-arduino-avr/cores/arduino",
@@ -47,6 +48,7 @@
                 "path": [
                     "/Users/FabianFranz/Development/github/openVentilator/07_Software/src",
                     "/Users/FabianFranz/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "/Users/FabianFranz/.platformio/lib/PID_ID2",
                     "/Users/FabianFranz/.platformio/lib/LiquidCrystal_I2C_ID576",
                     "/Users/FabianFranz/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     "/Users/FabianFranz/.platformio/packages/framework-arduino-avr/cores/arduino",

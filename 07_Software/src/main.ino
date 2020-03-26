@@ -33,8 +33,13 @@
 #define PRESSURE_TOPSENSOR 5
 #define PRESSURE_BOTTOMENSOR 6
 // motor pin defines
-#define MOTOR_POWER 4
+#define MOTOR_POWER 3
 #define MOTOR_SENSOR 2
+
+// variables for the Program sequence
+uint8_t volume = EEPROM.read(ADRESS_VOLUME);
+uint8_t breath = EEPROM.read(ADRESS_BREATHS);
+uint8_t proportions = EEPROM.read(ADRESS_PROPORTIONS);
 
 // constructors for the parts
 potentiometer poti1(A0, RANGE_VOLUME); // poti(pin, range);
@@ -44,40 +49,43 @@ LiquidCrystal_I2C display(LCD_ADRESS, LCD_COLUMNS, LCD_ROWS);						 // display(a
 dcMotor motor(MOTOR_POWER, MOTOR_SENSOR);											 // motor(motorPin, sensorPin);
 pressureSensor sensor(PRESSURE_ELECTRODE, PRESSURE_TOPSENSOR, PRESSURE_BOTTOMENSOR); // sensor(electodePin, topPin, bottomPin);
 
-// variables for the Program sequence
-
 // function for code validating
-void testMotor()
-{
-	if (motor.rotate())
-		Serial.println(motor.getRpm());
-}
+
 // funtions for programm sequence
 void show(String topic, uint8_t value);
 void handlePotentiometers(uint8_t &volume, uint8_t &breath, uint8_t &proportions);
+bool handleMotor(uint8_t &breath);
 
 void setup()
 {
-	// variables for the parameters
-	static uint8_t volume = EEPROM.read(ADRESS_VOLUME);
-	static uint8_t breath = EEPROM.read(ADRESS_BREATHS);
-	static uint8_t proportions = EEPROM.read(ADRESS_PROPORTIONS);
 	// initialise the display
 	display.init();
 	display.backlight();
 	// initialise the serial port
 	Serial.begin(9600);
+}
+void loop()
+{
 	//#############################//
 	// main loop of the ventilator //
 	//#############################//
-	while (true)
-	{
-		handlePotentiometers(volume, breath, proportions);
-		testMotor();
-	}
+	handlePotentiometers(volume, breath, proportions);
+	handleMotor(breath);
 }
 
 // test functions
+// core functions
+void show(String topic, uint8_t value)
+{
+	display.clear();
+	display.setCursor(0, 0); // setCourser(column, row);
+	display.print(topic);
+	if (value < 10)
+		display.setCursor(15, 0);
+	else
+		display.setCursor(14, 0);
+	display.print(value);
+}
 // head functions
 void handlePotentiometers(uint8_t &volume, uint8_t &breath, uint8_t &proportions)
 {
@@ -97,15 +105,17 @@ void handlePotentiometers(uint8_t &volume, uint8_t &breath, uint8_t &proportions
 		show("Proportions: ", proportions);
 	}
 }
-// core functions
-void show(String topic, uint8_t value)
+bool handleMotor(uint8_t &breath)
 {
-	display.clear();
-	display.setCursor(0, 0); // setCourser(column, row);
-	display.print(topic);
-	if (value < 10)
-		display.setCursor(15, 0);
-	else
-		display.setCursor(14, 0);
-	display.print(value);
+	static uint32_t prevMillis;
+	uint32_t currentMillis = millis();
+
+	if (!motor.rotate())
+		motor.start();
+	motor.setRpm(100);
+	if (currentMillis - prevMillis > 100)
+	{
+		Serial.println(motor.getRpm());
+		prevMillis = currentMillis;
+	}
 }

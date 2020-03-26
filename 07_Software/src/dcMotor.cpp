@@ -6,46 +6,66 @@
 
 dcMotor *elapsedPointer;
 
-static void elapsedInterrupt() // global int. function needed for class internal int. funcion
+static void regulateInterrupt() // global int. function needed for class internal int. funcion
 {
-    elapsedPointer->detectElapsedTime();
+    elapsedPointer->regulate();
 }
 
-dcMotor::dcMotor(uint8_t motorPin, uint8_t sensorPin)
+dcMotor::dcMotor(uint8_t motorPin, uint8_t sensorPin) : PID(&controlledVariable, &manipulatedVariable, &commandVariable, KP, KI, KD, DIRECT)
 {
     pinMode(motorPin, OUTPUT);
     pinMode(sensorPin, INPUT_PULLUP);
     this->motorPin = motorPin;
     this->sensorPin = sensorPin;
     elapsedPointer = this;
-    attachInterrupt(digitalPinToInterrupt(sensorPin), elapsedInterrupt, RISING);
+    attachInterrupt(digitalPinToInterrupt(sensorPin), regulateInterrupt, RISING);
+    SetMode(AUTOMATIC);
+    if (REVERSED_MOSFET)
+        SetControllerDirection(REVERSE);
 }
-void dcMotor::detectElapsedTime() // class internal int. function
+double dcMotor::calculate()
 {
-    this->prevTime = micros();
+    uint32_t elapsedTime;
+    elapsedTime = micros() - prevTime;
+    return (1.0 / ((double)elapsedTime / (1000000.0))) * 60.0; // calculate the actual rpm
 }
-uint32_t dcMotor::getElapsedTime()
+void dcMotor::regulate() // class internal int. function
 {
-    uint32_t currentTime = micros();
-    return (currentTime - this->prevTime);
+    incrementCount++;
+    //Serial.println(controlledVariable);
+    controlledVariable = calculate();
+    Compute();                                  // calculate the manipulated variable
+    analogWrite(motorPin, manipulatedVariable); // regulate the motor
+    prevTime = micros();
 }
-bool dcMotor::rotate() // detects if the motor rotates with a minimum rpm
+void dcMotor::setRpm(double commandVariable)
 {
-    float minRpm = getRpm();
-    if (minRpm > RPM_MIN)
+    this->commandVariable = commandVariable;
+}
+uint32_t dcMotor::getIncrementCount()
+{
+    return incrementCount;
+}
+double dcMotor::getRpm() // get the current rpm
+{
+    return controlledVariable;
+}
+bool dcMotor::rotate()
+// detects if the motor rotates with a minimum fixed rpm
+{
+    if (calculate() > RPM_MIN)
         return true;
     else
         return false;
 }
-double dcMotor::getRpm() // get the current rpm
+void dcMotor::start()
 {
-    return 1 / ((double)getElapsedTime() / ((double)1000000 * (double)ENCODER_HOLES) * (double)60);
+    commandVariable = stateVariable;
+    analogWrite(motorPin, 255);
 }
-void dcMotor::setRpm(uint16_t speed)
+void dcMotor::stop()
 {
-    this->commandVariable = speed;
-}
-bool dcMotor::handleMotor()
-{
-    return false;
+    stateVariable = commandVariable;
+    commandVariable = 0;
+    analogWrite(motorPin, 0);
 }
