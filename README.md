@@ -73,8 +73,8 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ### Slack Channel
 
-[Documentation, Hardware, Design and Code discussions]:(https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg)
-[Check the decissions ALREADY TAKEN]:(https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
+[**Documentation, Hardware, Design and Code discussions**](https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg)</br>
+[**Check the decissions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
