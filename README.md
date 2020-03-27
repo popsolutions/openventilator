@@ -69,9 +69,14 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ### For more information: https://www.popsolutions.co/openventilator
 
-### To join the whatsappgroup: https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
-### Slack Channel
+## If do you want to help
+
+[First complete the form please, so we can organize everybody](https://forms.gle/1h19khkxExsEmvPE6)
+
+Then join the whatsappgroup and talk with amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
+
+### Slack Channel for working in progress discussions...
 
 [**Documentation, Hardware, Design and Code discussions**](https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg)</br>
 [**Check the decissions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
