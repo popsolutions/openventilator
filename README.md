@@ -72,7 +72,7 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ## If do you want to help
 
-[First complete the form please, so we can organize everybody](https://forms.gle/1h19khkxExsEmvPE6)
+[First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://forms.gle/1h19khkxExsEmvPE6) 
 
 Then join the whatsappgroup and talk with amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
