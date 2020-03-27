@@ -78,7 +78,7 @@ Then join the whatsappgroup and talk with amanda (+55 11 99735-5042 ): https://c
 
 ### Slack Channel for working in progress discussions...
 
-[**Documentation, Hardware, Design and Code discussions**](https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg)</br>
+**Documentation, Hardware, Design and Code discussions** This was depracated to avoid outsiders looking for profit</br>
 [**Check the decissions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
 ### If I have seen further it is by standing on the shoulders of Giants.
