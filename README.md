@@ -96,6 +96,7 @@ Speciall thanks to:
  - [Wendell Mendes](https://www.linkedin.com/in/1endell)
  - [Rodrigo Borges](http://linkedin.com/in/rborges111)
  - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
+ - [Duit](https://www.duit.com.br/)
  - [Carlos Delfino](https://github.com/CarlosDelfino)
  - [Marcio Dultra](https://www.linkedin.com/in/marciodultra)
  - [Três meninas hardware store](https://www.google.com/maps/place/Casa+das+3+Meninas/@-23.5391312,-46.6524764,19.5z/data=!4m5!3m4!1s0x0:0x377232460c40d90d!8m2!3d-23.5391706!4d-46.6524278)
