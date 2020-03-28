@@ -9,7 +9,7 @@ Since than we tryied to stablish some development and community standards and ch
 # :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
 **PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements.
 
-*PLEASE DO NOT USE ONLY TIRE-CHAMBER, ENCASE THE the ineer part of the TireChamber with a foodbag like ZIPLOCK or any material with compliance to contact with food.
+**PLEASE DO NOT USE ONLY TIRE-CHAMBER**, ENCASE THE the ineer part of the TireChamber with a foodbag like ZIPLOCK or any material with compliance to contact with food.
 
 :warning: WE DO NOT YET GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLAPSE SCENARIOS
 
