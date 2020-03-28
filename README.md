@@ -17,7 +17,7 @@ Since than we tryied to stablish some development and community standards and ch
 
 ## Main Goal
 
-Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in dificult economical situations. (That's is why we didn't continued putting efforts on the projects being developed by other teams who have a different society and economical reality)
+Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in dificult economical situations with a component and mechanical agnostic philosophy. (That's is why we didn't continued putting efforts on the projects being developed by other teams who have a different society and economical reality)
 
 **The equipment must have as few industrial parts as possible. If necessary, industrial parts must be easily accessible, even in small towns and villages.**
 
