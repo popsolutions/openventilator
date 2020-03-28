@@ -29,12 +29,20 @@ Thechnical features are still being decided, the ventilator has not being valida
 
 ### Technical & Medical Requirments (MVP)
 
-[x] Adjusting the ventilation volume 200ml ~ 900ml </br>
-[x] Ventilation frequency adjustment 10~25/min </br>
-[x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6 </br>
-[x] Inlet air filtration </br> 
-[x] Inlet air humidification </br>
-[x] Filtration of the exhaust air system with anti-contamination sanitary standards </br>
+|       Especification        |      Spartan model      |      Mark II            |
+|-----------------------------|:-----------------------:|------------------------:|
+|Volume Control               |mechanical native feature|mechanical native feature|
+|Ventilation Frecuency        |implementing 2 types     |electronic native feature|
+|Inhale/Exhale proportion     |implementing 2 types     |electronic native feature|
+|Inlet air Filtration         | Optional(recomended)    |Mandatory                |
+|Inlet air humidifier         | Optional(recomended)    |Mandatory                |
+|Exahaust filtration          | Optional(recomended)    |Mandatory                |
+|Peep Preassure indicator     | Not available           |Digital UI or Mechanical |
+|Oxymeter                     | Not available           |Aditional Hardware       |   
+|                             |                         |                         |
+
+
+
 
 ## Risk Control
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
