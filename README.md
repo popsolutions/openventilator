@@ -34,10 +34,11 @@ Thechnical features are still being decided, the ventilator has not being valida
 |Volume Control               |mechanical native feature|mechanical native feature|
 |Ventilation Frecuency        |implementing 2 types     |electronic native feature|
 |Inhale/Exhale proportion     |implementing 2 types     |electronic native feature|
-|Inlet air Filtration         | Optional(recomended)    |Mandatory                |
-|Inlet air humidifier         | Optional(recomended)    |Mandatory                |
+|Inlet air Filtration         | Hepa(recomended)        |Mandatory HEPA           |
+|Inlet air humidifier         | Aspirator(recomended)   |Mandatory -Aspirator     |
 |Exahaust filtration          | Optional(recomended)    |Mandatory                |
-|Peep Preassure indicator     | Not available           |Digital UI or Mechanical |
+|Peep Pressure regulator      | House Pipe solution     |House pipe solution      |
+|Peep Preassure indicator     | Water Column indicator  |Digital UI or WaterColumn|
 |Oxymeter                     | Not available           |Aditional Hardware       |   
 |                             |                         |                         |
 
