@@ -105,6 +105,7 @@ Speciall thanks to:
  - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
  - [Vandeir Soares](https://www.facebook.com/vandeir.soares.7)
  - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
+ - [Ethan Moses](https://www.cameradactyl.com/)
  - [Wendell Mendes](https://www.linkedin.com/in/1endell)
  - [Rodrigo Borges](http://linkedin.com/in/rborges111)
  - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
