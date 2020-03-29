@@ -103,6 +103,7 @@ Speciall thanks to:
  - [Amanda Pellini](https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
  - [Marguel Gutierrez](https://www.linkedin.com/in/marguelgtz/)
  - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
+ - [Vandeir Soares](https://www.facebook.com/vandeir.soares.7)
  - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
  - [Wendell Mendes](https://www.linkedin.com/in/1endell)
  - [Rodrigo Borges](http://linkedin.com/in/rborges111)
