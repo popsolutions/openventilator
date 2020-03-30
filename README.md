@@ -2,44 +2,44 @@
 
 > Welcome to the OpenVentilator project. This is an OpenSource Ventilator / Mechanical Respirator for the Covid-19 Crisis.
 
-This initiative as well as [OpenLung](https://gitlab.com/open-source-ventilator/OpenLung) was born on the [Open Source COVID19 Medical Supplies](https://web.facebook.com/groups/opensourcecovid19medicalsupplies/) Facebook Group by the awareness on creating a Ventilator solution for the scarcity plaguing our society world wide. I contacted Jeremias Almada from Argentina who by that time had presented an Ambu solution and a Cad Design. The idea was interseting but needed improvments
+This initiative as well as [OpenLung](https://gitlab.com/open-source-ventilator/OpenLung) was born on the [Open Source COVID19 Medical Supplies](https://web.facebook.com/groups/opensourcecovid19medicalsupplies/) Facebook Group by the awareness of the need to create a Ventilator solution for the scarcity plaguing our society worldwide. I contacted Jeremias Almada from Argentina who by that time had presented an Ambu solution and a Cad Design. The idea was interesting but needed improvements.
 
-Since than we tryied to stablish some development and community standards and changed several times the project
+Since then we tried to establish some development and community standards and evolved the project several times.
 
 # :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
 **PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements.
 
-**PLEASE DO NOT USE ONLY TIRE-CHAMBER**, ENCASE THE the ineer part of the TireChamber with a foodbag like ZIPLOCK or any material with compliance to contact with food.
+**PLEASE DO NOT USE ONLY TIRE-CHAMBER**, ENCASE THE the inner part of the TireChamber with a foodbag like ZIPLOCK or any material with compliance to contact with food.
 
-:warning: WE DO NOT YET GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLAPSE SCENARIOS
+:warning: WE DO NOT YET GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLLAPSE SCENARIOS
 
 
 
 ## Main Goal
 
-Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in dificult economical situations with a component and mechanical agnostic philosophy. (That's is why we didn't continued putting efforts on the projects being developed by other teams who have a different society and economical reality)
+Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in difficult economical situations with a component- and mechanical-agnostic philosophy. (This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality)
 
 **The equipment must have as few industrial parts as possible. If necessary, industrial parts must be easily accessible, even in small towns and villages.**
 
-The equipment should be built independent of the main motor or the ventilation tool (AmbuBag, Bellow etc) to increase modularity of the parts and resources
+The equipment should be built independent of the main motor or the ventilation tool (AmbuBag, Bellows etc) to increase modularity of the parts and resources.
 
 The equipment can be built with as few tools as possible, and even with the use of scrap to facilitate access to materials. 
 
-Thechnical features are still being decided, the ventilator has not being validated yet.
+The technical features are still being decided, the ventilator has not been validated yet.
 
 ### Technical & Medical Requirments (MVP)
 
-|       Especification        |      Spartan model      |      Mark II            |
+|       Specification         |      Spartan model      |      Mark II            |
 |-----------------------------|:-----------------------:|------------------------:|
-|Volume Control               |mechanical native feature|mechanical native feature|
-|Ventilation Frecuency        |implementing 2 types     |electronic native feature|
-|Inhale/Exhale proportion     |implementing 2 types     |electronic native feature|
-|Inlet air Filtration         | Hepa(recomended)        |Mandatory HEPA           |
-|Inlet air humidifier         | Aspirator(recomended)   |Mandatory -Aspirator     |
-|Exahaust filtration          | Optional(recomended)    |Mandatory                |
-|Peep Pressure regulator      | House Pipe solution     |House pipe solution      |
-|Peep Preassure indicator     | Water Column indicator  |Digital UI or WaterColumn|
-|Oxymeter                     | Not available           |Aditional Hardware       |   
+|Volume control               |Mechanical native feature|Mechanical native feature|
+|Ventilation frequency        |Implementing 2 types     |Electronic native feature|
+|Inhale/Exhale proportion     |Implementing 2 types     |Electronic native feature|
+|Inlet air filtration         | HEPA(recommended)       |Mandatory HEPA           |
+|Inlet air humidifier         | Aspirator(recommended)  |Mandatory aspirator      |
+|Exhaust filtration           | Optional(recommended)   |Mandatory                |
+|Peep Pressure regulator      | House pipe solution     |House pipe solution      |
+|Peep Pressure indicator      | Water column indicator  |Digital UI or WaterColumn|
+|Oximeter                     | Not available           |Additional hardware      |   
 |                             |                         |                         |
 
 
@@ -69,7 +69,7 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 - **Mechanical Motor** Status `Implementing`
 - **Ventilator** Status:  `Validation`
 - **Humidifier**  Status:  `Design`
-- **Filtering** status `Implementing`
+- **Filtering** Status `Implementing`
 - **Peep Valve** Status:  `Adopted` - Thanks to [ProjectOpenAir](https://www.youtube.com/watch?v=HEfCRcew_pk)
 - **Breathing tube** Status:  `Testing`
 ​
@@ -85,16 +85,16 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 [First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://forms.gle/1h19khkxExsEmvPE6) 
 
-Then join the whatsappgroup and talk with amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
+Then join the WhatsApp group and talk with Amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
-### Slack Channel for working in progress discussions...
+### Slack Channel for work-in-progress discussions...
 
-**Documentation, Hardware, Design and Code discussions** This was depracated to avoid outsiders looking for profit</br>
-[**Check the decissions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
+**Documentation, Hardware, Design and Code discussions** This was deprecated to avoid outsiders looking for profit</br>
+[**Check the decisions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
-Speciall thanks to:
+Special thanks to:
  - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
  - Fabian Franz
  - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
@@ -115,6 +115,6 @@ Speciall thanks to:
  - [Três meninas hardware store](https://www.google.com/maps/place/Casa+das+3+Meninas/@-23.5391312,-46.6524764,19.5z/data=!4m5!3m4!1s0x0:0x377232460c40d90d!8m2!3d-23.5391706!4d-46.6524278)
  - [The MIT guys from this paper](https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf): Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil, Alexander Slocum, Jussi Saukkonen. 
 
-All our families, wifes and husbands that for the last days have been supporting us on our crazyness.
+All our families, wives and husbands that for the last days have been supporting us on our craziness.
 
-All the doctors, nurses and paramedics on the field fighting this common enemy
+All the doctors, nurses and paramedics in the field fighting this common enemy.
