@@ -6,10 +6,18 @@ This initiative as well as [OpenLung](https://gitlab.com/open-source-ventilator/
 
 Since than we tryied to stablish some development and community standards and changed several times the project
 
+# :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
+**PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements.
+
+**PLEASE DO NOT USE ONLY TIRE-CHAMBER**, ENCASE THE the ineer part of the TireChamber with a foodbag like ZIPLOCK or any material with compliance to contact with food.
+
+:warning: WE DO NOT YET GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLAPSE SCENARIOS
+
+
 
 ## Main Goal
 
-Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in dificult economical situations. (That's is why we didn't continued putting efforts on the projects being developed by other teams who have a different society and economical reality)
+Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in dificult economical situations with a component and mechanical agnostic philosophy. (That's is why we didn't continued putting efforts on the projects being developed by other teams who have a different society and economical reality)
 
 **The equipment must have as few industrial parts as possible. If necessary, industrial parts must be easily accessible, even in small towns and villages.**
 
@@ -21,12 +29,21 @@ Thechnical features are still being decided, the ventilator has not being valida
 
 ### Technical & Medical Requirments (MVP)
 
-[x] Adjusting the ventilation volume 200ml ~ 900ml </br>
-[x] Ventilation frequency adjustment 10~25/min </br>
-[x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6 </br>
-[x] Inlet air filtration </br> 
-[x] Inlet air humidification </br>
-[x] Filtration of the exhaust air system with anti-contamination sanitary standards </br>
+|       Especification        |      Spartan model      |      Mark II            |
+|-----------------------------|:-----------------------:|------------------------:|
+|Volume Control               |mechanical native feature|mechanical native feature|
+|Ventilation Frecuency        |implementing 2 types     |electronic native feature|
+|Inhale/Exhale proportion     |implementing 2 types     |electronic native feature|
+|Inlet air Filtration         | Hepa(recomended)        |Mandatory HEPA           |
+|Inlet air humidifier         | Aspirator(recomended)   |Mandatory -Aspirator     |
+|Exahaust filtration          | Optional(recomended)    |Mandatory                |
+|Peep Pressure regulator      | House Pipe solution     |House pipe solution      |
+|Peep Preassure indicator     | Water Column indicator  |Digital UI or WaterColumn|
+|Oxymeter                     | Not available           |Aditional Hardware       |   
+|                             |                         |                         |
+
+
+
 
 ## Risk Control
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
@@ -59,15 +76,21 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ![Software Hardware overview](07_Software/OpenVentilator25_03.png)
 
-### [Research we based on]()
+### [Research we based on](https://github.com/popsolutions/openventilator/tree/folder-structure/00_Documentation/Research)
 
 ### For more information: https://www.popsolutions.co/openventilator
 
-### To join the whatsappgroup: https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
-### Slack Channel
+## If do you want to help
 
-Documentation, Hardware, Design and Code discussions: https://join.slack.com/t/openventilator-c-19/shared_invite/zt-cymrzj50-KcwgV5tBAX4WqlmfE43QEg
+[First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://forms.gle/1h19khkxExsEmvPE6) 
+
+Then join the whatsappgroup and talk with amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
+
+### Slack Channel for working in progress discussions...
+
+**Documentation, Hardware, Design and Code discussions** This was depracated to avoid outsiders looking for profit</br>
+[**Check the decissions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
 ### If I have seen further it is by standing on the shoulders of Giants.
 
@@ -80,11 +103,16 @@ Speciall thanks to:
  - [Amanda Pellini](https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
  - [Marguel Gutierrez](https://www.linkedin.com/in/marguelgtz/)
  - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
+ - [Vandeir Soares](https://www.facebook.com/vandeir.soares.7)
  - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
+ - [Ethan Moses](https://www.cameradactyl.com/)
  - [Wendell Mendes](https://www.linkedin.com/in/1endell)
  - [Rodrigo Borges](http://linkedin.com/in/rborges111)
  - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
+ - [Duit](https://www.duit.com.br/)
  - [Carlos Delfino](https://github.com/CarlosDelfino)
+ - [Marcio Dultra](https://www.linkedin.com/in/marciodultra)
+ - [Três meninas hardware store](https://www.google.com/maps/place/Casa+das+3+Meninas/@-23.5391312,-46.6524764,19.5z/data=!4m5!3m4!1s0x0:0x377232460c40d90d!8m2!3d-23.5391706!4d-46.6524278)
  - [The MIT guys from this paper](https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf): Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil, Alexander Slocum, Jussi Saukkonen. 
 
 All our families, wifes and husbands that for the last days have been supporting us on our crazyness.
