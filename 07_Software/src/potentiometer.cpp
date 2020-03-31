@@ -16,7 +16,7 @@ uint8_t potentiometer::getValue()
 	// this function gives a value in a fixed range
 	// the previous value have to hand over for the "isTurned" function
 	this->value = analogRead(potiPin);
-	return map(analogRead(potiPin), 0, 1023, 1, gradiations + 1);
+	return map(analogRead(potiPin), 0, 1023, 1, gradiations);
 	// only from 5 to 1020 because the risk of bit jitter in the upper and lower range Part
 }
 bool potentiometer::isTurned()
