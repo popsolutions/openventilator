@@ -29,18 +29,21 @@ The technical features are still being decided, the ventilator has not been vali
 
 ### Technical & Medical Requirments (MVP)
 
-|       Specification         |      Spartan model      |      Mark II            |
-|-----------------------------|:-----------------------:|------------------------:|
-|Volume control               |Mechanical native feature|Mechanical native feature|
-|Ventilation frequency        |Implementing 2 types     |Electronic native feature|
-|Inhale/Exhale proportion     |Implementing 2 types     |Electronic native feature|
-|Inlet air filtration         | HEPA(recommended)       |Mandatory HEPA           |
-|Inlet air humidifier         | Aspirator(recommended)  |Mandatory aspirator      |
-|Exhaust filtration           | Optional(recommended)   |Mandatory                |
-|Peep Pressure regulator      | House pipe solution     |House pipe solution      |
-|Peep Pressure indicator      | Water column indicator  |Digital UI or WaterColumn|
-|Oximeter                     | Not available           |Additional hardware      |   
-|                             |                         |                         |
+|       Specification         |      Spartan model      |      Mark II                 |
+|-----------------------------|:-----------------------:|-----------------------------:|
+|Volume control               |Mechanical native feature|Mechanical control            |
+|Ventilation frequency        |Implementing 2 types     |Electronic native control     |
+|Inhale/Exhale proportion     |Implementing 2 types     |Electronic native control     |
+|Inhale Pressure Sensing      |    Not Available        |Electronic sensor             |
+|Exhale Pressure Sensor       |    Not Available        |Electronic sensor             |
+|Flow Sensor                  |    Not Available        |Electronic if available       |
+|Inlet air filtration         | HEPA(recommended)       |Mandatory HEPA                |
+|Inlet air humidifier         | HME Filter(recommended) |Humidity and Moistue Exchanger|
+|Exhaust filtration           | Optional(recommended)   |Mandatory                     |
+|Peep Pressure regulator      | Vynil hose solution     |Vynil hose solution           |
+|Peep Pressure indicator      | Water column indicator  |Digital UI or WaterColumn     |
+|Oximeter                     | Not available           |Electronic sensor             |   
+|Heartbeat sensor             | Not available           |Electronic Sensor             |
 
 
 
