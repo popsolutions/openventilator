@@ -49,6 +49,9 @@ The technical features are still being decided, the ventilator has not been vali
 
 
 ## Risk Control
+- Inalhation speed 1s
+- Exalhation speed 1 ~ 6 s
+- From 10 to 35 cycles a minute
 - PEEP Valve control between 1mm/h20 ~ 40mm/h20
 - Mechanical Volumetric Ventilation Adjustment
 - Contagion reduction by contaminated air
