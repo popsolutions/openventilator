@@ -24,7 +24,7 @@ The equipment should be built independent of the main motor or the ventilation t
 ## Technical & Medical Requirments ( MVP )
 
 - [x] Adjusting the ventilation volume 200ml ~ 900ml </br>
-- [x] Ventilation frequency adjustment 10~25/min </br>
+- [x] Ventilation frequency adjustment 10 ~ 25 strokes/min </br>
 - [x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6 </br>
 - [x] Inlet air filtration </br>
 - [x] Inlet air humidification </br>
@@ -32,7 +32,7 @@ The equipment should be built independent of the main motor or the ventilation t
 
 ## Risk Control
 
-- PEEP Valve control between 1mm/h20 ~ 40mm/h20
+- PEEP Valve control between 1cm H2O ~ 40cm H2O pressure
 - Mechanical Volumetric Ventilation Adjustment
 - Patient Ventilation Trigger
 - Filtration of air to reduce contagion risk
