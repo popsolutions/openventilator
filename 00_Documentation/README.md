@@ -1,0 +1,1 @@
+This directory contains documentation on overall system level. See subdirectories for documentation on various parts.
