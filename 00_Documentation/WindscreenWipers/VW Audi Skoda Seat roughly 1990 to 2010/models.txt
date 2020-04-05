@@ -1,0 +1,44 @@
+AIC 50868, EUR 27
+Febi 17092, EUR 20
+Audio A3 (8L1) 1996-2003
+Audio #  955 113,  955 119
+Seat #  955 023,  955 119
+Skoda #  955 113,  955 119
+VW #  955 113,  955 119
+Seat Toledo (1L) 1991-1999
+Seat Ibiza II (6K1) 1993-2002
+Seat Cordoba (6K1,6K2) 1993-2002
+Seat Inca (6K9) 1995-2003
+Seat Arosa (6H) 1997-2004
+Skoda Octavia (1U2) 1997-2010
+Skoda Octavia Combo (1U5) 2000-2010
+Skoda Octavia Box BodyEstate (1U5) 2000-2010
+VW Passat (3A2, 35I) 1988-1996
+VW Passat Variant (3A5), 35I) 1988-1997
+VW Corrado (53I) 1988-1995
+VW Transporter IV bus (70B, 70C, 7DB, 7DK, 70J, 70K, 7DC, 7DJ) 1990-2003 
+VW Transporter IV platformchassis  (70E, 70L, 70M, 7DE, 7DL, 7D) 1990-2003 
+VW Transporter IV Box (70A, 70H, 7DA, 7DH) 1996-2003
+VW Golf III (1H1) 1991-1997
+VW Golf III Variant (1H5) 1993-1999
+VW Golf III Cabriolet (1E7) 1993-1998
+VW Golf Van III Variant (1H5) 1993-1999
+VW Golf IV (1J1) 1997-2005
+VW Golf IV Cabriolet (1E7) 1998-2002
+VW Golf IV Variant (1J5) 1999-2006
+VW Golf Van IV Variant (1J5) 1999-2006
+VW Polo (6N1) 1994-1999
+VW Polo Variant (6N5) 1997-2001
+VW Polo Classic (6N1) 1995-2001
+VW Polo (6N2) 1999-2001
+VW Polo Variant (6N2) 1999-2001
+VW Polo Classic (6N2) 1999-2002
+VW Polo Van Box Body  Hatchback (6N1) 1994-1999
+VW Vento (1H2) 1991-1998
+VW Caddy II Box (9K9A) 1995-2004
+VW Caddy II Estate (9K9B) 1995-2004
+VW Lupo (6X1, 6E1) 1998-2005
+VW New Beetle (9C1,1C1) 1998-2010)
+VW New Beetle Convertible (1Y7) 2005-2010
+VW Bora (1J2) 1998-2005
+VW Bora Variant (1J2) 1999-2005
