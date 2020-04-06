@@ -110,6 +110,7 @@ Special thanks to:
  - [Marguel Gutierrez](https://www.linkedin.com/in/marguelgtz/)
  - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
  - [Vandeir Soares](https://www.facebook.com/vandeir.soares.7)
+ - [Fábio Soares]
  - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
  - [Ethan Moses](https://www.cameradactyl.com/)
  - [Wendell Mendes](https://www.linkedin.com/in/1endell)
