@@ -27,7 +27,7 @@ The equipment should be built independent of the main motor or the ventilation t
 - [x] Ventilation frequency adjustment 10 ~ 25 strokes/min </br>
 - [x] Adjusting the proportion between inhalation and exhalation 1/1 ~ 1/6 </br>
 - [x] Inlet air filtration </br>
-- [x] Inlet air humidification </br>
+- [x] Prevent lung dehumidification HME Filter</br>
 - [x] Filtration of the exhaust air system with anti-contamination sanitary standards </br>
 
 ## Risk Control
