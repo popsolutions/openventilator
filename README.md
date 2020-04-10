@@ -1,8 +1,9 @@
 # OpenVentilator
 
-> Welcome to the OpenVentilator project. This is an OpenSource Ventilator / Mechanical Respirator for the Covid-19 Crisis.
+> Welcome to the OpenVentilator project. This is an Open Source Ventilator / Mechanical Respirator for the Covid-19 Crisis.
+> Specially Designed for countries in Africa / South America / Middle East and other poor regions in the world
 
-This initiative as well as [OpenLung](https://gitlab.com/open-source-ventilator/OpenLung) was born on the [Open Source COVID19 Medical Supplies](https://web.facebook.com/groups/opensourcecovid19medicalsupplies/) Facebook Group by the awareness of the need to create a Ventilator solution for the scarcity plaguing our society worldwide. I contacted Jeremias Almada from Argentina who by that time had presented an Ambu solution and a Cad Design. The idea was interesting but needed improvements.
+This initiative as other projects was born on the [Open Source COVID19 Medical Supplies](https://web.facebook.com/groups/opensourcecovid19medicalsupplies/) Facebook Group by the awareness of the need to create a Ventilator solution for the scarcity plaguing our society worldwide. I contacted Jeremias Almada from Argentina who by that time had presented an Ambu solution and a Cad Design. The idea was interesting but needed improvements.
 
 Since then we tried to establish some development and community standards and evolved the project several times.
 
