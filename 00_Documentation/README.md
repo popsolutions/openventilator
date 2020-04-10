@@ -1,1 +1,1 @@
-This directory contains documentation on overall system level. See subdirectories for documentation on various parts.
+This directory contains various documentation, such as research, standards, test results.
