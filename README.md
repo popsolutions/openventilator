@@ -8,11 +8,9 @@ This initiative as other projects was born on the [Open Source COVID19 Medical S
 Since then we tried to establish some development and community standards and evolved the project several times.
 
 # :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
-**PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements.
+**PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements. - The tests on Lung Simulators are Sucessfull, limited on application depending on hardware availability but viable on emergency cases
 
-**PLEASE DO NOT USE ONLY TIRE-CHAMBER**, ENCASE THE the inner part of the TireChamber with a foodbag like ZIPLOCK or any material with compliance to contact with food.
-
-:warning: WE DO NOT YET GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLLAPSE SCENARIOS
+**PLEASE DO NOT USE THIS MACHINE IF NOT NEEDED**, WE DO NOT GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLLAPSE SCENARIOS :warning: 
 
 
 
@@ -30,21 +28,24 @@ The technical features are still being decided, the ventilator has not been vali
 
 ### Technical & Medical Requirments (MVP)
 
-|       Specification         |      Spartan model      |      Mark II                 |
-|-----------------------------|:-----------------------:|-----------------------------:|
-|Volume control               |Mechanical native feature|Mechanical control            |
-|Ventilation frequency        |Implementing 2 types     |Electronic native control     |
-|Inhale/Exhale proportion     |Implementing 2 types     |Electronic native control     |
-|Inhale Pressure Sensing      |    Not Available        |Electronic sensor             |
-|Exhale Pressure Sensor       |    Not Available        |Electronic sensor             |
-|Flow Sensor                  |    Not Available        |Electronic if available       |
-|Inlet air filtration         | HEPA(recommended)       |Mandatory HEPA                |
-|Inlet air humidifier         | HME Filter(recommended) |Humidity and Moistue Exchanger|
-|Exhaust filtration           | Optional(recommended)   |Mandatory                     |
-|Peep Pressure regulator      | Vynil hose solution     |Vynil hose solution           |
-|Peep Pressure indicator      | Water column indicator  |Digital UI or WaterColumn     |
-|Oximeter                     | Not available           |Electronic sensor             |   
-|Heartbeat sensor             | Not available           |Electronic Sensor             |
+|       Specification         |      Spartan model         |      Mark II                 |
+|-----------------------------|:--------------------------:|-----------------------------:|
+|Volume control               |Mechanical crank-wheel      |Mechanical crank-wheel        |
+|Ventilation frequency        | Manual Ajusted on I:E      |Electronic native control     |
+|Inhale Speed                 | 12 position Switch         |Electronic controled          |
+|Exhale Speed                 | 12 position Switch         |Electronic controled          |
+|Inhale/Exhale proportion     |Adjustment with I:E speed   |Electronic native control     |
+|Inhale Pressure Sensing      |    Not Available           |Electronic sensor             |
+|Inhale MAX Pressure Valve    |Adjustment on Tube position |Adjustable with tube position |
+|Exhale Pressure Sensor       |    Not Available           |Electronic sensor             |
+|Flow Sensor                  |    Not Available           |Electronic if available       |
+|Inlet air filtration         | HEPA / Coffee Paper Filter |HEPA                          |
+|Inlet air humidifier         | HME Filter(recommended)    |Humidity and Moistue Exchanger|
+|Exhaust filtration           | BUV Filter* + Heat Chamber |BUV Filter* + Heat Chamber    |
+|Peep Pressure regulator      | Vynil hose solution        |Vynil hose solution           |
+|Peep Pressure indicator      | Water column indicator     |Digital UI or WaterColumn     |
+|Oximeter                     | Not available              |Electronic sensor             |   
+|Heartbeat sensor             | Not available              |Electronic Sensor             |
 
 
 
@@ -60,7 +61,7 @@ The technical features are still being decided, the ventilator has not been vali
 
 ## Success Criteria
 
-Validated Prototype (Looking for partners for testing on Lung Simulators)
+Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This team was super professional and lent us one of the pulmonary simulators that they have available at the company.
 
 ## Current Status
 
@@ -72,49 +73,56 @@ Validated Prototype (Looking for partners for testing on Lung Simulators)
 
 ## Modules 
 
-- **Electronic Controller** Status `Testing`
-- **Mechanical Motor** Status `Implementing`
-- **Ventilator** Status:  `Validation`
-- **Humidifier**  Status:  `Design`
-- **Filtering** Status `Implementing`
-- **Peep Valve** Status:  `Adopted` - Thanks to [ProjectOpenAir](https://www.youtube.com/watch?v=HEfCRcew_pk)
-- **Breathing tube** Status:  `Testing`
-​
+- **Electronic Controller** Status `Use if Available` on the Spartan Model only Reles, Diodes and Switches
+- **Mechanical Motor** Status `Mandatory` we recomend Bosch VW motor by the availability and stamina delivered
+- **Humidifier**  Status:  `Deprecated` we are now using HME filter widly available.
+- **Bellow Ventilator** Status `Recommended` We don't belive Ambu-bags are reliable as a Mission Critical Device. Use a Tire.
+- **Filtering** Status `Adopted` Is the only way we managed to reduce contamination on the outake system
+- **Peep Valve** Status:  `Adopted` - Pressure control with pipe height adjustment
+- **Over Pressure Valve** Status `Adopted` - This is the Garantee that personal using this machine won't kill someone
+- **Diverter Valve** Status `Adopted` - Please use it on the Vertical Position THIS IS MANDATORY to be reliable
+- **O2 mixing system** Status `Researching & Testing` 
 
 ![Software Hardware overview](07_Software/OpenVentilator25_03.png)
 
-### [Research we based on](https://github.com/popsolutions/openventilator/tree/folder-structure/00_Documentation/Research)
+### [Research we based on](https://github.com/popsolutions/openventilator/00_Documentation/Research)
 
 ### For more information: https://www.popsolutions.co/openventilator
 
-
 ## If do you want to help
 
-[First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://forms.gle/1h19khkxExsEmvPE6) 
+[First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://www.popsolutions.co/openventilator-jointheteam) 
 
-Then join the WhatsApp group and talk with Amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
+Then join the Whatsapp group and talk with Amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
 ### Slack Channel for work-in-progress discussions...
 
 **Documentation, Hardware, Design and Code discussions** This was deprecated to avoid outsiders looking for profit</br>
 [**Check the decisions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
 
-### If I have seen further it is by standing on the shoulders of Giants.
+### If we have seen further it is by standing on the shoulders of Giants.
 
 Special thanks to:
+ - [The most badass guy in the world that doesn't want to be mentioned]
+ - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
  - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
  - Fabian Franz
- - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
  - [Washington Perez](https://www.linkedin.com/in/washingtonperez/) 
  - [Jaqueline Passos](https://www.linkedin.com/in/jaquelinepassos/)
  - [Amanda Pellini](https://www.linkedin.com/in/amanda-cristina-maciel-pellini-9177226a/)
  - [Marguel Gutierrez](https://www.linkedin.com/in/marguelgtz/)
  - [Henrique Aguilar](https://www.linkedin.com/in/henriaguilar/)
  - [Vandeir Soares](https://www.facebook.com/vandeir.soares.7)
- - [Fábio Soares]
- - [GlobaltTech]
- - [Ronaldo Alves](https://www.linkedin.com/in/ronaldoalves10/)
+ - [Fábio Soares](https://www.linkedin.com/in/fabio-julio-sores-soares-58852630/)
+ - [GlobaltTech](http://www.globaltechc.com.br/)
+ - [Samtronic](http://www.samtronic.com.br/)
  - [Ethan Moses](https://www.cameradactyl.com/)
+ - [Joris Robijn](https://www.linkedin.com/in/jorisrobijn/)
+ - [Ramon Bastos]
+ - [Matheus Prado]
+ - [Leonardo Automni]
+ - [Diego Sangiorgi]
+ - [Rodrigo Song]
  - [Wendell Mendes](https://www.linkedin.com/in/1endell)
  - [Rodrigo Borges](http://linkedin.com/in/rborges111)
  - [Henrique Nery](https://www.linkedin.com/in/henrique-nery-650216a2/) 
@@ -122,6 +130,7 @@ Special thanks to:
  - [Carlos Delfino](https://github.com/CarlosDelfino)
  - [Marcio Dultra](https://www.linkedin.com/in/marciodultra)
  - [Três meninas hardware store](https://www.google.com/maps/place/Casa+das+3+Meninas/@-23.5391312,-46.6524764,19.5z/data=!4m5!3m4!1s0x0:0x377232460c40d90d!8m2!3d-23.5391706!4d-46.6524278)
+ - [Rogers Guedes]
  - [The MIT guys from this paper](https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf): Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil, Alexander Slocum, Jussi Saukkonen. 
 
 All our families, wives and husbands that for the last days have been supporting us on our craziness.
