@@ -89,7 +89,7 @@ Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This te
 
 ### For more information: https://www.popsolutions.co/openventilator
 
-## If do you want to help
+## If you want to help
 
 [First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://www.popsolutions.co/openventilator-jointheteam) 
 
