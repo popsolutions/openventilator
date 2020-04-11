@@ -4,9 +4,9 @@ Depending on the situation you face, you may be able to find a HEPA filter (such
 
 IN THIS CASE WE LIST SOME OPTIONS
 
--1 Coffee Filter (made of paper and widely available) [Melitta Bentz] (https://pt.wikipedia.org/wiki/Melitta_Bentz)
--2 Automotive Air Filter (may be a more viable option than option 1 mainly because it does not reduce flow)
+- 1 Coffee Filter (made of paper and widely available) [Melitta Bentz](https://pt.wikipedia.org/wiki/Melitta_Bentz)
+- 2 Automotive Air Filter (may be a more viable option than option 1 mainly because it does not reduce flow)
 
-** We do not recommend using bubbling in water or any other type of humidification with water as the medium may be conducive to the reproduction of bacteria and fungi. **
+**We do not recommend using bubbling in water or any other type of humidification with water as the medium may be conducive to the reproduction of bacteria and fungi.**
 
 For this reason we have adopted an HME filter
