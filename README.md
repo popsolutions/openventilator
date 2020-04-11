@@ -119,6 +119,7 @@ Special thanks to:
  - [Ethan Moses](https://www.cameradactyl.com/)
  - [Joris Robijn](https://www.linkedin.com/in/jorisrobijn/)
  - [Ramon Bastos]
+ - [Faizan Shaikh](https://www.linkedin.com/in/faizanzshaikh)
  - [Matheus Prado]
  - [Leonardo Automni]
  - [Diego Sangiorgi]
