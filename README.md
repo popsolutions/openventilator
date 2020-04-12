@@ -16,15 +16,15 @@ Since then we tried to establish some development and community standards and ev
 
 ## Main Goal
 
-Design, Build, Validate and Supply a reliable Ventilation Medical Equipment for people/regions/countries in difficult economical situations with a component- and mechanical-agnostic philosophy. (This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality)
+Design, Build, Validate a reliable Ventilation Medical Equipment Project for people, regions, countries in difficult economical situations with a component and mechanical-agnostic philosophy. (This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality)
 
 **The equipment must have as few industrial parts as possible. If necessary, industrial parts must be easily accessible, even in small towns and villages.**
 
-The equipment should be built independent of the main motor or the ventilation tool (AmbuBag, Bellows etc) to increase modularity of the parts and resources.
+The equipment should be built independent of the main motor or the ventilation tool (AmbuBag, Bellows etc) to increase modularity of the parts and resources and also the buildability by others.
 
-The equipment can be built with as few tools as possible, and even with the use of scrap to facilitate access to materials. 
+The equipment can be built with as few tools as possible, and even with the use of scrap to facilitate access to materials (Sometimes, Scrap is the only source of materials in many poor regions and cities)
 
-The technical features are still being decided, the ventilator has not been validated yet.
+The technical features are still being decided, the ventilator has been testes on a Simulator [YOU CAN CHECK THE RESULTS HERE](https://github.com/popsolutions/openventilator/tree/master/00_Documentation/SimulatorTest/SpartanV1.0)
 
 ### Technical & Medical Requirments (MVP)
 
@@ -51,13 +51,15 @@ The technical features are still being decided, the ventilator has not been vali
 
 
 ## Risk Control
-- Inalhation speed 1s
+- Inalhation speed 1 ~ 6 s
 - Exalhation speed 1 ~ 6 s
-- From 10 to 35 cycles a minute
-- PEEP Valve control between 1mm/h20 ~ 40mm/h20
+- BPM from 10 to 35 cycles a minute
+- PEEP Valve control between 1mm/h20 ~ 30mm/h20
+- Maximum Overpressure Valve (adjustable from 5cm/h2o ~ 50cm/h20)
 - Mechanical Volumetric Ventilation Adjustment
-- Contagion reduction by contaminated air
-- [Brazil Sanitary Regulations](http://www.in.gov.br/en/web/dou/-/resolucao-rdc-n-356-de-23-de-marco-de-2020-249317437?fbclid=IwAR3tQyhVUPMqrTcX5HAW9Tq7MfYLCYCk8IwH2yqnO6RuaKEyzOCC9ImPHMI)
+- Contagion reduction by contaminated air on the Exhalation Circuit
+
+
 
 ## Success Criteria
 
