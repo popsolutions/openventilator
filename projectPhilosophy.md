@@ -9,7 +9,7 @@ Please read how ventilators used to work on the 50s and even before.
 
 
 Any complaints about the safety and usage of those machines should have been made 70 years ago, when many ventilators started to surge. It is a surreal scenario to see that engeeniers try to make an 
-Ambubag to be pushed in a ritmic time and forget that [these guys](http://rc.rcjournal.com/content/56/8/1170) 
+Ambubag to be pushed in a ritmic time and forget that [these guys](http://rc.rcjournal.com/content/56/8/1170) made history
 
 Today rich regulation agencies talk about sanitary standards and forget that the poor don't even have soap on their countries. This is the typical genocide atitude. 
 Many people have said that our machine can't be used in a ICU (WE DON'T WANT EVEN TO USE THIS MACHINE at all) but the truth We should ask is how many people in the world have access to an ICU? 
