@@ -11,22 +11,16 @@ Please read how ventilators used to work on the 50s and even before.
 Any complaints about the safety and usage of those machines should have been made 70 years ago, when many ventilators started to surge. It is a surreal scenario to see that engeeniers try to make an 
 Ambubag to be pushed in a ritmic time and forget that [these guys](http://rc.rcjournal.com/content/56/8/1170) made history
 
-Today rich regulation agencies talk about sanitary standards and forget that the poor don't even have soap on their countries. This is the typical genocide atitude. 
-Many people have said that our machine can't be used in a ICU (WE DON'T WANT EVEN TO USE THIS MACHINE at all) but the truth We should ask is how many people in the world have access to an ICU? 
+Today many people talk about sanitary standards and forget that the poor don't even have soap on their countries.
+Many people have said that our machine can't be used in a ICU (WE DON'T WANT EVEN TO USE THIS MACHINE at all) but the truth We should ask is how many people in the world have access to an ICU? How many people have access to minimum sanitary standards. How many can make a ventilator we a US$300,00 valve and a US$400 electronic controller?
 
-The current health and economical system just shown us how they FAILED to provide Health to everyone. 
+The current health and economical system just shown us how they FAILED to provide Health to everyone. In te history of Capitalism the Chicago Boys told us: When a high Demand we will have a higher supply with lower prices. This is exatcly the oposite that we see on this crisis. 
 
-Tipically and also, please notice that electronic and fancy projects from today are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. 
+Tipically and also many other team have beeing putting efforts to solve the supply on Ventilators. Please notice that electronics and fancy projects from chic universities are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on Global Solutions. 
 
-Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on Global Solutions. 
-
-Is very easy to manufacture a machine in a country with GPD per capita of 100.000 dollars while in the majority of the world is suffering and literally sufocating on poverty!
+Is very easy to manufacture a machine in a country with GPD per capita of 100.000 dollars while in the majority of the world is suffering and literally sufocating on poverty! The problem is manufacture this machine on Scale
 
 Any person we reasonable knowledge about and how a ventilator works can make a ventilator. The problem is NOT AN ENGENEERING PROBLEM, it is a scale and logistics problem. We can't even provide sanitary toilets to some countries, and there is people trying to send ventilator?
-
-## WHAT WE WANT TO AVOID ##
-
-[Barotrauma](https://www.ncbi.nlm.nih.gov/books/NBK545226/)
 
  
 ## THE MULTIPLE PORPOUSE PROBLEM ##
