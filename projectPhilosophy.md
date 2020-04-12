@@ -46,8 +46,6 @@ The most manufactured items in worlds history probably are nails or mud-bricks. 
 
 On the Software level we have Linux, that is a mission critical system running the International Space Station, or other types of systems. The Decentralization of the project is more importante for the scale of the project than the proud to say: "Ohhhh my prescioussss"
 
-That's why we choose to this project Public and Open. We do not ## we do not encourage people in any way to intubate humans or animals with this device! We would prefere that it never have to be used, but more evil an wicked is to forbid someone to try. No one will try to entubate someone without need. No one would like to see deaths on their hands. Hope is the last that dies in this situations.
+That's why we choose to make this project Public and Open. __We do not encourage people in any way to intubate humans or animals with this device!!!__ We would prefere that it never have to be used, but more evil an wicked is to forbid someone to try. No one will try to entubate someone without need. No one would like to see deaths on their hands. Hope is the last that dies in this situations.
 
-## BUROCRATS ## 
-Normally in history those are the responsible for the failure and colapse of all the huge empires that existed. The open gates to curruption and to stupidity. 
 
