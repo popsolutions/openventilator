@@ -132,6 +132,7 @@ Special thanks to:
  - [Duit](https://www.duit.com.br/)
  - [Carlos Delfino](https://github.com/CarlosDelfino)
  - [Marcio Dultra](https://www.linkedin.com/in/marciodultra)
+ - [Baú da Eletrônica](https://www.baudaeletronica.com.br/)
  - [Três meninas hardware store](https://www.google.com/maps/place/Casa+das+3+Meninas/@-23.5391312,-46.6524764,19.5z/data=!4m5!3m4!1s0x0:0x377232460c40d90d!8m2!3d-23.5391706!4d-46.6524278)
  - [Rogers Guedes]
  - [The MIT guys from this paper](https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf): Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil, Alexander Slocum, Jussi Saukkonen. 
