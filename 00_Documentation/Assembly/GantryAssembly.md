@@ -4,7 +4,8 @@
 **Part List**
 
 You will need:
-  
+
+- 4x LM8UU Linear Bearings  
 - 4x washers (8mm ID and 16mm ED)
 - 2x pressure washer or locktite
 - 2x 602 bearrings
@@ -17,7 +18,11 @@ You will need:
 
 Also do not forget that you will need all the acrylic parts. 
 
-Start with the 8mm x 50mm screw.
+Insert the linear Bearings into the bearing case (3D printed or laser cutted)
+
+Than start the assembly
+
+Start it with the 8mm x 50mm screw.
 
 Insert the Screw trought the acrilic plate with the washers, bearings as show in the photo sequence.
 
@@ -39,4 +44,4 @@ Please just follow this steps after you have finished the Bellow Assembly. Make 
 
 Also notice that the screws on the back on the gantry should not have an over size as they will colide with the Ventilator Structure
 
-
+You can now finish the Gantry assembly by thingting the Main 8mm Screw and the 2x M3 assistant screws. 
