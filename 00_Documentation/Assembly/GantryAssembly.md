@@ -27,3 +27,16 @@ Finish the Installation with a pressure washer and the nut.
 
 Do not tight the gantry set yet. We will need to finish the bellow to connect with the bottom part of the Gantry.
 
+**After the Bellow Assembly Continue Here**
+
+**Parts List**
+
+- 4x M3 Screw by 180mm
+- 4x M3 Nut
+- 4x M3 Washer
+
+Please just follow this steps after you have finished the Bellow Assembly. Make sure that the Logo on the Gantry is front oriented.
+
+Also notice that the screws on the back on the gantry should not have an over size as they will colide with the Ventilator Structure
+
+
