@@ -58,7 +58,7 @@ At the end it should look like this before you go to the next step
 
 ![](images/gantry12.35.22.jpeg)
 
-After kindly inserting the top part of the Gantry Go to the [BELLOW ASSEMBLY MANUAL](https://github.com/popsolutions/openventilator/blob/master/00_Documentation/Assembly/BellowAssembly/BellowAssembly.md)
+After kindly inserting the top part of the Gantry Go to the [BELLOW ASSEMBLY MANUAL](../BellowAssembly/BellowAssembly.md)
 
 **After the Bellow Assembly Continue Here**
 
