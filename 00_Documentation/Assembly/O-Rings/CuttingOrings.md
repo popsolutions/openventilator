@@ -28,3 +28,5 @@ After cutting the o-ring, verify that the inner diamenter is slightly bigger tha
 Also with one of the tube connections we will need to cut a bigger o-ring that will be used on the base of the bellow. (Fig)
 
 ![](images/orings13.23.12.jpeg)
+
+[NOW PROCEED TO THE GANTRY ASSEMBLY](../Gantry/GantryAssembly.md)

@@ -87,3 +87,5 @@ It should look like this after finished
 
 
 ![](images/WhatsApp%20Image%202020-04-19%20at%2016.23.56.jpeg)
+
+[**NOW PROCEED TO THE FRAME ASSEMBLY](../Frame/FrameAssembly.md)
