@@ -23,7 +23,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 /*
-Dimensions of 22 mm conical male connector according to ISO 6356-1:2004
+Dimensions of 22 mm conical male connector according to ISO 5356-1:2004
 Should engage at least 15 mm, at that point diameter should be 22.37 mm
 Should when engaged have 6 mm clearance left
 Should have taper ratio of 1:40
