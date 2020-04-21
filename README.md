@@ -7,7 +7,7 @@ This initiative as other projects was born on the [Open Source COVID19 Medical S
 
 Since then we tried to establish some development and community standards and evolved the project several times.
 
-![](OpenVentilatorLogo.png) ![](OpenVentilator.png)
+<img src="OpenVentilatorLogo.png" height=200>  <img src="OpenVentilator.png" height=200>
 
 # :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
 **PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements. - The tests on Lung Simulators are Sucessfull, limited on application depending on hardware availability but viable on emergency cases
