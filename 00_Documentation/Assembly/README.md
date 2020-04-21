@@ -2,6 +2,14 @@
 
 *OPEN-SOURCE VENTILATOR FOR DEVELOPING COUNTRIES*
 
+![](../../../openventilator/OpenVentilator.png)
+
+[First Read the Complete Assembly GUIDE and Manual that is available here](../OpenVentilator.io_Spartan_Model_Documentation.pdf)
+
+After reading you can start the Assembly by:
+
+**STEPS TO FOLLOW**
+
 0-Cut the [o-rings you will need](O-Rings/CuttingOrings.md)
 
 1-Start by the Gantry [HERE](Gantry/GantryAssembly.md)
