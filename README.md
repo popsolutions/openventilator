@@ -26,7 +26,7 @@ The equipment should be built independent of the main motor or the ventilation t
 
 The equipment can be built with as few tools as possible, and even with the use of scrap to facilitate access to materials (Sometimes, Scrap is the only source of materials in many poor regions and cities)
 
-The technical features are still being decided, the ventilator has been testes on a Simulator [YOU CAN CHECK THE RESULTS HERE](https://github.com/popsolutions/openventilator/tree/master/00_Documentation/SimulatorTest/SpartanV1.0)
+The technical features are still being decided, the ventilator has been testes on a Simulator [YOU CAN CHECK THE RESULTS HERE](/00_Documentation/SimulatorTest/SpartanV1.0/SpartanV1.0.zip)
 
 ### Technical & Medical Requirments (MVP)
 
@@ -67,7 +67,7 @@ The technical features are still being decided, the ventilator has been testes o
 
 Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This team was super professional and lent us one of the pulmonary simulators that they have available at the company.
 
-## Current Status
+## Current Status - TESTED!
 
 <p float="left">
 	<img src="https://www.popsolutions.co/web/image/64981/open%20respirator%20v1.11.jpg" alt="OpenVentilator" height="200">
@@ -87,9 +87,9 @@ Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This te
 - **Diverter Valve** Status `Adopted` - Please use it on the Vertical Position THIS IS MANDATORY to be reliable
 - **O2 mixing system** Status `Researching & Testing` 
 
-![Software Hardware overview](07_Software/OpenVentilator25_03.png)
+[Software Hardware overview](07_Software/OpenVentilator25_03.png)
 
-### [Research we based on](https://github.com/popsolutions/openventilator/00_Documentation/Research)
+### [Research we based on](00_Documentation/Research)
 
 ### For more information: https://www.popsolutions.co/openventilator
 
