@@ -14,8 +14,6 @@ Since then we tried to establish some development and community standards and ev
 
 **PLEASE DO NOT USE THIS MACHINE IF NOT NEEDED**, WE DO NOT GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLLAPSE SCENARIOS :warning: 
 
-
-
 ## Main Goal
 
 Design, Build, Validate a reliable Ventilation Medical Equipment Project for people, regions, countries in difficult economical situations with a component and mechanical-agnostic philosophy. (This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality)
@@ -27,6 +25,9 @@ The equipment should be built independent of the main motor or the ventilation t
 The equipment can be built with as few tools as possible, and even with the use of scrap to facilitate access to materials (Sometimes, Scrap is the only source of materials in many poor regions and cities)
 
 The technical features are still being decided, the ventilator has been testes on a Simulator [YOU CAN CHECK THE RESULTS HERE](/00_Documentation/SimulatorTest/SpartanV1.0/SpartanV1.0.zip)
+
+**SYSTEM OVERVIEW**
+![](systemDiagram.jpg)
 
 ### Technical & Medical Requirments (MVP)
 
