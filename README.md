@@ -71,9 +71,8 @@ Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This te
 ## Current Status - TESTED!
 
 <p float="left">
-	<img src="https://www.popsolutions.co/web/image/64981/open%20respirator%20v1.11.jpg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64982/open%20respirator%20v1.12.jpg" alt="OpenVentilator" height="200">
-	<img src="https://www.popsolutions.co/web/image/64987/open%20respirator%20v1.17.jpg" alt="OpenVentilator" height="200">
+	<img src="00_Documentation/SimulatorTest/TestImage1.jpeg" height="200">
+	<img src="00_Documentation/SimulatorTest/TestImage2.jpeg" height="200">
 </p>
 
 ## Modules 
