@@ -2,7 +2,7 @@
 
 *OPEN-SOURCE VENTILATOR FOR DEVELOPING COUNTRIES*
 
-![](../../../openventilator/OpenVentilator.png)
+![](../OpenVentilator.png)
 
 [First Read the Complete Assembly GUIDE and Manual that is available here](../OpenVentilator.io_Spartan_Model_Documentation.pdf)
 
