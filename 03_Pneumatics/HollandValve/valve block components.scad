@@ -24,7 +24,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 use <common.scad>;
 
-//$fn=200;
+hosetail_id=10.2;
+hosetail_od=13.2;
+//hosetail_id=16.5;
+//hosetail_od=19.5;
 
 module pressure_controlled_valve_bottom_pos()
 {
@@ -322,20 +325,21 @@ module corridor_joint_neg()
 
 module hosetail_pos( h=30 )
 {
-	hosetail( d2=13.2, d1=10.2, h=h );
-	cylinder( d=13.2, h=0.5 ); 
+	hosetail( d2=hosetail_od, d1=hosetail_id, h=h );
+	cylinder( d=hosetail_od, h=0.5 ); 
 	translate( [0,0,0] ) corridor_joint( w=19.5, h=17, f=0.75, b=2 );
+
 }
 
 module hosetail_neg( h=30 )
 {
-	translate( [0,-0.01,0.5-0.01] ) cylinder( d=10.2, h=h );
+	translate( [0,-0.01,0.5-0.01] ) cylinder( d=hosetail_id, h=h );
 	translate( [0,-0.01,0.5] ) corridor_joint( w=16.5, h=14.5 );
 }
 
 module bottom_hosetail_neg( d )
 {
-	translate( [0,0,-d] ) cylinder( d=16.5, h=14 );
+	translate( [0,0,-d] ) cylinder( d=16.5, h=d+2 );
 }
 
 module screw_hole_bottom_neg( d1=3, d2=7, h=9 )
