@@ -24,11 +24,11 @@ Many people have said that our machine can't be used in a ICU (WE DON'T WANT EVE
 
 The current health and economical system just shown us how they FAILED to provide Health to everyone. In te history of Capitalism the Chicago Boys told us: When a high Demand we will have a higher supply with lower prices. This is exatcly the oposite that we see on this crisis. 
 
-Tipically and also many other team have beeing putting efforts to solve the supply on Ventilators. Please notice that electronics and fancy projects from chic universities are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on Global Solutions. 
+Tipically and also many other teams have beeing putting efforts to solve the supply on Ventilators. Please notice that electronics and fancy projects from chic universities are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on a Global Solutions. 
 
 Is very easy to manufacture a machine in a country with GPD per capita of 100.000 dollars while in the majority of the world is suffering and literally sufocating on poverty! The problem is manufacture this machine on Scale
 
-Any person we reasonable knowledge about and how a ventilator works can make a ventilator. The problem is NOT AN ENGENEERING PROBLEM, it is a scale and logistics problem. We can't even provide sanitary toilets to some countries, and there is people trying to send ventilator?
+Any person with reasonable knowledge about and how a ventilator works can make a ventilator. The problem is NOT AN ENGENEERING PROBLEM, it is a scale and logistics problem. We can't even provide sanitary standards to some countries, and there is people trying to build ventilators? What about everything that goes in the ICU? The Gasometry and the other periferals we have to a proper treatment? 
 
  
 ## THE MULTIPLE PORPOUSE PROBLEM ##
