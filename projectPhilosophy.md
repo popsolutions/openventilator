@@ -1,8 +1,10 @@
-##Global Problems Must Have Global Solutions##
+## Global Problems Must Have Global Solutions ##
 
 Do you have a solution for a problem that only works in your country or city? So then it isn`t a sollutions is a new problem. The they humanity start thinking about a global and interconected society as a hole we will evolve as a society. 
 
-A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism.
+A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism projects. We believe in a OpenSource Society where knoledges and essential resources are determined and distributed by the needs of everyone and not by how much they can pay for it.
+
+This is not Socialism and neither a Capitalism ideal, this is a Hippie idea that began in the 1960s. The idea of free knowledge, the idea of Ubuntu, free software, open access to knowledge sources. The idea that if alone we can go fast, together we can go further. 
 
 ## Before attempting to make a new project or re-inventing the wheel ##
 Please read how ventilators used to work on the 50s and even before.
