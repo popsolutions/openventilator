@@ -1,4 +1,5 @@
 ##Global Problems Must Have Global Solutions##
+
 Do you have a solution for a problem that only works in your country or city? So then it isn`t a sollutions is a new problem. The they humanity start thinking about a global and interconected society as a hole we will evolve as a society. 
 
 A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism.
