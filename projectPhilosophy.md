@@ -1,3 +1,8 @@
+##Global Problems Must Have Global Solutions##
+Do you have a solution for a problem that only works in your country or city? So then it isn`t a sollutions is a new problem. The they humanity start thinking about a global and interconected society as a hole we will evolve as a society. 
+
+A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism.
+
 ## Before attempting to make a new project or re-inventing the wheel ##
 Please read how ventilators used to work on the 50s and even before.
  
@@ -41,5 +46,6 @@ The most manufactured items in worlds history probably are nails or mud-bricks. 
 On the Software level we have Linux, that is a mission critical system running the International Space Station, or other types of systems. The Decentralization of the project is more importante for the scale of the project than the proud to say: "Ohhhh my prescioussss"
 
 That's why we choose to make this project Public and Open. __We do not encourage people in any way to intubate humans or animals with this device!!!__ We would prefere that it never have to be used, but more evil an wicked is to forbid someone to try. No one will try to entubate someone without need. No one would like to see deaths on their hands. Hope is the last that dies in this situations.
+
 
 
