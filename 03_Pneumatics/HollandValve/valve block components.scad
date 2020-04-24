@@ -24,10 +24,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 use <common.scad>;
 
-hosetail_id=10.2;
-hosetail_od=13.2;
-//hosetail_id=16.5;
+hosetail_od=16.0;
+//hosetail_od=13.2;
 //hosetail_od=19.5;
+hosetail_id=hosetail_od-3;
 
 module pressure_controlled_valve_bottom_pos()
 {
@@ -308,9 +308,36 @@ module corridor_neg( l=35, w=16.5, h=14.5 )
 
 module multiple_corridor_neg( l, w, h )
 {
-	translate( [-w-1,0,0] ) corridor( l=l, w=w, h=h );
-	translate( [   0,0,0] ) corridor( l=l, w=w, h=h );
-	translate( [+w+1,0,0] ) corridor( l=l, w=w, h=h );
+	// Calculate channel width
+	num_channels = 2;
+	pw = 2; // pillar width
+	cw = (w-(num_channels-1)*pw) / num_channels; // channel width
+
+	// Create polygon with the shape of the channel
+	pg = [[-cw/2+0.5,0],[-cw/2,0.5],[-cw/2,h-1-cw/2],[0,h-1],[+cw/2,h-1-cw/2],[+cw/2,0.5],[+cw/2-0.5,0]];
+	
+	translate( [0,0,-h] ) for( i=[0:1:num_channels-1+0.01] ) {
+		rotate( [90,0,180] ) translate( [-w/2+cw/2+i*(cw+pw),0,0] ) linear_extrude( height=l+0.02 ) polygon( pg );
+	}
+}
+
+module multiple_bent_corridor_neg( r, start_a, bend_a, w, h )
+{
+	// Calculate channel width
+	num_channels = 2;
+	pw = 2; // pillar width
+	cw = (w-(num_channels-1)*pw) / num_channels; // channel width
+
+	// Create polygon with the shape of the channel
+	pg = [[-cw/2+0.5,0],[-cw/2,0.5],[-cw/2,h-1-cw/2],[0,h-1],[+cw/2,h-1-cw/2],[+cw/2,0.5],[+cw/2-0.5,0]];
+
+	translate( [0,0,-h] ) rotate( [0,0,start_a] ) {
+		rotate_extrude( angle=bend_a ) {
+			for( i=[0:1:num_channels-1+0.01] ) {
+				translate( [r-w/2+cw/2+i*(cw+pw),0,0] ) polygon( pg );
+			}
+		}
+	}
 }
 
 module corridor_joint_pos()
@@ -394,6 +421,12 @@ intersection() {
 		}
 		translate( [200,0,30] ) difference() {
 			bottom_hosetail_neg( 4 );
+		}
+		translate( [240,0,0] ) {
+			multiple_corridor_neg( 40, 20, 12 );
+		}
+		translate( [240,0,0] ) {
+			multiple_bent_corridor_neg( -20, 180, 30, 20, 12 );
 		}
 	}
 }

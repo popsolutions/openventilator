@@ -25,10 +25,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 use <common.scad>;
 use <valve block components.scad>;
 
-$fn = 40;
+$fn = 90;
 
 h = 12;
 bh = 2;
+text_h = 0.3;
 
 size_x = 128;
 size_y = 100;
@@ -68,6 +69,10 @@ bottom_corridor_paths = [	[ [ 20,32-0.01,0], [ 20,40,0] ],
 							[ [ 20,80,0], [ 52,80,0] ],
 							[ [ 80,80,0], [108,80,0] ] ];
 
+bottom_bent_corridor_centers =    [	[36,32,0] ];
+bottom_bent_corridor_start_angles =	[ 180 ];
+bottom_bent_corridor_bend_angles =	[ 90 ];
+
 bottom_thin_corridor_paths = [	[ [80,80-3.25,h-8], pcv_p ] ];
 
 top_corridor_paths = [	[ [ 20,48,0], [ 63,48,0] ],
@@ -104,7 +109,7 @@ bottom_text_p =	[[25,19],
 				[82,16],
 				[122,16] ];
 bottom_text_rot = [0,0,90,90];
-bottom_text_text = [ "OpenVentilator.io", "3Dp valves v1.0", "OVP", "PEEP" ];
+bottom_text_text = [ "OpenVentilator.io", "3Dp valves v1.1", "OVP", "PEEP" ];
 
 
 module bottom_part()
@@ -128,7 +133,7 @@ module bottom_part()
 					translate( bottom_hosetail_p[i] ) hosetail_pos( h=bottom_hosetail_h[i] );
 				}
 				for( i=[0:1:len(bottom_text_p)-0.99] ) {
-					translate( bottom_text_p[i] ) rotate( [0,0,bottom_text_rot[i]] ) color( "black" ) linear_extrude( height=0.2 ) text( size=3, halign="center", valign="center", bottom_text_text[i] );
+					translate( bottom_text_p[i] ) rotate( [0,0,bottom_text_rot[i]] ) color( "black" ) linear_extrude( height=text_h ) text( size=3, halign="center", valign="center", bottom_text_text[i] );
 				}				
 			}
 		}
@@ -154,7 +159,11 @@ module bottom_part()
 				for( path=bottom_corridor_paths ) {
 					l = 2D_length( path[0], path[1] );
 					a = 2D_angle( path[0], path[1] );
-					translate( [0,0,-h] ) translate( path[0] ) rotate( [0,0,a ] ) multiple_corridor_neg( l, 6, h-1 );
+					translate( path[0] ) rotate( [0,0,a ] ) multiple_corridor_neg( l, 20, h );
+				}
+				// bent corridor
+				for( i=[0:1:len(bottom_bent_corridor_centers)-0.99] ) {
+					translate( bottom_bent_corridor_centers[i] ) multiple_bent_corridor_neg( 16, bottom_bent_corridor_start_angles[i], bottom_bent_corridor_bend_angles[i], 20, h );
 				}
 				// thin corridor to pressure controlled valve
 				for( path=bottom_thin_corridor_paths ) {
@@ -163,16 +172,6 @@ module bottom_part()
 					translate( [0,0,-h] ) translate( path[0] ) rotate( [0,0,a ] ) corridor( w=2, l=l, h=3 );
 				}
 				// MANUAL PARTS FROM HERE
-				// bent corridor
-				translate( [36,32,-h] ) rotate( [0,0,180] ) {
-					rotate_extrude( angle=90 ) {
-						w = 6;
-						pg = [[-w/2,0],[-w/2,h-w/2],[0,h-1],[w/2,h-1-w/2],[w/2,0]];
-						translate( [16-w-1,0,0] ) polygon( pg );
-						translate( [16    ,0,0] ) polygon( pg );
-						translate( [16+w+1,0,0] ) polygon( pg );
-					}
-				}
 			}
 			// screw holes
 			translate( [0,0,-0.01] ) {
@@ -261,7 +260,7 @@ module top_part()
 					translate( path[0] ) rotate( [0,0,a ] ) corridor_pos( l );
 				}
 				for( i=[0:1:len(top_text_p)-0.99] ) {
-					translate( top_text_p[i] ) rotate( [0,0,top_text_rot[i]] ) color( "black" ) linear_extrude( height=0.2 ) text( size=3, halign="center", valign="center", top_text_text[i] );
+					translate( top_text_p[i] ) rotate( [0,0,top_text_rot[i]] ) color( "black" ) linear_extrude( height=text_h ) text( size=3, halign="center", valign="center", top_text_text[i] );
 				}
 				// MANUAL PARTS FROM HERE
 			}
@@ -317,10 +316,10 @@ module top_part()
 intersection() {
 	union() {
 		translate( [0,0,0] ) bottom_part();
-		translate( [0,0,0+bh+h+1] ) top_part();
-		translate( [0,0,0+bh+h+0.5] ) color( "grey", 1 ) membrane();
+		//translate( [0,0,0+bh+h+1] ) top_part();
+		//translate( [0,0,0+bh+h+0.5] ) color( "grey", 1 ) membrane();
 	}
-	//translate( [-500,16,0] ) cube( [1000,1000,1000] );
+	translate( [0,0,0] ) cube( [1000,1000,1000] );
 }
 
 //translate( [0,0,0] ) bottom_part();
