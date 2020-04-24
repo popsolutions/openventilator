@@ -1,3 +1,11 @@
+## Global Problems Must Have Global Solutions ##
+
+Do you have a solution for a problem that only works in your country or city? So then it isn`t a sollutions is a new problem. The day humanity starts thinking about a global and interconected society as a hole we will evolve as a society to a new level. 
+
+A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism projects. We believe in a OpenSource Society where knoledges and essential resources are determined and distributed by the needs of everyone and not by how much they can pay for it.
+
+This is not Socialism and neither a Capitalism ideal, this is a Hippie idea that began in the 1960s. The idea of free knowledge, the idea of Ubuntu, free software, open access to knowledge sources. The idea that if alone we can go fast, together we can go further. 
+
 ## Before attempting to make a new project or re-inventing the wheel ##
 Please read how ventilators used to work on the 50s and even before.
  
@@ -16,11 +24,11 @@ Many people have said that our machine can't be used in a ICU (WE DON'T WANT EVE
 
 The current health and economical system just shown us how they FAILED to provide Health to everyone. In te history of Capitalism the Chicago Boys told us: When a high Demand we will have a higher supply with lower prices. This is exatcly the oposite that we see on this crisis. 
 
-Tipically and also many other team have beeing putting efforts to solve the supply on Ventilators. Please notice that electronics and fancy projects from chic universities are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on Global Solutions. 
+Tipically and also many other teams have beeing putting efforts to solve the supply on Ventilators. Please notice that electronics and fancy projects from chic universities are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on a Global Solutions. 
 
 Is very easy to manufacture a machine in a country with GPD per capita of 100.000 dollars while in the majority of the world is suffering and literally sufocating on poverty! The problem is manufacture this machine on Scale
 
-Any person we reasonable knowledge about and how a ventilator works can make a ventilator. The problem is NOT AN ENGENEERING PROBLEM, it is a scale and logistics problem. We can't even provide sanitary toilets to some countries, and there is people trying to send ventilator?
+Any person with reasonable knowledge about and how a ventilator works can make a ventilator. The problem is NOT AN ENGENEERING PROBLEM, it is a scale and logistics problem. We can't even provide sanitary standards to some countries, and there is people trying to build ventilators? What about everything that goes in the ICU? The Gasometry and the other periferals we have to a proper treatment? 
 
  
 ## THE MULTIPLE PORPOUSE PROBLEM ##
@@ -41,5 +49,6 @@ The most manufactured items in worlds history probably are nails or mud-bricks. 
 On the Software level we have Linux, that is a mission critical system running the International Space Station, or other types of systems. The Decentralization of the project is more importante for the scale of the project than the proud to say: "Ohhhh my prescioussss"
 
 That's why we choose to make this project Public and Open. __We do not encourage people in any way to intubate humans or animals with this device!!!__ We would prefere that it never have to be used, but more evil an wicked is to forbid someone to try. No one will try to entubate someone without need. No one would like to see deaths on their hands. Hope is the last that dies in this situations.
+
 
 
