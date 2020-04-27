@@ -7,6 +7,8 @@ This initiative as other projects was born on the [Open Source COVID19 Medical S
 
 Since then we tried to establish some development and community standards and evolved the project several times.
 
+[![N|Solid](https://popsolutions.co/web/image/65243/CommunitySupport.png)](mailto:support@openventilator.io)   [![N|Solid](https://popsolutions.co/web/image/65245/t_logo.png)](https://t.me/openventilator) 
+
 <img src="OpenVentilatorLogo.png" height=300> <img src="OpenVentilator.png" height=300>
 
 # :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
