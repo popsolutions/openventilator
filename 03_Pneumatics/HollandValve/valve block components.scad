@@ -23,6 +23,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 use <common.scad>;
+use <rounded_60deg_segment.scad>;
 
 // hosetail settings
 //hosetail_od=19.5;
@@ -42,144 +43,83 @@ top_corr_b = 1;
 
 echo( top_corr_ih );
 
-module pressure_controlled_valve_bottom_pos()
+module pressure_controlled_valve_bottom_pos( x=30, y=30 )
 {
-	translate( [-15,-15,0] ) rounded_rectangle( 30, 30, 0.5, 7 );
+	translate( [-x/2,-y/2,0] ) rounded_rectangle( x, y, 0.5, 7 );
 }
 
-module pressure_controlled_valve_bottom_neg( d )
+module pressure_controlled_valve_bottom_neg( x=30, y=30, d )
 {
-	d2 = min(d,8) + 0.5;
+	d2 = min(d,6) + 0.5;
 	hull() {
-		translate( [-14,-14,0.5] ) rounded_rectangle( 28, 28, 0.01, 6 );
-		translate( [0,0,0.5+0.02] ) sine_hole( d=28, depth=d2+0.01 );
+		translate( [-x/2+1,-y/2+1,0.5] ) rounded_rectangle( x-2, y-2, 0.01, 6 );
+		translate( [-(x-y)/2,0,0.5+0.02] ) sine_hole( d=min(x,y)-2, depth=d2+0.01 );
+		translate( [(x-y)/2,0,0.5+0.02] ) sine_hole( d=min(x,y)-2, depth=d2+0.01 );
 	}
+	
 }
 
-module pressure_controlled_valve_membrane_neg()
+module pressure_controlled_valve_membrane_neg( x, y )
 {
 	// Requires no holes in the membrane
 }
 
-module pressure_controlled_valve_top_pos()
+module pressure_controlled_valve_top_pos( x=30, y=30 )
 {
-	h=34/2-0.75;
-	w=34;
+	h=17-0.75;
 	translate( [0,0,0] ) hull() {
-		translate( [-w/2+9,-w/2+h,h-0.01] ) rounded_rectangle( w-2*9, w-2*h, 0.01, 0.01 );
-		translate( [-w/2,-w/2,0.01] ) rounded_rectangle( w, w, 0.01, 9 );
+		translate( [-x/2+8,-1.5/2,h-0.01] ) rounded_rectangle( x-16, 1.5, 0.01, 0.01 );
+		translate( [-x/2-1,-y/2-1,-0.01] ) rounded_rectangle( x+2, y+2, 0.01, 8 );
 	}
+	// Add corridor
+	translate( [-x/2-1,0,0] ) rotate( [0,0,-90] ) corridor( w=top_corr_ow, l=x+2, h=top_corr_oh, f=top_corr_f, b=top_corr_b );
 }
 
-module pressure_controlled_valve_top_neg()
+module pressure_controlled_valve_top_neg( x=30, y=30, rot=0 )
 {
-	d = 2.5;
-	translate( [0,0,-d] ) {
+	d = 3;
+	diag_size=sqrt( x*x + y*y );
 
-/*
-		// type b, 13 entry holes
-		for( y=[-7.5:5:7+.5+0.02] ) {
-			translate( [-11.9,y,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		for( y=[-10:5:+10+0.02] ) {
-			translate( [-7.6,y,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		for( y=[-7.5:5:7+.5+0.02] ) {
-			translate( [-3.3,y,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
+	translate( [0,0,-d+0.5+0.01] ) {
+		intersection() {
+			union() {
+				// entry holes
+				rotate( [0,0,-90+rot] ) translate( [-diag_size/2,1,0] ) cylinder_grid( x=diag_size, y=diag_size/2, h=d+0.5+0.02, d=4.5, x_incr=6 );
 
-		// 13 exit holes
-		for( y=[-7.5:5:7+.5+0.02] ) {
-			translate( [+3.3,y,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		for( y=[-10:5:+10+0.02] ) {
-			translate( [+7.6,y,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		for( y=[-7.5:5:7+.5+0.02] ) {
-			translate( [+11.9,y,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-*/
-/*
-		// type a, large opening
-		translate( [-13.5,-14,-0.01] ) rounded_rectangle( 12, 28, d+0.5+0.02, 6 );
-		translate( [+1.5,-14,-0.01] ) rounded_rectangle( 12, 28, d+0.5+0.02, 6 );
-*/
-		// ellipses
-		hull() {
-			translate( [-11.9,-9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [-11.9,-2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [-11.9,+2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [-11.9,+9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [-7.5,-12.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [-7.5,-2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [-7.5,+2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [-7.5,+12.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [-3.1,-9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [-3.1,-2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [-3.1,+2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [-3.1,+9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [+11.9,-9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [+11.9,-2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [+11.9,+2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [+11.9,+9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [+7.5,-12.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [+7.5,-2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [+7.5,+2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [+7.5,+12.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [+3.1,-9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [+3.1,-2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-		}
-		hull() {
-			translate( [+3.1,+2.0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
-			translate( [+3.1,+9.5,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
+				// exit holes
+				rotate( [0,0,90+rot] ) translate( [-diag_size/2,1,0] ) cylinder_grid( x=diag_size, y=diag_size/2, h=d+0.5+0.02, d=4.5, x_incr=6 );
+			}
+			translate( [-x/2+1,-y/2+1,0] ) rounded_rectangle( x-2, y-2, d, 6 );
 		}
 	}
 	translate( [0,0,0.5] ) {
-		hull() {
-			translate( [-1.5-12,-14,-0.01] ) rounded_rectangle( 12, 28, 0.01, 6 );
-			translate( [-1.5-12+6,-14+6,6] ) rounded_rectangle( 0.01, 16, 0.01, 0.01 );
-		}
-	}
-	translate( [0,0,0.5] ) {
-		hull() {
-			translate( [+1.5,-14,-0.01] ) rounded_rectangle( 12, 28, 0.01, 6 );
-			translate( [+1.5+6,-14+6,6] ) rounded_rectangle( 0.01, 16, 0.01, 0.01 );
+		difference() {
+			// roof shape inside
+			union() {
+				hull() {
+					translate( [-x/2+6,0,top_corr_ih-0.5] ) rounded_rectangle( x-20, 0.01, 0.01, 0.01 );
+					translate( [-x/2+1,-y/2+1,0] ) rounded_rectangle( x-2, y-2, 0.01, 6 );
+				}
+				translate( [-x/2-1,0,0] ) rotate( [0,0,-90] ) corridor( w=top_corr_iw, l=x, h=top_corr_ih-0.5 );
+			}
+			// wall
+			rotate( [0,0,-90+rot] ) translate( [-diag_size/2,-1,0] ) cube( [diag_size,2,top_corr_ih-0.5+0.01] );
 		}
 	}
 }
 
 module one_way_valve_bottom_pos( r=8.5, e=0, type=0 )
 {
-	x = 2*r+2*e+11.5;
-	y = 2*r+11.5;
+	x = 2*r+2*e+11;
+	y = 2*r+11;
 	translate( [-x/2-1,-y/2-1,0] ) rounded_rectangle( x+2, y+2, 0.5, 7 );
 }
 
 module one_way_valve_bottom_neg( d, r=8.5, e=0, type=0 )
 {
 	d2 = d+0.5+0.01;
-	x = 2*r+2*e+11.5;
-	y = 2*r+11.5;
+	x = 2*r+2*e+11;
+	y = 2*r+11;
 	cos_pg = concat( [[0,0]], [ for( i=[0:0.05:1+0.0001] ) [i*x/2, d2/2 - d2/2 * cos( 180*i )] ], [[x,d2],[x,0]] );
 	intersection() {
 		translate( [-x/2+0.01,-y/2,0.5+0.01] ) rotate( [-90,0,0] ) linear_extrude( y ) polygon( cos_pg );	
@@ -189,8 +129,8 @@ module one_way_valve_bottom_neg( d, r=8.5, e=0, type=0 )
 
 module one_way_valve_membrane_neg( r=8.5, e=0, type=0 )
 {
-	x = 2*r+2*e+11.5;
-	y = 2*r+11.5;
+	x = 2*r+2*e+11;
+	y = 2*r+11;
 	
 	// flap
 	translate( [-r-e, -r-3.75-0.25, -0.01] ) cube( [+r+2*e+0.01,0.5,1] );
@@ -228,21 +168,23 @@ module one_way_valve_top_neg( r=8.5, e=0, type=0 )
 	if( type == 0 ) {
 		translate( [0,0,-d] ) {
 			// 7 holes
-			intersection() {
-				union() { 
+			//intersection() {
+			//	union() { 
 					for( a=[0:60:359] ) {
-						rotate( [0,0,a] ) hull() {
+						rotate( [0,0,a] ) 
+							linear_extrude( height = d+0.5+0.02 ) rounded_60deg_segment( 8.5, 2.25, 1, 2.25+1.5, res=2 );
+/*						hull() {
 							translate( [6.0,   0,-0.01] ) cylinder( d=4.5, h=d+0.5+0.02 );
 							translate( [7.2,-2.1,-0.01] ) cylinder( d=2, h=d+0.5+0.02 );
-							translate( [8,   0,-0.01] ) cylinder( d=3, h=d+0.5+0.02 );
+							translate( [8.2,   0,-0.01] ) cylinder( d=0.5, h=d+0.5+0.02 );
 							translate( [7.2,+2.1,-0.01] ) cylinder( d=2, h=d+0.5+0.02 );
-						}
+						}*/
 					}
 					translate( [0,0,-0.01] ) cylinder( d=4.5, h=d+0.5+0.02 );
-				}
+				//}
 				// bounding cylinder
-				translate( [0,0,-0.01] ) cylinder( d=17, h=d+0.5+0.02 );
-			}
+				//translate( [0,0,-0.01] ) cylinder( d=17, h=d+0.5+0.02 );
+			//}
 		}
 	}
 	else if( type == 1 ) {
@@ -342,7 +284,7 @@ module multiple_corridor_neg( l, w, h )
 {
 	// Calculate channel width
 	num_channels = ceil( w / h );
-	pw = 2; // pillar width
+	pw = (h+3)/7; // pillar width
 	cw = (w-(num_channels-1)*pw) / num_channels; // channel width
 
 	// Create polygon with the shape of the channel
@@ -357,7 +299,7 @@ module multiple_bent_corridor_neg( r, start_a, bend_a, w, h )
 {
 	// Calculate channel width
 	num_channels = ceil( w / h );
-	pw = 2; // pillar width
+	pw = (h+3)/7; // pillar width
 	cw = (w-(num_channels-1)*pw) / num_channels; // channel width
 
 	// Create polygon with the shape of the channel
@@ -401,10 +343,25 @@ module bottom_hosetail_neg( d )
 	translate( [0,0,-d] ) cylinder( d=16.5, h=d+2 );
 }
 
+module meas_port_pos( d=3, h=20 )
+{
+	cylinder( d=d+3, h=h-8 );
+	translate( [0,0,h-8-0.01] ) cylinder( d1=d+3, d2=3, h=d/4 );
+	cylinder( d=d, h=h-2 );
+	translate( [0,0,h-2-0.01] ) cylinder( d1=d, d2=d-1, h=2 );
+}
+
+module meas_port_neg( d=3, h=20, depth=-0.5-0.01 )
+{
+	translate( [0,0,-depth-0.01] ) cylinder( d=d, h=h-10+depth+0.01 );
+	translate( [0,0,h-10-0.01] ) cylinder( d1=d, d2=0, h=d/2+0.01 );
+	translate( [0,0,h-0.5] ) cylinder( d1=0, d2=d-1, h=0.2*d+0.01 );
+}
+
 module screw_hole_bottom_neg( d1=3, d2=7, h=9 )
 {			
 	cylinder( d=d1, h=h );
-	cylinder( d1=d2, d1=3, h=(d2-d1)/2 );
+	cylinder( d1=d2, d2=3, h=(d2-d1)/2 );
 }
 
 intersection() {
@@ -412,12 +369,12 @@ intersection() {
 	union() {
 	
 		translate( [0,0,0] ) difference() {
-			pressure_controlled_valve_bottom_pos();
-			pressure_controlled_valve_bottom_neg( 4 );
+			pressure_controlled_valve_bottom_pos( 50, 30 );
+			pressure_controlled_valve_bottom_neg( 50, 30, 4 );
 		}
 		translate( [0,0,30] ) difference() {
-			pressure_controlled_valve_top_pos();
-			pressure_controlled_valve_top_neg();
+			pressure_controlled_valve_top_pos( 50, 30 );
+			pressure_controlled_valve_top_neg( 50, 30, rot=60 );
 		}
 		translate( [40,0,0] ) difference() {
 			one_way_valve_bottom_pos();
@@ -464,20 +421,25 @@ intersection() {
 		translate( [280,0,0] ) {
 			multiple_bent_corridor_neg( -20, 180, 30, 20, 12 );
 		}
+		translate( [360,0,00] )  difference() {
+			meas_port_pos( d=3, h=20 );
+			meas_port_neg( d=3, h=20 );
+		}
 	}
 }
+
 color( "darkblue", 0.25 ) intersection() {
 	translate( [-100,-0.02,-100] ) cube( [1000,1000,1000] );
 	union() {
 
-		translate( [0,0,0] ) union() {
-			 pressure_controlled_valve_bottom_neg( 4 );
+		translate( [0,00,0] ) union() {
+			 pressure_controlled_valve_bottom_neg( 50, 30, 4 );
 		}
 		translate( [0,0,20] ) union() {
-			 pressure_controlled_valve_membrane_neg();
+			 pressure_controlled_valve_membrane_neg( 50, 30 );
 		}
-		translate( [0,0,30] ) union() {
-			pressure_controlled_valve_top_neg();
+		translate( [0,40,30] ) union() {
+			pressure_controlled_valve_top_neg( 50, 30, rot=60 );
 		}
 		translate( [40,0,0] ) union() {
 			one_way_valve_bottom_neg( 4 );
@@ -517,6 +479,12 @@ color( "darkblue", 0.25 ) intersection() {
 		}
 		translate( [240,0,30] ) union() {
 			bottom_hosetail_neg( 4 );
+		}
+		translate( [320,0,30] ) union() {
+			screw_hole_bottom_neg( 4 );
+		}
+		translate( [360,0,30] ) union() {
+			meas_port_neg( d=3, h=20 );
 		}
 	}
 }

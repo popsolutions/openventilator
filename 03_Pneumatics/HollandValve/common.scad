@@ -91,6 +91,18 @@ module rounded_rectangle( x=20, y=40, h=10, r=4 )
 		translate( [r, y-r, 0] ) cylinder( r=r, h=h );
 	}
 }
+
+module cylinder_grid( x=40, y=40, h=10, d=4.5, x_incr=6 )
+{
+	y_incr=1/2*sqrt(3) * x_incr;
+	for( y=[d/2:y_incr:y] ) {
+		x_offset = (((y-d/2)/y_incr) % 2 ) * x_incr/2;
+		for( x=[d/2+x_offset:x_incr:x] ) {
+			translate( [x,y,0] ) cylinder( d=d, h=h );
+		}
+	}
+}
+
 function 2D_length( p0, p1 ) = sqrt( pow( p1[1] - p0[1], 2 ) + pow( p1[0] - p0[0], 2 ) );
 
 function 2D_angle( p0, p1 ) =  -90+atan2( p1[1] - p0[1], p1[0] - p0[0] );

@@ -1,0 +1,14 @@
+slic3r print settings
+
+Layers and perimeters
+~~~~~~~~~~~~~~~~~~~~~
+Vertical shells - Perimeters: 4
+Horizontal shells - Solid layers:   Top: 4   Bottom: 4
+Quality - Extra perimeters if needed: check
+
+Infill
+~~~~~~
+Fill density: 10% to 25%
+Fill pattern: Rectilinear
+Top/bottom fill pattern: Concentric
+

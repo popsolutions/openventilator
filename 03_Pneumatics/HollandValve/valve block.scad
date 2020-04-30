@@ -25,7 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 use <common.scad>;
 use <valve block components.scad>;
 
-//$fn = 90;
+//$fn = 20;
 $fa = 5;
 $fs = 0.25;
 
@@ -39,7 +39,9 @@ top_part_p =  [  0,28,0];
 top_part_size = [140,72,2];
 
 pcv_p = [86,48,0];
-owv_p = [	[ 20, 48,0],
+pcv_size = [34,30];
+pcv_rot = 45;
+owv_p = [ [ 20, 48,0],
 			[120, 48,0],
 			[ 52, 80,0],
 			[ 79, 80,0],
@@ -70,15 +72,16 @@ bottom_hosetail_h = [	45,
 						45 ];
 
 bottom_corridor_paths = [	[ [ 20,32-0.01,0], [ 20,40,0] ],
-							[ [ 36-0.01,16,0], [ 92,16,0] ],
+							[ [ 36-0.01,16,0], [ 85,16,0] ],
+							[ [ 100,24,-5], [116,24,-5] ],
 							[ [120,16,0], [120,48,0] ],
-//							[ [ 56,22,-4], [ 80,74,0] ],
-							[ [ 74,22,-3], [ 74,74,0] ],
+							[ [ 54,22,-2], [ 82,74,0] ],
+//							[ [ 79,22,-5], [ 79,74,0] ],
 							[ [ 20,80,0], [ 52,80,0] ],
 							[ [ 96,80,0], [120,80,0] ],
-							[ [96,80,-4], pcv_p ] ];
-bottom_corridor_widths =	[20, 20, 20, 4, 20, 20, 2];
-bottom_corridor_heights =	[h-1,h-1,h-1,h-4,h-1,h-1,3];
+							[ [98,80,0], [88,48,0] ] ];
+bottom_corridor_widths =	[20, 20, 3, 20, 7, 20, 20, 3];
+bottom_corridor_heights =	[h-1,h-1,h-5-1,h-1,h-2-1,h-1,h-1,5];
 
 bottom_bent_corridor_centers =    [	[36,32,0] ];
 bottom_bent_corridor_start_angles =	[ 180 ];
@@ -87,30 +90,37 @@ bottom_bent_corridor_widths =		[20];
 bottom_bent_corridor_radii =		[16];
 bottom_bent_corridor_heights =		[h-1];
 
-top_corridor_paths = [	[ [ 20,48,0], [ 84.5,48,0] ],
-						[ [ 20,40,0], [ 20,48,0] ],
-						[ [ 87.5,48,0], [120,48,0] ],
+top_corridor_paths = [	[ [ 20,40,0], [ 20,48,0] ],
+						[ [ 20,48,0], [ 73,48,0] ],
+						[ [ 99,48,0], [120,48,0] ],
 						[ [ 52,80,0], [ 96,80,0] ] ];
 
 // Screws are placed asymmetrycally, so the part cannot be assembled the wrong way round
 screw_p = [ 	[   4, 32, 0],
 				[  36, 32, 0],
 				[  68, 32, 0],
-				[ 102, 32, 0],
+				[ 104, 32, 0],
 				[ 136, 32, 0],
 				[   4, 64, 0],
 				[  36, 64, 0],
 				[  68, 64, 0],
-				[ 102, 64, 0],
+				[ 104, 64, 0],
 				[ 136, 64, 0],
 				[  36, 96, 0],
 				[  68, 96, 0],
 				[  92, 96, 0],
 				[ 136, 96, 0] ];
 mount_p = [		[   4,  4, 0],
-				[ 102,  4, 0],
-				[   4,  96, 0],
-				[ 102, 96, 0] ];
+				[ 104,  4, 0],
+				[   4, 96, 0],
+				[ 104, 96, 0] ];
+
+top_meas_port_p = [	[ 56,48,0],			// EXP pressure
+					[ 64,48,0],			// EXP pressure
+					[ 56,80,0] ];		// PUMP pressure
+
+bottom_meas_port_p = [	[ 60,24,0],		// OVP pressure
+						[100,24,0] ];	// PEEP pressure
 
 top_text_p = [	[6,40,0],
 				[6,80],
@@ -124,7 +134,7 @@ bottom_text_p =	[ [ 25,19],
 				  [ 94,16],
 				  [134,16] ];
 bottom_text_rot = [0,0,90,90];
-bottom_text_text = [ "OpenVentilator.io", "3Dp valves v1.2", "OVP", "PEEP" ];
+bottom_text_text = [ "OpenVentilator.io", "3Dp valves v1.3", "OVP", "PEEP" ];
 
 
 module bottom_part()
@@ -134,7 +144,7 @@ module bottom_part()
 			rounded_rectangle( size_x, size_y, bh+h );
 			
 			translate( [0,0,h+bh] ) {
-				translate( pcv_p ) pressure_controlled_valve_bottom_pos();
+				translate( pcv_p ) pressure_controlled_valve_bottom_pos( pcv_size[0], pcv_size[1] );
 				for( i=[0:1:len(owv_p)-0.99] ) {
 					p = owv_p[i];
 					rot = owv_rot[i];
@@ -146,11 +156,11 @@ module bottom_part()
 				for( p=via_p ) {
 					translate( p ) via_bottom_pos( r=5, e=3.5 );
 				}
-				for( p=bottom_corridor_joint_p ) {
-					translate( p ) corridor_joint_pos();
-				}
 				for( i=[0:1:len(bottom_hosetail_p)-0.99] ) {
 					translate( bottom_hosetail_p[i] ) hosetail_pos( h=bottom_hosetail_h[i] );
+				}
+				for( p=bottom_meas_port_p ) {
+					translate( p ) meas_port_pos( h=12 );
 				}
 				for( i=[0:1:len(bottom_text_p)-0.99] ) {
 					translate( bottom_text_p[i] ) rotate( [0,0,bottom_text_rot[i]] ) color( "black" ) linear_extrude( height=text_h ) text( size=3, halign="center", valign="center", bottom_text_text[i] );
@@ -159,7 +169,7 @@ module bottom_part()
 		}
 		union() { // NEGATIVE PART
 			translate( [0,0,h+bh] ) {
-				translate( pcv_p ) pressure_controlled_valve_bottom_neg( d=h );
+				translate( pcv_p ) pressure_controlled_valve_bottom_neg( pcv_size[0], pcv_size[1], d=6 );
 				for( i=[0:1:len(owv_p)-0.99] ) {
 					p = owv_p[i];
 					rot = owv_rot[i];
@@ -173,6 +183,9 @@ module bottom_part()
 				}
 				for( p=bottom_hosetail_p ) {
 					translate( p ) hosetail_neg();
+				}
+				for( p=bottom_meas_port_p ) {
+					translate( p ) meas_port_neg( h=12, depth=h );
 				}
 				for( p=bottom_corridor_joint_p ) {
 					translate( p ) corridor_joint_neg( d=h );
@@ -226,7 +239,7 @@ module membrane()
 		}
 		union() { // NEGATIVE PART
 			translate( [0,0,0] ) {
-				translate( pcv_p ) pressure_controlled_valve_membrane_neg();
+				translate( pcv_p ) pressure_controlled_valve_membrane_neg( pcv_size[0], pcv_size[1] );
 				for( i=[0:1:len(owv_p)-0.99] ) {
 					p = owv_p[i];
 					rot = owv_rot[i];
@@ -273,7 +286,7 @@ module top_part()
 			translate( top_part_p ) rounded_rectangle( top_part_size[0], top_part_size[1],  top_part_size[2] );
 			translate( [0,0,2] ) {
 				
-				translate( pcv_p ) pressure_controlled_valve_top_pos();
+				translate( pcv_p ) pressure_controlled_valve_top_pos( pcv_size[0], pcv_size[1] );
 				
 				for( i=[0:1:len(owv_p)-0.99] ) {
 					p = owv_p[i];
@@ -286,11 +299,14 @@ module top_part()
 				for( p=via_p ) {
 					translate( p ) via_top_pos( r=5, e=3.5 );
 				}
-				for( p=top_corridor_joint_p ) {
-					translate( p ) corridor_joint_pos();
-				}
 				for( i=[0:1:len(top_hosetail_p)-0.99] ) {
 					translate( top_hosetail_p[i] ) hosetail_pos( h=top_hosetail_h[i] );
+				}
+				for( p=top_meas_port_p ) {
+					translate( p ) meas_port_pos( h=25 );
+				}
+				for( p=top_corridor_joint_p ) {
+					translate( p ) corridor_joint_pos();
 				}
 				for( path=top_corridor_paths ) {
 					l = 2D_length( path[0], path[1] );
@@ -306,7 +322,7 @@ module top_part()
 		union() { // NEGATIVE PART
 			
 			translate( [0,0,2] ) {
-				translate( pcv_p ) pressure_controlled_valve_top_neg();
+				translate( pcv_p ) pressure_controlled_valve_top_neg( pcv_size[0], pcv_size[1], pcv_rot );
 				
 				for( i=[0:1:len(owv_p)-0.99] ) {
 					p = owv_p[i];
@@ -319,11 +335,14 @@ module top_part()
 				for( p=via_p ) {
 					translate( p ) via_top_neg( r=5, e=3.5 );
 				}
-				for( p=top_corridor_joint_p ) {
-					translate( p ) corridor_joint_neg();
-				}
 				for( i=[0:1:len(top_hosetail_p)-0.99] ) {
 					translate( top_hosetail_p[i] ) hosetail_neg( h=top_hosetail_h[i] );
+				}
+				for( p=top_meas_port_p ) {
+					translate( p ) meas_port_neg( h=25 );
+				}
+				for( p=top_corridor_joint_p ) {
+					translate( p ) corridor_joint_neg();
 				}
 				for( path=top_corridor_paths ) {
 					l = 2D_length( path[0], path[1] );
@@ -357,15 +376,17 @@ module top_part()
 	}
 }
 
+/*
 intersection() {
 	union() {
 		translate( [0,0,0] ) bottom_part();
 		translate( [0,0,0+bh+h+1] ) top_part();
 		translate( [0,0,0+bh+h+0.5] ) color( "grey" ) membrane();
 	}
-	//translate( [0,0,-1000+9] ) cube( [1000,1000,1000] );
+	//translate( [0,0,-1000+4] ) cube( [1000,1000,1000] );
 }
+*/
 
-//translate( [0,0,0] ) bottom_part();
+translate( [0,0,0] ) bottom_part();
 
 //translate( [0,0,00] ) top_part();
