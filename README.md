@@ -3,13 +3,9 @@
 > Welcome to the OpenVentilator project. This is an Open Source Ventilator / Mechanical Respirator for the Covid-19 Crisis.
 > Specially Designed for countries in Africa / South America / Middle East and other poor regions in the world
 
-This initiative as other projects was born on the [Open Source COVID19 Medical Supplies](https://web.facebook.com/groups/opensourcecovid19medicalsupplies/) Facebook Group by the awareness of the need to create a Ventilator solution for the scarcity plaguing our society worldwide. I contacted Jeremias Almada from Argentina who by that time had presented an Ambu solution and a Cad Design. The idea was interesting but needed improvements.
-
-Since then we tried to establish some development and community standards and evolved the project several times.
-
 [![N|Solid](https://popsolutions.co/web/image/65243/CommunitySupport.png)](mailto:support@openventilator.io)   [![N|Solid](https://popsolutions.co/web/image/65245/t_logo.png)](https://t.me/openventilator) 
 
-<img src="OpenVentilatorLogo.png" height=300> <img src="OpenVentilator.png" height=300>
+<img src="images/OpenVentilatorLogo.png" height=300> <img src="images/OpenVentilatorSpartanModel.png" height=300>
 
 # :heavy_exclamation_mark::heavy_exclamation_mark:DISCLAIMER 
 **PROJECT STATUS:** We still need validation with health regulatory institutions and compliance with clinical requirements. - The tests on Lung Simulators are Sucessfull, limited on application depending on hardware availability but viable on emergency cases
@@ -18,82 +14,25 @@ Since then we tried to establish some development and community standards and ev
 
 ## Main Goal
 
-Design, Build, Validate a reliable Ventilation Medical Equipment Project for people, regions, countries in difficult economical situations with a component and mechanical-agnostic philosophy. (This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality)
+Design, Build, Validate a reliable Ventilation Medical Equipment Project for people, regions, countries in difficult economical situations with a component-agnostic philosophy. This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality.
 
 **The equipment must have as few industrial parts as possible. If necessary, industrial parts must be easily accessible, even in small towns and villages.**
 
-The equipment should be built independent of the main motor or the ventilation tool (AmbuBag, Bellows etc) to increase modularity of the parts and resources and also the buildability by others.
+## Technical highlights
 
-The equipment can be built with as few tools as possible, and even with the use of scrap to facilitate access to materials (Sometimes, Scrap is the only source of materials in many poor regions and cities)
+OpenVentilor has adjustable PEEP and maximum pressure threshold, with a wide range. It has adjustable timing for the inspiratory and expiratory phases, allowing a wide range of BPM and I/E. The volume per breath is adjustable mechanically.
 
-The technical features are still being decided, the ventilator has been testes on a Simulator [YOU CAN CHECK THE RESULTS HERE](/00_Documentation/SimulatorTest/SpartanV1.0/SpartanV1.0.zip)
+## More information
 
-**SYSTEM OVERVIEW**
-![](systemDiagram.jpg)
+For more info, see here:
+- [Specifications](Specifications.md)
+- [System description](SystemDescription.md)
+- [How to build one](Assembly.md)
+- [Research we based on](00_Documentation/Research)
 
-### Technical & Medical Requirments (MVP)
+Website: https://www.popsolutions.co/openventilator
 
-|       Specification         |      Spartan model         |      Mark II                 |
-|-----------------------------|:--------------------------:|-----------------------------:|
-|Volume control               |Mechanical crank-wheel      |Mechanical crank-wheel        |
-|Ventilation frequency        | Manual Ajusted on I:E      |Electronic native control     |
-|Inhale Speed                 | 12 position Switch         |Electronic controled          |
-|Exhale Speed                 | 12 position Switch         |Electronic controled          |
-|Inhale/Exhale proportion     |Adjustment with I:E speed   |Electronic native control     |
-|Inhale Pressure Sensing      |    Not Available           |Electronic sensor             |
-|Inhale MAX Pressure Valve    |Adjustment on Tube position |Adjustable with tube position |
-|Exhale Pressure Sensor       |    Not Available           |Electronic sensor             |
-|Flow Sensor                  |    Not Available           |Electronic if available       |
-|Inlet air filtration         | HEPA / Coffee Paper Filter |HEPA                          |
-|Inlet air humidifier         | HME Filter(recommended)    |Humidity and Moistue Exchanger|
-|Exhaust filtration           | BUV Filter* + Heat Chamber |BUV Filter* + Heat Chamber    |
-|Peep Pressure regulator      | Vynil hose solution        |Vynil hose solution           |
-|Peep Pressure indicator      | Water column indicator     |Digital UI or WaterColumn     |
-|Oximeter                     | Not available              |Electronic sensor             |   
-|Heartbeat sensor             | Not available              |Electronic Sensor             |
-
-
-
-
-## Risk Control
-- Inalhation speed 1 ~ 6 s
-- Exalhation speed 1 ~ 6 s
-- BPM from 10 to 35 cycles a minute
-- PEEP Valve control between 1mm/h20 ~ 30mm/h20
-- Maximum Overpressure Valve (adjustable from 5cm/h2o ~ 50cm/h20)
-- Mechanical Volumetric Ventilation Adjustment
-- Contagion reduction by contaminated air on the Exhalation Circuit
-
-
-
-## Success Criteria
-
-Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This team was super professional and lent us one of the pulmonary simulators that they have available at the company.
-
-## Current Status - TESTED!
-
-<p float="left">
-	<img src="00_Documentation/SimulatorTest/TestImage1.jpeg" height="200">
-	<img src="00_Documentation/SimulatorTest/TestImage2.jpeg" height="200">
-</p>
-
-## Modules 
-
-- **Electronic Controller** Status `Use if Available` on the Spartan Model only Reles, Diodes and Switches
-- **Mechanical Motor** Status `Mandatory` we recomend Bosch VW motor by the availability and stamina delivered
-- **Humidifier**  Status:  `Deprecated` we are now using HME filter widly available.
-- **Bellow Ventilator** Status `Recommended` We don't belive Ambu-bags are reliable as a Mission Critical Device. Use a Tire.
-- **Filtering** Status `Adopted` Is the only way we managed to reduce contamination on the outake system
-- **Peep Valve** Status:  `Adopted` - Pressure control with pipe height adjustment
-- **Over Pressure Valve** Status `Adopted` - This is the Garantee that personal using this machine won't kill someone
-- **Diverter Valve** Status `Adopted` - Please use it on the Vertical Position THIS IS MANDATORY to be reliable
-- **O2 mixing system** Status `Researching & Testing` 
-
-[Software Hardware overview](07_Software/OpenVentilator25_03.png)
-
-### [Research we based on](00_Documentation/Research)
-
-### For more information: https://www.popsolutions.co/openventilator
+Forum (ask anything or report your problems): http://idontknowwhere.com
 
 ## If you want to help
 
@@ -101,15 +40,12 @@ Validated Prototype Thanks to [SAMTRONICS](http://www.samtronic.com.br/) This te
 
 Then join the Whatsapp group and talk with Amanda (+55 11 99735-5042 ): https://chat.whatsapp.com/HRMx9xzVdt8Gpmwgm7ZVZ3
 
-### Slack Channel for work-in-progress discussions...
+This initiative as other projects was born on the [Open Source COVID19 Medical Supplies](https://web.facebook.com/groups/opensourcecovid19medicalsupplies/) Facebook Group by the awareness of the need to create a Ventilator solution for the scarcity plaguing our society worldwide. I contacted Jeremias Almada from Argentina who by that time had presented an Ambu solution and a Cad Design. The idea was interesting but needed improvements.
 
-**Documentation, Hardware, Design and Code discussions** This was deprecated to avoid outsiders looking for profit</br>
-[**Check the decisions ALREADY MADE**](https://openventilator-c-19.slack.com/archives/C010KFG8MUP)
+Since then we tried to establish some development and community standards and evolved the project several times.
 
-### If we have seen further it is by standing on the shoulders of Giants.
+## Special thanks to
 
-Special thanks to:
- - [The most badass guy in the world that doesn't want to be mentioned]
  - [Jose Ignácio Méndez](https://www.linkedin.com/in/jos%C3%A9-ignacio-m%C3%A9ndez-0ba3ab53/)
  - [Jeremias Almada](https://www.linkedin.com/in/almada-jerem%C3%ADas-43888680)
  - Fabian Franz
@@ -140,6 +76,7 @@ Special thanks to:
  - [Três meninas hardware store](https://www.google.com/maps/place/Casa+das+3+Meninas/@-23.5391312,-46.6524764,19.5z/data=!4m5!3m4!1s0x0:0x377232460c40d90d!8m2!3d-23.5391706!4d-46.6524278)
  - [Rogers Guedes]
  - [The MIT guys from this paper](https://web.mit.edu/2.75/projects/DMD_2010_Al_Husseini.pdf): Abdul Mohsen Al Husseini, Heon Ju Lee, Justin Negrete, Stephen Powelson, Amelia Servil, Alexander Slocum, Jussi Saukkonen. 
+ - [Draeger for supplying parts to test with]
 
 All our families, wives and husbands that for the last days have been supporting us on our craziness.
 

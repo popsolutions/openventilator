@@ -1,4 +1,4 @@
-![](../../OpenVentilatorLogoSmall.png) **OPEN VENTILATOR - Regulating Water Columnn**
+![](../../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
 
 This directory contains build instructions for a level-regulating water column. 
 

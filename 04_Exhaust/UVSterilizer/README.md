@@ -1,4 +1,4 @@
-![](../../OpenVentilatorLogoSmall.png) **OPEN VENTILATOR - UVSterilizeer**
+![](../../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
 
 This directory contains information on how to use ultra violet light to clean the exhaust air. The part is to be placed after the water column, before the air is exhausted. 
 

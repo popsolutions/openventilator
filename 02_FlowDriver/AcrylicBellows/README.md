@@ -1,10 +1,9 @@
-![](../../OpenVentilatorLogoSmall.png) **ASSEMBLY GUIDE OF THE OPEN VENTILATOR - ACRYLICS FRAME AND BELLOWS**
+![](../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
 
 This part is about the acrylic frame and its bellow. This frame is more than only a flow driver, it also makes it possible to mount some of the other parts of the system to it.
-To get an overview of the system as a whole, see the [toplevel description](../../README.md).
+To get an overview of the system as a whole, see the [toplevel description](../SystemDescription.md) or the [assembly document](../Assembly.md).
 
-![](../../OpenVentilator.png) 
-
+![](../images/OpenVentilatorSpartanModel.png) 
 
 **STEPS TO FOLLOW**
 
@@ -20,7 +19,7 @@ To get an overview of the system as a whole, see the [toplevel description](../.
 
 1. Install the Motor [HERE](Motor/MotorAssembly.md)
 
-After this create all other needed parts, such as electronics and pneumatics. See the [toplevel assembly](../../Assembly.md).
+After this create all other needed parts, such as electronics and pneumatics. See the [toplevel assembly](../Assembly.md).
 
 
 **Parts list**

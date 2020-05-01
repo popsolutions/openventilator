@@ -1,13 +1,12 @@
-Following the principles of this project, we tryed at maximum to make it manufacturable all over the world. With that in mind we try to use the basic eletronic components and present lots of options for the same solution.
+![](../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR - ELECTRONICS SECTION**
 
-This way we see that each group could assembly it as best as possible choosing from the options available.
+In this directory you can find information, schematics and PCB designs for the electronics parts. They are one part of the system as a whole. To get an overview of the system as a whole, see the [toplevel description](../SystemDescription.md) or the [assembly document](../Assembly.md).
 
-Also, the project was created with diferent versions in mind with diferent features, from the low one to the "higher" end.
+## What's here
 
-The circuit was design using easyEDA, so it is sharable and editable.
+The project's main Spartan design uses the circuit in the SpartanControl directory. It offers separate control of the speed of the motor during the inspiratory and expiratory phases. The circuit was design using easyEDA, so it is sharable and editable. [Go to this directory for more info about it](SpartanControl). 
 
-Following the block diagram its much easier to understand all parts of the circuit.
+However, you can try an alternative electronics solution. Check for each solution of you can find the parts needed for it. Most use very basic electronics components, so they can be built in many places in the world.
 
-![block diagram](block_diagram_v01.png)
+You will also see that some electronics solutions offer slightly different features, from low end to high end. The high end solution (with Arduino) is not finished at the time of writing this.
 
-[schematics_v0.1](Schematic_OpenVentilator_v0.1_Sheet_1_20200328083349.pdf)
