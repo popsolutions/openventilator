@@ -1,11 +1,5 @@
 **Making O-Rings for the Bellow System**
 
-**Part List**
-- Tire Chamber Snip
-- 1x Washer 8mm ID x 20mm OD
-- Scissors
-- Marker or Pen
-
 It is very important that this O-rings are well made as they will be responsible for maintaining the pressure inside the bellow, prevent leak and therefore are **Critiacal Mission** part component of the system. 
 
 Do not be intimidated, although they are made with the flaps of the tire chamber, these rings, if well made, can last for a few months.

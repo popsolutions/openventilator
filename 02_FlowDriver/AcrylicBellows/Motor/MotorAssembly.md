@@ -1,13 +1,5 @@
 **Motor Assembly**
 
-**Part List**
--   Motor [This are the motors we tested](https://github.com/popsolutions/openventilator/tree/master/02_Pump/WindscreenWiperMotors)
--   3x Screws
--   1x Washer (The Inner Diameter should be less than the size of the the shaft diameter of the motor)
--   1x Nut (Our case and example is an 8mm Nut)
--   3x M5 Screws x 15mm
--   3x M5 Nut (A lower high is recommended like a 3mm nut to avoid colision on the backpart of the Crank Disk)
-
 Start by inserting the washer into the shaft. This washer is responsible by holding the CrankWheel and don't allow it to slip on the shaft movement.
 
 ![](images/motor17.47.22.jpeg)
