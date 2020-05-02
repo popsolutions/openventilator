@@ -1,11 +1,20 @@
-![](../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
+![](../../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
 
-This part is about the acrylic frame and its bellow. This frame is more than only a flow driver, it also makes it possible to mount some of the other parts of the system to it.
-To get an overview of the system as a whole, see the [toplevel description](../SystemDescription.md) or the [assembly document](../Assembly.md).
+This part is about the acrylic frame and its bellow. It is a flow driver (or pump), and the frame also allows mounting some of the other parts of the system to it, such as the valve block and the electronics.
+To get an overview of the system as a whole, see the [toplevel description](../../SystemDescription.md) or the [assembly document](../../Assembly.md).
 
-![](../images/OpenVentilatorSpartanModel.png) 
+![](../../images/OpenVentilatorSpartanModel.png) 
 
-**STEPS TO FOLLOW**
+## Design
+
+You can find the sources of the frame and bellows online on Onshape. 
+You don't normally need these.
+
+https://cad.onshape.com/documents/65a7e619b43e334e4c6a76e1/w/303bd782c84ce8af675f0266/e/64cdac504dbc45a4d06220ea
+
+## Build Instructions
+
+1. Laser cut the Acrylic parts the DXF directory. 3D-print the printable parts in the STL directory.
 
 1. Cut the [o-rings you will need](O-Rings/CuttingOrings.md)
 
@@ -22,7 +31,7 @@ To get an overview of the system as a whole, see the [toplevel description](../S
 After this create all other needed parts, such as electronics and pneumatics. See the [toplevel assembly](../Assembly.md).
 
 
-**Parts list**
+## Parts list
 
 ***O-rings***
 - Tire Chamber Snip
@@ -75,9 +84,10 @@ After this create all other needed parts, such as electronics and pneumatics. Se
 -   3x M5 Screws x 15mm
 -   3x M5 Nut (A lower high is recommended like a 3mm nut to avoid colision on the backpart of the Crank Disk)
 
+## Tools required
 
-**Tools required**
 - Laser cutter that can cut acrylic
+- 3D printer for some parts, although they are only a few and maybe they can be made in another way.
 - Scissors
 - Marker or Pen
 - Screwdrivers
