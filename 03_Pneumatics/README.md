@@ -4,7 +4,7 @@ In this directory you can find the build descriptions and parts files for variou
 
 **Pneumatic diagram**
 
-The system as a whole has the following pneumatics diagram. Any solution you build, should be built according to this diagram. 
+The system as a whole has the following pneumatics diagram. Any solution should be built according to this diagram. 
 
 Note that no external pressurized air is needed. The flow driver (or pump) will create the required low air pressure and the volume needed.
 
