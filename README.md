@@ -16,7 +16,7 @@
 
 Design, Build, Validate a reliable Ventilation Medical Equipment Project for people, regions, countries in difficult economical situations with a component-agnostic philosophy. This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality.
 
-**The equipment must have as few industrial parts as possible. If necessary, industrial parts must be easily accessible, even in small towns and villages.**
+**The equipment must have as few industrial parts as possible. If necessary, parts must be easily accessible, even in small towns and villages.**
 
 ## Technical highlights
 
@@ -28,6 +28,7 @@ For more info, see here:
 - [Specifications](Specifications.md)
 - [System description](SystemDescription.md)
 - [How to build one](Assembly.md)
+- [Project philosophy](projectPhilosophy.md)
 - [Research we based on](00_Documentation/Research)
 
 Website: https://www.popsolutions.co/openventilator

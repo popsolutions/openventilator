@@ -1,3 +1,5 @@
+![](images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR - Project Philosophy**
+
 ## Global Problems Must Have Global Solutions ##
 
 Do you have a solution for a problem that only works in your country or city? So then it isn`t a sollutions is a new problem. The day humanity starts thinking about a global and interconected society as a hole we will evolve as a society to a new level. 
