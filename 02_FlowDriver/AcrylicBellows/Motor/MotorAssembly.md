@@ -21,5 +21,9 @@ After that you can use the correct tools to tight the screw and fix the 2 disks
 ![](images/motor18.11.50.jpeg)
 ![](images/motor18.12.13.jpeg)
 
+If your motor shaft is not long enough to clear the the bolt, you can either use countersunk bolts or use the 3D printed Motor shaft adapter.stl
 
+The sources of this part are here, in case you want to adjust it:
+https://cad.onshape.com/documents/a7ff1fc9204fe3313dfe2b3a/w/b15e7fb4bb236fa3be8ddf97/e/5ff156e08413e785d0c10ea7 
 
+Finally remember for when you install the electrical part: **only run the motor in its forward direction**. Windscreen wiper motors are not designed to run in reverse and will wear out quickly if you do.

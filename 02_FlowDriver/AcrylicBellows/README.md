@@ -26,7 +26,7 @@ https://cad.onshape.com/documents/65a7e619b43e334e4c6a76e1/w/303bd782c84ce8af675
 
 1. Install the Base and start the [Frame Assembly](Frame/FrameAssembly.md)
 
-1. Install the Motor [HERE](Motor/MotorAssembly.md)
+1. Install the [Motor](Motor/MotorAssembly.md)
 
 After this create all other needed parts, such as electronics and pneumatics. See the [toplevel assembly](../Assembly.md).
 
@@ -77,7 +77,7 @@ After this create all other needed parts, such as electronics and pneumatics. Se
 - 1x Nut 8mm
 
 ***Motor***
--   Motor. [These are the motors we tested](../WindscreenWiperMotors) with some information per type.
+-   Motor. [These are the motors we tested](../WindscreenWiperMotors) with some information per type. Note that windscreen wiper motors should only be run in forward direction, or they will wear out very quickly.
 -   3x Screws
 -   1x Washer (The Inner Diameter should be less than the size of the the shaft diameter of the motor)
 -   1x Nut (Our case and example is an 8mm Nut)
