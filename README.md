@@ -33,7 +33,7 @@ For more info, see here:
 
 Website: https://www.popsolutions.co/openventilator
 
-Forum (ask anything or report your problems): http://idontknowwhere.com
+Forum (ask anything or report your problems): https://popsolutions.co/forum/openventilator-5
 
 ## If you want to help
 
