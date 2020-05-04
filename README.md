@@ -3,7 +3,7 @@
 > Welcome to the OpenVentilator project. This is an Open Source Ventilator / Mechanical Respirator for the Covid-19 Crisis.
 > Specially Designed for countries in Africa / South America / Middle East and other poor regions in the world
 
-[![N|Solid](https://popsolutions.co/web/image/65243/CommunitySupport.png)](mailto:support@openventilator.io)   [![N|Solid](https://popsolutions.co/web/image/65245/t_logo.png)](https://t.me/openventilator) 
+[![N|Solid](https://popsolutions.co/web/image/65243/CommunitySupport.png)](https://popsolutions.co/forum/openventilator-5)   [![N|Solid](https://popsolutions.co/web/image/65245/t_logo.png)](https://t.me/openventilator) 
 
 <img src="images/OpenVentilatorLogo.png" height=300> <img src="images/OpenVentilatorSpartanModel.png" height=300>
 
@@ -12,7 +12,7 @@
 
 **PLEASE DO NOT USE THIS MACHINE IF NOT NEEDED**, WE DO NOT GUARANTEE THE OPERATION OF THIS MACHINE | THIS MACHINE IS FOR EMERGENCY and HEALTH SYSTEM COLLAPSE SCENARIOS :warning: 
 
-## Main Goal
+# Main Goal
 
 Design, Build, Validate a reliable Ventilation Medical Equipment Project for people, regions, countries in difficult economical situations with a component-agnostic philosophy. This is why we didn't continue putting efforts into the projects being developed by other teams, who have a different society and economic reality.
 
@@ -22,18 +22,29 @@ Design, Build, Validate a reliable Ventilation Medical Equipment Project for peo
 
 OpenVentilor has adjustable PEEP and maximum pressure threshold, with a wide range. It has adjustable timing for the inspiratory and expiratory phases, allowing a wide range of BPM and I/E. The volume per breath is adjustable mechanically.
 
-## More information
+# Getting Started
+Summary
 
-For more info, see here:
-- [Specifications](Specifications.md)
-- [System description](SystemDescription.md)
-- [How to build one](Assembly.md)
+- [Join the Team](https://t.me/openventilator)
+- Documentation
+  - [Specifications](Specifications.md)
+  - [System description](SystemDescription.md)
+  - [Part List](00_Documentation/TheSpartanModel/PartsList.md)
+  - [Assembly Guide](Assembly.md)
+  - [Testing Your Machine]()
+  - [Regulations on your Country IYBITB]()
 - [Project philosophy](projectPhilosophy.md)
 - [Research we based on](00_Documentation/Research)
+- [Test Results](/00_Documentation/SimulatorTest/SpartanV1.0/SpartanV1.0.zip)
 
-Website: https://www.popsolutions.co/openventilator
+## Community
 
-Forum (ask anything or report your problems): https://popsolutions.co/forum/openventilator-5
+- [Website](https://www.popsolutions.co/openventilator)
+- [Forum](https://popsolutions.co/forum/openventilator-5)
+- [Social Media]()
+- [Problem / Issue Report]()
+
+Forum (ask anything or report your problems): http://idontknowwhere.com
 
 ## If you want to help
 
