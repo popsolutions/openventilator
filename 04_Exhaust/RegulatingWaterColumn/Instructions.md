@@ -4,15 +4,15 @@
 
 This water column has the following features:
 
-- an overpressure input tube (0 to 45 hPa)
+- an overpressure input tube (0 to 50 hPa / cm H2O)
 
-- a PEEP input tube (0 to 25 hPa)
+- a PEEP input tube (0 to 30 hPa / cm H2O)
 
 - an exhaust pipe
 
 - is sealed in practise (not perfectly)
 
-- can be made from materials at DIY shops (transparent tube may be more difficult to source, can be bought in many online shops)
+- can be made from materials at DIY shops (transparent tube may be more difficult to source, can be bought in online shops)
 
 ![column overview picture](images/AssembledWaterColumn.jpg)
 
@@ -23,7 +23,7 @@ This water column has the following features:
 
 - Smaller wood beams, at least 20x20mm, just over 600 mm length required
 
-- 1000 mm of transparent PVC 50 mm tube
+- 1000 mm of transparent PVC, Acrylic or Polycarbonate 50 mm tube
 
 - 500 mm of 40 mm PVC water pipe
 
@@ -144,7 +144,7 @@ Saw/create a piece of 900 mm 16 mm white PVC pipe.
 
 Saw/create a piece of 700 mm 16 mm white PVC pipe.
 
-Mark with a waterproof lines 1 to 45 on the long tube, and 1 to 25 on the short tube. For easy reading, make the lines a bit longer at multiples of 5, and place a number there. The value 0 is at the end of the tube, which will be deepest in the water.
+Mark with a waterproof lines 1 to 50 on the long tube, and 1 to 30 on the short tube. For easy reading, make the lines a bit longer at multiples of 5, and place a number there. The value 0 is at the end of the tube, which will be deepest in the water.
 
 ![Mark the pipes](images/PipeEntry4.jpg)
 
