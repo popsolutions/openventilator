@@ -44,8 +44,6 @@ Summary
 - [Social Media]()
 - [Problem / Issue Report]()
 
-Forum (ask anything or report your problems): http://idontknowwhere.com
-
 ## If you want to help
 
 [First, ** CLICK HERE ** to complete the form please, so we can organize everybody](https://www.popsolutions.co/openventilator-jointheteam) 
