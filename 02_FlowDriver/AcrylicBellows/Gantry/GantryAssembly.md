@@ -45,7 +45,7 @@ At the end it should look like this before you go to the next step
 
 After kindly inserting the top part of the Gantry Go to the [BELLOW ASSEMBLY MANUAL](../BellowAssembly/BellowAssembly.md)
 
-**Gantry Assembly part 2 (after bellow assembly)**
+# Gantry Assembly part 2 (after bellow assembly)
 
 Please just follow this steps after you have finished the Bellow Assembly. Make sure that the Logo on the Gantry is front oriented.
 
