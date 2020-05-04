@@ -1,5 +1,24 @@
 ![](../../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
 
+# 3D-printed valve block
+
+2020-05-03
+
+This valve block has the following features:
+
+- Incorporates all required valves in one unit
+
+- Large internal opening diameters for good flow
+
+- Manually cuttable membrane (can also be laser cut)
+
+- If printed in PETG it is well cleanable
+
+- **NO** special resin 3D printer needed.
+
+![valve block](images/all.png)
+
+
 # Required material
 
 - PLA or better PETG printing filament
