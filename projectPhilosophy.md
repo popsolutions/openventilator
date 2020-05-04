@@ -2,11 +2,13 @@
 
 ## Global Problems Must Have Global Solutions ##
 
-Do you have a solution for a problem that only works in your country or city? So then it isn`t a sollutions is a new problem. The day humanity starts thinking about a global and interconected society as a hole we will evolve as a society to a new level. 
+Do you have a solution for a problem that only works in your country or city? So then it isn`t a solutions is a new problem. The day humanity starts thinking about a global and interconected society as a hole we will evolve as a society to a new level. 
 
-A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism projects. We believe in a OpenSource Society where knoledges and essential resources are determined and distributed by the needs of everyone and not by how much they can pay for it.
+A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism projects. We believe in a OpenSource and Free Society where knoledges and essential resources are determined and distributed by the needs of eachone and not by how much you can pay for it.
 
 This is not Socialism and neither a Capitalism ideal, this is a Hippie idea that began in the 1960s. The idea of free knowledge, the idea of Ubuntu, free software, open access to knowledge sources. The idea that if alone we can go fast, together we can go further. 
+
+Taking this as an standard basis we decided to make this project like so.
 
 ## Before attempting to make a new project or re-inventing the wheel ##
 Please read how ventilators used to work on the 50s and even before.
@@ -24,11 +26,11 @@ Ambubag to be pushed in a ritmic time and forget that [these guys](http://rc.rcj
 Today many people talk about sanitary standards and forget that the poor don't even have soap on their countries.
 Many people have said that our machine can't be used in a ICU (WE DON'T WANT EVEN TO USE THIS MACHINE at all) but the truth We should ask is how many people in the world have access to an ICU? How many people have access to minimum sanitary standards. How many can make a ventilator we a US$300,00 valve and a US$400 electronic controller?
 
-The current health and economical system just shown us how they FAILED to provide Health to everyone. In te history of Capitalism the Chicago Boys told us: When a high Demand we will have a higher supply with lower prices. This is exatcly the oposite that we see on this crisis. 
+[The current health and economical system just shown us how they FAILED to provide Health to everyone.](https://edition.cnn.com/world/live-news/coronavirus-outbreak-03-30-20-intl-hnk/h_38745d93c4304badc708b9bddaab2a45) In te history of Capitalism the Chicago Boys told us: When a high Demand we will have a higher supply with lower prices. This is exatcly the oposite that we see on this crisis. 
 
 Tipically and also many other teams have beeing putting efforts to solve the supply on Ventilators. Please notice that electronics and fancy projects from chic universities are not scalable as they should to provide an "emergency solution" for the Covid-19 crisis AROUND THE WORLD. Also we strongly believe that a pandemic like this should have a GLOBAL solution as it is a GLOBAL problem. We still believe in the power of people cooperation, on liberty and equality to Build, make, test and work on a Global Solutions. 
 
-Is very easy to manufacture a machine in a country with GPD per capita of 100.000 dollars while in the majority of the world is suffering and literally sufocating on poverty! The problem is manufacture this machine on Scale
+Is very easy to manufacture a machine in a country with GPD per capita of 100.000 dollars while in the majority of the world is suffering and literally sufocating on poverty! The problem is manufacture this machine on Scale. Ventilators Exist since 1800s so, this shows that it isn't a Engeneering problem, but rather an scale supply chain problem.
 
 Any person with reasonable knowledge about and how a ventilator works can make a ventilator. The problem is NOT AN ENGENEERING PROBLEM, it is a scale and logistics problem. We can't even provide sanitary standards to some countries, and there is people trying to build ventilators? What about everything that goes in the ICU? The Gasometry and the other periferals we have to a proper treatment? 
 
