@@ -4,7 +4,9 @@
 
 For a standard build, read this [Complete Assembly GUIDE and Manual](OpenVentilator.io_Spartan_Model_Documentation.pdf)
 
-If you build this standard Sparan model, the frame, bellows and valve block will look like this:
+To build the standard build, also download [the STL and DXF files for production](https://github.com/popsolutions/openventilator/blob/master/OPENVENTILATOR%20Spartan%20Model%205.2.20.zip).
+
+If you build this standard Spartan model, the frame, bellows and valve block will look like this:
 
 ![](images/OpenVentilatorSpartanModel.png)
 
