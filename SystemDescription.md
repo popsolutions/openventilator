@@ -20,7 +20,7 @@ Because OpenVentilator does not want to rely on only one way of creating a worki
 - Glueing PVC waste water pipes
 - Simple tool operations such as cutting, drilling, sanding/grinding and screwing.
 
-The system fulfils the requirements as stated on the [specification file](Specification.md).
+The system fulfils the requirements as stated on the [Specifications file](Specifications.md).
 
 ## Functional diagram
 
@@ -38,7 +38,7 @@ The pump system uses a crank that expands and compresses a bellows. Because it d
 
 The electronics of the spartan model is very basic and only consist of a few diodes and switches. We have choosen not to do control by a microcontroller (yet), to keep the design simple and produceable anywhere. The Mk II model will have a microcontroller.
 
-TODO: add circuit diagram
+![Electronics schematic](05_Electronics/SpartanControl/images/schematic.png)
 
 A diode creates a voltage drop when placed in series with a load such as a motor. We have placed multiple diodes in series connected to the power supply, so that we can have higher voltage drops. We have connected switches to these diodes, to be able to select the voltage drop we want to use.
 
