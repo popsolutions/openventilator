@@ -8,5 +8,7 @@ It sets a single adjustable motor speed. After one revolution, the motor will ha
 
 Easily accessible parts have been used. The most difficult one may be the windscreen wiper interval module, which has to be a certain type. The voltage regulator is capable of 5A of current.
 
+**WARNING: THIS CIRCUIT DOES NOT HAVE ANY ALARMS AND THEREFORE IS UNSAFE TO USE**
+
 This circuit uses the following schematic. Read the build description to read how to connect and modify the interval module etcetera.
 ![schematic](images/schematic.png)
