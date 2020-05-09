@@ -2,6 +2,8 @@
 
 # Regulating water column
 
+2020-05-09
+
 This water column has the following features:
 
 - an overpressure input tube (0 to 50 hPa / cm H2O)
@@ -29,7 +31,7 @@ This water column has the following features:
 
 - < 150 mm of 19 mm (3/4") PVC electricity pipe (if you use 19 mm hoses in your ventilator only)
 
-- < 70 mm of 16 mm (5/8") PVC electricity pipe (if you use 16 mm hoses in your ventilator only)
+- < 90 mm of 16 mm (5/8") PVC electricity pipe (if you use 16 mm hoses in your ventilator only)
 
 - 1600 mm of 16 mm (5/8") PVC electricity pipe (white if possible)
 
@@ -59,9 +61,13 @@ This water column has the following features:
 
 - 6x shallow wood screws to mount the brackets onto the piece of wood
 
-- A (hollow) deodorant roller ball, diameter just under the inside diameter of the 40 mm tube, which is roughly 33 mm (measure a few balls in the supermarket). In the Netherlands, Nivea balls fit nicely.
+- A (hollow) deodorant roller ball, diameter just under the inside diameter of the 40 mm tube, which is roughly 33 mm (measure a few balls in the supermarket). In the Netherlands, Nivea balls fit well and are about 29 mm.
 
-- A piece of 10x25 mm of silicon oven glove, silicon swimming cap or thin rubber (bicycle tire or so).
+- A piece of 10x25 mm of silicon oven glove, silicon swimming cap or thin rubber (if possible thinner than bicycle tire).
+
+- A (stainless) short bolt M3 (M3x4, M3x6, M3x8 or M3x10)
+
+- A (stainless) washer M3
 
 - A small kitchen sponge.
 
@@ -78,9 +84,12 @@ This water column has the following features:
 
 - Hole saw of 25 mm (1")
 
-- Drill bits of 6 mm (or 1/4") and the outside diameter of the reed
+- Drill bits of 6 mm (or 1/4")
 
 - Screw drivers
+
+- Leather belt hole puncher (or other way to make a 3 mm hole)
+
 
 # Build procedure
 
@@ -132,9 +141,7 @@ Take the 40 and 50 mm end caps, and file both flat on the top, because there are
 
 ![Regulator](images/Regulator1.jpg)
 
-Drill a tiny hole (1mm or so) in the corner side of the 40mm cap, in a direction as flat as possible. It should not end on the top op the cap, but at the rounded top corner. It is probably easiest to drill from inside to outside, with the drill bit extending far from the drill machine.
-
-Glue both end caps together center-aligned. Make sure the tiny hole doesn’t get covered by glue.
+Glue both end caps together center-aligned. 
 
 ## 4. Pipe entry
 
@@ -154,7 +161,7 @@ If you use 19 mm instead of 16 mm hoses on your ventilator, saw/create 2 pieces 
 
 Prepare the 75 end cap in the following way.
 
-Hole-saw a 19 mm (or 16 of you use 16 mm hoses) hole and two 25 mm holes according to the shown pattern. (TODO: add)
+Hole-saw a 19 mm (or 16 of you use 16 mm hoses) hole and two 25 mm holes according to the shown pattern. Pre-drill with 2.5 or 3 mm for precision. Make sure that the tubes will fit in the 50 mm tube. You can use the 75 to 50 mm adapter to find a suitable place.
 
 ![mark holes in cap](images/PipeEntry1.jpg)
 ![saw holes in cap](images/PipeEntry2.jpg)
@@ -163,17 +170,19 @@ The nuts of the PVC glands might need to be reduced on one side, or things will 
 
 Put the PVC glands in the 25 mm holes, with the nut on the other side. You may need to tighten the glands by rotating the gland instead of the nut, because of the tight space.
 
-Glue the 19 mm diameter 40 mm long PVC pipe in to the 19 mm hole of the pipe entry.
+Glue the 19 mm diameter 40 mm long PVC pipe in to the 19 mm hole of the pipe entry. This will be the exhaust.
 
 ![19mm glued in](images/PipeEntry3.jpg)
 
 Insert the white PVC tubes into the glands of the pipe entry, so that around 200 mm stays outside. **Only lightly tighten the glands.**
 
-If the kitchen sponge has a rough side, take that off. Cut the sponge to a roughly round shape, a little bit larger than the transparent tube (8-sided will do). Drill a hole though for the pipes with a sharp drill. Use a drill of 10mm for a 16mm hole, the sponge will adjust.
+If the kitchen sponge has a rough side, take that off completely. Use scissors to cut the sponge to a roughly round shape, a bit larger than the transparent tube (8-sided will do). Make 2 holes for the pipes with a small knife, by pushing the blade of the knife through the sponge, making a cross-shaped cut. The sponge will bend around the pipe.
+
+![sponge](images/CutSponge.jpg)
 
 Put the sponge over the white tubes, until some 150 mm from the glands.
 
-![assembled](images/PipeEntry5.jpg)
+![](images/PipeEntry5.jpg)
 
 
 ## 5. Regulator part 2
@@ -182,21 +191,29 @@ Time: 0:10 to 0:45
 
 Take the glued-together combination of 40 and 50 mm caps.
 
-Draw a hole of 6 mm perfectly in the middle of the caps. Predrill it with 2 or 2.5 mm. Deburr this hole carefully, but not deep, and only in a way that the result has circular symmetry. Basically, there should be no imperfections on the edge of the hole, and the surface around it should be flat.
+Draw a hole of 6 mm perfectly in the middle of the caps. Predrill it with 2 or 2.5 mm, and drill from the bigger cap to the smaller cap. Deburr this hole very carefully, but not deep, and only in a way that the result has circular symmetry. Basically, there should be no imperfections on the edge of the hole, and the surface around it should be flat. If it's not perfect, the level will not be maintained properly. This may require retrying until it works.
 
-Cut a piece of oven glove, swimming cap or thin rubber to a size of 25 x 10 mm. It needs to be glued on the inside of the 40 mm cap, with the smooth side against the hole. One side should cover the hole, the other side should be glued. In this way, it should be able to “flap open” a bit. Later the deodorant ball will press against the rubber to close the hole.
+Find a straw between 2 and 3 mm diameter. A ball pen cartridge might work, or a straw from a cannister for air, isopropanol or oil. The opening should be small. This straw will serve to release air from the area near the deodorant ball. The hole should be small to prevent water level changes on the regulator side of the U-shape by temporary water level changes on the other side. Drill a hole of just under the diameter of the straw. Push the straw in, this should be a tight fit. If the hole is too small, drill it with a 0.1 mm larger drill. Alternatively, you can glue it in.
 
-(TODO: add picture)
+Drill a 2.5 mm hole in the cap at a flat area. Next tap M3 thread in it, but try to keep it tight by not using the final tap, and/or not tapping completely through. This will seal the bolt's thread. Alternatively, you can put glue on the bolt.
 
-The deodorant ball will later be put into the 40 mm tube of the U-shape. The ball might have to much space to move around. Only around 1 mm is allowable. To reduce the space, create thin pieces of PVC and glue them to the inside of the 40 mm pipe. You can for example use slits of 19 mm tube, 30 mm long. This is most easily accomplished by sawing multiple slits into the pipe, 30 mm deep, and then cutting the pipe at 30 mm. Of the small pieces chose the 4 best ones, deburr them and glue them on the inside of the 40 mm tube part of the U-shape. Check that the ball fits through.
+Cut a piece of silicon oven glove, swimming cap or very thin rubber to a size of 25 x 10 mm. Punch a 3 mm hole with a hole puncher on one side. 
 
-(TODO: add picture)
+![Regulator](images/PunchHole.jpg)
+
+Place the membrane on the final place, with the smooth side against the hole, and the hole aligned to the created M3 hole. Place the washer with the round side down, sharp side up, on the hole in the membrane. Screw the screw in, don’t put it very tight. The membrane should not change shape. When fixed in place, the membrane should be able to “flap open” a bit. Later the deodorant ball will press against it to close the hole.
+
+![Regulator](images/Regulator2.jpg)
+
+The deodorant ball will later be put into the 40 mm tube of the U-shape. The ball might have too much space to move around. Only around 1 mm is allowable. To reduce the space, create thin pieces of PVC and glue them to the inside of the 40 mm pipe. You can for example use slits of 19 mm tube, 30 mm long. This is most easily accomplished by sawing multiple slits into the pipe, 30 mm deep, and then cutting the pipe at 30 mm. Of the small pieces chose the 4 best ones, deburr them and glue them on the inside of the 40 mm tube part of the U-shape. Check that the ball fits through.
+
+![Regulator](images/Regulator4.jpg)
 
 Saw/create a piece of 200 mm transparent 50 mm tube. The length is not critical.
 
-Glue the 200 mm piece of transparent tube into the 50 mm cap. This is the water container. Mark a line at 60 mm distance from the hole and mark it with “minimum”, and a line at 140 mm distance from the hole with “maximum”, if possible by using stickers.
+Put the 200 mm piece of transparent tube into the 50 mm cap. This is the water container. Mark a line at 40 mm distance from the hole and mark it with “minimum”, and a line at 100 mm distance from the hole with “maximum”, if possible by using stickers. When the regulator has been proven to work, you can glue the transparent tube into the cap.
 
-(TODO: add picture)
+![Regulator](images/Regulator5.jpg)
 
 ## 6. Assembly
 
@@ -216,6 +233,8 @@ Never tighten the glands very tight. This serves no purpose. Only tighten them s
 
 Small amounts of water may flow out of the tiny hole at the regulator when the level rises too much. Be prepared for this to be possible. This can for example happen when the overpressure tube is used for the first time in a long time.
 
-You may want to put a lid loosely onto the water container to prevent dust etcetera from getting in.
+You may want to put a lid loosely onto the water container to prevent dust etcetera from getting in. Putting a tight lid on will push water through the membrane, so that's not a good idea.
+
+In a later modification I replaced the tubes by 15 mm transparent tubes, and put a 15 mm hose on them to create 19 mm hose connections. The transparent tubes don't need marks on them, but do need a cm marked background behind the tube (a template for this is present). With transparent tubes you can both set and read the pressure.
 
 ![column overview picture](images/AssembledWaterColumn.jpg)
