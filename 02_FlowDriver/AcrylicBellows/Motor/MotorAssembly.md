@@ -12,9 +12,9 @@ Check if the holes to fix the motor on the frame are in the correct position, yo
 
 ![](images/motor17.35.42.jpeg)
 
-Now you can assembly the 2 CrankDisks Wheels, they have differant characteristics, but the important thing to notice is that the screw head goes on the side that have the ruler with the numbers. 
+Now you can assembly the 2 CrankDisks Wheels, they have different characteristics, but the important thing to notice is that the screw head goes on the side that have the ruler with the numbers. 
 
-Align the center to be exatcly co-centric
+Align the center to be exactly co-centric
 
 After that you can use the correct tools to tight the screw and fix the 2 disks
 
