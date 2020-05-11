@@ -2,9 +2,11 @@
 
 # Wooden bellows mechanism with windscreen wiper motor
 
-2020-05-04
+2020-05-11
 
 This pump device uses only material from a DIY shop plus a truck inner tyre.
+
+It does not give a phase signal (such as present in the Spartan model), indicating whether the device is in the inspiration or expiration phase. This should switch every 180 degrees, and it can be used to create two motor speeds. If you know a good and simple way to add it, let us know.
 
 ![](images/Assembled.jpg)
 
