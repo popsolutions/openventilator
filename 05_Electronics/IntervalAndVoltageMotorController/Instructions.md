@@ -2,7 +2,9 @@
 
 # Interval + voltage motor controller
 
-2020-05-09
+2020-05-11
+
+This controller was designed to test hardware. It is not intended to be used on humans.
 
 This device has the following features:
 
@@ -10,9 +12,11 @@ This device has the following features:
 
 - Uses standard 5 A adjustable voltage regulator, which is easy to get and needs only a few extra components
 
-- Controls for interval time and motor voltage
+- Controls for interval time and motor voltage, in that way indirectly adjusting Respiration Rate and I/E ratio. 
 
-**WARNING: THIS CIRCUIT DOES NOT HAVE ANY ALARMS AND THEREFORE IS UNSAFE TO USE**
+**WARNING: THIS CIRCUIT DOES NOT HAVE ANY ALARMS AND THEREFORE IS UNSAFE TO USE IN A VENTILATOR**
+
+The inspiration starts later than the motor starts to compress the bellows, because the pump first needs to overcome the pressure already present. That's why this controller cannot go to 1:1. The actual I/E ratio has been measured to be adjustable from roughly 1:2.5 upwards (at PEEP of 10 cm H2O). Not every combination can be made.
 
 ![Box outside](images/BoxOutside.jpg)
 
@@ -47,7 +51,7 @@ This device has the following features:
 
 Alternatively take an LM338. It gives a higher voltage drop, but this doesn't matter for most motors as they run fast enough anyway. 
 
-If you cannot get the above regulators and you need **only smaller air volume such as for children**, you can use a regulator that can do only 3A. In this case you can choose to use an LD1085 or LM1085-ADJ (same but 3A), an or LM350 (higher voltage drop and only 3A). 
+If your test purposes can be achieved with smaller air volumes (in the range of children) you can choose to use a regulator that is only capable of delivering 3 A. In this case you can choose to use an LD1085 or LM1085-ADJ (same but 3A), an or LM350 (higher voltage drop and only 3A). 
 
 All mentioned regulators are pin compatible with the well-known LM317 (which is only rated 1.5A, not enough). You need a low-drop regulator if your motor rotates slowly for a given voltage (such as the Mercedes Sprinter motor) and therefore might need all the voltage we can give it. 
 
@@ -130,7 +134,7 @@ The maximum voltage is generated with indicated schematic is 11.7 V. At this vol
 
 ## 4. Assembly
 
-Drill holes into the enclosure to hold the connectors, switches and potmeters. Mount them and wire them according to the schematic. The schematic below is also on EasyEDA: https://easyeda.com/editor#id=|52cfee2ce7384476b625351098e58511
+Drill holes into the enclosure to hold the connectors, switches and potmeters. Mount them and wire them according to the schematic. The schematic below is also [on EasyEDA]( https://easyeda.com/editor#id=|52cfee2ce7384476b625351098e58511).
 
 ![schematic](images/schematic.png)
 
@@ -157,7 +161,7 @@ You might want to integrate the alarm system from the Spartan model into this bo
 
 For builders not familiar with the terms: How to calculate the I/E ratio and RR (or frequency)
 
-1. Measure inspiration time (the time the machine is pumping air into the lungs)
+1. Measure inspiration time (the time the machine is pumping air into the lungs; should be measured by pressure and/or flow)
 
 2. Measure period time (time after which a cycle repeats)
 
