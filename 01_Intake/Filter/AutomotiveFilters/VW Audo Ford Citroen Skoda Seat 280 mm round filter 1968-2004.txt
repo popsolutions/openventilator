@@ -1,0 +1,161 @@
+Mann C 2873/1
+Mahle LX568
+Meyle MAF0132
+Bosch 1 457 429 054 BOSCH S9054, BOSCH AFVW8, BOSCH 3165141015591
+Febi Bilstein 21110
+Many other manufacturers
+
+Round circular filter
+Filter outside diameter max 280
+Filter inside diameter min 220
+Filter height 62
+
+SEAT
+SEAT Arosa (6H) (Bouwjaar 05.1997 - 06.2004, 50 - 60 PK, Benzine)
+SEAT Córdoba I Sedan (6K1, 6K2) (Bouwjaar 02.1993 - 10.2002, 50 - 75 PK, Benzine)
+SEAT Córdoba I Vario (6K5) (Bouwjaar 09.1996 - 12.2002, 60 - 75 PK, Benzine)
+SEAT Ibiza II (6K1) (Bouwjaar 03.1993 - 02.2002, 54 - 75 PK, Benzine)
+SEAT Inca (6K9) (Bouwjaar 11.1995 - 06.2003, 60 PK, Benzine)
+
+SKODA
+SKODA Favorit Hatchback (781) (Bouwjaar 01.1994 - 09.1994, 68 PK, Benzine)
+SKODA Favorit Forman (785) (Bouwjaar 01.1994 - 06.1995, 68 PK, Benzine)
+SKODA Favorit Pick-up (787) (Bouwjaar 12.1992 - 06.1997, 68 PK, Benzine)
+SKODA Felicia I Hatchback (6U1) (Bouwjaar 10.1994 - 03.1998, 54 - 68 PK, Benzine)
+SKODA Felicia I Pick-up (6UF, 6U7) (Bouwjaar 10.1995 - 04.2002, 54 - 68 PK, Benzine)
+SKODA Felicia I Station Wagon (6U5) (Bouwjaar 08.1995 - 03.1998, 54 - 68 PK, Benzine)
+SKODA Felicia II Hatchback (6U1) (Bouwjaar 01.1998 - 06.2001, 54 - 68 PK, Benzine)
+SKODA Felicia II Station Wagon (6U5) (Bouwjaar 01.1998 - 06.2001, 68 PK, Benzine)
+SKODA Favorit Hatchback (781) (Bouwjaar 01.1994 - 09.1994, 68 PK, Benzine)
+SKODA Favorit Forman (785) (Bouwjaar 09.1991 - 06.1995, 54 - 68 PK, Benzine)
+SKODA Octavia I Hatchback (1U2) (Bouwjaar 09.1996 - 09.2004, 75 PK, Benzine)
+SKODA Octavia I Combi (1U5) (Bouwjaar 07.1998 - 09.2004, 75 PK, Benzine)
+
+VW
+VW Caddy II Station Wagon (9K9B) (Bouwjaar 11.1995 - 01.2004, 60 - 75 PK, Benzine)
+VW Caddy II Van (9K9A) (Bouwjaar 11.1995 - 01.2004, 60 - 75 PK, Benzine)
+VW Golf III Hatchback (1H1) (Bouwjaar 10.1991 - 08.1997, 55 - 75 PK, Benzine)
+VW Golf III Variant (1H5) (Bouwjaar 07.1993 - 04.1999, 60 PK, Benzine)
+VW Lupo / Lupo 3L (6X1, 6E1) (Bouwjaar 09.1998 - 07.2005, 50 PK, Benzine)
+VW Polo III Hatchback (6N2) (Bouwjaar 10.1999 - 09.2001, 60 PK, Benzine)
+VW Polo III Classic (6V2) (Bouwjaar 11.1995 - 09.2001, 54 - 88 PK, Benzine)
+VW Polo III Hatchback (6N1) (Bouwjaar 10.1994 - 10.1999, 45 - 75 PK, Benzine)
+VW Polo III Van Van / Station wagon (6V5) (Bouwjaar 08.1997 - 12.1999, 60 PK, Benzine)
+VW Polo III Van / Hatchback (6N1) (Bouwjaar 10.1994 - 12.1999, 45 PK, Benzine)
+VW Polo III Variant (6V5) (Bouwjaar 05.1997 - 09.2001, 60 - 75 PK, Benzine)
+VW Vento (1H2) (Bouwjaar 11.1991 - 09.1998, 55 - 75 PK, Benzine)
+VW Derby I (86) (Bouwjaar 02.1977 - 09.1981, 50 - 60 PK, Benzine)
+VW Derby II (86C, 80) (Bouwjaar 08.1983 - 12.1984, 55 PK, Benzine)
+VW Golf II Hatchback (19E, 1G1) (Bouwjaar 08.1983 - 12.1992, 45 - 58 PK, Benzine)
+VW Golf III Hatchback (1H1) (Bouwjaar 10.1991 - 08.1997, 55 - 60 PK, Benzine)
+VW Jetta Mk2 (19E, 1G2, 165) (Bouwjaar 01.1984 - 12.1991, 55 - 58 PK, Benzine)
+VW Passat B1 Hatchback (32) (Bouwjaar 05.1973 - 07.1980, 55 - 86 PK, Benzine)
+VW Passat B2 Hatchback (32B) (Bouwjaar 08.1980 - 03.1988, 60 - 115 PK, Benzine)
+VW Passat B2 Sedan (32B) (Bouwjaar 01.1985 - 03.1988, 69 - 90 PK, Benzine)
+VW Passat B1 Variant (33) (Bouwjaar 05.1973 - 07.1980, 55 - 86 PK, Benzine)
+VW Passat B2 Variant (33B) (Bouwjaar 08.1980 - 03.1988, 70 - 115 PK, Benzine)
+VW Polo I Hatchback (86) (Bouwjaar 03.1975 - 09.1981, 50 - 60 PK, Benzine)
+VW Polo II Van (86CF) (Bouwjaar 08.1992 - 07.1994, 45 - 54 PK, Benzine)
+VW Polo II Classic (86C, 80) (Bouwjaar 01.1985 - 09.1994, 45 - 55 PK, Benzine)
+VW Polo II Coupe (86C, 80) (Bouwjaar 08.1983 - 09.1994, 45 - 55 PK, Benzine)
+VW Polo II Hatchback (86C, 80) (Bouwjaar 08.1983 - 09.1994, 45 - 55 PK, Benzine)
+VW Santana Sedan (32B) (Bouwjaar 08.1981 - 12.1984, 75 - 115 PK, Benzine)
+VW Scirocco II (53B) (Bouwjaar 08.1983 - 07.1984, 55 PK, Benzine)
+VW Vento (1H2) (Bouwjaar 11.1991 - 09.1998, 55 - 60 PK, Benzine)
+
+AUDI
+AUDI 100 C2 Sedan (43) (Bouwjaar 08.1976 - 07.1982, 85 - 115 PK, Benzine)
+AUDI 100 C2 Avant (43) (Bouwjaar 07.1977 - 02.1983, 85 - 115 PK, Benzine)
+AUDI 100 C3 Avant (44, 44Q) (Bouwjaar 08.1982 - 11.1990, 75 - 100 PK, Benzine)
+AUDI 100 C3 Sedan (44, 44Q) (Bouwjaar 08.1982 - 11.1990, 75 - 100 PK, Benzine)
+AUDI 50 (86) (Bouwjaar 08.1974 - 07.1978, 50 - 60 PK, Benzine)
+AUDI 80 B1 Sedan (80, 82) (Bouwjaar 05.1972 - 07.1978, 55 - 100 PK, Benzine)
+AUDI 80 B2 (81, 85) (Bouwjaar 08.1978 - 08.1986, 55 - 115 PK, Benzine)
+AUDI 80 B3 (89, 89Q, 8A) (Bouwjaar 08.1986 - 10.1991, 65 - 90 PK, Benzine)
+AUDI 80 B4 Avant (8C5) (Bouwjaar 07.1992 - 01.1996, 90 PK, Benzine)
+AUDI 80 B4 Sedan (8C2) (Bouwjaar 09.1991 - 12.1994, 71 - 90 PK, Benzine)
+AUDI Coupe B2 (81, 85) (Bouwjaar 08.1980 - 10.1988, 88 - 115 PK, Benzine)
+
+CITROËN
+CITROËN LNA Hatchback (Bouwjaar 11.1978 - 07.1986, 34 - 35 PK, Benzine)
+CITROËN Visa Hatchback (Bouwjaar 09.1978 - 03.1991, 33 - 34 PK, Benzine)
+
+FORD
+FORD Capri (ECJ) (Bouwjaar 12.1968 - 08.1972, 75 PK, Benzine)
+
+OEN 78732034 — MAHLE
+OEN 030129620 — VAG
+OEN 030129620A — VAG
+OEN 032129620 — VAG
+OEN 115946205 — VAG
+OEN 030129620 — VW
+OEN 030129620A — VW
+OEN 032129620 — VW
+OEN 115946205 — VW
+OEN 032 126 962 0F — AUDI
+OEN 032 129 620 F — AUDI
+OEN 036 129 608 — AUDI
+OEN 056 129 620 — AUDI
+OEN S 9915 — BOSCH
+OEN 1444 Z6 — CITROËN
+OEN 1444 Z7 — CITROËN
+OEN 75 524 148 — CITROËN
+OEN 75 524 148 C — CITROËN
+OEN 95 555 218 — CITROËN
+OEN 95 558 218 — CITROËN
+OEN 95 559 627 — CITROËN
+OEN 1444Z6 — CITROËN/PEUGEOT
+OEN 1444Z7 — CITROËN/PEUGEOT
+OEN 75524148 — CITROËN/PEUGEOT
+OEN 755241480 — CITROËN/PEUGEOT
+OEN 75524148C — CITROËN/PEUGEOT
+OEN 95555218 — CITROËN/PEUGEOT
+OEN 95558218 — CITROËN/PEUGEOT
+OEN 95559627 — CITROËN/PEUGEOT
+OEN 0464 619 — FORD
+OEN 11464508 — FORD
+OEN 1146 4619 — FORD
+OEN 11465619 — FORD
+OEN 5001102 — FORD
+OEN 5004885 — FORD
+OEN 5006225 — FORD
+OEN 5011876 — FORD
+OEN 5012631 — FORD
+OEN 5015476 — FORD
+OEN 5020305 — FORD
+OEN A740X9601AA — FORD
+OEN A780X9601BFA — FORD
+OEN A830X9601DBA — FORD
+OEN A840X9601ARA — FORD
+OEN 99741113 — GMC
+OEN 9974113 — GMC
+OEN 77 01 409 299 — RENAULT
+OEN 72 28 16 — SAAB
+OEN 728216 — SAAB
+OEN 72 82 163 — SAAB
+OEN 728216 — SCANIA
+OEN 7282163 — SCANIA
+OEN 032 129 620 — SEAT
+OEN 056 129 620 — SEAT
+OEN 6K0 129 620 — SEAT
+OEN 032 129 620 — SKODA
+OEN 115 946 205 — SKODA
+OEN 007 045 248 — VW
+OEN 030 129 620 — VW
+OEN 030 129 620 A — VW
+OEN 032 126 962 0F — VW
+OEN 032 129 620 — VW
+OEN 032 129 620 F — VW
+OEN 036 129 608 — VW
+OEN 052 126 620 A — VW
+OEN 052 129 620 A — VW
+OEN 056 129 602 — VW
+OEN 056 129 620 — VW
+OEN 115 946 202 — VW
+OEN 115 946 205 — VW
+OEN 115 946 205 S — VW
+OEN 6K0 129 620 — VW
+OEN 823 121 250 — VW
+OEN C11 594 620 5 — VW
+OEN C11 594 650 5 — VW
+

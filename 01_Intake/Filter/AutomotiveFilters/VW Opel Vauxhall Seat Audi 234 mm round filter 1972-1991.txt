@@ -1,0 +1,68 @@
+Mahle LX 69
+UFI 30.807.00
+Bosch 1 457 429 050
+Mann C 2536
+Many other manufacturers
+
+Round circular filter
+Filter outside diameter max 245
+Filter inside diameter min 175
+Filter height 48
+
+AUDI
+AUDI 80 B2 (81, 85) (Bouwjaar 09.1978 - 07.1981, 55 PK, Benzine)
+
+OPEL
+OPEL Ascona A Sedan (Bouwjaar 04.1972 - 08.1975, 60 PK, Benzine)
+OPEL Ascona B Sedan (Bouwjaar 09.1975 - 08.1981, 55 - 60 PK, Benzine)
+OPEL Ascona C CC (J82) (Bouwjaar 09.1981 - 08.1986, 60 PK, Benzine)
+OPEL Ascona C Sedan (J82) (Bouwjaar 09.1981 - 08.1986, 60 PK, Benzine)
+OPEL Corsa A CC (S83) (Bouwjaar 09.1982 - 03.1993, 45 - 60 PK, Benzine)
+OPEL Corsa A TR (S83) (Bouwjaar 09.1982 - 03.1993, 45 - 58 PK, Benzine)
+OPEL Corsa A Van (S83) (Bouwjaar 02.1986 - 07.1990, 45 - 60 PK, Benzine)
+OPEL Kadett B Sedan (Bouwjaar 09.1965 - 08.1973, 45 - 75 PK, Benzine)
+OPEL Kadett B Coupe (Bouwjaar 09.1965 - 08.1973, 45 - 60 PK, Benzine)
+OPEL Kadett B Stationwagon (Bouwjaar 09.1965 - 08.1973, 45 - 60 PK, Benzine)
+OPEL Kadett C Sedan (Bouwjaar 08.1973 - 07.1979, 40 - 60 PK, Benzine)
+OPEL Kadett C CC (Bouwjaar 08.1973 - 07.1979, 40 - 60 PK, Benzine)
+OPEL Kadett C Coupe (Bouwjaar 08.1973 - 07.1979, 40 - 60 PK, Benzine)
+OPEL Kadett C Stationwagon (Bouwjaar 08.1973 - 07.1979, 40 - 60 PK, Benzine)
+OPEL Kadett D Hatchback (Bouwjaar 08.1979 - 08.1984, 41 - 75 PK, Benzine)
+OPEL Kadett D Sedan (Bouwjaar 08.1979 - 08.1984, 45 - 60 PK, Benzine)
+OPEL Kadett D Stationwagon (Bouwjaar 08.1979 - 08.1984, 53 - 75 PK, Benzine)
+OPEL Kadett E Caravan (T85) (Bouwjaar 09.1984 - 08.1991, 55 - 60 PK, Benzine)
+OPEL Kadett E CC (T85) (Bouwjaar 09.1984 - 08.1991, 55 - 75 PK, Benzine)
+OPEL Kadett E Combo (T85) (Bouwjaar 01.1986 - 12.1989, 60 PK, Benzine)
+OPEL Kadett E Sedan (T85) (Bouwjaar 09.1984 - 08.1989, 55 - 60 PK, Benzine)
+OPEL Kadett E Van (T85) (Bouwjaar 09.1984 - 07.1989, 55 - 60 PK, Benzine)
+OPEL Manta A Coupe (Bouwjaar 04.1972 - 08.1975, 60 PK, Benzine)
+OPEL Manta B Sedan (Bouwjaar 09.1975 - 07.1983, 55 - 60 PK, Benzine)
+OPEL Manta B CC (Bouwjaar 03.1979 - 12.1980, 60 PK, Benzine)
+
+VAUXHALL
+VAUXHALL Nova CC (S83) (Bouwjaar 05.1983 - 03.1993, 45 - 55 PK, Benzine)
+VAUXHALL Nova Sedan (S83) (Bouwjaar 09.1982 - 10.1987, 55 PK, Benzine)
+
+VW
+VW Derby I (86) (Bouwjaar 02.1977 - 09.1981, 40 - 58 PK, Benzine)
+VW Derby II (86C, 80) (Bouwjaar 08.1981 - 12.1984, 40 - 60 PK, Benzine)
+VW Golf I Hatchback (17) (Bouwjaar 04.1974 - 12.1983, 50 - 60 PK, Benzine)
+VW Golf I Cabrio (155) (Bouwjaar 08.1983 - 07.1986, 54 PK, Benzine)
+VW Golf II Hatchback (19E, 1G1) (Bouwjaar 11.1983 - 10.1991, 45 - 50 PK, Benzine)
+VW Jetta Mk1 (16) (Bouwjaar 08.1979 - 02.1984, 50 - 60 PK, Benzine)
+VW Passat B1 Hatchback (32) (Bouwjaar 05.1973 - 07.1980, 55 PK, Benzine)
+VW Passat B2 Hatchback (32B) (Bouwjaar 08.1980 - 07.1986, 55 - 60 PK, Benzine)
+VW Passat B1 Variant (33) (Bouwjaar 05.1973 - 07.1980, 55 PK, Benzine)
+VW Passat B2 Variant (33B) (Bouwjaar 08.1980 - 07.1983, 55 PK, Benzine)
+VW Polo I Hatchback (86) (Bouwjaar 09.1975 - 09.1981, 34 - 40 PK, Benzine)
+VW Polo II Classic (86C, 80) (Bouwjaar 01.1985 - 09.1994, 40 - 45 PK, Benzine)
+VW Polo II Coupe (86C, 80) (Bouwjaar 10.1981 - 09.1994, 40 - 60 PK, Benzine)
+VW Polo II Hatchback (86C, 80) (Bouwjaar 10.1981 - 09.1994, 39 - 60 PK, Benzine)
+VW Santana Sedan (32B) (Bouwjaar 08.1981 - 07.1983, 60 PK, Benzine)
+VW Scirocco I (53) (Bouwjaar 04.1974 - 07.1980, 50 - 60 PK, Benzine)
+VW Scirocco II (53B) (Bouwjaar 08.1980 - 12.1983, 60 PK, Benzine)
+
+SEAT
+SEAT Ibiza I Hatchback (021A) (Bouwjaar 11.1984 - 12.1993, 60 - 85 PK, Benzine)
+SEAT Malaga (023A) (Bouwjaar 11.1984 - 12.1993, 60 - 90 PK, Benzine)
+SEAT Ronda (022A) (Bouwjaar 09.1984 - 12.1986, 60 - 85 PK, Benzine)
