@@ -1,0 +1,48 @@
+Mahle LX 157
+Mann C2120/2
+Bosch 1 457 432 109
+
+Round circular filter
+Filter outside diameter max 205
+Filter inside diameter min 156
+Filter height 50
+
+FIAT
+FIAT 127 Hatchback (127) (Bouwjaar 06.1971 - 12.1986, 40 - 50 PK, Benzine)
+FIAT 127 Panorama (127) (Bouwjaar 01.1977 - 12.1986, 50 PK, Benzine)
+FIAT 128 Coupe (128) (Bouwjaar 03.1972 - 02.1981, 64 - 65 PK, Benzine)
+FIAT 128 Familiare (128) (Bouwjaar 10.1969 - 10.1982, 45 - 60 PK, Benzine)
+FIAT 128 Sedan (128) (Bouwjaar 03.1969 - 12.1984, 45 - 60 PK, Benzine)
+FIAT 147 Hatchback (Bouwjaar 10.1976 - 12.1995, 50 PK, Benzine)
+FIAT Fiorino I Van (147) (Bouwjaar 01.1980 - 12.1987, 50 PK, Benzine)
+FIAT Fiorino II Van (146) (Bouwjaar 05.1988 - 12.1993, 54 PK, Benzine)
+FIAT Fiorino Pick-up (147) (Bouwjaar 06.1982 - 10.1987, 50 PK, Benzine)
+FIAT Fiorino Van (127) (Bouwjaar 10.1977 - 12.1987, 45 - 50 PK, Benzine)
+FIAT Panda I Hatchback (141) (Bouwjaar 10.1980 - 06.1994, 34 - 45 PK, Benzine)
+FIAT Ritmo I Hatchback (138) (Bouwjaar 09.1978 - 09.1982, 60 PK, Benzine)
+
+SUZUKI
+SUZUKI Alto II (CA71) (Bouwjaar 01.1986 - 12.1988, 39 PK, Benzine)
+SUZUKI Alto III (EC) (Bouwjaar 12.1988 - 11.1993, 39 PK, Benzine)
+SUZUKI Alto IV (EF) (Bouwjaar 09.1994 - 09.1998, 53 PK, Benzine)
+SUZUKI Alto I (SS80) (Bouwjaar 06.1982 - 08.1984, 39 PK, Benzine)
+
+AUTOBIANCHI
+AUTOBIANCHI A 112 Hatchback (Bouwjaar 10.1969 - 12.1985, 42 - 48 PK, Benzine)
+
+LANCIA
+LANCIA A 112 Hatchback (Bouwjaar 03.1981 - 12.1986, 40 - 48 PK, Benzine)
+
+MARUTI
+MARUTI 800 Hatchback (Bouwjaar 01.1991 - 12.2006, 35 PK, Benzine)
+
+SEAT
+SEAT 127 (Bouwjaar 04.1972 - 12.1982, 45 PK, Benzine)
+SEAT Fura (025A) (Bouwjaar 01.1982 - 12.1986, 40 - 45 PK, Benzine)
+SEAT Panda (141A) (Bouwjaar 10.1980 - 12.1986, 42 PK, Benzine)
+
+ZASTAVA
+ZASTAVA 101 (1100) (Bouwjaar 06.1973 - 12.1993, 50 - 56 PK, Benzine)
+ZASTAVA Yugo Florida (Bouwjaar 08.1989 - 11.2008, 60 PK, Benzine)
+ZASTAVA Yugo Hatchback (Bouwjaar 04.1980 - 06.1995, 45 - 65 PK, Benzine)
+
