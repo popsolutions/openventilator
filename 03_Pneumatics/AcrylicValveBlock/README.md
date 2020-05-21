@@ -8,4 +8,6 @@ The sources are online on Onshape:
 
 https://cad.onshape.com/documents/6909470fa5e6854c657f9f39/w/2e92dcc71fa6785d73b9fb84/e/d9eb9e88be5d90407434fc69
 
+For a functional description, have a look at the [SystemDescription page](../../SystemDescription.md#pneumatics) where the pneumatics are explained as well.
+
 ![valve block](images/ValveBlock.png)
