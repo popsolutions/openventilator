@@ -56,7 +56,7 @@ A typical graph of lung pressure on our mechanical ventilator looks as follows.
 
 ![pressure during cycle](03_Pneumatics/images/phases.png)
 
-You can see that during the inspiration phases, the pressure rises. Nearing the end of the phase, this stabilizes. The stable high pressure before the end of this phase is called the plateau pressure.
+You can see that during the inspiration phases, when air is pushed into the patient's lungs, the pressure rises. Nearing the end of the phase, this stabilizes. The stable high pressure before the end of this phase is called the plateau pressure.
 
 Then the expiration starts. The air is released from the patient's lungs by the pressure of its body and his weight. The ventilator should not release all air from the patient's lungs, but keep a certain pressure on it, called PEEP (positive end-expiratory pressure). 
 
@@ -103,3 +103,9 @@ _Figure: Expiration phase, patient inspires condition_
 If the patient autonomously inspires while the machine is still completing the expiration phase, the patient can suck in air from the SUPPLY port. If the valve block also has an added one-way valve from SUPPLY to INSP, the inspiration will be easier. 
 
 Note that there is currently **no Assist Control**. This is detection of inspiration attempts by the patient, which should trigger an immediate start of the inspiration phase, in that way assisting the patient in performing a breath.
+
+![flow during free respiration](03_Pneumatics/images/MachineOff-FreeRespiration.png)
+
+_Figure: Machine off, free respiration_
+
+When the machine is off, the patient can inhale through the one-way valve from SUPPLY to INSP (or the other two valves near those). The patient can exhale through the path via EXP to PEEP port, however, he will need to overcome the set PEEP pressure to exhale. Both paths are drawn in the diagram above.
