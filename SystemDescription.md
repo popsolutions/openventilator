@@ -109,3 +109,7 @@ Note that there is currently **no Assist Control**. This is detection of inspira
 _Figure: Machine off, free respiration_
 
 When the machine is off, the patient can inhale through the one-way valve from SUPPLY to INSP (or the other two valves near those). The patient can exhale through the path via EXP to PEEP port, however, he will need to overcome the set PEEP pressure to exhale. Both paths are drawn in the diagram above.
+
+## Failure Mode and Effects Analysis (FMEA)
+
+Failure mode analysis for the Spartan model and the projected characteristics of the MkII have been analysed. See [FMEA.xlsx](FMEA.xlsx)
