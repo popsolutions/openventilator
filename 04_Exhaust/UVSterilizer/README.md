@@ -2,6 +2,8 @@
 
 This directory contains information on how to use ultra violet light to clean the exhaust air. The part is to be placed after the water column, before the air is exhausted. 
 
+Background information here: https://www.ashrae.org/file%20library/technical%20resources/covid-19/i-p_a19_ch62_uvairandsurfacetreatment.pdf?fbclid=IwAR3PsiQmZhp8u3DiJIlGiOdFOSVwV0maNzpdISj3fbsJkHFSugpVflkqFB4
+
 ## On UV-C light
 
 The idea is that all outgoing air is passed past a UV-C light, which sterilizes it. 

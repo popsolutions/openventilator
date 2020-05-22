@@ -1,0 +1,78 @@
+Bosch 1987429404
+Bosch f026400172 for with extra fine particle filter
+Mann C 35 154
+Febi Bilstein 22552
+
+length 344
+width 136
+height 70
+
+AUDI
+AUDI A3 Cabrio (8P7) (Bouwjaar 04.2008 - 05.2013, 105 - 200 PK, Benzine, Diesel)
+AUDI A3 Hatchback (8P1) (Bouwjaar 05.2003 - 08.2012, 90 - 200 PK, Benzine, Diesel)
+AUDI A3 Sportback (8PA) (Bouwjaar 09.2004 - 03.2013, 90 - 200 PK, Benzine, Diesel)
+AUDI Q3 (8UB, 8UG) (Bouwjaar 06.2011 - 10.2018, 120 - 220 PK, Benzine, Diesel)
+AUDI TT Coupe (8J3) (Bouwjaar 08.2006 - 06.2014, 160 - 211 PK, Benzine, Diesel)
+AUDI TT Roadster (8J9) (Bouwjaar 03.2007 - 06.2014, 160 - 211 PK, Benzine, Diesel)
+
+SEAT
+SEAT Alhambra II (710, 711) (Bouwjaar 06.2010 - ..., 115 - 220 PK, Benzine, Diesel)
+SEAT Altea (5P1) (Bouwjaar 03.2004 - ..., 90 - 170 PK, Benzine, Diesel)
+SEAT Altea XL (5P5, 5P8) (Bouwjaar 10.2006 - ..., 90 - 211 PK, Benzine, Diesel)
+SEAT Leon II Hatchback (1P1) (Bouwjaar 07.2005 - 12.2012, 90 - 211 PK, Benzine, Diesel)
+SEAT Toledo III (5P2) (Bouwjaar 04.2004 - 05.2009, 105 - 170 PK, Benzine, Diesel)
+
+SKODA
+SKODA Octavia II Hatchback (1Z3) (Bouwjaar 02.2004 - 06.2013, 105 - 200 PK, Benzine, Diesel)
+SKODA Octavia II Combi (1Z5) (Bouwjaar 02.2004 - 06.2013, 105 - 200 PK, Benzine, Diesel)
+SKODA Superb II Hatchback (3T4) (Bouwjaar 03.2008 - 05.2015, 105 - 200 PK, Benzine, Diesel)
+SKODA Superb II Station Wagon (3T5) (Bouwjaar 10.2009 - 05.2015, 105 - 200 PK, Benzine, Diesel)
+SKODA Yeti (5L) (Bouwjaar 05.2009 - 12.2017, 105 - 170 PK, Benzine, Diesel)
+
+VW
+VW Beetle Cabrio (5C7, 5C8) (Bouwjaar 12.2011 - 07.2019, 105 - 220 PK, Benzine, Diesel)
+VW Beetle Hatchback (5C1, 5C2) (Bouwjaar 04.2011 - 07.2019, 105 - 220 PK, Benzine, Diesel)
+VW Caddy Alltrack IV Van (SAA) (Bouwjaar 05.2015 - ..., 75 - 150 PK, Diesel)
+VW Caddy Alltrack IV Kombi (SAB) (Bouwjaar 05.2015 - ..., 75 - 150 PK, Diesel)
+VW Caddy III Station Wagon (2KB, 2KJ, 2CB, 2CJ) (Bouwjaar 04.2004 - 05.2015, 75 - 170 PK, Diesel)
+VW Caddy III Van (2KA, 2KH, 2CA, 2CH) (Bouwjaar 04.2004 - 05.2015, 75 - 170 PK, Diesel)
+VW Caddy IV Van (SAA, SAH) (Bouwjaar 05.2015 - ..., 75 - 150 PK, Diesel)
+VW Caddy IV Kombi (SAB, SAJ) (Bouwjaar 05.2015 - ..., 75 - 150 PK, Diesel)
+VW CC (358) (Bouwjaar 11.2011 - 12.2016, 136 - 210 PK, Benzine, Benzine/Ethanol, Diesel)
+VW Eos (1F7, 1F8) (Bouwjaar 03.2006 - 08.2015, 136 - 210 PK, Benzine, Diesel)
+VW Golf Plus / Crossgolf (5M1, 521) (Bouwjaar 01.2005 - 12.2013, 90 - 170 PK, Benzine, Diesel)
+VW Golf V Hatchback (1K1) (Bouwjaar 10.2003 - 02.2009, 90 - 200 PK, Benzine, Diesel)
+VW Golf V Variant (1K5) (Bouwjaar 06.2007 - 07.2009, 105 - 200 PK, Benzine, Diesel)
+VW Golf VI Hatchback (5K1) (Bouwjaar 10.2008 - 11.2013, 90 - 210 PK, Benzine, Diesel)
+VW Golf VI Cabrio (517) (Bouwjaar 03.2011 - 05.2016, 105 - 220 PK, Benzine, Diesel)
+VW Golf VI Variant (AJ5) (Bouwjaar 07.2009 - 07.2013, 90 - 200 PK, Benzine, Diesel)
+VW Jetta Mk6 (162, 163, AV3, AV2) (Bouwjaar 04.2010 - ..., 105 - 211 PK, Benzine, Diesel)
+VW Jetta Mk5 (1K) (Bouwjaar 08.2005 - 10.2010, 90 - 200 PK, Benzine, Diesel)
+VW Passat B7 Alltrack (365) (Bouwjaar 01.2012 - 12.2014, 140 - 210 PK, Benzine, Diesel)
+VW Passat CC (357) (Bouwjaar 06.2008 - 01.2012, 136 - 211 PK, Benzine, Benzine/Ethanol, Diesel)
+VW Passat B7 Sedan (362) (Bouwjaar 08.2010 - 12.2014, 105 - 210 PK, Benzine, Benzine/Aardgas (CNG), Benzine/Ethanol, Diesel)
+VW Passat B6 Sedan (3C2) (Bouwjaar 03.2005 - 11.2010, 105 - 200 PK, Benzine, Benzine/Aardgas (CNG), Diesel)
+VW Passat B7 Variant (365) (Bouwjaar 08.2010 - 12.2014, 105 - 210 PK, Benzine, Benzine/Aardgas (CNG), Benzine/Ethanol, Diesel)
+VW Passat B6 Variant (3C5) (Bouwjaar 08.2005 - 10.2011, 105 - 200 PK, Benzine, Benzine/Aardgas (CNG), Diesel)
+VW Scirocco III (137, 138) (Bouwjaar 05.2008 - 11.2017, 136 - 220 PK, Benzine, Diesel)
+VW Sharan II (7N1, 7N2) (Bouwjaar 05.2010 - ..., 116 - 220 PK, Benzine, Diesel)
+VW Tiguan I (5N) (Bouwjaar 09.2007 - 07.2018, 110 - 211 PK, Benzine, Diesel)
+VW Touran I (1T1, 1T2) (Bouwjaar 02.2003 - 05.2010, 90 - 170 PK, Benzine, CNG, Diesel)
+VW Touran I (1T3) (Bouwjaar 05.2010 - 05.2015, 90 - 177 PK, Benzine, Benzine/Aardgas (CNG), Diesel)
+
+
+OEN 1K0 129 620 D — AUDI
+OEN 3C0 129 620 A — AUDI
+OEN 3C0 129 620 B — AUDI
+OEN 5C0 129 620 — AUDI
+OEN AF-VW-12 — BOSCH
+OEN S 9404 — BOSCH
+OEN 1K0 129 620 D — SEAT
+OEN 1K0 129 620 D — SKODA
+OEN 1K0 129 620 D — VW
+OEN 1K0 129 620 F — VW
+OEN 1K0 129 620 G — VW
+OEN 3C0 129 620 A — VW
+OEN 3C0 129 620 B — VW
+OEN 5C0 129 620 — VW
+

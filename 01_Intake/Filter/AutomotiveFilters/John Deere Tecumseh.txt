@@ -1,0 +1,38 @@
+John Deere / Tecumseh
+
+31925
+FGP006093
+AM30800
+
+round filter
+diameter 111 mm
+height 60 mm
+
+
+30804
+FGP006092
+AM31034
+
+round filter
+diameter 111 mm
+height 38 mm
+
+
+32008
+FGP006037
+AM31400
+
+lawn mower
+
+round filter
+diameter 120 mm
+height 48 mm
+
+
+23410051
+35066
+FGP001349 
+
+round filter
+diameter 45 mm
+height 73 mm

@@ -18,11 +18,11 @@ https://cad.onshape.com/documents/65a7e619b43e334e4c6a76e1/w/303bd782c84ce8af675
 
 1. Cut the [o-rings you will need](O-Rings/CuttingOrings.md)
 
-1. Start the [1st part of the Gantry assembly](Gantry/GantryAssembly.md)
+1. Start the [1st part of the Gantry assembly](Gantry/GantryAssemblyPart1.md)
 
 1. Do the [Bellow Assembly](BellowAssembly/BellowAssembly.md)
 
-1. Complete the gantry with the [2nd part of the Gantry assembly](Gantry/GantryAssembly.md)
+1. Complete the gantry with the [2nd part of the Gantry assembly](Gantry/GantryAssemblyPart1.md)
 
 1. Install the Base and start the [Frame Assembly](Frame/FrameAssembly.md)
 

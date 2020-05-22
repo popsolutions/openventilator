@@ -1,0 +1,10 @@
+BMW motorcycle R850, R1100, R1150
+
+Round circular filter
+Filter outside diameter max 151
+Filter inside diameter min 75
+Filter height 88
+
+Mahle LX578
+Mann C1552
+UFI 30.094.00
