@@ -27,15 +27,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <Arduino.h>
 #include "ADCReader.h"
 
-ADCReader::ADCReader()
+ADCReader::ADCReader( uint8_t pin ) //  byte numPins, uint8_t ADCpins[]
 {
+  _pin = pin;
 }
 
-void ADCReader::init( byte numChannels, int averaging )
+void ADCReader::init( int averaging )
 // Works for at least Arduino UNO
 // http://yaab-arduino.blogspot.com/2015/02/fast-sampling-from-analog-input.html
 {
-  _numChannels = numChannels;
   _averaging = averaging;
   _growthCount = 0;       // counter of amount of ADC samples taken for a summed sample
   _growingSample = 0;     // summed sample as it is growing
@@ -45,10 +45,10 @@ void ADCReader::init( byte numChannels, int averaging )
 
   // Hardware setup
   ADMUX = 
-  (0x01)    // set A1 analog input pin
+  ( _pin - A0 )   // set analog input pin (0 = A0)
   | (1 << REFS0)  // set reference voltage to 5V (only S0 set, S1 cleared)
   | (0 << REFS1)  // set reference voltage to 5V (only S0 set, S1 cleared)
-  | (0 << ADLAR);  // if 1, left align ADC value to 8 bits from ADCH register
+  | (0 << ADLAR); // if 1, left align ADC value to 8 bits from ADCH register
 
   // Sampling rate is [ADC clock] / [prescaler] / [conversion clock cycles]
   // For Arduino Uno ADC clock is 16 MHz and a conversion takes 13 clock cycles.

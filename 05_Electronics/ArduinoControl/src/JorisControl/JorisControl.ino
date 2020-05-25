@@ -26,11 +26,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RespirationAnalysis.h"
 #include "ADCReader.h"
 
-const int pressure1InPin = A0; // For pressure at patien
-const int pressure2InPin = A1; // For flow at patient
-int analogInValue     = 0;
-int average           = 0;
-float buffer[100];
 
 /*
 Timer output  Arduino output  Chip pin  Pin name
@@ -47,17 +42,44 @@ TCCR1B = TCCR1B & B11111000 | B00000011; // for PWM frequency of 490.20 Hz (The 
 TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The DEFAULT)
 */
 
-LiquidCrystal lcd( 7, 6, 5, 4, 3, 2 );
+#define DOUT_LCD_EN 9
+#define DOUT_LCD_RS 8
+#define DOUT_LCD_DB4 7
+#define DOUT_LCD_DB5 6
+#define DOUT_LCD_DB6 5
+#define DOUT_LCD_DB7 4
+#define DIN_ROTENC_A 2  // Needs to be on this pin because it needs interrupt on change
+#define DIN_ROTENC_B 3  // Needs to be on this pin because it needs interrupt on change
+#define DOUT_KEYS_X0 8   // These key pins are shared with the LCD
+#define DOUT_KEYS_X1 7   // On all of them, a diode needs to be connected with 
+#define DOUT_KEYS_X2 6   // the cathode towards the pin, and the anode towards
+#define DOUT_KEYS_X3 5   // the switch and then the KEYS_Y0 pin.
+#define DOUT_KEYS_X4 4
+#define DIN_KEYS_Y0 10  // This pin reads the key status. It is internally pulled up.
+#define DOUT_MOTOR_PWM 11 // This PWM pin is on Timer 2
+#define DIN_MOTOR_PARK 12
+#define DOUT_BUZZER 13
+
+#define AIN_VSUPPLY A0
+#define AIN_IMOTOR A1
+#define AIN_LUNGPRES A2
+#define AIN_LUNGFLOW A3 // Differential pressure to detect flow
+
+// Free pins: A4 (=SDA) and A5 (=SCK)
+
+LiquidCrystal lcd( DOUT_LCD_RS, DOUT_LCD_EN, DOUT_LCD_DB4, DOUT_LCD_DB5, DOUT_LCD_DB6, DOUT_LCD_DB7 );
 VerticalGraph graph( lcd );
 CircularBuffer circBuf;
 RespirationAnalysis an;
-ADCReader ADCR;
+byte ADCPins[4] = { AIN_VSUPPLY, AIN_IMOTOR, AIN_LUNGPRES, AIN_LUNGFLOW };
+//ADCReader ADCR( 4, ADCPins );
+ADCReader ADCR( AIN_LUNGPRES );
 long next_tick_ts = 100;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  ADCR.init( 1, 2000 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 125 samples per 26 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms.
+  ADCR.init( 2000 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 125 samples per 26 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms.
 
   lcd.begin( 20, 4 );
   lcd.noAutoscroll();

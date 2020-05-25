@@ -27,15 +27,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class ADCReader
 {
   public:
-    ADCReader();
-    void init( byte numChannels, int averaging );
+    ADCReader( uint8_t pin ); //  byte numPins, uint8_t ADCpins[]  // Create reader object and use indicated pins
+    void init( int averaging ); // Sets up the ADC and sets averaging
     bool isSampleReady();  // Returns if there is a new sample ready
     long getSample();  // Returns this new sample and clears the flag for the readiness
     void addRawSample( byte channel, int a );
     int getAveraging() { return _averaging; };
     
   private:
-    byte _numChannels;    // The number of channels we will scan
+    uint8_t _pin;
+    //byte _numChannels;    // The number of channels we will scan
     int _averaging;           // We will average over how many raw samples
     int _growthCount;         // the count of raw samples currently in the growing sample
     long _growingSample;      // the growing sample as being taken
