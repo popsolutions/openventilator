@@ -2,7 +2,7 @@
 
 # Wooden bellows mechanism with windscreen wiper motor
 
-2020-05-11
+2020-05-25
 
 This pump device uses only material from a DIY shop plus a truck inner tyre.
 
@@ -12,9 +12,11 @@ It does not give a phase signal (such as present in the Spartan model), indicati
 
 # Required materials
 
+- Rubber inner truck tyre R13 to R15, (13 to 15 cm diameter). R16 is also possible, but the frame needs to be made wider.
+
 - 0.6 m Wooden beam of 20x40 mm up to 25x50 mm
 
-- A piece of roughly 6 mm thick MDF. Not too thick or the motor doesn't fit. Not too thin or it doesn't clamp well. 
+- A piece of roughly 6 mm thick MDF to make the motor mount and the disks from. Not too thick or the motor doesn't fit. Not too thin or it doesn't clamp the bellows well. Instead you can use 5 or 6 mm acylic, which doesn't release fibers. (Maybe for hygiene issues too, although exhaled air never comes in the pump). 
 
 - 1 m Aluminium, copper or steel rods or tubes of around 10 mm. Slightly different size will also work. Make sure to have a drill for this size.
 
@@ -28,7 +30,7 @@ Materials known to fail are rain coat trousers and swimming caps. Don't use thes
 
 - 4x Wood screws 12x4 or 15x4 mm. Make sure to have a drill that fits the core part, e.g. 2.5 mm.
 
-- 4x Carriage bolt M4 or M5, 40 to 50 mm long with fitting nut; OR alternatively 4x weft nut (M4 preferred) and 4x 35 mm fitting bolt.
+- 4x Carriage bolt M4 or M5, 60 mm long with fitting nut (the previously indicated alternative using a weft nut leaks too much.
 
 - A plastic hosetail (fitting your hose size) with a thread diameter of less than 22 mm (13/16"?). It may be an angled hosetail, depending on how you want to place the bellows.
 
@@ -56,7 +58,7 @@ Materials known to fail are rain coat trousers and swimming caps. Don't use thes
 
 - Drill bits of specific sizes, see materials part specially for large drills.
 
-- Manual jigsaw or machine jigsaw, to cut large circular disks.
+- Manual jigsaw or machine jigsaw, to cut large circular disks. 
 
 - Hole saw of 22 mm and 38 or 40 mm
 
@@ -71,8 +73,8 @@ Materials known to fail are rain coat trousers and swimming caps. Don't use thes
 Time: 0:03 to 0:15
 
 The bellows material should withstand many movements and not let air though. Rubber will work. Not working:
-- Rain coat starts to leak after a week of constant use. 
-- Swimming cap is too flexible and breaks too easily.
+- Rain coat, starts to leak after a week of constant use. 
+- Swimming cap, is too flexible and breaks too easily.
 
 The length of the bellows is dependent on the diameter of the tyre according to the following table:
 
@@ -85,7 +87,9 @@ The length of the bellows is dependent on the diameter of the tyre according to 
 
 ![](images/CutBellows.jpg)
 
-We also need an O ring to seal the hosetail. On a piece of rubber, draw a circle of between 45 and 55 mm diameter and cut it with a pair of scissors. On this circle, draw a circle of 22 mm and cut it out with a sharp knife.
+We also need some O-rings. First one to seal the hosetail. If you can't get a rubber seal ring with the hosetail, you can make one from a piece of left-over rubber. 
+
+Then 2 O-rings for the carriage bolts. Instead of making them, maybe you have some available. To make them, cut a circle of 15 to 20 mm, and make a hole the size of your carriage bolts. You can use a washer as template. The small hole can be made with a punch, or with a small knife. It does not need to fit very tightly, it will seal on the flat area. 
 
 ![](images/CutORing.jpg)
 
@@ -109,7 +113,7 @@ The second 240 mm beam is the ***slider beam***. On this beam, do the same, but 
 
 On the slider beam also 2 holes for the screw eyes need to be made. Drill these with the core diameter of the screw eye (e.g. 2 mm). Make the holes 10 mm above each other in the middle of the beam (see picture).
 
-On both beams, drill two holes at 40 mm from the center, so 80 mm apart. These are to mount the disks. The diameter needed is the carriage bolt diameter (or the inner diameter of the weft but, if you use those).
+On both beams, drill two holes at 40 mm from the center, so 80 mm apart. These are to mount the disks. The diameter needed is the carriage bolt diameter.
 
 On all 40 mm blocks, do something similar again. The inner (e.g. 10mm) tube/rod should fit here. Also drill two 2.5 mm holes in each block.
 
@@ -117,7 +121,7 @@ On all 40 mm blocks, do something similar again. The inner (e.g. 10mm) tube/rod 
 
 Time: 0:20 to 1:00
 
-Draw circles on the roughly 6 mm MDF. While doing this, **mark the center** (we'll need it later). Use a diameter for the circles of the tyre diameter + 25 and + 30 mm. Make 2 of each, according to this table. 
+Draw circles on the roughly 6 mm MDF or acrylic. While doing this, **mark the center** (we'll need it later). Use a diameter for the circles of the tyre diameter + 25 and + 30 mm. Make 2 of each, according to this table. 
 
 | Tyre diameter | Small diameter disks | Large diameter disks | Notes
 |---------------|----------------------|----------------------|-----------------------------------
@@ -128,7 +132,7 @@ Draw circles on the roughly 6 mm MDF. While doing this, **mark the center** (we'
 
 So now you have 4 disks.
 
-On all disks, indicate 2 points on a line, both at 40 mm from the center (see picture below). On the indicated points, drill two holes of the carriage bolt (or weft nut) diameter. For accuracy, it's best to first drill a small hole of 2.5 mm.
+On all disks, indicate 2 points on a line, both at 40 mm from the center (see picture below). On the indicated points, drill two holes of the carriage bolt diameter. For accuracy, it's best to first drill a small hole of 2.5 mm.
 
 ![](images/DrillHolesInDisk.jpg)
 
@@ -142,7 +146,7 @@ Time: 0:05 to 1:00
 
 Find out what motor mount pattern you need. There are some patterns in the directory with windscreen wiper motor documentation. The motor should be placed such that the heaviest part is in the middle of the bellows system, probably pointing towards the bellows. This may mean you have to rotate the pattern to accomplish this.
 
-Saw/create a board of MDF or multilayer wood, size 240x100 mm.
+Saw/create a board of MDF or multilayer wood or acrylic, size 240x100 mm.
 
 Drill holes to mount the board onto the 40 mm blocks that will go onto the 10 mm tube/rod. These holes have to be at the corners, as in below picture. It is important that the distance between them is **200 mm exactly**. In the other direction, fit the distance from the ends so that things fit nicely onto the 40 mm blocks, this is less critical. For a 20 mm thickness beam, this would mean 10 mm distance from the edge. Make the holes 1 to 1.5 mm larger than needed, so the screw can be moved in the hole, to make things fit well. Don’t use countersink screws here for this reason.
 
@@ -197,17 +201,15 @@ Put the created rubber O-ring on the hosetail's thread and put the hosetail in t
 
 ![](images/HosetailInDisk.jpg)
 
-Put the 4 carriage bolts through the 2 small diameter disks and hammer their square parts into the wood (support the wood near the hole while doing this). Or if you are using weft nuts, clamp them in with a vice, see picture.
+Put the 4 carriage bolts through the 2 small diameter disks and hammer their square parts into the wood (support the wood near the hole while doing this). If you use acrylic disks, add rubber rings under the carriage bolt heads.
 
-![](images/PressWeftNutIntoDisk.jpg)
+Put the rubber bellows over the first small diameter disks without the hosetail. Leave some 10 to 20 mm over the edge of the disk. It should not overlap with the O-ring, or it will not seal well. 
 
-Put the rubber bellows over the first small diameter disks without the hosetail. Leave some 10 to 15 mm over the edge of the disk. It should not overlap with the O-ring, or it will not seal well. 
+Add the large diameter disk over it, add the slider beam, and screw this together with the carriage bolts. Make sure the bellows is enclosed well between the disks.
 
-Add the large diameter disk over it, add the slider beam, and screw this together with the (carriage) bolts. Make sure the bellows is enclosed well between the disks.
+Put the second small diameter disk with hosetail into the bellows with 10 to 20 mm over the edge. Rotate the disk such that the small holes are aligned with the ones on the other disks.
 
-Put the second small diameter disk with hosetail into the bellows with 10 to 15 mm over the edge. Rotate the disk such that the small holes are aligned with the ones on the other disks.
-
-Add the large diameter disk over it, add the end beam, and screw this together with the (carriage) bolts. Make sure the bellows is enclosed well between the disks.
+Add the large diameter disk over it, add the end beam, and screw this together with the carriage bolts. Make sure the bellows is enclosed well between the disks.
 
 #### Onto the rods
 
