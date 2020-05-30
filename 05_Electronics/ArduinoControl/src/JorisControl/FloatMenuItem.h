@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * FloatMenuItem.h
+ * Class definition of a menu item displaying a float.
  */
 
 /*
@@ -24,26 +24,27 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+#ifndef FLOATMENUITEM_H
+#define FLOATMENUITEM_H
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+#include <Arduino.h>
+#include "MenuItem.h"
 
-class RespirationAnalysis
+class FloatMenuItem : public MenuItem
 {
   public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
+    FloatMenuItem( const char* text_PSTR, float& value, bool editable, byte precision, float lowLimit, float highLimit, float stepSize ); // make stepsize 0 to disable editing
+    bool generateText( char* buf, byte maxLength );
+    byte getEditCursorPos( byte maxLength );
+    bool isEditable() { return true; }
+    bool performAction( MenuItemAction action );
   private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
+    const char* _text_PSTR;
+    float& _value;
+    float _prevValue;
+    bool _editable;
+    byte _precision;
+    float _lowLimit, _highLimit, _stepSize;
 };
 
 #endif

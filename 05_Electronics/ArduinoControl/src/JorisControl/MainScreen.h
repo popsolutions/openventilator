@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * MainScreen.h
+ * Class definition of the main screen.
  */
 
 /*
@@ -24,26 +24,29 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+#ifndef MAINSCREEN_H
+#define MAINSCREEN_H
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+#include <LiquidCrystal.h>
+#include "Screen.h"
 
-class RespirationAnalysis
-{
+class MainScreen;
+#include "globals.h"
+
+typedef enum :byte { MSM_FULL_GRAPH, MSM_HALF_GRAPH_AND_VALUES, MSM_VALUES_AND_SETPOINTS, MSM_NUM_MODES } MainScreenMode;
+
+class MainScreen : public Screen {
   public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
+    MainScreen();
+    void process();
+    void draw();
+    void onEnter();
+    void onLeave();
+    void setMode( MainScreenMode mode );
   private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
+    MainScreenMode _mode;
+    Meas _measSel[4];
+    char _editLine; // -1 for not editing
 };
 
 #endif

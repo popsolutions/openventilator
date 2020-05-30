@@ -24,6 +24,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef ADCREADER_H
+#define ADCREADER_H
+
 class ADCReader
 {
   public:
@@ -35,7 +38,7 @@ class ADCReader
     int getAveraging() { return _averaging; };
     
   private:
-    uint8_t _pin;
+    uint8_t _pin; // the pins to use
     //byte _numChannels;    // The number of channels we will scan
     int _averaging;           // We will average over how many raw samples
     int _growthCount;         // the count of raw samples currently in the growing sample
@@ -45,4 +48,4 @@ class ADCReader
     int _prevStoredCounter; // used on the reading side to check if a new sample has arrived
 };
 
-extern ADCReader ADCR;
+#endif

@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * Graphs.cpp
+ * Class implementation to display graphs on the screen.
  */
 
 /*
@@ -24,26 +24,52 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+#include <Arduino.h>
+#include <LiquidCrystal.h>
+#include "VerticalGraph.h"
+#include "globals.h"
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+VerticalGraph::VerticalGraph() 
+{}
 
-class RespirationAnalysis
+void VerticalGraph::prepare()
 {
-  public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
-  private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
-};
+  int c;
+  byte shape[8] = {
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000
+  };
 
-#endif
+  for( c = 0; c < 8; c++ )
+  {
+    shape[7-c] = B11111;
+    lcd.createChar( c, shape );
+  }
+}
+
+void VerticalGraph::draw( float value, float bottom_value, float top_value, int x, int y_bottom, int y_top )
+{
+  int lines = (y_bottom-y_top+1) * 8;
+  int bargraphed_value = round( lines * (value - bottom_value) / (top_value - bottom_value) );
+  int y;
+  for( y = y_bottom; y >= y_top; y -- )
+  {
+    char c;
+    if( bargraphed_value >= 8 ) {
+      c = 7;
+    } else if( bargraphed_value > 0 ) {
+      c = bargraphed_value % 8 - 1;
+    } else {
+      c = 32; // space
+    }
+    bargraphed_value -= 8;
+    lcd.setCursor( x, y );
+    lcd.write( c );
+  }  
+}

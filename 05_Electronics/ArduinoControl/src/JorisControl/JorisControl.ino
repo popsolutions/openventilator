@@ -21,10 +21,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Arduino.h>
 #include <LiquidCrystal.h>
-#include "Graphs.h"
-#include "CircularBuffer.h"
+#include "RotaryEncoder.h"
+#include "VerticalGraph.h"
 #include "RespirationAnalysis.h"
+#include "CircularBuffer.h"
 #include "ADCReader.h"
+#include "KeyScanner.h"
+#include "MainScreen.h"
+#include "MenuScreen.h"
+#include "MemoryFree.h"
 
 
 /*
@@ -68,24 +73,38 @@ TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The 
 // Free pins: A4 (=SDA) and A5 (=SCK)
 
 LiquidCrystal lcd( DOUT_LCD_RS, DOUT_LCD_EN, DOUT_LCD_DB4, DOUT_LCD_DB5, DOUT_LCD_DB6, DOUT_LCD_DB7 );
-VerticalGraph graph( lcd );
+RotaryEncoder rotEnc( DIN_ROTENC_A, DIN_ROTENC_B ); 
+VerticalGraph vgraph;
 CircularBuffer circBuf;
 RespirationAnalysis an;
 byte ADCPins[4] = { AIN_VSUPPLY, AIN_IMOTOR, AIN_LUNGPRES, AIN_LUNGFLOW };
 //ADCReader ADCR( 4, ADCPins );
 ADCReader ADCR( AIN_LUNGPRES );
-long next_tick_ts = 100;
+
+#define VSUPPLYRATIO ((20/3)+1) // 20k and 3k resistor
+
+uint8_t X_pinList[] = {10};
+uint8_t Y_pinList[] = {};
+Key directKeyList[] = {KEY_ENTER};
+Key matrixKeyList[] = {};
+KeyScanner keySc( 1, 0, X_pinList, Y_pinList, directKeyList, matrixKeyList );
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-  ADCR.init( 2000 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 125 samples per 26 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms.
-
+  Serial.begin( 115200 );
+  if( circBuf.init( 2, 40 ) != 0 ) {
+    Serial.println( "Buffer allocation failed" );
+  }
+  ADCR.init( 500 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
+  keySc.init();
   lcd.begin( 20, 4 );
   lcd.noAutoscroll();
-  //lcd.noCursor();
-  graph.prepare();
-  circBuf.init( 2, 100 );
+  rotEnc.init();
+  vgraph.prepare();
+  switchScreen( mainScreen );
+
+  Serial.print( freeMemory() );
+  Serial.println( F(" bytes free") );
 }
 
 void loop() {
@@ -102,79 +121,28 @@ void loop() {
   VA0 = 0.004883 * s / ADCR.getAveraging();
   p0 = (VA0 - 0.2) / 0.04413;
 
-  char fStr[12];
-  char buf[40];
+  Serial.print( "p0=" );
+  Serial.println( p0 );
 
   float row[2];
   row[0] = t;
   row[1] = p0;
-  circBuf.appendRow( row );
+  int ar = circBuf.appendRow( row );
 
-  an.processData( p0, 0 );
+  measValues[M_p] = p0;
+  //flow = values[M_Q];
+  //measValues[M_Vsup] = p0;
+  //measValues[M_Vmot = p0;
+  //measValues[M_Imot] = p0;
+  //measValues[M_Pmot] = measValues[V_Vmot] * measValues[V_Imot];
 
-  // TODO: move all screen stuff to separate files
+  //an.processData( p0, 0 );
 
-/*
-  dtostrf( p0, 7, 2, fStr );
-  sprintf( buf, "p0=%s ", fStr );
-  lcd.setCursor( 10, 0 );
-  lcd.print( buf );
+  measValues[M_pMax] = an.getPP();
+  measValues[M_PEEP] = an.getPEEP();
+  measValues[M_RR] = an.getRR();
+  measValues[M_EI] = an.getEI();
 
-  dtostrf( VA0, 6, 4, fStr );
-  sprintf( buf, "VA0=%s ", fStr );
-  lcd.setCursor( 10, 1 );
-  lcd.print( buf );
-*/
-
-  float pMin = an.getPEEP();
-  float pMax = an.getPP();
-  float RR = an.getRR();
-  float EI = an.getEI();
-
-  dtostrf( pMin, 5, 1, fStr );
-  sprintf( buf, "PEEP %s ", fStr );
-  lcd.setCursor( 10, 0 );
-  lcd.print( buf );
-
-  dtostrf( pMax, 5, 1, fStr );
-  sprintf( buf, "Ppl  %s ", fStr );
-  lcd.setCursor( 10, 1 );
-  lcd.print( buf );
-
-  dtostrf( RR, 5, 1, fStr );
-  sprintf( buf, "RR   %s ", fStr );
-  lcd.setCursor( 10, 2 );
-  lcd.print( buf );
-
-  dtostrf( EI, 3, 1, fStr );
-  sprintf( buf, "I/E  1:%s ", fStr );
-  lcd.setCursor( 10, 3 );
-  lcd.print( buf );
-
-  Serial.println();
-
-  float col[10];
-  circBuf.getColumn( 1, -10, 10, col );
-
-  for( int x = 0; x < 10; x++ ) {
-    graph.draw( col[x], 0.0, 40.0, x, 3, 0 );
-  }
-/*
-  const int dataWidth = 80;
-  const byte graphWidth = 10;
-  float col[dataWidth];
-  circBuf.getColumn( 1, -dataWidth, dataWidth, col );
-  
-  int i = 0;
-  for( int x = 0; x < graphWidth; x++ ) {
-    float sum = 0;
-    
-    for( int n = 0; n < dataWidth/graphWidth; n++ ) {
-      sum += col[i++];
-    }
-    float avg = sum / (dataWidth/graphWidth);
-    graph.draw( avg, 0.0, 40.0, x, 3, 0 );
-  }
-*/
-  next_tick_ts += 100;
+  activeScreen->process();
+  activeScreen->draw();
 }

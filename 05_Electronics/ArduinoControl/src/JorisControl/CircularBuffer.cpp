@@ -40,7 +40,7 @@ CircularBuffer::~CircularBuffer()
   }
 }
 
-void CircularBuffer::init( int num_cols, int num_rows )
+int CircularBuffer::init( int num_cols, int num_rows )
 {
   if( _buffer ) {
     free( _buffer );
@@ -51,6 +51,7 @@ void CircularBuffer::init( int num_cols, int num_rows )
   _num_rows = num_rows;
   _head = 0;
   _tail = 0;
+  return _buffer ? 0 : -1;
 }
 
 long CircularBuffer::appendRow( float values[] )
@@ -70,6 +71,8 @@ long CircularBuffer::appendRow( float values[] )
 
 float CircularBuffer::getValue( int column, long pos )
 {
+  if( !_buffer ) return NAN;
+
   if( pos < 0 ) {
     pos += _head;
   }
@@ -82,6 +85,8 @@ float CircularBuffer::getValue( int column, long pos )
 
 int CircularBuffer::getRow( long pos, float * dest )
 {
+  if( !_buffer ) return 0;
+
   if( pos < 0 ) {
     pos += _head;
   }
@@ -96,6 +101,8 @@ int CircularBuffer::getRow( long pos, float * dest )
 
 int CircularBuffer::getColumn( int column, long pos, long len, float * dest )
 {
+  if( !_buffer ) return 0;
+
   if( pos < 0 ) {
     pos += _head;
   }

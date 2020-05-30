@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * Menu.h
+ * Class definition of a menu.
  */
 
 /*
@@ -24,26 +24,31 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+#ifndef MENU_H
+#define MENU_H
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+#include <Arduino.h>
+#include "MenuItem.h"
 
-class RespirationAnalysis
+class Menu : public MenuItem
 {
   public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
+    Menu( const char* text_PSTR, MenuItem* items[] );
+    // Note the string will not be copied, and neither will the list of items! Only the pointer will be stored! So don't feed a temporary object.
+    // The last item should always be a NULL entry.
+
+    byte getNumItems();
+    MenuItem* getItem( byte index );
+
+    bool generateText( char* buf, byte maxLength );
+    bool isEditable() { return false; }
+    bool performAction( MenuItemAction action );
+    bool onEnter() {};
+    bool onLeave() {};
+        
   private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
+    const char* _text_PSTR; // The strings are in program memory
+    MenuItem** _items;
 };
 
 #endif

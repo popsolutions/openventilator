@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * RotaryEncoder.h
+ * Class definition to track the position of a rotary encoder.
  */
 
 /*
@@ -24,26 +24,26 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+/*
+ * This class will keep track of the position of a rotary encoder. 
+ *
+ * Make sure you use pins that support interrupt on change. On the Arduino Uno this is only pin 2 and 3.
+ *
+ */
+ 
+#ifndef ROTARYENCODER_H
+#define ROTARYENCODER_H
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+#include <Arduino.h>
 
-class RespirationAnalysis
+class RotaryEncoder
 {
   public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
-  private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
+    RotaryEncoder( uint8_t A_Pin, uint8_t B_Pin );
+    void init(); // Makes sure the pins are in the correct mode and assigns interrupts on change
+    int getPos();
+    void setPos( int newPos );
+    int getIncrPos();
 };
 
 #endif

@@ -1,6 +1,6 @@
 /*
- * Graphs.cpp
- * Class implementation to display graphs on the screen.
+ * MenuScreen.h
+ * Class definition of the menu screen.
  */
 
 /*
@@ -24,53 +24,30 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <Arduino.h>
+#ifndef MENUSCREEN_H
+#define MENUSCREEN_H
+
 #include <LiquidCrystal.h>
-#include "Graphs.h"
+#include "Screen.h"
+#include "Menu.h"
 
-VerticalGraph::VerticalGraph( LiquidCrystal &lcd ) 
-:
-  _lcd( lcd )
-{}
+class MenuScreen;
+#include "globals.h"
 
-void VerticalGraph::prepare()
-{
-  int c;
-  byte shape[8] = {
-    B00000,
-    B00000,
-    B00000,
-    B00000,
-    B00000,
-    B00000,
-    B00000,
-    B00000
-  };
+class MenuScreen : public Screen {
+	public:
+		MenuScreen();
+    void process();
+		void draw();
+    void switchMenu( Menu* newMenu );
+    void onEnter();
+    void onLeave();
+	private:
+    Menu* _activeMenu;
+		char _selection;
+		char _scrollPos;
+    bool _editing;
+    bool _forceRedraw;
+};
 
-  for( c = 0; c < 8; c++ )
-  {
-    shape[7-c] = B11111;
-    _lcd.createChar( c, shape );
-  }
-}
-
-void VerticalGraph::draw( float value, float bottom_value, float top_value, int x, int y_bottom, int y_top )
-{
-  int lines = (y_bottom-y_top+1) * 8;
-  int bargraphed_value = round( lines * (value - bottom_value) / (top_value - bottom_value) );
-  int y;
-  for( y = y_bottom; y >= y_top; y -- )
-  {
-    char c;
-    if( bargraphed_value >= 8 ) {
-      c = 7;
-    } else if( bargraphed_value > 0 ) {
-      c = bargraphed_value % 8 - 1;
-    } else {
-      c = 32; // space
-    }
-    bargraphed_value -= 8;
-    _lcd.setCursor( x, y );
-    _lcd.write( c );
-  }  
-}
+#endif

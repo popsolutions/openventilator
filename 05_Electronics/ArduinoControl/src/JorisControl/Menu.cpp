@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * Menu.cpp
+ * Class implementation of a menu.
  */
 
 /*
@@ -24,26 +24,47 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+#include "Menu.h"
+#include "globals.h"
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+Menu* activeMenu;
 
-class RespirationAnalysis
+Menu::Menu( const char* text_PSTR, MenuItem* items[] )
+:
+  _text_PSTR( text_PSTR ), _items( items )
+{}
+
+byte Menu::getNumItems()
 {
-  public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
-  private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
-};
+  byte n;
+  while( _items[n] != NULL ) n++;
+  return n;
+}
 
-#endif
+MenuItem* Menu::getItem( byte index )
+{
+  byte n;
+  // Check that the requested item is not further than the length of the item list
+  for( n=0; _items[n] != NULL && n < index; n++ );
+  // Might be NULL, or contain the requested item
+  return _items[n];
+}
+
+bool Menu::generateText( char* buf, byte maxLength )
+{
+  strncpy_P( buf, _text_PSTR, maxLength );
+  return false; // return changed indicator: assume text has not changed
+}
+
+bool Menu::performAction( MenuItemAction action )
+{
+  switch( action ) {
+    case MIA_VALUEUP:
+    case MIA_VALUEDOWN:
+    case MIA_MOVERIGHT:
+    case MIA_ENTER:
+      menuScreen->switchMenu( this );
+      break;
+  }
+  return false;
+}

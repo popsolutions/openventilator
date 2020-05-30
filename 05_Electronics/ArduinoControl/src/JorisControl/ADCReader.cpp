@@ -95,6 +95,8 @@ void ADCReader::addRawSample( byte channel, int a )
   }
 }
 
+extern ADCReader ADCR;
+
 ISR(ADC_vect) {
 // Called when new ADC value is ready
   int a = ADCL | ((int)ADCH << 8);

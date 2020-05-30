@@ -1,6 +1,6 @@
 /*
- * RespirationAnalysis.h
- * Class definition to analyse the pressure and flow, determining indicative values.
+ * MenuItem.h
+ * Class definition of a menu item.
  */
 
 /*
@@ -24,26 +24,19 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RESPIRATIONANALYSIS_H
-#define RESPIRATIONANALYSIS_H
+#ifndef MENUITEM_H
+#define MENUITEM_H
 
-typedef enum : byte { RS_MECH_INSPIRATION, RS_MECH_EXPIRATION } respStateType;
+#include <Arduino.h>
 
-class RespirationAnalysis
+typedef enum : byte { MIA_NONE, MIA_ENTER, MIA_ACCEPT, MIA_VALUEUP, MIA_VALUEDOWN, MIA_MOVELEFT, MIA_MOVERIGHT } MenuItemAction;
+
+class MenuItem
 {
   public:
-    RespirationAnalysis();
-    void processData( float Pressure, float Flow );
-    float getPP();
-    float getPEEP();
-    float getEI();
-    float getRR();
-  private:
-    float _kalmanGain, _pThr, _pFilt;
-    respStateType _state;
-    float _pMax, _pMin, _next_pMax, _next_pMin;
-    long _tsStartInsp, _tsStartExp;
-    int _tInsp, _tExp; // in ms
+    virtual bool generateText( char* buf, byte maxLength ) = 0; // return true if modified since last call; always supply a buffer of at least maxLength+1 bytes
+    virtual byte getEditCursorPos( byte maxLength ) { return -1; }; // return -1 from this function to disable the cursor
+    virtual bool performAction( MenuItemAction action ) { return true; } // return code indicates whether we are (still) editing
 };
 
 #endif

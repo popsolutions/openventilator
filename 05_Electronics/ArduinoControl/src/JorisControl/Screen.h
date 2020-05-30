@@ -1,8 +1,8 @@
-/* 
- * Graphs.h
- * Class implementation to display graphs on the screen.
+/*
+ * Screen.h
+ * Class definition of a generic screen.
  */
- 
+
 /*
 Copyright (c) 2020, Joris Robijn
 All rights reserved.
@@ -24,18 +24,17 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef GRAPHS_H
-#define GRAPHS_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
-#include <LiquidCrystal.h>
-
-class VerticalGraph {
+class Screen {
 	public:
-		VerticalGraph( LiquidCrystal &lcd );
-	
-		void prepare();
-		void draw( float value, float bottom_value, float top_value, int x, int y_bottom, int y_top );
+    Screen() {};
+    virtual void process() = 0;
+		virtual void draw() = 0;
+		virtual void onEnter() {};
+		virtual void onLeave() {};
 	private:
-		LiquidCrystal &_lcd;
 };
+
 #endif

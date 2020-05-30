@@ -24,6 +24,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef CIRCULARBUFFER_H
+#define CIRCULARBUFFER_H
+
 #include <Arduino.h>
 
 class CircularBuffer {
@@ -31,11 +34,13 @@ class CircularBuffer {
       CircularBuffer();
       ~CircularBuffer();
       
-      void init( int num_cols, int num_rows );
+      int init( int num_cols, int num_rows );
       // Clears the buffer and sets the number of columns and maximum size (rows)
+      // Return nonzero if allocation failed
  
       long appendRow( float values[] );
-      // Adds a row of data to the buffer
+      // Adds a row of data to the buffer.
+      // Returns the next position where a point will be added. This value keeps counting forward.
 
       float getValue( int column, long pos );
       // Returns a single value from the storage
@@ -59,8 +64,10 @@ class CircularBuffer {
       long getHeadPos() { return _head; }
       
     private:
-      int _num_cols, _num_rows;
-      long _head; // number of next item to be written. 
-      long _tail; // number of oldest item written.
+      int _num_cols, _num_rows; // size of the storage
+      long _head; // position of next item to be written. This value keeps counting forward.
+      long _tail; // position of oldest item present. This value keeps counting forward.
       float * _buffer;
 };
+
+#endif
