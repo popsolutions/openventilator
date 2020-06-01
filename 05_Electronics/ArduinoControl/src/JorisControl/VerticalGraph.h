@@ -33,6 +33,7 @@ class VerticalGraph {
 	
 		void prepare();
 		void draw( float value, float bottom_value, float top_value, int x, int y_bottom, int y_top );
+    void drawMultiple( byte count, float *value, float bottom_value, float top_value, int x_left, int y_bottom, int y_top );
 	private:
 };
 

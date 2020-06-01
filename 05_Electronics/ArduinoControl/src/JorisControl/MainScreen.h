@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class MainScreen;
 #include "globals.h"
 
-typedef enum :byte { MSM_FULL_GRAPH, MSM_HALF_GRAPH_AND_VALUES, MSM_VALUES_AND_SETPOINTS, MSM_NUM_MODES } MainScreenMode;
+typedef enum :byte { MSM_VALUES_AND_SETPOINTS, MSM_HALF_GRAPH_AND_VALUES, MSM_FULL_GRAPH, MSM_NUM_MODES } MainScreenMode;
 
 class MainScreen : public Screen {
   public:

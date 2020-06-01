@@ -45,6 +45,15 @@ void MainScreen::process()
     case KEY_ENTER:
       switchScreen( menuScreen );
       break;
+    case KEY_0:
+    case KEY_1:
+    case KEY_2:
+    case KEY_3:
+      if ( _editLine < 0 ) {
+      }
+      else {
+      }
+      break;
     case KEY_4:
       _mode = (MainScreenMode) (( _mode + 1 ) % MSM_NUM_MODES );
       break;
@@ -80,17 +89,15 @@ void MainScreen::draw()
   switch( _mode ) {
     case MSM_FULL_GRAPH:
       circBuf.getColumn( 1, -20, 20, col );
-      for( int x = 0; x < 20; x++ ) {
-        vgraph.draw( col[x], 0.0, 40.0, x, 3, 0 );
-      }
+
+      vgraph.drawMultiple( 20, col, 0.0, 40.0, 0, 3, 0 );
+      
       break;
       
     case MSM_HALF_GRAPH_AND_VALUES:
       circBuf.getColumn( 1, -10, 10, col );
     
-      for( int x = 0; x < 10; x++ ) {
-        vgraph.draw( col[x], 0.0, 40.0, x, 3, 0 );
-      }
+      vgraph.drawMultiple( 10, col, 0.0, 40.0, 0, 3, 0 );
 
       for( byte y=0; y<4; y++ ) {
         Meas meas = _measSel[y];
@@ -116,10 +123,10 @@ void MainScreen::draw()
         
         dtostrf( measValues[meas], 4, measPrecisions[meas], fStr );
 
-        float* linkedSetting = measLinkedSettings[meas];
+        Sett linkedSetting = findMeasSett( meas );
         fStr2[0] = 0; // empty string
-        if( linkedSetting != NULL ) {
-          dtostrf( *measLinkedSettings[meas], 4, measPrecisions[meas], fStr2 );
+        if( linkedSetting ) {
+          dtostrf( settings[linkedSetting], 4, measPrecisions[meas], fStr2 );
         }
         sprintf( buf, " %-5.5s  %4.4s %4.4s  ", measStr, fStr, fStr2 );
         lcd.setCursor( 1, y );

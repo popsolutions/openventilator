@@ -31,11 +31,28 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 
-typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pMax, M_RR, M_EI, M_Vt, M_VE, M_p, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_NUM_MEAS } Meas;
+// All measurements are stored in an array with all elements accessible by name
+typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_NUM_MEAS } Meas;
+// All settings are stored in an array with all elements accessible by name. This way they can easily be stored to and restored from EEPROM.
+typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_NUM_SETT } Sett;
+
+// Alarm information describes the relation between the measurements and settings
+typedef enum : byte { AT_NONE, AT_LowerLimit, AT_UpperLimit, AT_AbsDeviation, AT_PercDeviation } AlarmType;
+typedef struct {
+  Meas meas;
+  AlarmType type;
+  Sett sett; // This is the value that is settable in the main screen
+  Sett deviationSett; // This is the deviation that is settable in the menu
+} Alarm;
+
+extern const Alarm alarms[];
+
 extern char const *const measStrings[M_NUM_MEAS];
 extern float measValues[M_NUM_MEAS];
 extern byte measPrecisions[M_NUM_MEAS];  // Precision of the values for formatting
-extern float * measLinkedSettings[M_NUM_MEAS];
+//extern float * measLinkedSettings[M_NUM_MEAS];
+
+extern float settings[S_NUM_SETT];
 
 #include "RotaryEncoder.h"
 #include "VerticalGraph.h"
@@ -58,38 +75,15 @@ extern MainScreen* mainScreen;
 extern MenuScreen* menuScreen;
 extern Screen* activeScreen;
 
-
-// Observations
-//extern float pressure;
-//extern float flow;
-//extern float Vsupply;
-//extern float Vmotor;
-//extern float Imotor;
-//extern float Pmotor;
-
-// Settings
 extern bool assistEnabled;
-extern float assistThreshold;
-extern float assistMaxRR;
-
-extern float PEEPSetpoint;
-extern float RRSetpoint; // percentage
-extern float EISetpoint; // percentage
-extern float pPlSetpoint;
-extern float VESetpoint; // liter/min
-
-// Alarms
-extern float pMaxAlarm;
-extern float pDropAlarm;
-extern float PEEPDeviationAlarm;
-extern float pPlDeviationAlarm;
-extern float RRDeviationAlarm; // percentage
-extern float EIDeviationAlarm; // percentage
-extern float VsupLowAlarm;
-extern float VsupHighAlarm;
 
 extern void switchScreen( Screen* newScreen );
 extern void switchMenu( Menu* newMenu );
 extern void strpad( char* buf, char chr, byte len );
+
+extern Sett findMeasSett( Meas );
+
+extern void setDefaultSettings();
+
 
 #endif

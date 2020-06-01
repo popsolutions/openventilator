@@ -86,6 +86,7 @@ float CircularBuffer::getValue( int column, long pos )
 int CircularBuffer::getRow( long pos, float * dest )
 {
   if( !_buffer ) return 0;
+  if( !dest ) return 0;
 
   if( pos < 0 ) {
     pos += _head;
@@ -99,9 +100,10 @@ int CircularBuffer::getRow( long pos, float * dest )
   return _num_rows;
 }
 
-int CircularBuffer::getColumn( int column, long pos, long len, float * dest )
+int CircularBuffer::getColumn( int column, long pos, int len, float * dest )
 {
   if( !_buffer ) return 0;
+  if( !dest ) return 0;
 
   if( pos < 0 ) {
     pos += _head;

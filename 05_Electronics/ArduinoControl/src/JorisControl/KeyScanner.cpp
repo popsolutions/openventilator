@@ -26,6 +26,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "KeyScanner.h"
 
+// #define DEBUG_KEYS 1
+
 KeyScanner::KeyScanner( byte num_X_Pins, byte num_Y_Pins, uint8_t X_Pins[], uint8_t Y_Pins[], Key directKeys[], Key matrixKeys[] )
 // Construct with a list of pins as shown above, and a list of Key codes that will be returned when the corresponding key is pressed.
 // The pins nor the keys will be copied, and only a pointer is stored! So don't feed a temporary object.
@@ -47,21 +49,63 @@ void KeyScanner::init()
 Key KeyScanner::getKey()
 {
   Key foundKey = KEY_NONE;
+
+  // First disable the matrix outputs
+  for( byte y = 0; y < _num_Y_Pins; y++ ) {
+    digitalWrite( _Y_Pins[y], 1 ); // Make all Y pins high
+  }
+  // Scan for direct keys
   for( byte x = 0; x < _num_X_Pins; x++ ) {
     if( !digitalRead( _X_Pins[x] )) { // if low
-        foundKey = _directKeys[x];
-        if( foundKey != KEY_NONE )
-          break;
+      foundKey = _directKeys[x];
+      if( foundKey != KEY_NONE )
+        #ifdef DEBUG_KEYS
+          Serial.print( F("directKey pressed at ") );
+          Serial.print( x );
+          Serial.print( ": " );
+          Serial.println( foundKey );
+        #endif
+        break;
     }
   }
   if( foundKey == KEY_NONE ) {
     // TODO: scan matrix keys
+    byte matrixKeysIdx = 0;
+    for( byte y = 0; y < _num_Y_Pins; y++ ) {
+      digitalWrite( _Y_Pins[y], 0 ); // Pull Y pin low
+      for( byte x = 0; x < _num_X_Pins; x++ ) {
+        if( !digitalRead( _X_Pins[x] )) { // if low
+          foundKey = _matrixKeys[matrixKeysIdx];
+          if( foundKey != KEY_NONE )
+            #ifdef DEBUG_KEYS
+              Serial.print( F("matrixKey pressed at ") );
+              Serial.print( x );
+              Serial.print( ", " );
+              Serial.print( y );
+              Serial.print( ": " );
+              Serial.println( foundKey );
+            #endif
+            break;
+        }
+        matrixKeysIdx++;
+      }
+      digitalWrite( _Y_Pins[y], 1 ); // Make Y pin high again
+      if( foundKey != KEY_NONE )
+        break;
+    }
+    // Check if the low signal was not caused by a direct keypress
+    for( byte x = 0; x < _num_X_Pins; x++ ) {
+      if( !digitalRead( _X_Pins[x] )) { // if low
+        Key foundKey2 = _directKeys[x];
+        if( foundKey2 != KEY_NONE )
+          foundKey = foundKey2; // Overwrite the found key
+          break;
+      }
+    }
   }
   if( foundKey == _prevKey ) {
     return KEY_NONE;
   }
-  Serial.print( "Key pressed: " );
-  Serial.println( foundKey );
   _prevKey = foundKey;
   return foundKey;
 }

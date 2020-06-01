@@ -56,9 +56,9 @@ void VerticalGraph::prepare()
 void VerticalGraph::draw( float value, float bottom_value, float top_value, int x, int y_bottom, int y_top )
 {
   int lines = (y_bottom-y_top+1) * 8;
-  int bargraphed_value = round( lines * (value - bottom_value) / (top_value - bottom_value) );
-  int y;
-  for( y = y_bottom; y >= y_top; y -- )
+  float processed_value = round( lines * (value - bottom_value) / (top_value - bottom_value) );
+  byte bargraphed_value = (processed_value<0) ? 0 : (processed_value>255) ? 255 : processed_value;
+  for( int y = y_bottom; y >= y_top; y -- )
   {
     char c;
     if( bargraphed_value >= 8 ) {
@@ -68,8 +68,47 @@ void VerticalGraph::draw( float value, float bottom_value, float top_value, int 
     } else {
       c = 32; // space
     }
-    bargraphed_value -= 8;
+    if( bargraphed_value > 8 )
+      bargraphed_value -= 8;
+    else
+      bargraphed_value = 0;
     lcd.setCursor( x, y );
     lcd.write( c );
   }  
+}
+
+void VerticalGraph::drawMultiple( byte count, float *value, float bottom_value, float top_value, int x_left, int y_bottom, int y_top )
+// This routine prevents replacing the cursor every time
+{
+  int lines = (y_bottom-y_top+1) * 8;
+
+  // Create 
+  byte bargraphed_value[40]; // max 4 columns
+  for( byte n = 0; n < count; n ++ )
+  {
+    float processed_value = round( lines * (value[n] - bottom_value) / (top_value - bottom_value) );
+    bargraphed_value[n] = (processed_value<0) ? 0 : (processed_value>255) ? 255 : processed_value;
+  }
+
+  for( int y = y_bottom; y >= y_top; y -- )
+  {
+    lcd.setCursor( x_left, y );
+    for( byte n = 0; n < count; n ++ )
+    {
+      byte b = bargraphed_value[n];
+      char c;
+      if( b >= 8 ) {
+        c = 7;
+      } else if( b > 0 ) {
+        c = b % 8 - 1;
+      } else {
+        c = 32; // space
+      }
+      lcd.write( c );
+      if( b > 8 )
+        bargraphed_value[n] = b - 8;
+      else
+        bargraphed_value[n] = 0;
+    }
+  }
 }

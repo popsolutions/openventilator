@@ -47,23 +47,23 @@
   float RRDeviationPercentageAlarm;
 */
 
-// Default PSTR dos not allow using it at object static initialisation
+// Default PSTR does not allow using it at object static initialisation
 #undef PSTR
 #define PSTR(s) ([]{ static const char c[] PROGMEM = (s); return &c[0]; }())
 
 // Define the menus here
 // Always use PSTR for the strings, the class assumes that the strings are in program memory.
 
-FloatMenuItem pMaxAlarmVoltageMI( PSTR("Pmax"), pMaxAlarm, true, 0, 10, 50, 1 );
-FloatMenuItem PEEPDeviationAlarmMI( PSTR("PEEP deviation"), PEEPDeviationAlarm, true, 1, 0, 10, 0.5 );
-FloatMenuItem RRDeviationAlarmMI( PSTR("RR deviation %"), RRDeviationAlarm, true, 0, 0, 20, 1 );
+FloatMenuItem pMaxMI( PSTR("Pmax"), settings[S_pMax], true, 0, 10, 50, 1 );
+FloatMenuItem PEEPDeviationMI( PSTR("PEEP deviation"), settings[S_PEEPDeviation], true, 1, 0, 10, 0.5 );
+FloatMenuItem RRDeviationMI( PSTR("RR deviation %"), settings[S_RRDeviation], true, 0, 0, 20, 1 );
 
-MenuItem * alarmMenuList[] = {&pMaxAlarmVoltageMI, &PEEPDeviationAlarmMI, &RRDeviationAlarmMI, NULL};
+MenuItem * alarmMenuList[] = {&pMaxMI, &PEEPDeviationMI, &RRDeviationMI, NULL};
 Menu alarmMenu( PSTR("Alarm"), alarmMenuList );
 
-BoolMenuItem assistEnableMI( PSTR("Assist Control"), assistEnabled, true );
-FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), assistThreshold, true, 1, 1, 10, 0.2 );
-FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), assistMaxRR, true, 0, 10, 30, 1 );
+BoolMenuItem assistEnableMI( PSTR("Assist Control"), assistEnabled, true ); // TODO: store differently
+FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), settings[S_AssistThreshold], true, 1, 1, 10, 0.2 );
+FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), settings[S_AssistMaxRR], true, 0, 10, 30, 1 );
 
 MenuItem * settingsMenuList[] = {&assistEnableMI, &assistThresholdMI, &assistMaxRRMI, NULL};
 Menu settingsMenu( PSTR("Settings"), settingsMenuList );
@@ -71,8 +71,9 @@ Menu settingsMenu( PSTR("Settings"), settingsMenuList );
 FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, 1, 0, 0, 0 );
 //FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, 1, 0, 0, 0 ); // l/s
 FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, 1, 0, 0, 0 );
+FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, 1, 0, 0, 0 );
 
-MenuItem * observationMenuList[] = {&pressureMI, &VsupplyMI, NULL};
+MenuItem * observationMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
 Menu observationMenu( PSTR("Observations"), observationMenuList );
 
 MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &observationMenu, NULL};
@@ -102,6 +103,29 @@ void MenuScreen::process()
           _editing = item->performAction( MIA_ACCEPT );
         }
       }
+      break;
+    case KEY_0:
+    case KEY_1:
+    case KEY_2:
+    case KEY_3:
+        if ( _editing ) {
+          // independent of which key is pressed
+          _editing = item->performAction( MIA_ACCEPT );
+        }
+        else {
+          // Check if the button corresponds to a menu item (or the menu header for Back)
+          if( (pressedKey - KEY_0) + _scrollPos <= _activeMenu->getNumItems() ) {
+            _selection = _scrollPos + (pressedKey - KEY_0);
+            if( _selection == 0 ) {
+              switchScreen( mainScreen );
+            }
+            else {
+              item = _activeMenu->getItem( _selection - 1 );
+              _editing = item->performAction( MIA_ENTER );
+              // If the item doesn't do editing, it will return true here already.
+            }
+          }
+        }
       break;
     default:
       char rotMove = rotEnc.getIncrPos();

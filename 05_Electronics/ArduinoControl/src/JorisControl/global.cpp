@@ -31,31 +31,30 @@ MenuScreen* menuScreen = new MenuScreen;
 
 Screen* activeScreen = NULL;
 
-char const *const measStrings[M_NUM_MEAS] = { "None", "PEEP", "pDrop", "pPl", "pMax", "RR", "E/I", "Vt", "VE", "p", "Q", "Vsup", "Vmot", "Imot", "Pmot" }; 
+char const *const measStrings[M_NUM_MEAS] = { "None", "PEEP", "pDrop", "pPl", "pPk", "RR", "E/I", "Vt", "VE", "p", "Q", "Vsup", "Vmot", "Imot", "Pmot" }; 
+// TODO: get these strings in PROGMEM
+
 float measValues[M_NUM_MEAS];
 byte measPrecisions[M_NUM_MEAS] = { 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
-float * measLinkedSettings[M_NUM_MEAS] = { NULL, &PEEPSetpoint, &pDropAlarm, &pPlDeviationAlarm, &pMaxAlarm, &RRSetpoint, &EISetpoint, NULL, &VESetpoint, NULL, NULL, &VsupLowAlarm, NULL, NULL, NULL };
+
+float settings[S_NUM_SETT];
+// typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_NUM_SETT } Sett;
+const float defaultSettings[S_NUM_SETT] PROGMEM = { 0, 10, 2, 4, 40, 25, 4, 15, 10, 2, 10, 300, 10, 4.5, 10, 0, 2, 30, 11, 3 };
+
+const Alarm alarms[] PROGMEM = {
+  {M_PEEP,  AT_AbsDeviation,  S_PEEP,         S_NONE },
+  {M_pDrop, AT_UpperLimit,    S_pDropMax,     S_NONE },
+  {M_pPl,   AT_AbsDeviation,  S_pPl,          S_pPlDeviation },
+  {M_pPk,   AT_UpperLimit,    S_pMax,         S_NONE },
+  {M_RR,    AT_PercDeviation, S_RR,           S_RRDeviation },
+  {M_EI,    AT_PercDeviation, S_EI,           S_EIDeviation },
+  {M_VE,    AT_PercDeviation, S_VE,           S_VEDeviation },
+  {M_Vsup,  AT_LowerLimit,    S_VsupMin,      S_NONE },
+  {M_Imot,  AT_UpperLimit,    S_ImotMax,      S_NONE },
+  {M_NONE,  AT_NONE,          S_NONE,         S_NONE } }; // Always end with AT_NONE
 
 // Settings
 bool assistEnabled = false;
-float assistThreshold = 2.0;
-float assistMaxRR = 20.0;
-// Alarms
-float pMaxAlarm = 40.0;
-float pDropAlarm = 4.0;
-float PEEPSetpoint = 10;
-float PEEPDeviationAlarm = 2.0;
-float pPlSetpoint = 25.0;
-float pPlDeviationAlarm = 4.0;
-float RRSetpoint = 15.0; // percentage
-float RRDeviationAlarm = 5.0; // percentage
-float EISetpoint = 2.0; // percentage
-float EIDeviationAlarm = 10.0; // percentage
-float VtSetpoint = 300; // ml
-float VESetpoint = 4.5; // liter/min
-float VsupLowAlarm = 11.0;
-float VsupHighAlarm = 14.5;
-
 
 void switchScreen( Screen* newScreen )
 {
@@ -72,4 +71,25 @@ void strpad( char* buf, char chr, byte len )
   // Fill string to <len> characters, and add a termination char
   for( byte pos=strlen( buf ); pos < len; pos ++ ) buf[pos] = ' ';
   buf[len] = 0; // terminate string
+}
+ 
+Sett findMeasSett( Meas meas )
+{
+  for( byte i=0; ; i++ ) {
+    Alarm a;
+    memcpy_P( &a, &(alarms[i]), sizeof( Alarm ) );
+    if( a.type == AT_NONE ) {
+      return S_NONE;
+    }
+    if( a.meas == meas ){
+      return (Sett) a.sett;
+    }
+  }
+  Serial.println( "NONE" );
+  return S_NONE;
+}
+
+void setDefaultSettings()
+{
+  memcpy_P( settings, defaultSettings, sizeof(settings) );
 }

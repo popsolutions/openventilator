@@ -51,7 +51,7 @@ class CircularBuffer {
       // dest: where to copy the values to
       // Returns the amount of items copied (0 if data for position is not available)
       
-      int getColumn( int column, long pos, long len, float * dest );
+      int getColumn( int column, long pos, int len, float * dest );
       // Copies a column from the storage
       // pos: start position. Use negative value to indicate position relative to the head (next pos to add to).
       // len: max length to return. You may give a large number to just get all available.

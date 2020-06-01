@@ -55,12 +55,12 @@ TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The 
 #define DOUT_LCD_DB7 4
 #define DIN_ROTENC_A 2  // Needs to be on this pin because it needs interrupt on change
 #define DIN_ROTENC_B 3  // Needs to be on this pin because it needs interrupt on change
-#define DOUT_KEYS_X0 8   // These key pins are shared with the LCD
-#define DOUT_KEYS_X1 7   // On all of them, a diode needs to be connected with 
-#define DOUT_KEYS_X2 6   // the cathode towards the pin, and the anode towards
-#define DOUT_KEYS_X3 5   // the switch and then the KEYS_Y0 pin.
-#define DOUT_KEYS_X4 4
-#define DIN_KEYS_Y0 10  // This pin reads the key status. It is internally pulled up.
+#define DIN_KEYS_X0 10  // This pin reads the key status. It is internally pulled up.
+#define DOUT_KEYS_Y0 7   // These key pins are shared with the LCD
+#define DOUT_KEYS_Y1 6   // On all of them, a diode needs to be connected with 
+#define DOUT_KEYS_Y2 5   // the cathode towards the pin, and the anode towards
+#define DOUT_KEYS_Y3 4   // the switch and then the KEYS_Y0 pin.
+#define DOUT_KEYS_Y4 8
 #define DOUT_MOTOR_PWM 11 // This PWM pin is on Timer 2
 #define DIN_MOTOR_PARK 12
 #define DOUT_BUZZER 13
@@ -83,11 +83,12 @@ ADCReader ADCR( AIN_LUNGPRES );
 
 #define VSUPPLYRATIO ((20/3)+1) // 20k and 3k resistor
 
-uint8_t X_pinList[] = {10};
-uint8_t Y_pinList[] = {};
-Key directKeyList[] = {KEY_ENTER};
-Key matrixKeyList[] = {};
-KeyScanner keySc( 1, 0, X_pinList, Y_pinList, directKeyList, matrixKeyList );
+uint8_t X_pinList[] = { DIN_KEYS_X0 };
+uint8_t Y_pinList[] = { DOUT_KEYS_Y0, DOUT_KEYS_Y1, DOUT_KEYS_Y2, DOUT_KEYS_Y3, DOUT_KEYS_Y4 };
+Key directKeyList[] = { KEY_ENTER};
+Key matrixKeyList[] = { KEY_0, KEY_1, KEY_2, KEY_3, KEY_4 };
+KeyScanner keySc( sizeof(X_pinList), sizeof(Y_pinList), X_pinList, Y_pinList, directKeyList, matrixKeyList );
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -103,6 +104,8 @@ void setup() {
   vgraph.prepare();
   switchScreen( mainScreen );
 
+  setDefaultSettings();
+
   Serial.print( freeMemory() );
   Serial.println( F(" bytes free") );
 }
@@ -114,7 +117,7 @@ void loop() {
   // The timing of this loop has to be based on the availability of data. Each cycle should not take longer than the sample time (which actually is an averaged sample).
   while( !ADCR.isSampleReady() ) // this also works on carry-over
     delay( 1 );
-  
+
   long t = millis();
   long s = ADCR.getSample();
   
@@ -136,13 +139,17 @@ void loop() {
   //measValues[M_Imot] = p0;
   //measValues[M_Pmot] = measValues[V_Vmot] * measValues[V_Imot];
 
-  //an.processData( p0, 0 );
+  an.processData( p0, 0 );
 
-  measValues[M_pMax] = an.getPP();
+  measValues[M_pPk] = an.getPP();
   measValues[M_PEEP] = an.getPEEP();
   measValues[M_RR] = an.getRR();
   measValues[M_EI] = an.getEI();
 
   activeScreen->process();
+
   activeScreen->draw();
+
+  Serial.print( F("t end=") );
+  Serial.println( millis() - t );
 }

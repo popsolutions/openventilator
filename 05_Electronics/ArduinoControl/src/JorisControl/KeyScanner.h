@@ -80,7 +80,7 @@ class KeyScanner
     uint8_t* _X_Pins;
     uint8_t* _Y_Pins;
     Key* _directKeys;           // The amount should be _num_X_Pins, fill unused ones with KEY_NONE
-    Key* _matrixKeys;           // The amount shoudl be _num_X_Pins * _num_Y_Pins, fill unused ones with KEY_NONE
+    Key* _matrixKeys;           // The amount should be _num_X_Pins * _num_Y_Pins, fill unused ones with KEY_NONE
     Key _prevKey;
 };
 
