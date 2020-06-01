@@ -28,6 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CIRCULARBUFFER_H
 
 #include <Arduino.h>
+#include "half.h"
 
 class CircularBuffer {
     public:
@@ -58,6 +59,14 @@ class CircularBuffer {
       // dest: where to copy the values to
       // Returns the amount of items copied (0 if data for position is not available)
 
+      int getCompressedColumn( int column, long pos, int len, byte compression, float * dest );
+      // Copies column data from the storage, compressing multiple rows
+      // pos: start position. Use negative value to indicate position relative to the head (next pos to add to).
+      // len: max length to return. You may give a large number to just get all available.
+      // compression: how many source values to compress into one destination value
+      // dest: where to copy the values to
+      // Returns the amount of items copied (0 if data for position is not available)
+
       int getNumCols()  { return _num_cols; }
       int getNumRows()  { return _num_rows; }
       long getTailPos() { return _tail; }
@@ -67,7 +76,7 @@ class CircularBuffer {
       int _num_cols, _num_rows; // size of the storage
       long _head; // position of next item to be written. This value keeps counting forward.
       long _tail; // position of oldest item present. This value keeps counting forward.
-      float * _buffer;
+      half * _buffer;
 };
 
 #endif

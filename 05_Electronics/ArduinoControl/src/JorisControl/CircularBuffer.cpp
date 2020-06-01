@@ -46,7 +46,7 @@ int CircularBuffer::init( int num_cols, int num_rows )
     free( _buffer );
     _buffer = NULL;
   }
-  _buffer = (float*) malloc( sizeof(float) * num_cols * num_rows );
+  _buffer = (half*) malloc( sizeof(half) * num_cols * num_rows );
   _num_cols = num_cols;
   _num_rows = num_rows;
   _head = 0;
@@ -62,7 +62,7 @@ long CircularBuffer::appendRow( float values[] )
   int i = _num_cols * ( _head % _num_rows );
   for( int n = 0; n < _num_cols; n ++ )
   {
-    _buffer[i++] = values[n];
+    _buffer[i++] = f2h( values[n] );
   }
   _head ++;
   if( _head - _tail > _num_rows ) _tail ++;
@@ -80,7 +80,7 @@ float CircularBuffer::getValue( int column, long pos )
     return 0;
 
   int i = _num_cols * ( pos % _num_rows ) + column;
-  return _buffer[i];
+  return h2f( _buffer[i] );
 }
 
 int CircularBuffer::getRow( long pos, float * dest )
@@ -96,7 +96,7 @@ int CircularBuffer::getRow( long pos, float * dest )
   
   int i = _num_cols * ( pos % _num_rows );
   for( int n = 0; n < _num_cols; n ++ )
-    dest[n] = _buffer[i];
+    dest[n] = h2f( _buffer[i] );
   return _num_rows;
 }
 
@@ -116,10 +116,51 @@ int CircularBuffer::getColumn( int column, long pos, int len, float * dest )
 
   int i = _num_cols * ( pos % _num_rows ) + column;
   for( int n = 0; n < len; n ++ ) {
-    dest[n] = _buffer[i];
+    dest[n] = h2f( _buffer[i] );
     i += _num_cols;
     if( i >= _num_cols * _num_rows )
       i -= _num_cols * _num_rows;
+  }
+  return len;
+}
+
+int CircularBuffer::getCompressedColumn( int column, long pos, int len, byte compression, float * dest )
+{
+  if( !_buffer ) return 0;
+  if( !dest ) return 0;
+
+  if( pos < 0 ) {
+    pos += _head;
+  }
+  if( pos < _tail || pos >= _head )
+    return 0;
+
+  if( len > _head - pos )
+    len = _head - pos;
+
+  int i = _num_cols * ( pos % _num_rows ) + column;
+  byte d_pos = 0; // destination pos
+  byte d_count = 0; // number of values currently summed for destination
+  float d_sum = 0; // current sum for destination value
+
+  for( int n = 0; n < len; n ++ ) {
+    
+    // Add value to sum
+    d_sum += h2f( _buffer[i] );
+    d_count ++;
+    
+    // Advance source index
+    i += _num_cols;
+    if( i >= _num_cols * _num_rows )
+      i -= _num_cols * _num_rows;
+      
+    // Check if we need to advance the dest index and write the average
+    if( d_count >= compression ) {
+      dest[d_pos] = d_sum / compression;
+      d_count = 0;
+      d_sum = 0;
+      d_pos ++;      
+    }    
   }
   return len;
 }

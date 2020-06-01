@@ -93,7 +93,7 @@ KeyScanner keySc( sizeof(X_pinList), sizeof(Y_pinList), X_pinList, Y_pinList, di
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 2, 40 ) != 0 ) {
+  if( circBuf.init( 1, 200 ) != 0 ) {
     Serial.println( "Buffer allocation failed" );
   }
   ADCR.init( 500 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
@@ -127,9 +127,9 @@ void loop() {
   Serial.print( "p0=" );
   Serial.println( p0 );
 
-  float row[2];
-  row[0] = t;
-  row[1] = p0;
+  float row[1];
+  //row[0] = t;
+  row[0] = p0;
   int ar = circBuf.appendRow( row );
 
   measValues[M_p] = p0;

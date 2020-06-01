@@ -1,9 +1,4 @@
 /*
- * MainScreen.h
- * Class definition of the main screen.
- */
-
-/*
 Copyright (c) 2020, Joris Robijn
 All rights reserved.
 
@@ -24,30 +19,22 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef MAINSCREEN_H
-#define MAINSCREEN_H
+#ifndef HALF_H
+#define HALF_H
 
-#include <LiquidCrystal.h>
-#include "Screen.h"
+#define HALF_EXPONENT_BIAS 11
+// You may change the exponent bias if you don't need to conform to IEEE 754 defintions.
 
-class MainScreen;
-#include "globals.h"
+// With IEEE 754's value 15, you can represent values up to 65504 (positive or negative). 
+// In full precision, you can represent from 6.1E-5.
+// In limited precision, you can represent from 5.96E-8.
 
-typedef enum :byte { MSM_VALUES_AND_SETPOINTS, MSM_HALF_GRAPH_AND_VALUES, MSM_FULL_GRAPH, MSM_NUM_MODES } MainScreenMode;
+// With value 11, you can represent values up to 1048064 (positive or negative). 
+// In full precision, you can represent from 1E-3.
+// In limited precision, you can represent from 1E-6.
 
-class MainScreen : public Screen {
-  public:
-    MainScreen();
-    void process();
-    void draw();
-    void onEnter();
-    void onLeave();
-    void setMode( MainScreenMode mode );
-  private:
-    MainScreenMode _mode;
-    byte _graphCompression;
-    Meas _measSel[4];
-    char _editLine; // -1 for not editing
-};
+typedef uint16_t half;
+half f2h( float in );
+float h2f( half in );
 
 #endif
