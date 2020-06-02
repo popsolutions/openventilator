@@ -90,6 +90,7 @@ void MenuScreen::process()
   MenuItem* item = _selection > 0 ? _activeMenu->getItem( _selection - 1 ) : NULL;
 
   Key pressedKey = keySc.getKey();
+  char rotMove = rotEnc.getIncrPos();
   switch ( pressedKey ) {
     case KEY_ENTER:
       if ( _selection == 0 ) {
@@ -127,8 +128,10 @@ void MenuScreen::process()
           }
         }
       break;
+    case KEY_4:
+      switchScreen( mainScreen );
+      break;
     default:
-      char rotMove = rotEnc.getIncrPos();
       if ( !_editing ) {
         if ( rotMove > 0 ) {
           // scroll down

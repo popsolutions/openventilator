@@ -47,13 +47,16 @@ void MainScreen::process()
   switch( _mode ) {
     case MSM_FULL_GRAPH:
       switch( pressedKey ) {
+        case KEY_ENTER:
+          switchScreen( menuScreen );
+          break;
         case KEY_4:
           _mode = (MainScreenMode) (( _mode + 1 ) % MSM_NUM_MODES );
           break;
         default:
-          if(  rotMove < 0 && _graphCompression > 1 )
+          if(  rotMove > 0 && _graphCompression > 1 )
             _graphCompression --;
-          else if(  rotMove > 0 && _graphCompression < circBuf.getNumRows() / 20 )
+          else if(  rotMove < 0 && _graphCompression < circBuf.getNumRows() / 20 )
             _graphCompression ++;
       }
       break;
