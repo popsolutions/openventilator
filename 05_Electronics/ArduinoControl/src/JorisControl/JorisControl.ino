@@ -47,28 +47,30 @@ TCCR1B = TCCR1B & B11111000 | B00000011; // for PWM frequency of 490.20 Hz (The 
 TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The DEFAULT)
 */
 
-#define DOUT_LCD_EN 9
-#define DOUT_LCD_RS 8
-#define DOUT_LCD_DB4 7
-#define DOUT_LCD_DB5 6
-#define DOUT_LCD_DB6 5
-#define DOUT_LCD_DB7 4
-#define DIN_ROTENC_A 2  // Needs to be on this pin because it needs interrupt on change
-#define DIN_ROTENC_B 3  // Needs to be on this pin because it needs interrupt on change
-#define DIN_KEYS_X0 10  // This pin reads the key status. It is internally pulled up.
-#define DOUT_KEYS_Y0 7   // These key pins are shared with the LCD
-#define DOUT_KEYS_Y1 6   // On all of them, a diode needs to be connected with 
-#define DOUT_KEYS_Y2 5   // the cathode towards the pin, and the anode towards
-#define DOUT_KEYS_Y3 4   // the switch and then the KEYS_Y0 pin.
-#define DOUT_KEYS_Y4 8
+#define DOUT_LCD_EN 9     // Usually pin 6 on LCD
+#define DOUT_LCD_RS 8     // Usually pin 4 on LCD
+#define DOUT_LCD_DB4 7    // Usually pin 11 on LCD
+#define DOUT_LCD_DB5 6    // Usually pin 12 on LCD
+#define DOUT_LCD_DB6 5    // Usually pin 13 on LCD
+#define DOUT_LCD_DB7 4    // Usually pin 14 on LCD
+#define DIN_ROTENC_A 2    // Needs to be on this pin because it needs interrupt on change
+#define DIN_ROTENC_B 3    // Needs to be on this pin because it needs interrupt on change
+#define DIN_KEYS_X0 10    // This pin reads the key status. It is internally pulled up.
+#define DOUT_KEYS_Y0 7    // These 5 key pins are shared with the LCD
+#define DOUT_KEYS_Y1 6    // On all of them, a diode needs to be connected with 
+#define DOUT_KEYS_Y2 5    // the cathode towards the pin, and the anode towards
+#define DOUT_KEYS_Y3 4    // the switch. The other side of the switch should be connected to the KEYS_Y0 pin.
+#define DOUT_KEYS_Y4 8    // Finally, the Enter switch (on the rotary encoder) is directly connected from KEY_Y0 to ground.
 #define DOUT_MOTOR_PWM 11 // This PWM pin is on Timer 2
 #define DIN_MOTOR_PARK 12
-#define DOUT_BUZZER 13
+#define DOUT_BEEPER 13    // A beeper that will beep if it gets voltage. 
 
-#define AIN_VSUPPLY A0
-#define AIN_IMOTOR A1
-#define AIN_LUNGPRES A2
-#define AIN_LUNGFLOW A3 // Differential pressure to detect flow
+#define AIN_VSUPPLY A0    // Detects the supply voltage with a resistor divider network of e.g. 22k and 3k3. 
+                          // Values are not critical, but you should set the correct dividing in the #define further below.
+#define AIN_IMOTOR A1     // Detects the current through the motor from supply, with a shunt resistor on ground side of 0.05 ohm. 
+#define AIN_LUNGPRES A2   // Connected to MPX(V)5010 for detecting pressure.
+#define AIN_LUNGFLOW A3   // Connected to MPX(V)7002 for detecting differential pressure to detect flow.
+                          // If your Arduino is 3V3, you can best choose the 3V3 version of the sensors. They have a 3 in their prefix.
 
 // Free pins: A4 (=SDA) and A5 (=SCK)
 
