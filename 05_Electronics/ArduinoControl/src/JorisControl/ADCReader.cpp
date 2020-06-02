@@ -27,9 +27,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <Arduino.h>
 #include "ADCReader.h"
 
-ADCReader::ADCReader( uint8_t pin ) //  byte numPins, uint8_t ADCpins[]
+ADCReader::ADCReader( byte numChannels, uint8_t ADCpins[] ) //  byte numPins, uint8_t ADCpins[]
 {
-  _pin = pin;
+  if( numChannels > ADCR_MAX_CH ) {
+    _numChannels = 0;
+    return;
+  }
+  _numChannels = numChannels;
+
+  for( int n=0; n<numChannels; n++ )
+    _pin[n] = ADCpins[n];
+
 }
 
 void ADCReader::init( int averaging )
@@ -37,18 +45,21 @@ void ADCReader::init( int averaging )
 // http://yaab-arduino.blogspot.com/2015/02/fast-sampling-from-analog-input.html
 {
   _averaging = averaging;
-  _growthCount = 0;       // counter of amount of ADC samples taken for a summed sample
-  _growingSample = 0;     // summed sample as it is growing
-  _storedSample = 0;      // final summed sample data, will be overwritten when next sample is ready
-  _storedCounter = 0;     // will be increased each time a new average sample is ready
-  _prevStoredCounter = 0; // used on the reading side to check if a new sample has arrived
+  for( byte n=0; n<_numChannels; n++ ) {
+    _growingResult[n] = 0;     // summed sample as it is growing
+    _storedResult[n] = 0;      // final summed sample data, will be overwritten when next sample is ready
+  }
+  _selCh = 0;
+  _growthCount = 0;       // counter of amount of ADC samples taken in current cycle
+  _storedCounter = 0;     // will be increased each time new summed samples are ready
+  _readCounter = 0;       // used on the reading side to check if new samples have arrived
 
   // Hardware setup
   ADMUX = 
-  ( _pin - A0 )   // set analog input pin (0 = A0)
-  | (1 << REFS0)  // set reference voltage to 5V (only S0 set, S1 cleared)
-  | (0 << REFS1)  // set reference voltage to 5V (only S0 set, S1 cleared)
-  | (0 << ADLAR); // if 1, left align ADC value to 8 bits from ADCH register
+  ( _pin[0] - A0 )   // set analog input pin
+  | (1 << REFS0)      // set reference voltage to 5V (only S0 set, S1 cleared)
+  | (0 << REFS1)      // set reference voltage to 5V (only S0 set, S1 cleared)
+  | (0 << ADLAR);     // if 1, left align ADC value to 8 bits from ADCH register
 
   // Sampling rate is [ADC clock] / [prescaler] / [conversion clock cycles]
   // For Arduino Uno ADC clock is 16 MHz and a conversion takes 13 clock cycles.
@@ -68,37 +79,47 @@ void ADCReader::init( int averaging )
   | (1 << ADSC);  // start ADC measurements
 }
 
-bool ADCReader::isSampleReady()
+bool ADCReader::areSamplesReady()
 {
-  return _storedCounter - _prevStoredCounter > 0; // also works on wrap-around
+  return (byte)(_storedCounter - _readCounter) > 0; // also works on wrap-around
 }
 
-long ADCReader::getSample()
+long ADCReader::getSample( byte ch )
 {
-  noInterrupts();
-  _prevStoredCounter ++;
-  long s = _storedSample;
-  interrupts();
-  return s;
+  return _storedResult[ch];
 }
 
-void ADCReader::addRawSample( byte channel, int a )
+void ADCReader::signalSamplesRead()
 {
-  // Should be called by ISR, and therefore have interrupts disabled
-  _growingSample += a;
+  _readCounter ++;
+}
+
+void ADCReader::conversionComplete()
+{
+  // Retrieve ADC value
+  int a = ADCL | ((int)ADCH << 8);
+
+  _growingResult[_selCh] += a;
   _growthCount ++;
-  if( _growthCount >= _averaging ) {
-    _storedSample = _growingSample;
-    _growingSample = 0;
+  if( _growthCount >= _averaging *_numChannels ) {
+    for( byte n=0; n<_numChannels; n++ ) {
+      _storedResult[n] = _growingResult[n];
+      _growingResult[n] = 0;
+    }
     _growthCount = 0;
     _storedCounter ++;
   }
+  // Find which input to take next
+  _selCh = (_selCh+1) % _numChannels;
+  byte nextSelCh = (_selCh+1) % _numChannels;
+  
+  // Set the mux to that input. It will be activated when the current conversion is complete.
+  ADMUX = (ADMUX & 0xF0) | (_pin[nextSelCh] - A0);
 }
 
 extern ADCReader ADCR;
 
 ISR(ADC_vect) {
 // Called when new ADC value is ready
-  int a = ADCL | ((int)ADCH << 8);
-  ADCR.addRawSample( 0, a );
+  ADCR.conversionComplete();
 }

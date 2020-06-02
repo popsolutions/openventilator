@@ -27,25 +27,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef ADCREADER_H
 #define ADCREADER_H
 
+#define ADCR_MAX_CH 4
+
 class ADCReader
 {
   public:
-    ADCReader( uint8_t pin ); //  byte numPins, uint8_t ADCpins[]  // Create reader object and use indicated pins
-    void init( int averaging ); // Sets up the ADC and sets averaging
-    bool isSampleReady();  // Returns if there is a new sample ready
-    long getSample();  // Returns this new sample and clears the flag for the readiness
-    void addRawSample( byte channel, int a );
-    int getAveraging() { return _averaging; };
+    ADCReader( byte numChannels, uint8_t ADCpins[] ); // Create reader object and use indicated pins for each channel
+    void init( int averaging );       // Sets up the ADC and sets averaging
+    bool areSamplesReady();            // Returns if there are new summed samples ready
+    long getSample( byte ch );        // Reads a summed sample for the given channel number
+    void signalSamplesRead();         // Clears the flag for the readiness
+    int getAveraging() { return _averaging; }; // Returns the set averaging
+    void conversionComplete();        // Internal routine to add a raw sample to the sum and set the mux to the setting for the next sample
     
   private:
-    uint8_t _pin; // the pins to use
-    //byte _numChannels;    // The number of channels we will scan
-    int _averaging;           // We will average over how many raw samples
-    int _growthCount;         // the count of raw samples currently in the growing sample
-    long _growingSample;      // the growing sample as being taken
-    long _storedSample;       // final sample data
-    int _storedCounter;      // will be increased each time a new average sample is ready
-    int _prevStoredCounter; // used on the reading side to check if a new sample has arrived
+    int  _numChannels;
+    uint8_t _pin[ADCR_MAX_CH];        // For each channel the pins to use 
+    int  _averaging;                  // We will average over how many raw samples per channel
+    byte _selCh;                      // Channel for which we will get the raw sample next
+    int  _growthCount;                // Counts the amount of samples added for the current result
+    long _growingResult[ADCR_MAX_CH]; // The growing result as being taken
+    long _storedResult[ADCR_MAX_CH];  // Final summed sample data
+    byte  _storedCounter;             // Will be increased each time a new summed sample is ready
+    byte  _readCounter;               // Used on the reading side to check if a new summed sample has arrived
 };
 
 #endif

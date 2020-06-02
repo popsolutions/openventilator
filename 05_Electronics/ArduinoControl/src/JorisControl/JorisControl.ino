@@ -78,10 +78,10 @@ VerticalGraph vgraph;
 CircularBuffer circBuf;
 RespirationAnalysis an;
 byte ADCPins[4] = { AIN_VSUPPLY, AIN_IMOTOR, AIN_LUNGPRES, AIN_LUNGFLOW };
-//ADCReader ADCR( 4, ADCPins );
-ADCReader ADCR( AIN_LUNGPRES );
+ADCReader ADCR( 4, ADCPins );
 
-#define VSUPPLYRATIO ((20/3)+1) // 20k and 3k resistor
+#define VSUPPLYRATIO ((20000.0/3000.0)+1) // 20k and 3k resistor
+#define IMOTORCONDUCTANCE (1/0.05)
 
 uint8_t X_pinList[] = { DIN_KEYS_X0 };
 uint8_t Y_pinList[] = { DOUT_KEYS_Y0, DOUT_KEYS_Y1, DOUT_KEYS_Y2, DOUT_KEYS_Y3, DOUT_KEYS_Y4 };
@@ -93,10 +93,10 @@ KeyScanner keySc( sizeof(X_pinList), sizeof(Y_pinList), X_pinList, Y_pinList, di
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 1, 200 ) != 0 ) {
+  if( circBuf.init( 1, 80 ) != 0 ) {
     Serial.println( "Buffer allocation failed" );
   }
-  ADCR.init( 500 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
+  ADCR.init( 125 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
   keySc.init();
   lcd.begin( 20, 4 );
   lcd.noAutoscroll();
@@ -112,34 +112,52 @@ void setup() {
 
 void loop() {
 
-  float VA0, p0;
+  float VA[4], Vsup, Imot, p, Q;
 
   // The timing of this loop has to be based on the availability of data. Each cycle should not take longer than the sample time (which actually is an averaged sample).
-  while( !ADCR.isSampleReady() ) // this also works on carry-over
+  while( !ADCR.areSamplesReady() ) // this also works on carry-over
     delay( 1 );
 
   long t = millis();
-  long s = ADCR.getSample();
-  
-  VA0 = 0.004883 * s / ADCR.getAveraging();
-  p0 = (VA0 - 0.2) / 0.04413;
 
-  Serial.print( "p0=" );
-  Serial.println( p0 );
+  int a = ADCR.getAveraging();
+  for( byte ch=0; ch<4; ch++ ) {
+    VA[ch] = 0.004883 * ((float)ADCR.getSample( ch ) / a);
+    //Serial.print( " VA[" );
+    //Serial.print( ch );
+    //Serial.print( "]=" );
+    //Serial.print( VA[ch] );
+  }
+  Serial.println();
+  Vsup = VA[0] * VSUPPLYRATIO;
+  Imot = VA[1] * IMOTORCONDUCTANCE;
+  p    = (VA[2] - 0.2) * 22.66;
+  Q    = VA[3]; // TODO: determine conversion formula
+
+  ADCR.signalSamplesRead();
+
+  Serial.print( " Vsup=" );
+  Serial.print( Vsup );
+  Serial.print( " Imot=" );
+  Serial.print( Imot );
+  Serial.print( " p=" );
+  Serial.print( p );
+  Serial.print( " Q=" );
+  Serial.print( Q );
+  Serial.println();
 
   float row[1];
   //row[0] = t;
-  row[0] = p0;
+  row[0] = p;
   int ar = circBuf.appendRow( row );
 
-  measValues[M_p] = p0;
+  measValues[M_p] = p;
   //flow = values[M_Q];
-  //measValues[M_Vsup] = p0;
-  //measValues[M_Vmot = p0;
-  //measValues[M_Imot] = p0;
-  //measValues[M_Pmot] = measValues[V_Vmot] * measValues[V_Imot];
+  measValues[M_Vsup] = Vsup;
+  measValues[M_Imot] = Imot;
+  measValues[M_Pmot] = Vsup * Imot;
 
-  an.processData( p0, 0 );
+  an.processData( p, 0 );
 
   measValues[M_pPk] = an.getPP();
   measValues[M_PEEP] = an.getPEEP();
