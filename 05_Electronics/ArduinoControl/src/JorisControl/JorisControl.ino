@@ -20,6 +20,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include <Arduino.h>
+#include <pins_arduino.h>
 #include <LiquidCrystal.h>
 #include "RotaryEncoder.h"
 #include "VerticalGraph.h"
@@ -55,15 +56,15 @@ TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The 
 #define DOUT_LCD_DB7 4    // Usually pin 14 on LCD
 #define DIN_ROTENC_A 2    // Needs to be on this pin because it needs interrupt on change
 #define DIN_ROTENC_B 3    // Needs to be on this pin because it needs interrupt on change
-#define DIN_KEYS_X0 10    // This pin reads the key status. It is internally pulled up.
+#define DIN_KEYS_X0 12    // This pin reads the key status. It is internally pulled up.
 #define DOUT_KEYS_Y0 7    // These 5 key pins are shared with the LCD
 #define DOUT_KEYS_Y1 6    // On all of them, a diode needs to be connected with 
 #define DOUT_KEYS_Y2 5    // the cathode towards the pin, and the anode towards
-#define DOUT_KEYS_Y3 4    // the switch. The other side of the switch should be connected to the KEYS_Y0 pin.
-#define DOUT_KEYS_Y4 8    // Finally, the Enter switch (on the rotary encoder) is directly connected from KEY_Y0 to ground.
-#define DOUT_MOTOR_PWM 11 // This PWM pin is on Timer 2
-#define DIN_MOTOR_PARK 12
-#define DOUT_BEEPER 13    // A beeper that will beep if it gets voltage. 
+#define DOUT_KEYS_Y3 4    // the switch. The other side of the switch should be connected to the KEYS_X0 pin.
+#define DOUT_KEYS_Y4 8    // Finally, the Enter switch (on the rotary encoder) is directly connected from KEY_X0 to ground.
+#define DOUT_MOTOR_PWM 10 // This PWM pin is output B on Timer 1. From its two outputs, only this output is usable if we want to program the top value ourselves.
+#define DIN_MOTOR_PARK 11
+#define DOUT_BEEPER 13    // A beeper that will beep if it gets voltage. A GND pin is right next to pin 13.
 
 #define AIN_VSUPPLY A0    // Detects the supply voltage with a resistor divider network of e.g. 22k and 3k3. 
                           // Values are not critical, but you should set the correct dividing in the #define further below.
@@ -82,7 +83,7 @@ RespirationAnalysis an;
 byte ADCPins[4] = { AIN_VSUPPLY, AIN_IMOTOR, AIN_LUNGPRES, AIN_LUNGFLOW };
 ADCReader ADCR( 4, ADCPins );
 
-#define VSUPPLYRATIO ((20000.0/3000.0)+1) // 20k and 3k resistor
+#define VSUPPLYRATIO ((10000.0/3300.0)+1) // 10k and 3k3 resistor
 #define IMOTORCONDUCTANCE (1/0.05)
 
 uint8_t X_pinList[] = { DIN_KEYS_X0 };
@@ -106,6 +107,12 @@ void setup() {
   vgraph.prepare();
   switchScreen( mainScreen );
 
+  analogWrite( DOUT_MOTOR_PWM, 0 );
+  OCR1A = 249;        // Program top to 249 i.o. 255
+  TCCR1B = B00001001; // for PWM frequency of 32kHz, and PWM mode 5 (WGM22=1)
+
+  pinMode( DIN_MOTOR_PARK, INPUT_PULLUP );
+
   setDefaultSettings();
 
   Serial.print( freeMemory() );
@@ -114,7 +121,7 @@ void setup() {
 
 void loop() {
 
-  float VA[4], Vsup, Imot, p, Q;
+  float VA[4], Vsup, Imot, p, Q, Vmot;
 
   // The timing of this loop has to be based on the availability of data. Each cycle should not take longer than the sample time (which actually is an averaged sample).
   while( !ADCR.areSamplesReady() ) // this also works on carry-over
@@ -135,6 +142,7 @@ void loop() {
   Imot = VA[1] * IMOTORCONDUCTANCE;
   p    = (VA[2] - 0.2) * 22.66;
   Q    = VA[3]; // TODO: determine conversion formula
+  Vmot = OCR1B * Vsup / 250;
 
   ADCR.signalSamplesRead();
 
@@ -156,8 +164,13 @@ void loop() {
   measValues[M_p] = p;
   //flow = values[M_Q];
   measValues[M_Vsup] = Vsup;
+  measValues[M_Vmot] = Vmot;
   measValues[M_Imot] = Imot;
-  measValues[M_Pmot] = Vsup * Imot;
+  measValues[M_Pmot] = Vmot * Imot;
+
+  float V = settings[S_VmotTEMP];
+  byte PWM = COERCE( 250.0 * V / Vsup, 0, 250 );
+  analogWrite( DOUT_MOTOR_PWM, PWM );
 
   an.processData( p, 0 );
 

@@ -71,12 +71,15 @@ Menu settingsMenu( PSTR("Settings"), settingsMenuList );
 FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, 1, 0, 0, 0 );
 //FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, 1, 0, 0, 0 ); // l/s
 FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, 1, 0, 0, 0 );
-FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, 1, 0, 0, 0 );
+FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, 2, 0, 0, 0 );
 
 MenuItem * observationMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
 Menu observationMenu( PSTR("Observations"), observationMenuList );
 
-MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &observationMenu, NULL};
+FloatMenuItem VmotMI( PSTR("VmotTEMP"), settings[S_VmotTEMP], true, 1, 0, 10, 0.1 );
+FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, 0, 0, 0, 0 );
+
+MenuItem * mainMenuList[] = {&VmotMI, &ImotorMI, &ParkMI, &settingsMenu, &alarmMenu, &observationMenu, NULL};
 Menu mainMenu( PSTR("Menu"), mainMenuList );
 
 MenuScreen::MenuScreen()

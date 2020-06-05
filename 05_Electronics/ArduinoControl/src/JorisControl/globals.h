@@ -32,9 +32,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <LiquidCrystal.h>
 
 // All measurements are stored in an array with all elements accessible by name
-typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_NUM_MEAS } Meas;
+typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_Park, M_NUM_MEAS } Meas;
 // All settings are stored in an array with all elements accessible by name. This way they can easily be stored to and restored from EEPROM.
-typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_NUM_SETT } Sett;
+typedef enum : byte { S_NONE, S_VmotTEMP, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
 
 // Alarm information describes the relation between the measurements and settings
 typedef enum : byte { AT_NONE, AT_LowerLimit, AT_UpperLimit, AT_AbsDeviation, AT_PercDeviation } AlarmType;
@@ -85,5 +85,6 @@ extern Sett findMeasSett( Meas );
 
 extern void setDefaultSettings();
 
+#define COERCE( a, b, c ) ( (a)<(b)?(b):(a)>(c)?(c):(a) )
 
 #endif

@@ -31,15 +31,15 @@ MenuScreen* menuScreen = new MenuScreen;
 
 Screen* activeScreen = NULL;
 
-char const *const measStrings[M_NUM_MEAS] = { "None", "PEEP", "pDrop", "pPl", "pPk", "RR", "E/I", "Vt", "VE", "p", "Q", "Vsup", "Vmot", "Imot", "Pmot" }; 
+char const *const measStrings[M_NUM_MEAS] = { "None", "PEEP", "pDrop", "pPl", "pPk", "RR", "E/I", "Vt", "VE", "p", "Q", "Vsup", "Vmot", "Imot", "Pmot, Park" }; 
 // TODO: get these strings in PROGMEM
 
 float measValues[M_NUM_MEAS];
-byte measPrecisions[M_NUM_MEAS] = { 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
+byte measPrecisions[M_NUM_MEAS] = { 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 };
 
 float settings[S_NUM_SETT];
-// typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_NUM_SETT } Sett;
-const float defaultSettings[S_NUM_SETT] PROGMEM = { 0, 10, 2, 4, 40, 25, 4, 15, 10, 2, 10, 300, 10, 4.5, 10, 0, 2, 30, 11, 3 };
+// typedef enum : byte { S_NONE, S_VmotTEMP, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
+const float defaultSettings[S_NUM_SETT] PROGMEM = { 0, 1, 10, 2, 4, 40, 25, 4, 15, 10, 2, 10, 300, 10, 4.5, 10, 0, 2, 30, 11, 3, NAN, NAN };
 
 const Alarm alarms[] PROGMEM = {
   {M_PEEP,  AT_AbsDeviation,  S_PEEP,         S_NONE },
