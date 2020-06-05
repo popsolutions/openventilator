@@ -40,7 +40,7 @@ class Menu : public MenuItem
     byte getNumItems();
     MenuItem* getItem( byte index );
 
-    bool generateText( char* buf, byte maxLength );
+    void generateText( char* buf, byte maxLength );
     bool isEditable() { return false; }
     bool performAction( MenuItemAction action );
     bool onEnter() {};

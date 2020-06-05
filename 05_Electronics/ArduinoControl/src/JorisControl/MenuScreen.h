@@ -27,7 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MENUSCREEN_H
 #define MENUSCREEN_H
 
-#include <LiquidCrystal.h>
+#include "BufferedLiquidCrystal.h"
 #include "Screen.h"
 #include "Menu.h"
 

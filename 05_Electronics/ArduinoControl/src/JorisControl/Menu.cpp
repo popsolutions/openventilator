@@ -50,10 +50,9 @@ MenuItem* Menu::getItem( byte index )
   return _items[n];
 }
 
-bool Menu::generateText( char* buf, byte maxLength )
+void Menu::generateText( char* buf, byte maxLength )
 {
   strncpy_P( buf, _text_PSTR, maxLength );
-  return false; // return changed indicator: assume text has not changed
 }
 
 bool Menu::performAction( MenuItemAction action )

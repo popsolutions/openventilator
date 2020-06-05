@@ -29,7 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GLOBALS_H
 
 #include <Arduino.h>
-#include <LiquidCrystal.h>
 
 // All measurements are stored in an array with all elements accessible by name
 typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_Park, M_NUM_MEAS } Meas;
@@ -55,6 +54,7 @@ extern byte measPrecisions[M_NUM_MEAS];  // Precision of the values for formatti
 extern float settings[S_NUM_SETT];
 
 #include "RotaryEncoder.h"
+#include "BufferedLiquidCrystal.h"
 #include "VerticalGraph.h"
 #include "RespirationAnalysis.h"
 #include "CircularBuffer.h"
@@ -64,7 +64,7 @@ extern float settings[S_NUM_SETT];
 #include "Menu.h"
 #include "KeyScanner.h"
 
-extern LiquidCrystal lcd;
+extern BufferedLiquidCrystal lcd;
 extern RotaryEncoder rotEnc; 
 extern VerticalGraph vgraph;
 extern RespirationAnalysis an;

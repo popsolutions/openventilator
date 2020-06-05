@@ -29,10 +29,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 BoolMenuItem::BoolMenuItem( const char* text_PSTR, bool& value, bool editable )
 :
-  _text_PSTR( text_PSTR ), _value( value ), _prevValue( value ), _editable( editable )
+  _text_PSTR( text_PSTR ), _value( value ), _editable( editable )
 {}
 
-bool BoolMenuItem::generateText( char* buf, byte maxLength )
+void BoolMenuItem::generateText( char* buf, byte maxLength )
 {
   bool changed = false;
   
@@ -41,12 +41,6 @@ bool BoolMenuItem::generateText( char* buf, byte maxLength )
   strpad( buf, ' ', maxLength-1 );
   buf[maxLength-1] = _value ? 'Y' : 'N';
   buf[maxLength] = 0;
-
-  if( _prevValue != _value ) {
-    changed = true;
-    _prevValue = _value;
-  }
-  return changed; // return changed indicator: assume text has not changed, maybe the float
 }
 
 byte BoolMenuItem::getEditCursorPos( byte maxLength )

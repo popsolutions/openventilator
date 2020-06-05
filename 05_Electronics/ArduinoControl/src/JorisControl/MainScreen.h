@@ -27,7 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MAINSCREEN_H
 #define MAINSCREEN_H
 
-#include <LiquidCrystal.h>
+#include "BufferedLiquidCrystal.h"
 #include "Screen.h"
 
 class MainScreen;

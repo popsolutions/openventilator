@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 FloatMenuItem::FloatMenuItem( const char* text_PSTR, float& value, bool editable, const FloatMenuItemData *PData )
 :
-  _text_PSTR( text_PSTR ), _value( value ), _prevValue( NAN ), _editable( editable ), _PData( PData )
+  _text_PSTR( text_PSTR ), _value( value ), _editable( editable ), _PData( PData )
 {}
 
 FloatMenuItemData FloatMenuItem::_getPData()
@@ -39,7 +39,7 @@ FloatMenuItemData FloatMenuItem::_getPData()
   return PData;
 }
 
-bool FloatMenuItem::generateText( char* buf, byte maxLength )
+void FloatMenuItem::generateText( char* buf, byte maxLength )
 {
   bool changed = false;
   
@@ -56,11 +56,6 @@ bool FloatMenuItem::generateText( char* buf, byte maxLength )
     strcpy( buf+maxLength-len, fStr );
   }
   buf[maxLength] = 0;
-  if( _prevValue != _value ) {
-    changed = true;
-    _prevValue = _value;
-  }
-  return changed; // return changed indicator: assume text has not changed, maybe the float
 }
 
 byte FloatMenuItem::getEditCursorPos( byte maxLength )

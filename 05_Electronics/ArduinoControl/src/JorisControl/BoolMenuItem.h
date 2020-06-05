@@ -34,14 +34,13 @@ class BoolMenuItem : public MenuItem
 {
   public:
     BoolMenuItem( const char* text, bool& value, bool editable );
-    bool generateText( char* buf, byte maxLength );
+    void generateText( char* buf, byte maxLength );
     byte getEditCursorPos( byte maxLength );
 //    bool isEditable() { return true; }
     bool performAction( MenuItemAction action ); // return true if item is done editing
   private:
     const char* _text_PSTR;
     bool& _value;
-    bool _prevValue;
     bool _editable;
 };
 

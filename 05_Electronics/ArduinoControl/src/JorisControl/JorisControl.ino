@@ -21,7 +21,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Arduino.h>
 #include <pins_arduino.h>
-#include <LiquidCrystal.h>
+#include "BufferedLiquidCrystal.h"
 #include "RotaryEncoder.h"
 #include "VerticalGraph.h"
 #include "RespirationAnalysis.h"
@@ -75,7 +75,7 @@ TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The 
 
 // Free pins: A4 (=SDA) and A5 (=SCK)
 
-LiquidCrystal lcd( DOUT_LCD_RS, DOUT_LCD_EN, DOUT_LCD_DB4, DOUT_LCD_DB5, DOUT_LCD_DB6, DOUT_LCD_DB7 );
+BufferedLiquidCrystal lcd( DOUT_LCD_RS, DOUT_LCD_EN, DOUT_LCD_DB4, DOUT_LCD_DB5, DOUT_LCD_DB6, DOUT_LCD_DB7 );
 RotaryEncoder rotEnc( DIN_ROTENC_A, DIN_ROTENC_B ); 
 VerticalGraph vgraph;
 CircularBuffer circBuf;
@@ -96,7 +96,7 @@ KeyScanner keySc( sizeof(X_pinList), sizeof(Y_pinList), X_pinList, Y_pinList, di
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 1, 80 ) != 0 ) {
+  if( circBuf.init( 1, 200 ) != 0 ) {
     Serial.println( "Buffer allocation failed" );
   }
   ADCR.init( 125 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.

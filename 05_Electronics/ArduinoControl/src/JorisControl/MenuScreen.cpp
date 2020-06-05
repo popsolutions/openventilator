@@ -25,27 +25,12 @@
 */
 
 #include <Arduino.h>
-#include <LiquidCrystal.h>
 #include "MenuScreen.h"
 #include "Menu.h"
 #include "MenuItem.h"
 #include "FloatMenuItem.h"
 #include "BoolMenuItem.h"
 #include "globals.h"
-
-/*
-  // Observations
-  float pressure;
-  //float flow;
-  float Vmotor;
-  float Imotor;
-  float Pmotor;
-
-  // Alarms
-  float PmaxAlarm;
-  float PEEPDeviationAlarm;
-  float RRDeviationPercentageAlarm;
-*/
 
 // Default PSTR does not allow using it at object static initialisation
 #undef PSTR
@@ -174,16 +159,15 @@ void MenuScreen::process()
 void MenuScreen::draw()
 {
   char buf[21];
-  bool doDraw;
 
+  lcd.noBlink();
   for ( byte y = 0; y < 4; y++ )
   {
-    doDraw = _forceRedraw;
     byte i = y + _scrollPos;
     if ( i == 0 ) {
 
       // Let menu generate its text as menu name
-      doDraw |= _activeMenu->generateText( buf, 20 );
+      _activeMenu->generateText( buf, 20 );
 
       // Fill string to 20 characters
       strpad( buf, ' ', 20 );
@@ -203,7 +187,7 @@ void MenuScreen::draw()
       }
       if ( item != NULL ) {
         // Let menu item generate its text
-        doDraw |= item->generateText( buf + 1, 19 );
+        item->generateText( buf + 1, 19 );
       }
       else {
         buf[0] = 0; // start with zero length string
@@ -214,13 +198,11 @@ void MenuScreen::draw()
     strpad( buf, ' ', 20 );
 
     // Put it on LCD if needed
-    if ( doDraw ) {
-      Serial.print( y );
-      Serial.print( ": " );
-      Serial.println( buf );
-      lcd.setCursor( 0, y );
-      lcd.print( buf );
-    }
+    Serial.print( y );
+    Serial.print( ": " );
+    Serial.println( buf );
+    lcd.setCursor( 0, y );
+    lcd.print( buf );
   }
 
   // Place cursor if in edit more
@@ -232,10 +214,6 @@ void MenuScreen::draw()
     if ( _editing && x >= 0 ) {
       lcd.setCursor( x + 1, y );
       lcd.blink();
-    }
-    else {
-      //lcd.noCursor();
-      lcd.noBlink();
     }
   }
   _forceRedraw = false; // redraw complete
@@ -268,6 +246,6 @@ void MenuScreen::onEnter()
 void MenuScreen::onLeave()
 {
   Serial.println( F("MenuScreen::onLeave()") );
-  lcd.noCursor();
+  lcd.noBlink();
   switchMenu( NULL );
 }
