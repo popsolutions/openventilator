@@ -30,10 +30,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <Arduino.h>
 #include "MenuItem.h"
 
+typedef struct {
+  byte precision;
+  float lowLimit;
+  float highLimit;
+  float stepSize;
+} FloatMenuItemData;
+
 class FloatMenuItem : public MenuItem
 {
   public:
-    FloatMenuItem( const char* text_PSTR, float& value, bool editable, byte precision, float lowLimit, float highLimit, float stepSize ); // make stepsize 0 to disable editing
+    FloatMenuItem( const char* text_PSTR, float& value, bool editable, const FloatMenuItemData* PData );
     bool generateText( char* buf, byte maxLength );
     byte getEditCursorPos( byte maxLength );
     bool isEditable() { return true; }
@@ -43,8 +50,8 @@ class FloatMenuItem : public MenuItem
     float& _value;
     float _prevValue;
     bool _editable;
-    byte _precision;
-    float _lowLimit, _highLimit, _stepSize;
+    const FloatMenuItemData* _PData;
+    FloatMenuItemData _getPData();
 };
 
 #endif

@@ -50,40 +50,41 @@
 // Default PSTR does not allow using it at object static initialisation
 #undef PSTR
 #define PSTR(s) ([]{ static const char c[] PROGMEM = (s); return &c[0]; }())
+#define PDATA(t, ...) ([]{ static const t d PROGMEM = __VA_ARGS__; return &d; }())
 
 // Define the menus here
 // Always use PSTR for the strings, the class assumes that the strings are in program memory.
 
-FloatMenuItem pMaxMI( PSTR("Pmax"), settings[S_pMax], true, 0, 10, 50, 1 );
-FloatMenuItem PEEPDeviationMI( PSTR("PEEP deviation"), settings[S_PEEPDeviation], true, 1, 0, 10, 0.5 );
-FloatMenuItem RRDeviationMI( PSTR("RR deviation %"), settings[S_RRDeviation], true, 0, 0, 20, 1 );
+FloatMenuItem pMaxMI( PSTR("Pmax"), settings[S_pMax], true, PDATA( FloatMenuItemData, { 0, 10, 50, 1 } ) );
+FloatMenuItem PEEPDeviationMI( PSTR("PEEP deviation"), settings[S_PEEPDeviation], true, PDATA( FloatMenuItemData, { 1, 0, 10, 0.5 } ) );
+FloatMenuItem RRDeviationMI( PSTR("RR deviation %"), settings[S_RRDeviation], true, PDATA( FloatMenuItemData, { 0, 0, 20, 1 } ) );
 
 MenuItem * alarmMenuList[] = {&pMaxMI, &PEEPDeviationMI, &RRDeviationMI, NULL};
 Menu alarmMenu( PSTR("Alarm"), alarmMenuList );
 
-BoolMenuItem assistEnableMI( PSTR("Assist Control"), assistEnabled, true ); // TODO: store differently
-FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), settings[S_AssistThreshold], true, 1, 1, 10, 0.2 );
-FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), settings[S_AssistMaxRR], true, 0, 10, 30, 1 );
+BoolMenuItem assistEnableMI( PSTR("Assist Control"), assistEnabled, true );
+FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), settings[S_AssistThreshold], true, PDATA( FloatMenuItemData, { 1, 1, 10, 0.2 } ) );
+FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), settings[S_AssistMaxRR], true, PDATA( FloatMenuItemData, { 0, 10, 30, 1 } ) );
 
 MenuItem * settingsMenuList[] = {&assistEnableMI, &assistThresholdMI, &assistMaxRRMI, NULL};
 Menu settingsMenu( PSTR("Settings"), settingsMenuList );
 
-FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, 1, 0, 0, 0 );
-//FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, 1, 0, 0, 0 ); // l/s
-FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, 1, 0, 0, 0 );
-FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, 2, 0, 0, 0 );
+FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) );
+//FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) ); // l/s
+FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) );
+FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, PDATA( FloatMenuItemData, { 2, 0, 0, 0 } ) );
 
 MenuItem * observationMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
 Menu observationMenu( PSTR("Observations"), observationMenuList );
 
-FloatMenuItem VmotMI( PSTR("VmotTEMP"), settings[S_VmotTEMP], true, 1, 0, 10, 0.1 );
-FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, 0, 0, 0, 0 );
+FloatMenuItem VmotMI( PSTR("VmotTEMP"), settings[S_VmotTEMP], true, PDATA( FloatMenuItemData, { 1, 0, 10, 0.1 } ) );
+FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, PDATA( FloatMenuItemData, { 0, 0, 0, 0 } ) );
 
 MenuItem * mainMenuList[] = {&VmotMI, &ImotorMI, &ParkMI, &settingsMenu, &alarmMenu, &observationMenu, NULL};
 Menu mainMenu( PSTR("Menu"), mainMenuList );
 
 MenuScreen::MenuScreen()
-  :
+:
   _activeMenu( NULL )
 {}
 
