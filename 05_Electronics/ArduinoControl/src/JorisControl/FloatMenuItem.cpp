@@ -41,8 +41,6 @@ FloatMenuItemData FloatMenuItem::_getPData()
 
 void FloatMenuItem::generateText( char* buf, byte maxLength )
 {
-  bool changed = false;
-  
   FloatMenuItemData data = _getPData();
 
   char fStr[40]; // Use a large buffer just to be sure, because there's no easy way to limit the length
@@ -60,7 +58,7 @@ void FloatMenuItem::generateText( char* buf, byte maxLength )
 
 byte FloatMenuItem::getEditCursorPos( byte maxLength )
 {
-  if( !_editable ) return -1;
+  if( !_editable ) return 255;
   
   FloatMenuItemData data = _getPData();
    

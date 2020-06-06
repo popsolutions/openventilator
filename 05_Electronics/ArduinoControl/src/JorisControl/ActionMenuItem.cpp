@@ -1,6 +1,6 @@
 /*
- * Screen.cpp
- * Class implementation of a generic screen.
+ * ActionMenuItem.cpp
+ * Class implementation of a menu item that calls a function when activated.
  */
 
 /*
@@ -24,6 +24,33 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <Arduino.h>
+#include "ActionMenuItem.h"
 #include "globals.h"
-#include "Screen.h"
+
+ActionMenuItem::ActionMenuItem( const char* text_PSTR, void (*func)() )
+:
+  _text_PSTR( text_PSTR ), _func( func )
+{}
+
+void ActionMenuItem::generateText( char* buf, byte maxLength )
+{
+  strncpy_P( buf, _text_PSTR, maxLength );
+  buf[maxLength] = 0;
+  strpad( buf, ' ', maxLength );
+  buf[maxLength-3] = '.';
+  buf[maxLength-2] = '.';
+  buf[maxLength-1] = '.';
+}
+
+bool ActionMenuItem::performAction( MenuItemAction action )
+{
+  switch( action ) {
+    case MIA_ENTER:
+    case MIA_MOVERIGHT:
+      if( _func != NULL ) {
+        _func();
+      }
+      break;
+  }
+  return false; // We don't keep control
+}

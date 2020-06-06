@@ -40,11 +40,9 @@ class Menu : public MenuItem
     byte getNumItems();
     MenuItem* getItem( byte index );
 
+    void getName( char* buf, byte maxLength );
     void generateText( char* buf, byte maxLength );
-    bool isEditable() { return false; }
     bool performAction( MenuItemAction action );
-    bool onEnter() {};
-    bool onLeave() {};
         
   private:
     const char* _text_PSTR; // The strings are in program memory

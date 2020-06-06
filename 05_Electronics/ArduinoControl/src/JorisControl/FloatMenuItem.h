@@ -43,7 +43,6 @@ class FloatMenuItem : public MenuItem
     FloatMenuItem( const char* text_PSTR, float& value, bool editable, const FloatMenuItemData* PData );
     void generateText( char* buf, byte maxLength );
     byte getEditCursorPos( byte maxLength );
-    bool isEditable() { return true; }
     bool performAction( MenuItemAction action );
   private:
     const char* _text_PSTR;

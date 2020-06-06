@@ -50,9 +50,20 @@ MenuItem* Menu::getItem( byte index )
   return _items[n];
 }
 
+void Menu::getName( char* buf, byte maxLength )
+{
+  strncpy_P( buf, _text_PSTR, maxLength );
+  buf[maxLength] = 0;
+}
+
 void Menu::generateText( char* buf, byte maxLength )
 {
   strncpy_P( buf, _text_PSTR, maxLength );
+  buf[maxLength] = 0;
+  strpad( buf, ' ', maxLength );
+  buf[maxLength-3] = '.';
+  buf[maxLength-2] = '.';
+  buf[maxLength-1] = '.';
 }
 
 bool Menu::performAction( MenuItemAction action )

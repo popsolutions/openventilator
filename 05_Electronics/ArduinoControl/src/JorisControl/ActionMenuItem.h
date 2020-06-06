@@ -1,6 +1,6 @@
 /*
- * BoolMenuItem.cpp
- * Class implementation of a menu item displaying a bool.
+ * ActionMenuItem.h
+ * Class definition of a menu item that calls a function when activated.
  */
 
 /*
@@ -24,33 +24,21 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "BoolMenuItem.h"
-#include "globals.h"
+#ifndef ACTIONMENUITEM_H
+#define ACTIONMENUITEM_H
 
-BoolMenuItem::BoolMenuItem( const char* text_PSTR, bool& value, bool editable )
-:
-  _text_PSTR( text_PSTR ), _value( value ), _editable( editable )
-{}
+#include <Arduino.h>
+#include "MenuItem.h"
 
-void BoolMenuItem::generateText( char* buf, byte maxLength )
+class ActionMenuItem : public MenuItem
 {
-  strncpy_P( buf, _text_PSTR, maxLength );
-  buf[maxLength] = 0;
-  strpad( buf, ' ', maxLength-1 );
-  buf[maxLength-1] = _value ? 'Y' : 'N';
-  buf[maxLength] = 0;
-}
+  public:
+    ActionMenuItem( const char* text, void (*func)() );
+    void generateText( char* buf, byte maxLength );
+    bool performAction( MenuItemAction action );
+  private:
+    const char* _text_PSTR;
+    void (*_func)();
+};
 
-bool BoolMenuItem::performAction( MenuItemAction action )
-{
-  if( !_editable ) return false;
-  
-  switch( action ) {
-    case MIA_ENTER:
-    case MIA_VALUEUP:
-    case MIA_VALUEDOWN:
-      _value = !_value;
-      break;
-  }
-  return false; // Booleans do not need to keep control
-}
+#endif

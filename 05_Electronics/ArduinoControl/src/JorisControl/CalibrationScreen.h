@@ -1,6 +1,6 @@
 /*
- * BoolMenuItem.cpp
- * Class implementation of a menu item displaying a bool.
+ * CalibrationScreen.h
+ * Class definition of the calibration screen.
  */
 
 /*
@@ -24,33 +24,31 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "BoolMenuItem.h"
+#ifndef CALIBRATIONSCREEN_H
+#define CALIBRATIONSCREEN_H
+
+#include "BufferedLiquidCrystal.h"
+#include "Screen.h"
+
+class CalibrationScreen;
 #include "globals.h"
 
-BoolMenuItem::BoolMenuItem( const char* text_PSTR, bool& value, bool editable )
-:
-  _text_PSTR( text_PSTR ), _value( value ), _editable( editable )
-{}
+typedef enum : byte { CSM_ASKCONTINUE, CSM_VOLTAGE, CSM_PRESSUREOFFSETS, CSM_MOTORPREPARE, CSM_MOTORNORMAL, CSM_MOTORSLOWDOWN, CSM_COMPLETED, CSM_CANCELLED } CalibrationScreenMode;
 
-void BoolMenuItem::generateText( char* buf, byte maxLength )
-{
-  strncpy_P( buf, _text_PSTR, maxLength );
-  buf[maxLength] = 0;
-  strpad( buf, ' ', maxLength-1 );
-  buf[maxLength-1] = _value ? 'Y' : 'N';
-  buf[maxLength] = 0;
-}
+class CalibrationScreen : public Screen {
+  public:
+    CalibrationScreen();
+    void process();
+    void draw();
+    void onEnter();
+    void onLeave();
+  private:
+    CalibrationScreenMode _step, _prevStep;
+    byte _subStep;
+    float _editValue;
+    float _Iavg_normal, _Iavg_slowdown;
+    unsigned int _avg_counter, _t_normal, _t_slowdown;
+    
+};
 
-bool BoolMenuItem::performAction( MenuItemAction action )
-{
-  if( !_editable ) return false;
-  
-  switch( action ) {
-    case MIA_ENTER:
-    case MIA_VALUEUP:
-    case MIA_VALUEDOWN:
-      _value = !_value;
-      break;
-  }
-  return false; // Booleans do not need to keep control
-}
+#endif

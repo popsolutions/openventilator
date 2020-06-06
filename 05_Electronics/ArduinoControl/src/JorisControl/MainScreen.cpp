@@ -134,11 +134,16 @@ void MainScreen::draw()
       vgraph.drawMultiple( 10, col, 0.0, 40.0, 0, 3, 0 );
 
       for( byte y=0; y<4; y++ ) {
+        // Which measurement to display?
         Meas meas = _measSel[y];
 
-        strcpy( measStr, measStrings[meas] );
+        // Copy string from PROGMEM
+        strcpy_P( measStr, (char *)pgm_read_word( &(measStrings[meas]) ) );
+        // Read precision from PROGMEM
+        byte prec = pgm_read_byte( &(measPrecisions[meas]) );
 
-        dtostrf( measValues[meas], 4, measPrecisions[meas], fStr );
+        // Format the value
+        dtostrf( measValues[meas], 4, prec, fStr );
 
         sprintf( buf, "%-5.5s%4.4s ", measStr, fStr );
         lcd.setCursor( 10, y );
@@ -151,11 +156,16 @@ void MainScreen::draw()
       vgraph.draw( col[0], 0.0, 40.0, 0, 3, 0 );
 
       for( byte y=0; y<4; y++ ) {
+        // Which measurement to display?
         Meas meas = _measSel[y];
 
-        strcpy( measStr, measStrings[meas] );
-        
-        dtostrf( measValues[meas], 4, measPrecisions[meas], fStr );
+        // Copy string from PROGMEM
+        strcpy_P( measStr, (char *)pgm_read_word( &(measStrings[meas]) ) );
+        // Read precision from PROGMEM
+        byte prec = pgm_read_byte( &(measPrecisions[meas]) );
+
+        // Format the value
+        dtostrf( measValues[meas], 4, prec, fStr );
 
         Sett linkedSetting = findMeasSett( meas );
         fStr2[0] = 0; // empty string

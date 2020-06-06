@@ -35,7 +35,7 @@ class MenuItem
 {
   public:
     virtual void generateText( char* buf, byte maxLength ) = 0; // return true if modified since last call; always supply a buffer of at least maxLength+1 bytes
-    virtual byte getEditCursorPos( byte maxLength ) { return -1; }; // return -1 from this function to disable the cursor
+    virtual byte getEditCursorPos( byte maxLength ) { return 255; }; // return 255 from this function to disable the cursor
     virtual bool performAction( MenuItemAction action ) { return true; } // return code indicates whether we are (still) editing
 };
 

@@ -35,9 +35,7 @@ class BoolMenuItem : public MenuItem
   public:
     BoolMenuItem( const char* text, bool& value, bool editable );
     void generateText( char* buf, byte maxLength );
-    byte getEditCursorPos( byte maxLength );
-//    bool isEditable() { return true; }
-    bool performAction( MenuItemAction action ); // return true if item is done editing
+    bool performAction( MenuItemAction action );
   private:
     const char* _text_PSTR;
     bool& _value;

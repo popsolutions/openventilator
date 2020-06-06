@@ -34,6 +34,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class MenuScreen;
 #include "globals.h"
 
+extern Menu calibrationMenu;
+
+void activateCalibrationScreen();
+
 class MenuScreen : public Screen {
 	public:
 		MenuScreen();
@@ -47,7 +51,6 @@ class MenuScreen : public Screen {
 		char _selection;
 		char _scrollPos;
     bool _editing;
-    bool _forceRedraw;
 };
 
 #endif

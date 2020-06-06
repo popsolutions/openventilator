@@ -28,14 +28,10 @@
 #include "MenuScreen.h"
 #include "Menu.h"
 #include "MenuItem.h"
-#include "FloatMenuItem.h"
+#include "ActionMenuItem.h"
 #include "BoolMenuItem.h"
+#include "FloatMenuItem.h"
 #include "globals.h"
-
-// Default PSTR does not allow using it at object static initialisation
-#undef PSTR
-#define PSTR(s) ([]{ static const char c[] PROGMEM = (s); return &c[0]; }())
-#define PDATA(t, ...) ([]{ static const t d PROGMEM = __VA_ARGS__; return &d; }())
 
 // Define the menus here
 // Always use PSTR for the strings, the class assumes that the strings are in program memory.
@@ -59,14 +55,51 @@ FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, PDATA( Float
 FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) );
 FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, PDATA( FloatMenuItemData, { 2, 0, 0, 0 } ) );
 
-MenuItem * observationMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
-Menu observationMenu( PSTR("Observations"), observationMenuList );
+MenuItem * measurementMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
+Menu measurementMenu( PSTR("Measurements"), measurementMenuList );
 
-FloatMenuItem VmotMI( PSTR("VmotTEMP"), settings[S_VmotTEMP], true, PDATA( FloatMenuItemData, { 1, 0, 10, 0.1 } ) );
+ActionMenuItem calibMI( PSTR("Calibrate"), activateCalibrationScreen );
+FloatMenuItem PoffsetMI( PSTR("Poffset"), settings[S_pOffset], false, PDATA( FloatMenuItemData, { 1, -4, +4, 0.1 } ) );
+FloatMenuItem QoffsetMI( PSTR("Qoffset"), settings[S_Qoffset], false, PDATA( FloatMenuItemData, { 1, -4, +4, 0.1 } ) );
+FloatMenuItem VsupFacMI( PSTR("Vsupply_factor"), settings[S_VsupFac], false, PDATA( FloatMenuItemData, { 1, 3, 10, 0.1 } ) );
+FloatMenuItem RiMI( PSTR("Ri"), settings[S_Ri], false, PDATA( FloatMenuItemData, { 1, 0.1, 10, 0.1 } ) );
+FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], false, PDATA( FloatMenuItemData, { 1, 2, 20, 0.1 } ) );
+
+MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFacMI, &RiMI, &KvMI, NULL};
+Menu calibrationMenu( PSTR("Calibration"), calibrationMenuList );
+
+FloatMenuItem VmotMI( PSTR("VmotOverrule"), settings[S_VmotOverrule], true, PDATA( FloatMenuItemData, { 1, 0, 10, 0.1 } ) );
 FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, PDATA( FloatMenuItemData, { 0, 0, 0, 0 } ) );
 
-MenuItem * mainMenuList[] = {&VmotMI, &ImotorMI, &ParkMI, &settingsMenu, &alarmMenu, &observationMenu, NULL};
+MenuItem * mainMenuList[] = {&VmotMI, &ImotorMI, &ParkMI, &calibrationMenu, &settingsMenu, &alarmMenu, &measurementMenu, NULL};
 Menu mainMenu( PSTR("Menu"), mainMenuList );
+
+const byte triangle_left[8] PROGMEM = {
+  B00000,
+  B00001,
+  B00111,
+  B11111,
+  B00111,
+  B00001,
+  B00000,
+  B00000
+};
+
+const byte triangle_right[8] PROGMEM = {
+  B00000,
+  B10000,
+  B11100,
+  B11111,
+  B11100,
+  B10000,
+  B00000,
+  B00000
+};
+
+void activateCalibrationScreen()
+{
+  switchScreen( calibrationScreen );
+}
 
 MenuScreen::MenuScreen()
 :
@@ -126,7 +159,6 @@ void MenuScreen::process()
           // scroll down
           if ( _selection < _activeMenu->getNumItems() ) {
             _selection ++;
-            _forceRedraw = true;
             if ( _selection > _scrollPos + 2 ) {
               _scrollPos ++;
             }
@@ -136,7 +168,6 @@ void MenuScreen::process()
           // scroll up
           if ( _selection > 0 ) {
             _selection --;
-            _forceRedraw = true;
             if ( _selection < _scrollPos + 1 && _scrollPos > 0 ) {
               _scrollPos --;
             }
@@ -146,11 +177,13 @@ void MenuScreen::process()
       else { // if editing
         if ( rotMove > 0 ) {
           // scroll down
-          item->performAction( MIA_VALUEUP );
+          for( char n=0; n<rotMove; n++ )
+            item->performAction( MIA_VALUEUP );
         }
         if ( rotMove < 0 ) {
           // scroll up
-          item->performAction( MIA_VALUEDOWN );
+          for( char n=0; n>rotMove; n-- )
+            item->performAction( MIA_VALUEDOWN );
         }
       }
   }
@@ -167,13 +200,13 @@ void MenuScreen::draw()
     if ( i == 0 ) {
 
       // Let menu generate its text as menu name
-      _activeMenu->generateText( buf, 20 );
+      _activeMenu->getName( buf, 20 );
 
       // Fill string to 20 characters
       strpad( buf, ' ', 20 );
       if ( _selection == i ) {
-        buf[18] = '<';
-        buf[19] = '<';
+        buf[18] = 1; // left arrow
+        buf[19] = 1;
       }
     }
     else {
@@ -181,7 +214,7 @@ void MenuScreen::draw()
       MenuItem* item = _activeMenu->getItem(i - 1);
 
       if ( _selection == i ) {
-        buf[0] = '>';
+        buf[0] = 2; // right arrow
       } else {
         buf[0] = ' ';
       }
@@ -198,9 +231,6 @@ void MenuScreen::draw()
     strpad( buf, ' ', 20 );
 
     // Put it on LCD if needed
-    Serial.print( y );
-    Serial.print( ": " );
-    Serial.println( buf );
     lcd.setCursor( 0, y );
     lcd.print( buf );
   }
@@ -216,31 +246,30 @@ void MenuScreen::draw()
       lcd.blink();
     }
   }
-  _forceRedraw = false; // redraw complete
 }
 
 void MenuScreen::switchMenu( Menu* newMenu )
 {
   Serial.println( F("MenuScreen::switchMenu()") );
   if ( _activeMenu != newMenu ) {
-    if ( _activeMenu != NULL ) {
-      _activeMenu->onLeave();
-    }
     _activeMenu = newMenu;
-    if ( _activeMenu != NULL ) {
-      _activeMenu->onEnter();
-    }
   }
   _selection = 1;
   _scrollPos = 0;
   _editing = 0;
-  _forceRedraw = true;
 }
 
 void MenuScreen::onEnter()
 {
+  byte buf[8];
   Serial.println( F("MenuScreen::onEnter()") );
-  switchMenu( &mainMenu );
+  if( _activeMenu == NULL ) {
+    switchMenu( &mainMenu ); // If you set a menu before going to the menu screen, that will be shown.
+  }
+  memcpy_P( buf, triangle_left, 8 );
+  lcd.createChar( 1, buf );
+  memcpy_P( buf, triangle_right, 8 );
+  lcd.createChar( 2, buf );
 }
 
 void MenuScreen::onLeave()

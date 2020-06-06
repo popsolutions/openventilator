@@ -92,11 +92,13 @@ Key directKeyList[] = { KEY_ENTER};
 Key matrixKeyList[] = { KEY_0, KEY_1, KEY_2, KEY_3, KEY_4 };
 KeyScanner keySc( sizeof(X_pinList), sizeof(Y_pinList), X_pinList, Y_pinList, directKeyList, matrixKeyList );
 
+long park_ts = 0;
+long peak_ts = 0;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 1, 200 ) != 0 ) {
+  if( circBuf.init( 1, 160 ) != 0 ) {
     Serial.println( "Buffer allocation failed" );
   }
   ADCR.init( 125 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
@@ -121,7 +123,8 @@ void setup() {
 
 void loop() {
 
-  float VA[4], Vsup, Imot, p, Q, Vmot;
+  float VA[4], Vsup, Imot, p, Q, Vmot, tCycle;
+  bool park;
 
   // The timing of this loop has to be based on the availability of data. Each cycle should not take longer than the sample time (which actually is an averaged sample).
   while( !ADCR.areSamplesReady() ) // this also works on carry-over
@@ -143,6 +146,7 @@ void loop() {
   p    = (VA[2] - 0.2) * 22.66;
   Q    = VA[3]; // TODO: determine conversion formula
   Vmot = OCR1B * Vsup / 250;
+  park = digitalRead( DIN_MOTOR_PARK );
 
   ADCR.signalSamplesRead();
 
@@ -154,6 +158,8 @@ void loop() {
   Serial.print( p );
   Serial.print( " Q=" );
   Serial.print( Q );
+  Serial.print( " park=" );
+  Serial.print( park );
   Serial.println();
 
   float row[1];
@@ -161,15 +167,32 @@ void loop() {
   row[0] = p;
   int ar = circBuf.appendRow( row );
 
+  if( !measValues[M_Park] && park ) {
+    // Park has just become high
+    long new_park_ts = millis();
+    tCycle = new_park_ts - park_ts;
+    park_ts = millis();
+    measValues[M_tCycl] = tCycle;
+  }
+
   measValues[M_p] = p;
   //flow = values[M_Q];
   measValues[M_Vsup] = Vsup;
   measValues[M_Vmot] = Vmot;
   measValues[M_Imot] = Imot;
   measValues[M_Pmot] = Vmot * Imot;
+  measValues[M_Park] = park;
 
-  float V = settings[S_VmotTEMP];
-  byte PWM = COERCE( 250.0 * V / Vsup, 0, 250 );
+  // Is voltage overrule set?
+  float V = settings[S_VmotOverrule];
+  if( isnan(V) ) {
+    // No overrule, calculate normal voltage based on wanted motor speed
+    V = settings[S_RR] / settings[S_Kv] + measValues[M_Imot] * settings[S_Ri];
+  }
+  Serial.print( " Vmot=" );
+  Serial.print( V );
+  Serial.println();
+  byte PWM = coerce_float( 250.0 * V / Vsup, 0, 250 );
   analogWrite( DOUT_MOTOR_PWM, PWM );
 
   an.processData( p, 0 );

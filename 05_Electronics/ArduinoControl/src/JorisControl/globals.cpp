@@ -28,18 +28,35 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 MainScreen* mainScreen = new MainScreen;
 MenuScreen* menuScreen = new MenuScreen;
+CalibrationScreen* calibrationScreen = new CalibrationScreen;
 
 Screen* activeScreen = NULL;
 
-char const *const measStrings[M_NUM_MEAS] = { "None", "PEEP", "pDrop", "pPl", "pPk", "RR", "E/I", "Vt", "VE", "p", "Q", "Vsup", "Vmot", "Imot", "Pmot, Park" }; 
-// TODO: get these strings in PROGMEM
+const char M_PEEP_s[]  PROGMEM = "PEEP";
+const char M_pDrop_s[] PROGMEM = "pDrop";
+const char M_pPl_s[]   PROGMEM = "pPl";
+const char M_pPk_s[]   PROGMEM = "pPk";
+const char M_RR_s[]    PROGMEM = "RR";
+const char M_EI_s[]    PROGMEM = "EI";
+const char M_Vt_s[]    PROGMEM = "Vt";
+const char M_VE_s[]    PROGMEM = "VE";
+const char M_p_s[]     PROGMEM = "p";
+const char M_Q_s[]     PROGMEM = "Q";
+const char M_Vsup_s[]  PROGMEM = "Vsup";
+const char M_Vmot_s[]  PROGMEM = "Vmot";
+const char M_Imot_s[]  PROGMEM = "Imot";
+const char M_Pstr_s[]  PROGMEM = "Pstr";
+const char M_Park_s[]  PROGMEM = "Park";
+const char M_tCycl_s[] PROGMEM = "tCycl";
+//                              typedef enum : byte { M_NONE, M_PEEP,   M_pDrop,   M_pPl,   M_pPk,   M_RR,   M_EI,   M_Vt,   M_VE,   M_p,   M_Q,   M_Vsup,   M_Vmot,   M_Imot,   M_Pmot,   M_Park,   M_tCycl,  M_NUM_MEAS } Meas;
+char const *const measStrings[M_NUM_MEAS] PROGMEM = { NULL,   M_PEEP_s, M_pDrop_s, M_pPl_s, M_pPk_s, M_RR_s, M_EI_s, M_Vt_s, M_VE_s, M_p_s, M_Q_s, M_Vsup_s, M_Vmot_s, M_Imot_s, M_Pstr_s, M_Park_s, M_tCycl_s };
+const byte measPrecisions[M_NUM_MEAS] PROGMEM =     { 0,      1,        1,         1,       1,       1,      1,      0,      1,      1,     1,     1,        1,        1,        1,        0,        1 };
 
 float measValues[M_NUM_MEAS];
-byte measPrecisions[M_NUM_MEAS] = { 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 };
 
+//                            typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFac, S_pOffset, S_Qoffset, S_VmotOverrule, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
+const float defaultSettings[S_NUM_SETT] PROGMEM = { 0,      10,     2,               4,          40,     25,    4,              15,   10,            2,    10,            300,  10,            4.5,  10,            0,               2,                 30,            11,        4.0,       4.0,       NAN,       NAN,       4,              NAN,     NAN      };
 float settings[S_NUM_SETT];
-// typedef enum : byte { S_NONE, S_VmotTEMP, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
-const float defaultSettings[S_NUM_SETT] PROGMEM = { 0, 1, 10, 2, 4, 40, 25, 4, 15, 10, 2, 10, 300, 10, 4.5, 10, 0, 2, 30, 11, 3, NAN, NAN };
 
 const Alarm alarms[] PROGMEM = {
   {M_PEEP,  AT_AbsDeviation,  S_PEEP,         S_NONE },
@@ -56,23 +73,23 @@ const Alarm alarms[] PROGMEM = {
 // Settings
 bool assistEnabled = false;
 
-void switchScreen( Screen* newScreen )
-{
-  Serial.println( F("switchScreen") );
-  if( activeScreen != NULL && activeScreen != newScreen ) {
-    activeScreen->onLeave();
-  }
-  activeScreen = newScreen;
-  activeScreen->onEnter();
-}
-
 void strpad( char* buf, char chr, byte len )
 {
   // Fill string to <len> characters, and add a termination char
   for( byte pos=strlen( buf ); pos < len; pos ++ ) buf[pos] = ' ';
   buf[len] = 0; // terminate string
 }
- 
+
+void switchScreen( Screen* newScreen )
+{
+  Serial.println( F("switchScreen") );
+  if( activeScreen != NULL ) {
+    activeScreen->onLeave();
+  }
+  activeScreen = newScreen;
+  activeScreen->onEnter();
+}
+
 Sett findMeasSett( Meas meas )
 {
   for( byte i=0; ; i++ ) {
