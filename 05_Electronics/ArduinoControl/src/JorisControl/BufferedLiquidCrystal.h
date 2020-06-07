@@ -46,6 +46,10 @@ class BufferedLiquidCrystal : public LiquidCrystal {
       void home();                     // Set cursor position to home position
       void setCursor( uint8_t x, uint8_t y ); // Set cursor position
 
+      void printxy( byte x, byte y, const __FlashStringHelper* str ); // Helper for F() strings below
+      void printxy( byte x, byte y, const char* str ); // Places text at given position. Will reposition cursor back afterwards.
+                                       // No float printing etc unfortunately, like with print()
+
       virtual size_t write( uint8_t ); // This function will skip writes if the byte is the same
                                        // If you use a visible cursor, always set cursor position after writing a screen
       void createChar( uint8_t ch, uint8_t charmap[] );

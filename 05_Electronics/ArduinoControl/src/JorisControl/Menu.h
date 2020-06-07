@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class Menu : public MenuItem
 {
   public:
-    Menu( const char* text_PSTR, MenuItem* items[] );
+    Menu( const char* text_P, MenuItem* items[] );
     // Note the string will not be copied, and neither will the list of items! Only the pointer will be stored! So don't feed a temporary object.
     // The last item should always be a NULL entry.
 
@@ -45,7 +45,7 @@ class Menu : public MenuItem
     bool performAction( MenuItemAction action );
         
   private:
-    const char* _text_PSTR; // The strings are in program memory
+    const char* _text_P; // The strings are in program memory
     MenuItem** _items;
 };
 

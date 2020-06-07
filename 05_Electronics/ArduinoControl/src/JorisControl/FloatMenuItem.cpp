@@ -27,40 +27,45 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "FloatMenuItem.h"
 #include "globals.h"
 
-FloatMenuItem::FloatMenuItem( const char* text_PSTR, float& value, bool editable, const FloatMenuItemData *PData )
+FloatMenuItem::FloatMenuItem( const char* text_P, float& value, bool editable, const FloatProps *PData )
 :
-  _text_PSTR( text_PSTR ), _value( value ), _editable( editable ), _PData( PData )
+  _text_P( text_P ), _value( value ), _editable( editable ), _PData( PData )
 {}
 
-FloatMenuItemData FloatMenuItem::_getPData()
+FloatProps FloatMenuItem::_getPData()
 {
-  FloatMenuItemData PData;
-  memcpy_P( &PData, _PData, sizeof(FloatMenuItemData) );
+  FloatProps PData;
+  memcpy_P( &PData, _PData, sizeof(FloatProps) );
   return PData;
 }
 
 void FloatMenuItem::generateText( char* buf, byte maxLength )
+// Always supply a buffer of size maxLength + 1
 {
-  FloatMenuItemData data = _getPData();
+  FloatProps data = _getPData();
 
-  char fStr[40]; // Use a large buffer just to be sure, because there's no easy way to limit the length
-  dtostrf( _value, 1, data.precision, fStr );
-  int len = strlen( fStr );
+  // Format the number with maximum width
+  //format_float( buf, _value, 4, data.precision, true, true );
+  // TODO use maxLength and right alignment
+
+  // Check how many spaces before the number
+  //byte n;
+  //for( n=0; buf[n] !=' ' && n<maxLength; n++ );
   
-  strncpy_P( buf, _text_PSTR, maxLength );
-  buf[maxLength] = 0;
+  //strncpy_P( buf, _text_P, n );
+  strncpy_P( buf, _text_P, maxLength );
+  buf[maxLength] = 0; // terminate
   strpad( buf, ' ', maxLength );
-  if( len < maxLength ) {
-    strcpy( buf+maxLength-len, fStr );
-  }
-  buf[maxLength] = 0;
+  
+  format_float( buf+maxLength-4, _value, 4, data.precision, true, true );
+  // TODO use maxLength and right alignment
 }
 
 byte FloatMenuItem::getEditCursorPos( byte maxLength )
 {
   if( !_editable ) return 255;
   
-  FloatMenuItemData data = _getPData();
+  FloatProps data = _getPData();
    
   char precisionShift = data.precision > 0 ? data.precision + 1 : 0;
   char digitToModify; 
@@ -83,7 +88,7 @@ bool FloatMenuItem::performAction( MenuItemAction action )
 {
   if( !_editable ) return false;
 
-  FloatMenuItemData data = _getPData();
+  FloatProps data = _getPData();
    
   switch( action ) {
     case MIA_ENTER:

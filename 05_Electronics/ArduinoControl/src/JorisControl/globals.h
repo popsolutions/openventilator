@@ -30,6 +30,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Arduino.h>
 
+typedef struct {
+  byte precision;
+  float lowLimit;
+  float highLimit;
+  float stepSize;
+} FloatProps;
+
 // Default PSTR does not allow using it at object static initialisation, replace it
 #undef PSTR
 #define PSTR(s) ([]{ static const char c[] PROGMEM = (s); return &c[0]; }())
@@ -37,9 +44,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PDATA(t, ...) ([]{ static const t d PROGMEM = __VA_ARGS__; return &d; }())
 
 // All measurements are stored in an array with all elements accessible by name
-typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_Park, M_tCycl, M_NUM_MEAS } Meas;
+typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_pQ, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_Park, M_tCycl, M_NUM_MEAS } Meas;
 // All settings are stored in an array with all elements accessible by name. This way they can easily be stored to and restored from EEPROM.
-typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFac, S_pOffset, S_Qoffset, S_VmotOverrule, S_Kv, S_Ri, S_NUM_SETT } Sett;
+typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFac, S_pOffset, S_pQoffset, S_Kv, S_Ri, S_NUM_SETT } Sett;
 
 // Alarm information describes the relation between the measurements and settings
 typedef enum : byte { AT_NONE, AT_LowerLimit, AT_UpperLimit, AT_AbsDeviation, AT_PercDeviation } AlarmType;
@@ -50,14 +57,18 @@ typedef struct {
   Sett deviationSett; // This is the deviation that is settable in the menu
 } Alarm;
 
-extern const Alarm alarms[];
-
-extern char const *const measStrings[M_NUM_MEAS];
-extern const byte measPrecisions[M_NUM_MEAS];  // Precision of the values for formatting
+extern char const *const measStrings_P[M_NUM_MEAS];
+extern const byte measPrecisions_P[M_NUM_MEAS];  // Precision of the values for formatting
 extern float measValues[M_NUM_MEAS];
-//extern float * measLinkedSettings[M_NUM_MEAS];
 
+extern const float defaultSettings_P[S_NUM_SETT];
+extern const FloatProps settingsProps_P[S_NUM_SETT];
 extern float settings[S_NUM_SETT];
+
+extern const Alarm alarms_P[];
+
+extern float VmotOverrule; // This setting should not be saved to EEPROM
+extern bool assistEnabled;
 
 #include "RotaryEncoder.h"
 #include "BufferedLiquidCrystal.h"
@@ -83,8 +94,6 @@ extern MenuScreen* menuScreen;
 extern CalibrationScreen* calibrationScreen;
 extern Screen* activeScreen;
 
-extern bool assistEnabled;
-
 inline float coerce_float( float in, float low, float high )
 {
   if( in < low ) return low;
@@ -101,9 +110,14 @@ inline int coerce_int( int in, int low, int high )
 
 extern void strpad( char* buf, char chr, byte len );
 
+extern char* format_float( char* buf, float value, byte len, byte precision, bool allow_shift, bool right_align );
+// Always supply a buffer of at least size len + 1
+
 extern void switchScreen( Screen* newScreen );
 
 extern Sett findMeasSett( Meas );
+FloatProps getSettingsProps( Sett sett );
+extern bool isAlarmActiveForMeas( Meas );
 extern void setDefaultSettings();
 
 #endif

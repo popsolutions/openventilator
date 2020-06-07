@@ -102,6 +102,47 @@ void BufferedLiquidCrystal::createChar(uint8_t location, uint8_t charmap[]) {
   }
 }
 
+void BufferedLiquidCrystal::printxy( byte x, byte y, const __FlashStringHelper* str )
+{
+  char buf[_num_cols+1];
+  strncpy_P( buf, (const char*) str, _num_cols );
+  buf[_num_cols] = 0; // terminate
+  BufferedLiquidCrystal::printxy( x, y, buf );
+}
+
+void BufferedLiquidCrystal::printxy( byte x, byte y, const char* str )
+{
+  byte orig_x = _cursor_x;
+  byte orig_y = _cursor_y;
+
+  uint8_t* bp = _buffer + y * _num_cols + x; // buffer pointer
+  uint8_t* sp = (uint8_t*) str; // string pointer
+  
+  _pos_wrong = true; // force reposition
+  while( *sp ) {    
+    if( *sp != *bp ) {
+      if( _pos_wrong ) {
+        LiquidCrystal::setCursor( x, y );
+      }
+      _pos_wrong = false;
+      LiquidCrystal::write( *sp );
+      *bp = *sp;
+    }
+    else {
+      // We skip a write action
+      _pos_wrong = true;
+    }
+    bp++;
+    sp++;
+    x++;
+  }
+  // Restore cursor position
+  _cursor_x = orig_x;
+  _cursor_y = orig_y;
+  LiquidCrystal::setCursor( _cursor_x, _cursor_y );
+  _pos_wrong = false;
+}
+
 size_t BufferedLiquidCrystal::write( uint8_t ch )
 {
   if( _buffer[_cursor_y*_num_cols+_cursor_x] != ch ) {

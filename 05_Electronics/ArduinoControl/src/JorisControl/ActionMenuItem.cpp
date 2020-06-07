@@ -27,14 +27,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ActionMenuItem.h"
 #include "globals.h"
 
-ActionMenuItem::ActionMenuItem( const char* text_PSTR, void (*func)() )
+ActionMenuItem::ActionMenuItem( const char* text_P, void (*func)() )
 :
-  _text_PSTR( text_PSTR ), _func( func )
+  _text_P( text_P ), _func( func )
 {}
 
 void ActionMenuItem::generateText( char* buf, byte maxLength )
 {
-  strncpy_P( buf, _text_PSTR, maxLength );
+  strncpy_P( buf, _text_P, maxLength );
   buf[maxLength] = 0;
   strpad( buf, ' ', maxLength );
   buf[maxLength-3] = '.';

@@ -37,7 +37,7 @@ class BoolMenuItem : public MenuItem
     void generateText( char* buf, byte maxLength );
     bool performAction( MenuItemAction action );
   private:
-    const char* _text_PSTR;
+    const char* _text_P;
     bool& _value;
     bool _editable;
 };

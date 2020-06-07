@@ -42,7 +42,7 @@ void CalibrationScreen::process()
     case CSM_ASKCONTINUE:
       switch( pressedKey ) {
         case KEY_3:
-          settings[S_VmotOverrule] = 0; // Stop the motor
+          VmotOverrule = 0; // Stop the motor
           _step = (CalibrationScreenMode) ( (byte)_step + 1 );
           break;
         case KEY_0:
@@ -81,8 +81,8 @@ void CalibrationScreen::process()
     case CSM_PRESSUREOFFSETS:
       switch( pressedKey ) {
         case KEY_3:
-          settings[S_pOffset] = measValues[M_p];
-          settings[S_Qoffset] = measValues[M_Q];
+          settings[S_pOffset] += measValues[M_p];
+          settings[S_pQoffset] += measValues[M_pQ];
           _step = (CalibrationScreenMode) ( (byte)_step + 1 );
           break;
         case KEY_0:
@@ -150,7 +150,7 @@ void CalibrationScreen::process()
 
     case CSM_COMPLETED:
       if( _subStep == 0 ) {
-        float Vmot = settings[S_VmotOverrule];
+        float Vmot = VmotOverrule;
 
         // Calculate Ri and Kv
         settings[S_Ri] = (_t_slowdown * Vmot - _t_normal * Vmot) / (_Iavg_slowdown * _t_slowdown - _Iavg_normal * _t_normal);
@@ -159,7 +159,7 @@ void CalibrationScreen::process()
       // fall through !
     case CSM_CANCELLED:
       if( _subStep == 0 ) {
-        settings[S_VmotOverrule] = 0; // Stop the motor
+        VmotOverrule = 0; // Stop the motor
         _subStep ++;
       }
       switch( pressedKey ) {
@@ -167,7 +167,7 @@ void CalibrationScreen::process()
         case KEY_3:
         case KEY_4:
         case KEY_ENTER:
-          settings[S_VmotOverrule] = NAN; // Motor to normal operation
+          VmotOverrule = NAN; // Motor to normal operation
           switchScreen( mainScreen );
           break;
         case KEY_1:
@@ -196,7 +196,7 @@ void CalibrationScreen::onLeave()
 
 void CalibrationScreen::draw()
 {
-  char fStr[20];
+  char buf[21];
   int num_rows;
   long start_pos;
   enum : byte { None=0, Cancel=0x01, OK=0x02, OK_Cancel=0x03 } showButtons = None;
@@ -205,12 +205,9 @@ void CalibrationScreen::draw()
     case CSM_ASKCONTINUE:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.setCursor( 0, 0 );
-        lcd.print( F("CALIBRATION") );
-        lcd.setCursor( 0, 2 );
-        lcd.print( F("Stop the") );
-        lcd.setCursor( 0, 3 );
-        lcd.print( F("machine now?") );
+        lcd.printxy( 0, 0, F("CALIBRATION") );
+        lcd.printxy( 0, 2, F("Stop the") );
+        lcd.printxy( 0, 3, F("machine now?") );
         showButtons = OK_Cancel;
       }
       break;
@@ -218,18 +215,14 @@ void CalibrationScreen::draw()
     case CSM_VOLTAGE:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.setCursor( 0, 0 );
-        lcd.print( F("Measure") );
-        lcd.setCursor( 0, 1 );
-        lcd.print( F("supply voltage") );
-        lcd.setCursor( 0, 2 );
-        lcd.print( F("and set here:") );
+        lcd.printxy( 0, 0, F("Measure") );
+        lcd.printxy( 0, 1, F("supply voltage") );
+        lcd.printxy( 0, 2, F("and set here:") );
         lcd.blink();
         showButtons = OK_Cancel;
       }
-      lcd.setCursor( 16, 2 );
-      dtostrf( _editValue, 4, 1, fStr );
-      lcd.print( fStr );
+      format_float( buf, _editValue, 4, 1, true, true );
+      lcd.printxy( 16, 2, buf );
       lcd.setCursor( 19, 2 ); // Force placing cursor
       break;
       
@@ -237,12 +230,9 @@ void CalibrationScreen::draw()
       if( _prevStep != _step ) {
         lcd.noBlink();
         lcd.clear();
-        lcd.setCursor( 0, 0 );
-        lcd.print( F("Disconnect") );
-        lcd.setCursor( 0, 1 );
-        lcd.print( F("pressure tubes") );
-        lcd.setCursor( 0, 2 );
-        lcd.print( F("and press OK.") );
+        lcd.printxy( 0, 0, F("Disconnect") );
+        lcd.printxy( 0, 1, F("pressure tubes") );
+        lcd.printxy( 0, 2, F("and press OK.") );
         showButtons = OK_Cancel;
       }
       break;
@@ -250,14 +240,10 @@ void CalibrationScreen::draw()
     case CSM_MOTORPREPARE:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.setCursor( 0, 0 );
-        lcd.print( F("Disconnect") );
-        lcd.setCursor( 0, 1 );
-        lcd.print( F("motor crank") );
-        lcd.setCursor( 0, 2 );
-        lcd.print( F("and press OK.") );
-        lcd.setCursor( 0, 3 );
-        lcd.print( F("Motor will turn!") );
+        lcd.printxy( 0, 0, F("Disconnect") );
+        lcd.printxy( 0, 1, F("motor crank") );
+        lcd.printxy( 0, 2, F("and press OK.") );
+        lcd.printxy( 0, 3, F("Motor will turn!") );
         showButtons = OK_Cancel;
       }
       break;
@@ -265,10 +251,8 @@ void CalibrationScreen::draw()
     case CSM_MOTORNORMAL:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.setCursor( 0, 0 );
-        lcd.print( F("Measuring") );
-        lcd.setCursor( 0, 2 );
-        lcd.print( F("...") );
+        lcd.printxy( 0, 0, F("Measuring") );
+        lcd.printxy( 0, 2, F("...") );
         showButtons = Cancel;
       }
       break;
@@ -276,23 +260,19 @@ void CalibrationScreen::draw()
     case CSM_MOTORSLOWDOWN:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.setCursor( 3, 0 );
-        lcd.print( F("Slow down") );
-        lcd.setCursor( 1, 1 );
-        lcd.print( F("\x7F the motor") );
-        lcd.setCursor( 1, 2 );
-        lcd.print( F("\x7F by hand.") );
+        lcd.printxy( 3, 0, F("Slow down") );
+        lcd.printxy( 1, 1, F("\x7F the motor") );
+        lcd.printxy( 1, 2, F("\x7F by hand.") );
         showButtons = Cancel;
       }
       vgraph.draw( measValues[M_Imot], -0.5, 3.5, 0, 3, 0 ); // Draw a graph from 0 to 2 A motor current
       
-      lcd.setCursor( 3, 3 );
       if( measValues[M_Imot] < 1 ) {
-        lcd.print( F("Use more force") );
+        lcd.printxy( 3, 3, F("Use more force") );
       } else if( measValues[M_Imot] > 2 ) {
-        lcd.print( F("Use less force") );
+        lcd.printxy( 3, 3, F("Use less force") );
       } else {
-        lcd.print( F("Measuring...") );
+        lcd.printxy( 3, 3, F("Measuring...") );
       }
       break;
       
@@ -300,30 +280,24 @@ void CalibrationScreen::draw()
     case CSM_CANCELLED:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.setCursor( 0, 0 );
-        lcd.print( F("Calibration") );
-        lcd.setCursor( 0, 1 );
+        lcd.printxy( 0, 0, F("Calibration") );
         if( _step == CSM_COMPLETED ) {
-          lcd.print( F("complete.") );
+          lcd.printxy( 0, 1, F("complete.") );
         } else {
-          lcd.print( F("cancelled.") );
+          lcd.printxy( 0, 1, F("cancelled.") );
         }
-        lcd.setCursor( 0, 2 );
-        lcd.print( F("Reconnect crank and") );
-        lcd.setCursor( 0, 3 );
-        lcd.print( F("pressure tubes.") );
+        lcd.printxy( 0, 2, F("Reconnect crank and") );
+        lcd.printxy( 0, 3, F("pressure tubes.") );
         showButtons = OK;
       }
       break;
       
   }
   if( showButtons & Cancel ) {
-        lcd.setCursor( 14, 0 );
-        lcd.print( F("Cancel") );
+        lcd.printxy( 14, 0, F("Cancel") );
   }
   if( showButtons & OK ) {
-        lcd.setCursor( 18, 3 );
-        lcd.print( F("OK") );
+        lcd.printxy( 18, 3, F("OK") );
   }
   _prevStep = _step;
 }

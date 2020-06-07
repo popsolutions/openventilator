@@ -27,14 +27,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "BoolMenuItem.h"
 #include "globals.h"
 
-BoolMenuItem::BoolMenuItem( const char* text_PSTR, bool& value, bool editable )
+BoolMenuItem::BoolMenuItem( const char* text_P, bool& value, bool editable )
 :
-  _text_PSTR( text_PSTR ), _value( value ), _editable( editable )
+  _text_P( text_P ), _value( value ), _editable( editable )
 {}
 
 void BoolMenuItem::generateText( char* buf, byte maxLength )
 {
-  strncpy_P( buf, _text_PSTR, maxLength );
+  strncpy_P( buf, _text_P, maxLength );
   buf[maxLength] = 0;
   strpad( buf, ' ', maxLength-1 );
   buf[maxLength-1] = _value ? 'Y' : 'N';

@@ -29,27 +29,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <Arduino.h>
 #include "MenuItem.h"
-
-typedef struct {
-  byte precision;
-  float lowLimit;
-  float highLimit;
-  float stepSize;
-} FloatMenuItemData;
+#include "globals.h"
 
 class FloatMenuItem : public MenuItem
 {
   public:
-    FloatMenuItem( const char* text_PSTR, float& value, bool editable, const FloatMenuItemData* PData );
+    FloatMenuItem( const char* text_P, float& value, bool editable, const FloatProps* PData );
     void generateText( char* buf, byte maxLength );
     byte getEditCursorPos( byte maxLength );
     bool performAction( MenuItemAction action );
   private:
-    const char* _text_PSTR;
+    const char* _text_P;
     float& _value;
     bool _editable;
-    const FloatMenuItemData* _PData;
-    FloatMenuItemData _getPData();
+    const FloatProps* _PData;
+    FloatProps _getPData();
 };
 
 #endif

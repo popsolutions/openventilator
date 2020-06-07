@@ -98,7 +98,7 @@ long peak_ts = 0;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 1, 160 ) != 0 ) {
+  if( circBuf.init( 1, 200 ) != 0 ) {
     Serial.println( "Buffer allocation failed" );
   }
   ADCR.init( 125 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
@@ -106,12 +106,14 @@ void setup() {
   lcd.begin( 20, 4 );
   lcd.noAutoscroll();
   rotEnc.init();
-  vgraph.prepare();
   switchScreen( mainScreen );
 
   analogWrite( DOUT_MOTOR_PWM, 0 );
   OCR1A = 249;        // Program top to 249 i.o. 255
-  TCCR1B = B00001001; // for PWM frequency of 32kHz, and PWM mode 5 (WGM22=1)
+  TCCR1A = B00100011; // Only use OC1B (to Arduino pin 10) output, PWM mode 11 (this is for timer 1)
+  TCCR1B = B00010001; // for PWM frequency of 32kHz, and PWM mode 11           (this is for timer 1)
+  //TCCR1A = B10000001; // Only use OC2B output, PWM mode 5                    (this is for timer 2)
+  //TCCR1B = B00001001; // for PWM frequency of 32kHz, and PWM mode 5          (this is for timer 2)
 
   pinMode( DIN_MOTOR_PARK, INPUT_PULLUP );
 
@@ -121,52 +123,35 @@ void setup() {
   Serial.println( F(" bytes free") );
 }
 
-void loop() {
-
-  float VA[4], Vsup, Imot, p, Q, Vmot, tCycle;
+void get_inputs()
+{
+  float VA[4], Vsup, Imot, p, pQ, Q, Vmot, tCycle;
   bool park;
-
-  // The timing of this loop has to be based on the availability of data. Each cycle should not take longer than the sample time (which actually is an averaged sample).
-  while( !ADCR.areSamplesReady() ) // this also works on carry-over
-    delay( 1 );
-
-  long t = millis();
 
   int a = ADCR.getAveraging();
   for( byte ch=0; ch<4; ch++ ) {
     VA[ch] = 0.004883 * ((float)ADCR.getSample( ch ) / a);
-    //Serial.print( " VA[" );
-    //Serial.print( ch );
-    //Serial.print( "]=" );
-    //Serial.print( VA[ch] );
   }
+  ADCR.signalSamplesRead();
+
   Serial.println();
   Vsup = VA[0] * VSUPPLYRATIO;
   Imot = VA[1] * IMOTORCONDUCTANCE;
-  p    = (VA[2] - 0.2) * 22.66;
-  Q    = VA[3]; // TODO: determine conversion formula
-  Vmot = OCR1B * Vsup / 250;
+  p    = (VA[2] - 0.2) * 22.66 - settings[S_pOffset];  // assuming MPX(V)5010
+  pQ   = (VA[3] - 2.5) * 10.20 - settings[S_pQoffset]; // assuming MPX(V)7002
+  Q    = pQ; // TODO: determine conversion formula
+  //    Vmot = ( PWM * Vsup + (250-PWM) * -Vschottky ) / 250
+  // => Vmot = ( PWM * (Vsup+Vschottky) + 250 * -Vschottky ) / 250
+  Vmot = ( OCR1B * (Vsup+0.4) - 100 ) / 250; // This is calculated one cycle after setting it, to have all the measured values be from the same moment in time
   park = digitalRead( DIN_MOTOR_PARK );
 
-  ADCR.signalSamplesRead();
-
-  Serial.print( " Vsup=" );
-  Serial.print( Vsup );
-  Serial.print( " Imot=" );
-  Serial.print( Imot );
-  Serial.print( " p=" );
-  Serial.print( p );
-  Serial.print( " Q=" );
-  Serial.print( Q );
-  Serial.print( " park=" );
-  Serial.print( park );
-  Serial.println();
-
+  // Add data to circular buffer
   float row[1];
   //row[0] = t;
   row[0] = p;
   int ar = circBuf.appendRow( row );
 
+  // Process park switch
   if( !measValues[M_Park] && park ) {
     // Park has just become high
     long new_park_ts = millis();
@@ -175,37 +160,85 @@ void loop() {
     measValues[M_tCycl] = tCycle;
   }
 
-  measValues[M_p] = p;
-  //flow = values[M_Q];
+  // Store values
+  measValues[M_p]    = p;
+  measValues[M_pQ]   = pQ;
+  measValues[M_Q]    = Q;
   measValues[M_Vsup] = Vsup;
   measValues[M_Vmot] = Vmot;
   measValues[M_Imot] = Imot;
   measValues[M_Pmot] = Vmot * Imot;
   measValues[M_Park] = park;
 
-  // Is voltage overrule set?
-  float V = settings[S_VmotOverrule];
-  if( isnan(V) ) {
-    // No overrule, calculate normal voltage based on wanted motor speed
-    V = settings[S_RR] / settings[S_Kv] + measValues[M_Imot] * settings[S_Ri];
-  }
-  Serial.print( " Vmot=" );
-  Serial.print( V );
-  Serial.println();
-  byte PWM = coerce_float( 250.0 * V / Vsup, 0, 250 );
-  analogWrite( DOUT_MOTOR_PWM, PWM );
-
+  // Perform respiratory analysis with new data
   an.processData( p, 0 );
-
   measValues[M_pPk] = an.getPP();
   measValues[M_PEEP] = an.getPEEP();
   measValues[M_RR] = an.getRR();
   measValues[M_EI] = an.getEI();
+}
 
+void set_outputs()
+{
+  float Vsup = measValues[M_Vsup];
+
+  // Is voltage overrule set?
+  float Vmot = VmotOverrule;
+  if( isnan(Vmot) ) {
+    // No overrule, calculate normal voltage based on wanted motor speed
+    Vmot = settings[S_RR] / settings[S_Kv] + measValues[M_Imot] * settings[S_Ri];
+  }
+  // Calculate PWM ratio based on wanted voltage, Schottky diode voltage (0.4V) and supply voltage
+  //    Vmot = ( PWM * Vsup + (250-PWM) * -Vschottky ) / 250
+  // => Vmot = ( PWM * Vsup - 250 * Vschottky + PWM * Vschottky ) / 250
+  // => 250 * Vmot = PWM * Vsup - 250 * Vschottky + PWM * Vschottky
+  // => -PWM * Vsup = -250 * Vmot - 250 * Vschottky + PWM * Vschottky
+  // =>  PWM * -Vsup = -250 * Vmot - 250 * Vschottky + PWM * Vschottky
+  // =>  PWM * -Vsup - PWM * Vschottky = -250 * Vmot - 250 * Vschottky
+  // =>  PWM * (-Vschottky-Vsup) = -250 * Vmot - 250 * Vschottky
+  // =>  PWM  = (-250 * Vmot - 250 * Vschottky) / (-Vschottky-Vsup)
+  // =>  PWM  = (250 * Vmot + 250 * Vschottky) / (Vsup+Vschottky)
+  // =>  PWM = (250 * (Vmot + Vschottky)) / (Vsup + Vschottky)
+  byte PWM = coerce_int( (250 * (Vmot + 0.4)) / (Vsup + 0.4), 0, 250 );
+  analogWrite( DOUT_MOTOR_PWM, PWM );
+
+  // Debug output: current values (this takes a while, that's why it's done after setting output)
+  Serial.print( " Vsup=" );
+  Serial.print( measValues[M_Vsup] );
+  Serial.print( " Imot=" );
+  Serial.print( measValues[M_Imot] );
+  Serial.print( " p=" );
+  Serial.print( measValues[M_p] );
+  Serial.print( " Q=" );
+  Serial.print( measValues[M_Q] );
+  Serial.print( " park=" );
+  Serial.print( measValues[M_Park] );
+  Serial.print( " Vmot=" );
+  Serial.print( measValues[M_Vmot] );
+  Serial.println();
+}
+
+void loop() {
+
+  // The timing of this loop has to be based on the availability of data. Each cycle should not take longer than the sample time (which actually is an averaged sample).
+  while( !ADCR.areSamplesReady() ) // this also works on carry-over
+    delay( 1 );
+
+  unsigned int t = millis(); // We only use the upper 16 bits
+
+  // Read all inputs
+  get_inputs();
+  
+  // Set outputs (e.g. motor)
+  set_outputs();
+
+  // Let the currently active screen process a key press, dial rotation or other inputs
   activeScreen->process();
 
+  // Let the currently active screen (which might just have changed) draw its screen
   activeScreen->draw();
 
+  // Debug output: used time
   Serial.print( F("t end=") );
-  Serial.println( millis() - t );
+  Serial.println( (unsigned int) millis() - t );
 }

@@ -29,14 +29,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Menu* activeMenu;
 
-Menu::Menu( const char* text_PSTR, MenuItem* items[] )
+Menu::Menu( const char* text_P, MenuItem* items[] )
 :
-  _text_PSTR( text_PSTR ), _items( items )
+  _text_P( text_P ), _items( items )
 {}
 
 byte Menu::getNumItems()
 {
-  byte n;
+  byte n = 0;
   while( _items[n] != NULL ) n++;
   return n;
 }
@@ -52,13 +52,13 @@ MenuItem* Menu::getItem( byte index )
 
 void Menu::getName( char* buf, byte maxLength )
 {
-  strncpy_P( buf, _text_PSTR, maxLength );
+  strncpy_P( buf, _text_P, maxLength );
   buf[maxLength] = 0;
 }
 
 void Menu::generateText( char* buf, byte maxLength )
 {
-  strncpy_P( buf, _text_PSTR, maxLength );
+  strncpy_P( buf, _text_P, maxLength );
   buf[maxLength] = 0;
   strpad( buf, ' ', maxLength );
   buf[maxLength-3] = '.';

@@ -36,44 +36,46 @@
 // Define the menus here
 // Always use PSTR for the strings, the class assumes that the strings are in program memory.
 
-FloatMenuItem pMaxMI( PSTR("Pmax"), settings[S_pMax], true, PDATA( FloatMenuItemData, { 0, 10, 50, 1 } ) );
-FloatMenuItem PEEPDeviationMI( PSTR("PEEP deviation"), settings[S_PEEPDeviation], true, PDATA( FloatMenuItemData, { 1, 0, 10, 0.5 } ) );
-FloatMenuItem RRDeviationMI( PSTR("RR deviation %"), settings[S_RRDeviation], true, PDATA( FloatMenuItemData, { 0, 0, 20, 1 } ) );
+FloatMenuItem pMaxMI( PSTR("Pmax"), settings[S_pMax], true, &settingsProps_P[S_pMax] );
+FloatMenuItem PEEPDeviationMI( PSTR("PEEP deviation"), settings[S_PEEPDeviation], true, &settingsProps_P[S_PEEPDeviation] );
+FloatMenuItem RRDeviationMI( PSTR("RR deviation %"), settings[S_RRDeviation], true, &settingsProps_P[S_RRDeviation] );
 
 MenuItem * alarmMenuList[] = {&pMaxMI, &PEEPDeviationMI, &RRDeviationMI, NULL};
 Menu alarmMenu( PSTR("Alarm"), alarmMenuList );
 
 BoolMenuItem assistEnableMI( PSTR("Assist Control"), assistEnabled, true );
-FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), settings[S_AssistThreshold], true, PDATA( FloatMenuItemData, { 1, 1, 10, 0.2 } ) );
-FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), settings[S_AssistMaxRR], true, PDATA( FloatMenuItemData, { 0, 10, 30, 1 } ) );
+FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), settings[S_AssistThreshold], true, &settingsProps_P[S_AssistThreshold] );
+FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), settings[S_AssistMaxRR], true, &settingsProps_P[S_AssistMaxRR] );
 
 MenuItem * settingsMenuList[] = {&assistEnableMI, &assistThresholdMI, &assistMaxRRMI, NULL};
 Menu settingsMenu( PSTR("Settings"), settingsMenuList );
 
-FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) );
-//FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) ); // l/s
-FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, PDATA( FloatMenuItemData, { 1, 0, 0, 0 } ) );
-FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, PDATA( FloatMenuItemData, { 2, 0, 0, 0 } ) );
+FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, PDATA( FloatProps, { 1, 0, 0, 0 } ) );
+//FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, PDATA( FloatProp, { 1, 0, 0, 0 } ) ); // l/s
+FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, PDATA( FloatProps, { 1, 0, 0, 0 } ) );
+FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, PDATA( FloatProps, { 2, 0, 0, 0 } ) );
 
 MenuItem * measurementMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
 Menu measurementMenu( PSTR("Measurements"), measurementMenuList );
 
 ActionMenuItem calibMI( PSTR("Calibrate"), activateCalibrationScreen );
-FloatMenuItem PoffsetMI( PSTR("Poffset"), settings[S_pOffset], false, PDATA( FloatMenuItemData, { 1, -4, +4, 0.1 } ) );
-FloatMenuItem QoffsetMI( PSTR("Qoffset"), settings[S_Qoffset], false, PDATA( FloatMenuItemData, { 1, -4, +4, 0.1 } ) );
-FloatMenuItem VsupFacMI( PSTR("Vsupply_factor"), settings[S_VsupFac], false, PDATA( FloatMenuItemData, { 1, 3, 10, 0.1 } ) );
-FloatMenuItem RiMI( PSTR("Ri"), settings[S_Ri], false, PDATA( FloatMenuItemData, { 1, 0.1, 10, 0.1 } ) );
-FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], false, PDATA( FloatMenuItemData, { 1, 2, 20, 0.1 } ) );
+FloatMenuItem PoffsetMI( PSTR("pOffset"), settings[S_pOffset], false, &settingsProps_P[S_pOffset] );
+FloatMenuItem QoffsetMI( PSTR("pQoffset"), settings[S_pQoffset], false, &settingsProps_P[S_pQoffset] );
+FloatMenuItem VsupFacMI( PSTR("Vsupply_factor"), settings[S_VsupFac], false, &settingsProps_P[S_VsupFac] );
+FloatMenuItem RiMI( PSTR("Ri"), settings[S_Ri], false, &settingsProps_P[S_Ri] );
+FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], false, &settingsProps_P[S_Kv] );
 
 MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFacMI, &RiMI, &KvMI, NULL};
 Menu calibrationMenu( PSTR("Calibration"), calibrationMenuList );
 
-FloatMenuItem VmotMI( PSTR("VmotOverrule"), settings[S_VmotOverrule], true, PDATA( FloatMenuItemData, { 1, 0, 10, 0.1 } ) );
-FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, PDATA( FloatMenuItemData, { 0, 0, 0, 0 } ) );
+FloatMenuItem VmotMI( PSTR("VmotOverrule"), VmotOverrule, true, PDATA( FloatProps, { 1, 0, 10, 0.1 } ) );
+FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, PDATA( FloatProps, { 0, 0, 0, 0 } ) );
 
 MenuItem * mainMenuList[] = {&VmotMI, &ImotorMI, &ParkMI, &calibrationMenu, &settingsMenu, &alarmMenu, &measurementMenu, NULL};
 Menu mainMenu( PSTR("Menu"), mainMenuList );
 
+#define CH_TRIANGLE_LEFT 1
+#define CH_TRIANGLE_RIGHT 2
 const byte triangle_left[8] PROGMEM = {
   B00000,
   B00001,
@@ -108,7 +110,7 @@ MenuScreen::MenuScreen()
 
 void MenuScreen::process()
 {
-  char buf[40];
+  char buf[21];
   MenuItem* item = _selection > 0 ? _activeMenu->getItem( _selection - 1 ) : NULL;
 
   Key pressedKey = keySc.getKey();
@@ -176,12 +178,12 @@ void MenuScreen::process()
       }
       else { // if editing
         if ( rotMove > 0 ) {
-          // scroll down
+          // value up
           for( char n=0; n<rotMove; n++ )
             item->performAction( MIA_VALUEUP );
         }
         if ( rotMove < 0 ) {
-          // scroll up
+          // value down
           for( char n=0; n>rotMove; n-- )
             item->performAction( MIA_VALUEDOWN );
         }
@@ -193,7 +195,6 @@ void MenuScreen::draw()
 {
   char buf[21];
 
-  lcd.noBlink();
   for ( byte y = 0; y < 4; y++ )
   {
     byte i = y + _scrollPos;
@@ -205,8 +206,8 @@ void MenuScreen::draw()
       // Fill string to 20 characters
       strpad( buf, ' ', 20 );
       if ( _selection == i ) {
-        buf[18] = 1; // left arrow
-        buf[19] = 1;
+        buf[18] = CH_TRIANGLE_LEFT;
+        buf[19] = CH_TRIANGLE_LEFT;
       }
     }
     else {
@@ -214,7 +215,7 @@ void MenuScreen::draw()
       MenuItem* item = _activeMenu->getItem(i - 1);
 
       if ( _selection == i ) {
-        buf[0] = 2; // right arrow
+        buf[0] = CH_TRIANGLE_RIGHT;
       } else {
         buf[0] = ' ';
       }
@@ -230,12 +231,11 @@ void MenuScreen::draw()
     // Fill string to 20 characters
     strpad( buf, ' ', 20 );
 
-    // Put it on LCD if needed
-    lcd.setCursor( 0, y );
-    lcd.print( buf );
+    // Put it on LCD
+    lcd.printxy( 0, y, buf );
   }
 
-  // Place cursor if in edit more
+  // Place cursor if in edit mode
   MenuItem* item = _selection > 0 ? _activeMenu->getItem( _selection - 1 ) : NULL;
 
   if ( item ) {
@@ -244,6 +244,9 @@ void MenuScreen::draw()
     if ( _editing && x >= 0 ) {
       lcd.setCursor( x + 1, y );
       lcd.blink();
+    }
+    else {
+      lcd.noBlink();
     }
   }
 }
@@ -267,9 +270,9 @@ void MenuScreen::onEnter()
     switchMenu( &mainMenu ); // If you set a menu before going to the menu screen, that will be shown.
   }
   memcpy_P( buf, triangle_left, 8 );
-  lcd.createChar( 1, buf );
+  lcd.createChar( CH_TRIANGLE_LEFT, buf );
   memcpy_P( buf, triangle_right, 8 );
-  lcd.createChar( 2, buf );
+  lcd.createChar( CH_TRIANGLE_RIGHT, buf );
 }
 
 void MenuScreen::onLeave()
