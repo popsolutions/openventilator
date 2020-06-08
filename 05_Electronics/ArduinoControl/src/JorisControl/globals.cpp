@@ -59,24 +59,24 @@ const float defaultSettings_P[S_NUM_SETT] PROGMEM = { 0,      10,     2,        
 const FloatProps settingsProps_P[S_NUM_SETT] PROGMEM = 
 { // byte precision, float lowLimit, float highLimit, float stepSize
   { 0, 0,  0, 0 }, // S_NONE
-  { 1, 2,  0, 1 }, // S_PEEP
+  { 1, 2, 30, 1 }, // S_PEEP
   { 1, 0, 10, 0.5 }, // S_PEEPDeviation
   { 1, 1, 10, 0.5 }, // S_pDropMax
   { 1, 0,100, 1 }, // S_pMax
   { 1, 0, 40, 1 }, // S_pPl
-  { 0, 0, 10, 1 }, // S_pPlDeviation
-  { 0, 0, 10, 1 }, // S_RR
-  { 0, 0, 20, 1 }, // S_RRDeviation %
-  { 0, 0,  0, 0.1 }, // S_EI
+  { 1, 0, 10, 1 }, // S_pPlDeviation
+  { 1, 6, 30, 0.5 }, // S_RR
+  { 1, 0, 20, 1 }, // S_RRDeviation %
+  { 1, 1,  6, 0.1 }, // S_EI
   { 0, 0, 20, 1 }, // S_EIDeviation %
   { 0,100,1000,5 }, // S_Vt
   { 0, 1, 20, 1 }, // S_VtDeviation %
-  { 0, 0, 20, 0.1 }, // S_VE
+  { 1, 0, 20, 0.1 }, // S_VE
   { 1, 0, 20, 1 }, // S_VEDeviation %
   { 0, 0,  1, 1 }, // S_AssistEnabled
   { 1, 1, 10, 0.1 }, // S_AssistThreshold
-  { 1, 0,  0, 0.1 }, // S_AssistMaxRR
-  { 1, 0,  0, 0.1 }, // S_VsupMin
+  { 1, 6, 30, 0.1 }, // S_AssistMaxRR
+  { 1, 8, 12, 0.1 }, // S_VsupMin
   { 2, 0, 10, 0.1 }, // S_ImotMax
   { 0, 0,  0, 0 }, // S_VsupFac
   { 1, 0,  0, 0 }, // S_pOffset
@@ -150,7 +150,7 @@ Sett findMeasSett( Meas meas )
 FloatProps getSettingsProps( Sett sett )
 {
   FloatProps fd;
-  memcpy_P( &fd, &(settingsProps_P[sett]), sizeof( Sett ) );
+  memcpy_P( &fd, &(settingsProps_P[sett]), sizeof( FloatProps ) );
   return fd;
 }
 

@@ -132,8 +132,9 @@ void MainScreen::draw()
   float col[20];
   int num_rows;
   long start_pos;
+  byte cursorY;
 
-  bool blinker = ( ( (byte) circBuf.getHeadPos() & 7 ) < 6);
+  bool blinker = ( ( (byte) circBuf.getHeadPos() & 7 ) < 5);
 
   switch( _mode ) {
     case MSM_FULL_GRAPH:
@@ -152,6 +153,7 @@ void MainScreen::draw()
     case MSM_HALF_GRAPH_AND_VALUES:
     case MSM_VALUES_AND_SETPOINTS:
       byte x = 0;
+      lcd.noBlink();
       if( _mode == MSM_HALF_GRAPH_AND_VALUES ) {
         // Draw graph of history
         num_rows = 7 * _graphCompression;
@@ -198,6 +200,22 @@ void MainScreen::draw()
             FloatProps settProps = getSettingsProps( linkedSetting );
 
             format_float( buf+14, settings[linkedSetting], 5, settProps.precision, true, true );
+
+            // Now that we have the data, determine where edit cursor should be put
+            if( _editLine == y ) {
+              
+              char precisionShift = settProps.precision > 0 ? settProps.precision + 1 : 0;
+              char digitToModify;
+
+              // Make a simple log10-like function. The real one uses 400 program bytes or so...
+              if( settProps.stepSize < 0.1 ) { digitToModify = -3; }
+              else if( settProps.stepSize < 1 ) { digitToModify = -2; }
+              else if( settProps.stepSize < 10 ) { digitToModify = 0; }
+              else if( settProps.stepSize < 100 ) { digitToModify = 1; }
+              else { digitToModify = 2; }
+
+              cursorY = 19 - digitToModify - precisionShift;
+            }
           }
           buf[19] = 0; // terminator    WHY?
         }
@@ -209,11 +227,11 @@ void MainScreen::draw()
       break;
   }
   if ( _editLine >= 0 ) {
-    lcd.setCursor( 19, _editLine );
+    lcd.setCursor( cursorY, _editLine );
     lcd.blink();
   }
   else {
-    lcd.noBlink();
+    //lcd.noBlink();
   }
 }
 
