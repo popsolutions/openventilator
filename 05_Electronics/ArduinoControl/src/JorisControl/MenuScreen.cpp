@@ -39,6 +39,7 @@
 FloatMenuItem pMaxMI( PSTR("Pmax"), settings[S_pMax], true, &settingsProps_P[S_pMax] );
 FloatMenuItem PEEPDeviationMI( PSTR("PEEP deviation"), settings[S_PEEPDeviation], true, &settingsProps_P[S_PEEPDeviation] );
 FloatMenuItem RRDeviationMI( PSTR("RR deviation %"), settings[S_RRDeviation], true, &settingsProps_P[S_RRDeviation] );
+FloatMenuItem EIDeviationMI( PSTR("EI deviation %"), settings[S_EIDeviation], true, &settingsProps_P[S_EIDeviation] );
 
 MenuItem * alarmMenuList[] = {&pMaxMI, &PEEPDeviationMI, &RRDeviationMI, NULL};
 Menu alarmMenu( PSTR("Alarm"), alarmMenuList );
@@ -61,17 +62,15 @@ Menu measurementMenu( PSTR("Measurements"), measurementMenuList );
 ActionMenuItem calibMI( PSTR("Calibrate"), activateCalibrationScreen );
 FloatMenuItem PoffsetMI( PSTR("pOffset"), settings[S_pOffset], false, &settingsProps_P[S_pOffset] );
 FloatMenuItem QoffsetMI( PSTR("pQoffset"), settings[S_pQoffset], false, &settingsProps_P[S_pQoffset] );
-FloatMenuItem VsupFacMI( PSTR("Vsupply_factor"), settings[S_VsupFac], false, &settingsProps_P[S_VsupFac] );
-FloatMenuItem RiMI( PSTR("Ri"), settings[S_Ri], false, &settingsProps_P[S_Ri] );
-FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], false, &settingsProps_P[S_Kv] );
+FloatMenuItem VsupFactorMI( PSTR("VsupplyFactor"), settings[S_VsupFactor], true, &settingsProps_P[S_VsupFactor] );
+FloatMenuItem ImotShuntConductanceMI( PSTR("ImotShuntConductance"), settings[S_ImotShuntConductance], true, &settingsProps_P[S_ImotShuntConductance] );
+FloatMenuItem RiMI( PSTR("Ri"), settings[S_Ri], true, &settingsProps_P[S_Ri] );
+FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], true, &settingsProps_P[S_Kv] );
 
-MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFacMI, &RiMI, &KvMI, NULL};
+MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &RiMI, &KvMI, NULL};
 Menu calibrationMenu( PSTR("Calibration"), calibrationMenuList );
 
-FloatMenuItem VmotMI( PSTR("VmotOverrule"), VmotOverrule, true, PDATA( FloatProps, { 1, 0, 10, 0.1 } ) );
-FloatMenuItem ParkMI( PSTR("Park"), measValues[M_Park], false, PDATA( FloatProps, { 0, 0, 0, 0 } ) );
-
-MenuItem * mainMenuList[] = {&VmotMI, &ImotorMI, &ParkMI, &calibrationMenu, &settingsMenu, &alarmMenu, &measurementMenu, NULL};
+MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &measurementMenu, &calibrationMenu, NULL};
 Menu mainMenu( PSTR("Menu"), mainMenuList );
 
 #define CH_TRIANGLE_LEFT 1

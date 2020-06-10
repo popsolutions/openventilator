@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class CalibrationScreen;
 #include "globals.h"
 
-typedef enum : byte { CSM_ASKCONTINUE, CSM_VOLTAGE, CSM_PRESSUREOFFSETS, CSM_MOTORPREPARE, CSM_MOTORNORMAL, CSM_MOTORSLOWDOWN, CSM_COMPLETED, CSM_CANCELLED } CalibrationScreenMode;
+typedef enum : byte { CSM_ASK_CONTINUE, CSM_PARK_MOTOR, CSM_PRESSURE_OFFSETS, CSM_VOLTAGE, CSM_MOTOR_PREPARE, CSM_MOTOR_NORMAL, CSM_MOTOR_SLOWDOWN, CSM_COMPLETED, CSM_CANCELLED } CalibrationScreenStep;
 
 class CalibrationScreen : public Screen {
   public:
@@ -43,11 +43,11 @@ class CalibrationScreen : public Screen {
     void onEnter();
     void onLeave();
   private:
-    CalibrationScreenMode _step, _prevStep;
+    CalibrationScreenStep _step, _prevStep;
     byte _subStep;
     float _editValue;
-    float _Iavg_normal, _Iavg_slowdown;
-    unsigned int _avg_counter, _t_normal, _t_slowdown;
+    float _Iavg_normal, _Iavg_slowdown, _t_normal, _t_slowdown;
+    unsigned int _avg_counter;
     
 };
 

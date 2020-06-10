@@ -44,9 +44,9 @@ typedef struct {
 #define PDATA(t, ...) ([]{ static const t d PROGMEM = __VA_ARGS__; return &d; }())
 
 // All measurements are stored in an array with all elements accessible by name
-typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_pQ, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_Park, M_tCycl, M_NUM_MEAS } Meas;
+typedef enum : byte { M_NONE, M_PEEP, M_pDrop, M_pPl, M_pPk, M_RR, M_EI, M_Vt, M_VE, M_p, M_pQ, M_Q, M_Vsup, M_Vmot, M_Imot, M_Pmot, M_Park, M_tCycl, M_Pos, M_NUM_MEAS } Meas;
 // All settings are stored in an array with all elements accessible by name. This way they can easily be stored to and restored from EEPROM.
-typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFac, S_pOffset, S_pQoffset, S_Kv, S_Ri, S_NUM_SETT } Sett;
+typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFactor, S_ImotShuntConductance, S_pOffset, S_pQoffset, S_Kv, S_Ri, S_NUM_SETT } Sett;
 
 // Alarm information describes the relation between the measurements and settings
 typedef enum : byte { AT_NONE, AT_LowerLimit, AT_UpperLimit, AT_AbsDeviation, AT_PercDeviation } AlarmType;
@@ -61,14 +61,16 @@ extern char const *const measStrings_P[M_NUM_MEAS];
 extern const byte measPrecisions_P[M_NUM_MEAS];  // Precision of the values for formatting
 extern float measValues[M_NUM_MEAS];
 
-extern const float defaultSettings_P[S_NUM_SETT];
-extern const FloatProps settingsProps_P[S_NUM_SETT];
+extern const float defaultSettings_P[S_NUM_SETT]; // Settings used on factory reset, or if EEPROM data invalid
+extern const FloatProps settingsProps_P[S_NUM_SETT]; // Properties for the settings
 extern float settings[S_NUM_SETT];
 
 extern const Alarm alarms_P[];
 
-extern float VmotOverrule; // This setting should not be saved to EEPROM
-extern bool assistEnabled;
+extern bool& assistEnabled;
+
+extern float VmotOverrule; // Overrule voltage for motor, NAN if in operational mode (not in EEPROM)
+extern float motorSpeedSetpoint; // Currently set motor speed in RPM/min (not in EEPROM)
 
 #include "RotaryEncoder.h"
 #include "BufferedLiquidCrystal.h"

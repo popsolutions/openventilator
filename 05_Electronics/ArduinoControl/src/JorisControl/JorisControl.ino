@@ -32,7 +32,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "MenuScreen.h"
 #include "MemoryFree.h"
 
-
 /*
 Timer output  Arduino output  Chip pin  Pin name
 OC0A  6 12  PD6
@@ -66,9 +65,10 @@ TCCR2B = TCCR2B & B11111000 | B00000100; // for PWM frequency of 490.20 Hz (The 
 #define DIN_MOTOR_PARK 11
 #define DOUT_BEEPER 13    // A beeper that will beep if it gets voltage. A GND pin is right next to pin 13.
 
-#define AIN_VSUPPLY A0    // Detects the supply voltage with a resistor divider network of e.g. 22k and 3k3. 
-                          // Values are not critical, but you should set the correct dividing in the #define further below.
-#define AIN_IMOTOR A1     // Detects the current through the motor from supply, with a shunt resistor on ground side of 0.05 ohm. 
+#define AIN_VSUPPLY A0    // Detects the supply voltage with a resistor divider network of e.g. 10k and 3k3. 
+                          // Values are not critical, and can be calibrated from the menu.
+#define AIN_IMOTOR A1     // Detects the current through the motor from supply, with a shunt resistor on ground side of 0.05 ohm.
+                          // Can be calibrated from the menu.
 #define AIN_LUNGPRES A2   // Connected to MPX(V)5010 for detecting pressure.
 #define AIN_LUNGFLOW A3   // Connected to MPX(V)7002 for detecting differential pressure to detect flow.
                           // If your Arduino is 3V3, you can best choose the 3V3 version of the sensors. They have a 3 in their prefix.
@@ -83,8 +83,8 @@ RespirationAnalysis an;
 byte ADCPins[4] = { AIN_VSUPPLY, AIN_IMOTOR, AIN_LUNGPRES, AIN_LUNGFLOW };
 ADCReader ADCR( 4, ADCPins );
 
-#define VSUPPLYRATIO ((10000.0/3300.0)+1) // 10k and 3k3 resistor
-#define IMOTORCONDUCTANCE (1/0.05)
+//#define VSUPPLYRATIO ((10000.0/3300.0)+1) // 10k and 3k3 resistor
+//#define IMOTORCONDUCTANCE (1/0.04)
 
 uint8_t X_pinList[] = { DIN_KEYS_X0 };
 uint8_t Y_pinList[] = { DOUT_KEYS_Y0, DOUT_KEYS_Y1, DOUT_KEYS_Y2, DOUT_KEYS_Y3, DOUT_KEYS_Y4 };
@@ -98,7 +98,7 @@ long peak_ts = 0;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 1, 200 ) != 0 ) {
+  if( circBuf.init( 1, 160 ) != 0 ) {
     Serial.println( "Buffer allocation failed" );
   }
   ADCR.init( 125 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
@@ -112,7 +112,7 @@ void setup() {
   OCR1A = 249;        // Program top to 249 i.o. 255
   TCCR1A = B00100011; // Only use OC1B (to Arduino pin 10) output, PWM mode 11 (this is for timer 1)
   TCCR1B = B00010001; // for PWM frequency of 32kHz, and PWM mode 11           (this is for timer 1)
-  //TCCR1A = B10000001; // Only use OC2B output, PWM mode 5                    (this is for timer 2)
+  //TCCR1A = B10000001; // Only use OC2B (to Arduino pin 3), PWM mode 5        (this is for timer 2)
   //TCCR1B = B00001001; // for PWM frequency of 32kHz, and PWM mode 5          (this is for timer 2)
 
   pinMode( DIN_MOTOR_PARK, INPUT_PULLUP );
@@ -125,7 +125,7 @@ void setup() {
 
 void get_inputs()
 {
-  float VA[4], Vsup, Imot, p, pQ, Q, Vmot, tCycle;
+  float VA[4], Vsup, Imot, p, pQ, Q, Vmot;
   bool park;
 
   int a = ADCR.getAveraging();
@@ -134,9 +134,8 @@ void get_inputs()
   }
   ADCR.signalSamplesRead();
 
-  Serial.println();
-  Vsup = VA[0] * VSUPPLYRATIO;
-  Imot = VA[1] * IMOTORCONDUCTANCE;
+  Vsup = VA[0] * settings[S_VsupFactor];
+  Imot = VA[1] * settings[S_ImotShuntConductance];
   p    = (VA[2] - 0.2) * 22.66 - settings[S_pOffset];  // assuming MPX(V)5010
   pQ   = (VA[3] - 2.5) * 10.20 - settings[S_pQoffset]; // assuming MPX(V)7002
   Q    = pQ; // TODO: determine conversion formula
@@ -145,6 +144,13 @@ void get_inputs()
   Vmot = ( OCR1B * (Vsup+0.4) - 100 ) / 250; // This is calculated one cycle after setting it, to have all the measured values be from the same moment in time
   park = digitalRead( DIN_MOTOR_PARK );
 
+/*
+  Serial.print( " VA[0]=" );
+  Serial.print( VA[0] );
+  Serial.print( " VA[1]=" );
+  Serial.print( VA[1] );
+*/
+
   // Add data to circular buffer
   float row[1];
   //row[0] = t;
@@ -152,12 +158,21 @@ void get_inputs()
   int ar = circBuf.appendRow( row );
 
   // Process park switch
-  if( !measValues[M_Park] && park ) {
+  if( measValues[M_Park] == 0 && park == 1 ) {
     // Park has just become high
     long new_park_ts = millis();
-    tCycle = new_park_ts - park_ts;
+    measValues[M_tCycl] = ( new_park_ts - park_ts ) / 1000.0;
     park_ts = millis();
-    measValues[M_tCycl] = tCycle;
+    measValues[M_Pos] = 0;
+  }
+  else {
+    // Calculate current position
+    // We know that exactly 52 ms has passed since last time
+    //       position = 360 * 0.052 * motorSpeedSetpoint / 60;
+    if( isnan(VmotOverrule) ) 
+      measValues[M_Pos] += 0.312 * motorSpeedSetpoint;
+    else
+      measValues[M_Pos] = NAN; // We don't know the position when motor voltage is overruled
   }
 
   // Store values
@@ -182,11 +197,14 @@ void set_outputs()
 {
   float Vsup = measValues[M_Vsup];
 
+  // Calculate new speed setpoint
+  motorSpeedSetpoint = settings[S_RR];
+
   // Is voltage overrule set?
   float Vmot = VmotOverrule;
   if( isnan(Vmot) ) {
     // No overrule, calculate normal voltage based on wanted motor speed
-    Vmot = settings[S_RR] / settings[S_Kv] + measValues[M_Imot] * settings[S_Ri];
+    Vmot = motorSpeedSetpoint / settings[S_Kv] + measValues[M_Imot] * settings[S_Ri];
   }
   // Calculate PWM ratio based on wanted voltage, Schottky diode voltage (0.4V) and supply voltage
   //    Vmot = ( PWM * Vsup + (250-PWM) * -Vschottky ) / 250
@@ -199,9 +217,10 @@ void set_outputs()
   // =>  PWM  = (-250 * Vmot - 250 * Vschottky) / (-Vschottky-Vsup)
   // =>  PWM  = (250 * Vmot + 250 * Vschottky) / (Vsup+Vschottky)
   // =>  PWM = (250 * (Vmot + Vschottky)) / (Vsup + Vschottky)
-  byte PWM = coerce_int( (250 * (Vmot + 0.4)) / (Vsup + 0.4), 0, 250 );
+  byte PWM = Vmot == 0 ? 0 : coerce_int( (249 * (Vmot + 0.4)) / (Vsup + 0.4), 0, 249 );
   analogWrite( DOUT_MOTOR_PWM, PWM );
 
+/*
   // Debug output: current values (this takes a while, that's why it's done after setting output)
   Serial.print( " Vsup=" );
   Serial.print( measValues[M_Vsup] );
@@ -216,6 +235,7 @@ void set_outputs()
   Serial.print( " Vmot=" );
   Serial.print( measValues[M_Vmot] );
   Serial.println();
+*/
 }
 
 void loop() {
@@ -239,6 +259,8 @@ void loop() {
   activeScreen->draw();
 
   // Debug output: used time
+/*  
   Serial.print( F("t end=") );
   Serial.println( (unsigned int) millis() - t );
+*/
 }
