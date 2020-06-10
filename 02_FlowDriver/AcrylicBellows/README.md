@@ -22,7 +22,7 @@ https://cad.onshape.com/documents/65a7e619b43e334e4c6a76e1/w/303bd782c84ce8af675
 
 1. Do the [Bellow Assembly](BellowAssembly/BellowAssembly.md)
 
-1. Complete the gantry with the [2nd part of the Gantry assembly](Gantry/GantryAssemblyPart1.md)
+1. Complete the gantry with the [2nd part of the Gantry assembly](Gantry/GantryAssemblyPart2.md)
 
 1. Install the Base and start the [Frame Assembly](Frame/FrameAssembly.md)
 
