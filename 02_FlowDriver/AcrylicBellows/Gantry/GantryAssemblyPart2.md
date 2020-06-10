@@ -1,6 +1,6 @@
-**Gantry Assembly part 2 (after bellow assembly)**
+**Gantry Assembly part 2 (after bellows assembly)**
 
-Please just follow this steps after you have finished the Bellow Assembly. Make sure that the Logo on the Gantry is front oriented.
+Please just follow this steps after you have finished the Bellows Assembly. Make sure that the Logo on the Gantry is front oriented.
 
 ![](images/WhatsApp%20Image%202020-04-19%20at%2016.16.25.jpeg)
 
