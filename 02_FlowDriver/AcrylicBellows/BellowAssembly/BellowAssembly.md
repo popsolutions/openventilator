@@ -1,8 +1,8 @@
-**Bellow Assembly**
+**Bellows Assembly**
 
 ![](images/bellow13.30.53.jpeg)
 
-Start by assembling the bottom part of the Bellow. The Base and the Disk should press the Car Tire Chamber on each other. This pressure will garantee that there is no leakage. Also notice the importance of the O-rings and washer as they will also guarantee that air doesn't leak in the system. 
+Start by assembling the bottom part of the Bellows. The Base and the Disk should press the Car Tire Chamber on each other. This pressure will garantee that there is no leakage. Also notice the importance of the O-rings and washer as they will also guarantee that air doesn't leak in the system. 
 
 ![](images/bellow13.58.57.jpeg)
 
@@ -14,7 +14,7 @@ Screw>O-ring>Washer>O-ring
 
 ![](images/bellow14.00.00.jpeg)
 
-The Begining by the base is because the top part must me tighten by rotating the base of the gantry that will be screw to the disk set in the top part of the bellow. If you assemble the top part first you won't be able to screw the tubing connections that are in the bottom part. Please follow the steps as shown on the figures
+The Begining by the base is because the top part must me tighten by rotating the base of the gantry that will be screw to the disk set in the top part of the bellows. If you assemble the top part first you won't be able to screw the tubing connections that are in the bottom part. Please follow the steps as shown on the figures
 
 After passing the Screw trough the base you can tightit a little just hold firmly in place the disk
 
@@ -26,11 +26,11 @@ Having the disk aligned with the base is time to insert the 1/2in tubbing conect
 
 ![](images/bellow14.04.03.jpeg)
 
-Screw and thight the nut so with the pressure we make the bottom part of the bellow airsealed
+Screw and thight the nut so with the pressure we make the bottom part of the bellows airsealed
 
 ![](images/bellow14.05.46.jpeg)
 
-Make the same procedure for the TOP Part of the Bellow. It is important that you hold the screw inside the bellow trought the rubber so it doesn't fall down
+Make the same procedure for the TOP Part of the Bellows. It is important that you hold the screw inside the bellows trought the rubber so it doesn't fall down
 
 ![](images/bellow14.13.23.jpeg)
 
