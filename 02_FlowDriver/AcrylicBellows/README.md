@@ -1,6 +1,6 @@
 ![](../../images/OpenVentilatorLogoSmall.png) **OPEN VENTILATOR**
 
-This part is about the acrylic frame and its bellow. It is a flow driver (or pump), and the frame also allows mounting some of the other parts of the system to it, such as the valve block and the electronics.
+This part is about the acrylic frame and its bellows. It is a flow driver (or pump), and the frame also allows mounting some of the other parts of the system to it, such as the valve block and the electronics.
 To get an overview of the system as a whole, see the [toplevel description](../../SystemDescription.md) or the [assembly document](../../Assembly.md).
 
 ![](../../images/OpenVentilatorSpartanModel.png) 
@@ -20,7 +20,7 @@ https://cad.onshape.com/documents/65a7e619b43e334e4c6a76e1/w/303bd782c84ce8af675
 
 1. Start the [1st part of the Gantry assembly](Gantry/GantryAssemblyPart1.md)
 
-1. Do the [Bellow Assembly](BellowAssembly/BellowAssembly.md)
+1. Do the [Bellows Assembly](BellowAssembly/BellowAssembly.md)
 
 1. Complete the gantry with the [2nd part of the Gantry assembly](Gantry/GantryAssemblyPart2.md)
 
@@ -53,7 +53,7 @@ After this create all other needed parts, such as electronics and pneumatics. Se
 - 4x M3 Nut
 - 4x M3 Washer
 
-***Bellow Bottom Part***
+***Bellows Bottom Part***
 
 - 1x Acrilyc Disk
 - 1x Acrilic Base
@@ -67,7 +67,7 @@ After this create all other needed parts, such as electronics and pneumatics. Se
 - 1x Female 1/2 tube connection
 - 1x Piece of Car Tire 13 to 15 cm diameter (that's 20 to 23 cm when flat)
 
-***Bellow Top Part***
+***Bellows Top Part***
 
 - 2x Acrilyc Plates
 - 1x Screw 8mm x 35mm
