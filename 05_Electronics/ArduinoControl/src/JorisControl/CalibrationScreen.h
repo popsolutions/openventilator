@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 class CalibrationScreen;
 #include "globals.h"
 
-typedef enum : byte { CSM_ASK_CONTINUE, CSM_PARK_MOTOR, CSM_PRESSURE_OFFSETS, CSM_VOLTAGE, CSM_MOTOR_PREPARE, CSM_MOTOR_NORMAL, CSM_MOTOR_SLOWDOWN, CSM_COMPLETED, CSM_CANCELLED } CalibrationScreenStep;
+typedef enum : byte { CSM_ASK_CONTINUE, CSM_PARK_MOTOR, CSM_PRESSURE_OFFSETS, CSM_VOLTAGE, CSM_MOTOR_PREPARE, CSM_CURRENT_LOW_CONFIRM, CSM_CURRENT_LOW_IDLE, CSM_CURRENT_LOW_RUNNING, CSM_CURRENT_HIGH_CONFIRM, CSM_CURRENT_HIGH_IDLE, CSM_CURRENT_HIGH_RUNNING, CSM_MOTOR_NORMAL, CSM_MOTOR_SLOWDOWN, CSM_COMPLETED, CSM_CANCELLED } CalibrationScreenStep;
 
 class CalibrationScreen : public Screen {
   public:
@@ -46,7 +46,17 @@ class CalibrationScreen : public Screen {
     CalibrationScreenStep _step, _prevStep;
     byte _subStep;
     float _editValue;
-    float _Iavg_normal, _Iavg_slowdown, _t_normal, _t_slowdown;
+    float _var1, _var2, _var3, _var4; // Use these variable spaces for multiple steps
+    float& _Iavg_normal    = _var1;
+    float& _Iavg_slowdown  = _var2;
+    float& _t_normal       = _var3;
+    float& _t_slowdown     = _var4;
+    float& _supplyCurrentIdle_lowV  = _var1;
+    float& _motorCurrent_lowV       = _var2;
+    float& _Iavg_lowV               = _var3;
+    float& _supplyCurrentIdle_highV = _var1; // Reuse
+    float& _motorCurrent_highV      = _var1; // Reuse
+    float& _Iavg                    = _var4;
     unsigned int _avg_counter;
     
 };

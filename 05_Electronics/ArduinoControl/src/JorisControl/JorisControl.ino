@@ -135,7 +135,7 @@ void get_inputs()
   ADCR.signalSamplesRead();
 
   Vsup = VA[0] * settings[S_VsupFactor];
-  Imot = VA[1] * settings[S_ImotShuntConductance];
+  Imot = VA[1] * settings[S_ImotShuntConductance] + settings[S_ImotOffset];
   p    = (VA[2] - 0.2) * 22.66 - settings[S_pOffset];  // assuming MPX(V)5010
   pQ   = (VA[3] - 2.5) * 10.20 - settings[S_pQoffset]; // assuming MPX(V)7002
   Q    = pQ; // TODO: determine conversion formula

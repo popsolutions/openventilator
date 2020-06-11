@@ -52,11 +52,11 @@ const char M_tCycl_s[] PROGMEM = "tCycl";
 const char M_Pos_s[]   PROGMEM = "Pos";
 //                                typedef enum : byte { M_NONE, M_PEEP,   M_pDrop,   M_pPl,   M_pPk,   M_RR,   M_EI,   M_Vt,   M_VE,   M_p,   M_pQ,   M_Q,   M_Vsup,   M_Vmot,   M_Imot,   M_Pmot,   M_Park,   M_tCycl,   M_Pos, M_NUM_MEAS } Meas;
 char const *const measStrings_P[M_NUM_MEAS] PROGMEM = { NULL,   M_PEEP_s, M_pDrop_s, M_pPl_s, M_pPk_s, M_RR_s, M_EI_s, M_Vt_s, M_VE_s, M_p_s, M_pQ_s, M_Q_s, M_Vsup_s, M_Vmot_s, M_Imot_s, M_Pmot_s, M_Park_s, M_tCycl_s, M_Pos_s };
-const byte measPrecisions_P[M_NUM_MEAS] PROGMEM =     { 0,      1,        1,         1,       1,       1,      1,      0,      1,      1,     2,      2,     1,        1,        1,        1,        0,        1,         0 };
+const byte measPrecisions_P[M_NUM_MEAS] PROGMEM =     { 0,      1,        1,         1,       1,       1,      1,      0,      1,      1,     2,      2,     1,        1,        2,        1,        0,        1,         0 };
 float measValues[M_NUM_MEAS];
 
-//                              typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFactor, S_ImotShuntConductance, S_pOffset, S_pQoffset, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
-const float defaultSettings_P[S_NUM_SETT] PROGMEM = { 0,      10,     2,               4,          40,     25,    4,              15,   10,            2,    10,            300,  10,            4.5,  10,            0,               2,                 30,            11,        4.0,       4.0,          20,                   0,         0,          NAN,     NAN      };
+//                              typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFactor, S_ImotShuntConductance, S_ImotOffset, S_pOffset, S_pQoffset, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
+const float defaultSettings_P[S_NUM_SETT] PROGMEM = { 0,      10,     2,               4,          40,     25,    4,              15,   10,            2,    10,            300,  10,            4.5,  10,            0,               2,                 30,            11,        4.0,       4.0,          20,                     0.2,          0,         0,          NAN,     NAN      };
 const FloatProps settingsProps_P[S_NUM_SETT] PROGMEM = 
 { // byte precision, float lowLimit, float highLimit, float stepSize
   { 0, 0,  0, 0 }, // S_NONE
@@ -81,6 +81,7 @@ const FloatProps settingsProps_P[S_NUM_SETT] PROGMEM =
   { 2, 0, 10, 0.1 }, // S_ImotMax
   { 2, 0, 10, 0.1 }, // S_VsupFactor
   { 1, 0, 40, 0.1 }, // S_ImotShuntConductance
+  { 2, 0, 1, 0.01 }, // S_ImotOffset
   { 2,-5, 5, 0.1 }, // S_pOffset
   { 2,-5, 5, 0.1 }, // S_pQoffset
   { 1, 1, 20, 0.1 }, // S_KvMot
@@ -102,8 +103,8 @@ const Alarm alarms_P[] PROGMEM = {
 
 bool& assistEnabled = (bool&) settings[S_AssistEnabled]; // This bool is stored in float space; so cannot be read as float
 
-float VmotOverrule = 3; // Overrule voltage for motor, NAN if in operational mode (not in EEPROM)
-float motorSpeedSetpoint; // Currently set motor speed in RPM/min (not in EEPROM)
+float VmotOverrule = NAN; // Overrule voltage for motor, NAN if in operational mode (not stored in EEPROM)
+float motorSpeedSetpoint; // Currently set motor speed in RPM/min (not stored in EEPROM)
 
 void strpad( char* buf, char chr, byte len )
 {

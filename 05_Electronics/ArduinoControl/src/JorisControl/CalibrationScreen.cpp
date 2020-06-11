@@ -38,7 +38,7 @@ void CalibrationScreen::process()
   Key pressedKey = keySc.getKey();
   char rotMove = rotEnc.getIncrPos();
   CalibrationScreenStep currStep = _step;
-  
+
   switch( _step ) {
     case CSM_ASK_CONTINUE:
       if( _prevStep != _step ) { // First time in this case
@@ -78,23 +78,13 @@ void CalibrationScreen::process()
           _step = CSM_CANCELLED;
           break;
       }
+      break;
 
     case CSM_PRESSURE_OFFSETS:
       switch( pressedKey ) {
         case KEY_3:
           settings[S_pOffset] += measValues[M_p];
           settings[S_pQoffset] += measValues[M_pQ];
-          _step = (CalibrationScreenStep) ( (byte)_step + 1 );
-          break;
-        case KEY_0:
-          _step = CSM_CANCELLED;
-          break;
-      }
-      break;
-
-    case CSM_MOTOR_PREPARE:
-      switch( pressedKey ) {
-        case KEY_3:
           _step = (CalibrationScreenStep) ( (byte)_step + 1 );
           break;
         case KEY_0:
@@ -112,8 +102,8 @@ void CalibrationScreen::process()
         case KEY_3:
           if( _subStep > 0 ) { // Only execute if the value was edited
             // Calculate value
-            float Vin = measValues[M_Vsup] / settings[S_VsupFactor];
-            settings[S_VsupFactor] = _editValue / Vin;
+            float Vin = measValues[M_Vsup] / settings[S_VsupFactor]; // This is the voltage that we got on the analog input
+            settings[S_VsupFactor] = _editValue / Vin;               // This is the new dividing factor
           }
           _step = (CalibrationScreenStep) ( (byte)_step + 1 );
           break;
@@ -125,6 +115,137 @@ void CalibrationScreen::process()
           if( rotMove != 0 ) _subStep = 1;
           _editValue += 0.1 * rotMove;
           _editValue = coerce_float( _editValue, 8, 16 );
+          break;
+      }
+      break;
+
+    case CSM_MOTOR_PREPARE:
+      switch( pressedKey ) {
+        case KEY_3:
+          _step = (CalibrationScreenStep) ( (byte)_step + 1 );
+          break;
+        case KEY_0:
+          _step = CSM_CANCELLED;
+          break;
+      }
+      break;
+
+    case CSM_CURRENT_LOW_CONFIRM:
+    case CSM_CURRENT_HIGH_CONFIRM:
+      switch( pressedKey ) {
+        case KEY_3:
+          _step = (CalibrationScreenStep) ( (byte)_step + 1 );
+          break;
+      }
+      break;
+
+    case CSM_CURRENT_LOW_IDLE:
+    case CSM_CURRENT_HIGH_IDLE:
+      if( _prevStep != _step ) { // First time in this case
+        _subStep = 0;
+        if( _step == CSM_CURRENT_LOW_IDLE )
+          _editValue = 0;
+        else
+          _editValue = _supplyCurrentIdle_lowV;
+      }
+      switch( pressedKey ) {
+        case KEY_3:
+          if( _subStep == 0 && _editValue == 0 ) {
+            _step = (CalibrationScreenStep) ( (byte)CSM_CURRENT_HIGH_RUNNING + 1 ); // SKIP CURRENT CAL
+          } else {
+            if( _step == CSM_CURRENT_LOW_IDLE )
+              _supplyCurrentIdle_lowV = _editValue;
+            else
+              _supplyCurrentIdle_highV = _editValue;
+            _step = (CalibrationScreenStep) ( (byte)_step + 1 );
+          }
+          break;
+        case KEY_0:
+          _step = CSM_CANCELLED;
+          break;
+        default:
+          // process rotary encoder
+          if( rotMove != 0 ) _subStep = 1;
+          _editValue += 0.01 * rotMove;
+          _editValue = coerce_float( _editValue, 0, 1 );
+          break;
+      }
+      break;
+
+    case CSM_CURRENT_LOW_RUNNING:
+    case CSM_CURRENT_HIGH_RUNNING:
+      if( _prevStep != _step ) { // First time in this case
+        _subStep = 0;
+        _editValue = NAN; // Will be filled whe motor is at speed
+      }
+      switch( _subStep ) {
+        case 0:
+          // Increase motor voltage to more than supply speed
+          // We have to run the motor at 100% PWM to make sure the current can be measured correctly
+          if( VmotOverrule < 20 ) {
+            VmotOverrule += 1;
+          }
+          else {
+            _subStep ++;
+          }
+          break;
+        case 1:
+          _subStep ++;
+          // Take initial averaging value
+          _Iavg = measValues[M_Imot];
+          //_avg_counter = 0;
+
+          // Take original current estimate, add idle current and current flowing in driver circuit
+          _editValue = measValues[M_Imot] + _supplyCurrentIdle_lowV + (measValues[M_Vsup]-0.6)/1000 + 3.8/1000;
+          break;
+        case 2:
+        case 3:
+          // Keep averaging the current
+          _Iavg = (0.95 * _Iavg) + (0.05 * measValues[M_Imot]);
+          break;
+      }
+      switch( pressedKey ) {
+        case KEY_3:
+          if( _step == CSM_CURRENT_LOW_RUNNING ) {
+            _Iavg_lowV = _Iavg;
+            _motorCurrent_lowV = _editValue - _supplyCurrentIdle_lowV - (measValues[M_Vsup]-0.6)/1000 - 3.8/1000;
+            Serial.print( " _Iavg_lowV = " );
+            Serial.print( _Iavg_lowV );
+            Serial.print( " _motorCurrent_lowV = " );
+            Serial.print( _motorCurrent_lowV );
+            Serial.println();
+          }
+          else {
+            float Iavg_highV = _Iavg;
+            _motorCurrent_highV = _editValue - _supplyCurrentIdle_highV - (measValues[M_Vsup]-0.6)/1000 - 3.8/1000;
+
+            Serial.print( " Iavg_highV = " );
+            Serial.print( Iavg_highV );
+            Serial.print( " _motorCurrent_highV = " );
+            Serial.print( _motorCurrent_highV );
+            Serial.println();
+
+            // Calculate offset, where the current crosses the axis
+            float ImotOffset = _motorCurrent_highV - ( _motorCurrent_highV - _motorCurrent_lowV ) / ( Iavg_highV - _Iavg_lowV ) * Iavg_highV;
+
+            // Calculate the voltage we originally got on the analog input (which is not stored)
+            float Vin = ( _Iavg_normal - settings[S_ImotOffset] ) / settings[S_ImotShuntConductance];
+
+            // Calculate correct settings
+            settings[S_ImotShuntConductance] = (_motorCurrent_highV - ImotOffset) / Vin; // This is the new conductance (=1/R)
+            settings[S_ImotOffset] = ImotOffset;                          // And this the offset
+          }
+          VmotOverrule = 0; // Stop the motor
+          _step = (CalibrationScreenStep) ( (byte)_step + 1 );
+          break;
+        case KEY_0:
+          _step = CSM_CANCELLED;
+          break;
+        default:
+          // process rotary encoder
+          if( rotMove != 0 ) _subStep = 3;
+          _editValue += 0.01 * rotMove;
+          _editValue = coerce_float( _editValue, 0, 5 );
           break;
       }
       break;
@@ -171,13 +292,13 @@ void CalibrationScreen::process()
             Serial.println();
 
             // Check if conditions are met
-            if( _t_normal > 4 ) {
+            if( _t_normal > 4.3 ) {
               // Rotating too slowly, increase speed
               VmotOverrule *= 1.1;
               _Iavg_normal = 0;
               _avg_counter = 0;
               _subStep = 2;
-            } else if( _t_normal < 3.3 ) {
+            } else if( _t_normal < 3.7 ) {
               // Rotating too fast, decrease speed
               VmotOverrule *= 0.9;
               _Iavg_normal = 0;
@@ -244,7 +365,7 @@ void CalibrationScreen::process()
               _Iavg_slowdown = 0;
               _avg_counter = 0;
               _subStep = 2;
-            } else if( _Iavg_slowdown > _Iavg_normal * 4 ) {
+            } else if( _Iavg_slowdown > _Iavg_normal * 3 ) {
               // Too much current for measurement
               _Iavg_slowdown = 0;
               _avg_counter = 0;
@@ -271,9 +392,8 @@ void CalibrationScreen::process()
 
     case CSM_COMPLETED:
     case CSM_CANCELLED:
-      if( _subStep == 0 ) {
+      if( _prevStep != _step ) { // First time in this case
         VmotOverrule = 0; // Stop the motor
-        _subStep ++;
       }
       switch( pressedKey ) {
         case KEY_0:
@@ -301,6 +421,7 @@ void CalibrationScreen::onEnter()
   lcd.clear();
   _step = CSM_ASK_CONTINUE;
   _prevStep = CSM_COMPLETED; // Force redraw
+  vgraph.prepare();
 }
 
 void CalibrationScreen::onLeave()
@@ -371,15 +492,46 @@ void CalibrationScreen::draw()
       }
       break;
 
-    case CSM_MOTOR_NORMAL:
+    case CSM_CURRENT_LOW_CONFIRM:
+    case CSM_CURRENT_HIGH_CONFIRM:
+      if( _prevStep != _step ) {
+        lcd.noBlink();
+        lcd.clear();
+        lcd.printxy( 0, 0, F("Set supply") );
+        if( _step == CSM_CURRENT_LOW_CONFIRM )
+          lcd.printxy( 0, 1, F("to around 8.0V") );
+        else
+          lcd.printxy( 0, 1, F("to around 14.0V") );
+        lcd.printxy( 0, 2, F("and press OK.") );
+      }
+      break;
+
+    case CSM_CURRENT_LOW_IDLE:
+    case CSM_CURRENT_LOW_RUNNING:
+    case CSM_CURRENT_HIGH_IDLE:
+    case CSM_CURRENT_HIGH_RUNNING:
       if( _prevStep != _step ) {
         lcd.clear();
-        lcd.printxy( 0, 0, F("Measuring") );
-        lcd.printxy( 0, 2, F("...") );
+        lcd.printxy( 0, 0, F("Measure") );
+        lcd.printxy( 0, 1, F("supply current") );
+        lcd.printxy( 0, 2, F("and set here:") );
+        lcd.blink();
+        showButtons = OK_Cancel;
+      }
+      format_float( buf, _editValue, 5, 2, true, true );
+      lcd.printxy( 15, 2, buf );
+      lcd.setCursor( 19, 2 ); // Force placing cursor
+      break;
+
+    case CSM_MOTOR_NORMAL:
+      if( _prevStep != _step ) {
+        lcd.noBlink();
+        lcd.clear();
+        lcd.printxy( 0, 2, F("Measuring...") );
         showButtons = Cancel;
       }
       break;
-      
+
     case CSM_MOTOR_SLOWDOWN:
       if( _prevStep != _step ) {
         lcd.clear();
@@ -390,11 +542,11 @@ void CalibrationScreen::draw()
       }
 
       // Draw a graph of motor current
-      vgraph.draw( measValues[M_Imot], -_Iavg_normal, 7 * _Iavg_normal, 0, 3, 0 ); // Arrows will be between 2 and 4 * _Iavg_normal motor current
+      vgraph.draw( measValues[M_Imot], 0.5 * _Iavg_normal, 4.5 * _Iavg_normal, 0, 3, 0 ); // Arrows will be between 2 and 3 * _Iavg_normal motor current
 
       if( measValues[M_Imot] < 2 * _Iavg_normal ) {
         lcd.printxy( 3, 3, F("Use more force") );
-      } else if( measValues[M_Imot] > 4 * _Iavg_normal ) {
+      } else if( measValues[M_Imot] > 3 * _Iavg_normal ) {
         lcd.printxy( 3, 3, F("Use less force") );
       } else {
         lcd.printxy( 3, 3, F("Measuring...  ") );
