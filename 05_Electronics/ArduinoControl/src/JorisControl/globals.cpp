@@ -55,8 +55,8 @@ char const *const measStrings_P[M_NUM_MEAS] PROGMEM = { NULL,   M_PEEP_s, M_pDro
 const byte measPrecisions_P[M_NUM_MEAS] PROGMEM =     { 0,      1,        1,         1,       1,       1,      1,      0,      1,      1,     2,      2,     1,        1,        2,        1,        0,        1,         0 };
 float measValues[M_NUM_MEAS];
 
-//                              typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFactor, S_ImotShuntConductance, S_ImotOffset, S_pOffset, S_pQoffset, S_KvMot, S_RiMot, S_NUM_SETT } Sett;
-const float defaultSettings_P[S_NUM_SETT] PROGMEM = { 0,      10,     2,               4,          40,     25,    4,              15,   10,            2,    10,            300,  10,            4.5,  10,            0,               2,                 30,            11,        4.0,       4.0,          20,                     0.2,          0,         0,          NAN,     NAN      };
+//                              typedef enum : byte { S_NONE, S_PEEP, S_PEEPDeviation, S_pDropMax, S_pMax, S_pPl, S_pPlDeviation, S_RR, S_RRDeviation, S_EI, S_EIDeviation, S_Vt, S_VtDeviation, S_VE, S_VEDeviation, S_AssistEnabled, S_AssistThreshold, S_AssistMaxRR, S_VsupMin, S_ImotMax, S_VsupFactor, S_ImotShuntConductance, S_ImotOffset, S_pOffset, S_pQoffset, S_Kv, S_Ri0, S_RiIdep, S_NUM_SETT } Sett;
+const float defaultSettings_P[S_NUM_SETT] PROGMEM = { 0,      10,     2,               4,          40,     25,    4,              15,   10,            2,    10,            300,  10,            4.5,  10,            0,               2,                 30,            11,        4.0,       4.0,          20,                     0.2,          0,         0,          NAN,  NAN,   0         };
 const FloatProps settingsProps_P[S_NUM_SETT] PROGMEM = 
 { // byte precision, float lowLimit, float highLimit, float stepSize
   { 0, 0,  0, 0 }, // S_NONE
@@ -78,14 +78,15 @@ const FloatProps settingsProps_P[S_NUM_SETT] PROGMEM =
   { 1, 1, 10, 0.1 }, // S_AssistThreshold
   { 1, 6, 30, 0.1 }, // S_AssistMaxRR
   { 1, 8, 12, 0.1 }, // S_VsupMin
-  { 2, 0, 10, 0.1 }, // S_ImotMax
-  { 2, 0, 10, 0.1 }, // S_VsupFactor
+  { 2, 0, 10, 0.01 }, // S_ImotMax
+  { 2, 0, 10, 0.01 }, // S_VsupFactor
   { 1, 0, 40, 0.1 }, // S_ImotShuntConductance
   { 2, 0, 1, 0.01 }, // S_ImotOffset
-  { 2,-5, 5, 0.1 }, // S_pOffset
-  { 2,-5, 5, 0.1 }, // S_pQoffset
-  { 1, 1, 20, 0.1 }, // S_KvMot
-  { 2, 0, 4, 0.01 }  // S_RiMot
+  { 2,-5, 5, 0.01 }, // S_pOffset
+  { 2,-5, 5, 0.01 }, // S_pQoffset
+  { 1, 1, 20, 0.1 }, // S_Kv
+  { 2, 0, 4, 0.01 },  // S_Ri0
+  { 2, -1, 0, 0.01 }  // S_RiIdep
  };
 float settings[S_NUM_SETT];
 
@@ -113,16 +114,40 @@ void strpad( char* buf, char chr, byte len )
   buf[len] = 0; // terminate string
 }
 
-char* format_float( char* buf, float value, byte len, byte precision, bool allow_shift, bool right_align )
+char* format_float( char* buf, float value, byte maxlen, byte precision, bool allow_shift, bool right_align )
 // Always supply a buffer of at least size len + 1
 {
-  if( fabs(value) > pow( 10, len ) ) {
-    for( byte n=0; n<len; n++ ) buf[n] = '#'; 
+  buf[0] = 0;
+  if( precision + 2 > maxlen ) { return buf; } // seriously, did you really ask for this?
+
+  byte int_len;
+  byte frac_len = (precision == 0 ) ? 0 : (precision + 1);
+
+  if( value < 10 && value > -10 ) int_len = 1;
+  else if( value < 100 && value > -100 ) int_len = 2;
+  else if( value < 1000 && value > -1000 ) int_len = 3;
+  else if( value < 10000 && value > -10000 ) int_len = 4;
+  else if( value < 100000 & value > -100000 ) int_len = 5;
+  else if( value < 1000000 & value > -1000000 ) int_len = 6;
+  else int_len = 7; // Too large
+  if( value < 0 ) int_len ++; // Minus symbol
+  
+  if( int_len >= 7 || int_len > maxlen || ( !allow_shift && (int_len + frac_len > maxlen)  )) { // number is too large
+    for( byte n=0; n<maxlen; n++ ) buf[n] = '#'; 
+    buf[maxlen] = 0;
+    return buf;
+  }
+  // From this moment on we can safely call the unsafe dtostrf function
+  // Now do alignment
+  if( right_align && int_len + frac_len < maxlen ) {
+    strpad( buf, ' ', maxlen - int_len - frac_len );
+    dtostrf( value, int_len + frac_len, precision, buf + maxlen - int_len - frac_len );
   }
   else {
-    dtostrf( value, len, precision, buf );
-    strpad( buf, ' ', len );
+    dtostrf( value, maxlen, precision, buf );
+    strpad( buf, ' ', maxlen );
   }
+  buf[maxlen] = 0;
   return buf;
 }
 

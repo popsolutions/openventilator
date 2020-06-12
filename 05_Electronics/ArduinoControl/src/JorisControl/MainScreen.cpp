@@ -128,10 +128,6 @@ void MainScreen::onLeave()
 
 void MainScreen::draw()
 {
-  char buf[30];
-  float col[20];
-  int num_rows;
-  long start_pos;
   byte cursorY;
 
   bool blinker = ( ( (byte) circBuf.getHeadPos() & 7 ) < 5);
@@ -139,15 +135,17 @@ void MainScreen::draw()
   switch( _mode ) {
     case MSM_FULL_GRAPH:
       // Draw graph of history
-      num_rows = 19 * _graphCompression;
-      start_pos = (( circBuf.getHeadPos() - num_rows ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
-      circBuf.getCompressedColumn( 0, start_pos, num_rows, _graphCompression, col );
-      vgraph.drawMultiple( 19, col, 0.0, 40.0, 0, 3, 0 );
-      
-      // Draw single-widthbar with current pressure
-      circBuf.getColumn( 0, -1, 1, col );
-      vgraph.draw( col[0], 0.0, 40.0, 19, 3, 0 );
-      
+      {
+        float col[20];
+        int num_rows = num_rows = 19 * _graphCompression;
+        long start_pos = (( circBuf.getHeadPos() - num_rows ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
+        circBuf.getCompressedColumn( 0, start_pos, num_rows, _graphCompression, col );
+        vgraph.drawMultiple( 19, col, 0.0, 40.0, 0, 3, 0 );
+
+        // Draw single-widthbar with current pressure
+        circBuf.getColumn( 0, -1, 1, col );
+        vgraph.draw( col[0], 0.0, 40.0, 19, 3, 0 );
+      }
       break;
       
     case MSM_HALF_GRAPH_AND_VALUES:
@@ -156,20 +154,25 @@ void MainScreen::draw()
       lcd.noBlink();
       if( _mode == MSM_HALF_GRAPH_AND_VALUES ) {
         // Draw graph of history
-        num_rows = 7 * _graphCompression;
-        start_pos = (( circBuf.getHeadPos() - num_rows ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
+        float col[20];
+        int num_rows = 7 * _graphCompression;
+        long start_pos = (( circBuf.getHeadPos() - num_rows ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
         circBuf.getCompressedColumn( 0, start_pos, num_rows, _graphCompression, col );
         vgraph.drawMultiple( 7, col, 0.0, 40.0, x, 3, 0 );
         x+=7;
       }
-      // Draw single-widthbar with current pressure
-      circBuf.getColumn( 0, -1, 1, col );
-      vgraph.draw( col[0], 0.0, 40.0, x, 3, 0 );
-      x++;
+      {
+        float col[1];
+        // Draw single-widthbar with current pressure
+        circBuf.getColumn( 0, -1, 1, col );
+        vgraph.draw( col[0], 0.0, 40.0, x, 3, 0 );
+        x++;
+      }
 
       // Show measurements
       for( byte y=0; y<4; y++ ) {
         // Which measurement to display?
+        char buf[20];
         Meas meas = _measSel[y];
 
         buf[0] = ' ';
@@ -182,11 +185,11 @@ void MainScreen::draw()
         byte prec = pgm_read_byte( &(measPrecisions_P[meas]) );
 
         // Format the value
-        format_float( buf+6, measValues[meas], 5, prec, true, true );
+        format_float( buf+6, measValues[meas], 5, prec, false, true );
         strpad( buf+6, ' ', 19-6 );
 
         // Show alarm indicator *
-        if( blinker ) {
+        if( false && blinker ) { // TODO check alarms
           buf[11] = '*';
         } else {
           buf[11] = ' ';
@@ -199,7 +202,7 @@ void MainScreen::draw()
             // Read settings properties from PROGMEM
             FloatProps settProps = getSettingsProps( linkedSetting );
 
-            format_float( buf+14, settings[linkedSetting], 5, settProps.precision, true, true );
+            format_float( buf+14, settings[linkedSetting], 5, settProps.precision, false, true );
 
             // Now that we have the data, determine where edit cursor should be put
             if( _editLine == y ) {

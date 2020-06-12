@@ -63,12 +63,13 @@ ActionMenuItem calibMI( PSTR("Calibrate"), activateCalibrationScreen );
 FloatMenuItem PoffsetMI( PSTR("pOffset"), settings[S_pOffset], false, &settingsProps_P[S_pOffset] );
 FloatMenuItem QoffsetMI( PSTR("pQoffset"), settings[S_pQoffset], false, &settingsProps_P[S_pQoffset] );
 FloatMenuItem VsupFactorMI( PSTR("VsupplyFactor"), settings[S_VsupFactor], true, &settingsProps_P[S_VsupFactor] );
-FloatMenuItem ImotShuntConductanceMI( PSTR("ImotShuntConductance"), settings[S_ImotShuntConductance], true, &settingsProps_P[S_ImotShuntConductance] );
+FloatMenuItem ImotShuntConductanceMI( PSTR("ImotShuntCond"), settings[S_ImotShuntConductance], true, &settingsProps_P[S_ImotShuntConductance] );
 FloatMenuItem ImotOffsetMI( PSTR("ImotOffset"), settings[S_ImotOffset], true, &settingsProps_P[S_ImotOffset] );
-FloatMenuItem RiMI( PSTR("Ri"), settings[S_Ri], true, &settingsProps_P[S_Ri] );
+FloatMenuItem Ri0MI( PSTR("Ri0"), settings[S_Ri0], true, &settingsProps_P[S_Ri0] );
+FloatMenuItem RiIdepMI( PSTR("RiIdep"), settings[S_RiIdep], true, &settingsProps_P[S_RiIdep] );
 FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], true, &settingsProps_P[S_Kv] );
 
-MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &ImotOffsetMI, &RiMI, &KvMI, NULL};
+MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &ImotOffsetMI, &Ri0MI, &RiIdepMI, &KvMI, NULL};
 Menu calibrationMenu( PSTR("Calibration"), calibrationMenuList );
 
 MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &measurementMenu, &calibrationMenu, NULL};

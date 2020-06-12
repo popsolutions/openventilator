@@ -44,21 +44,11 @@ void FloatMenuItem::generateText( char* buf, byte maxLength )
 {
   FloatProps data = _getPData();
 
-  // Format the number with maximum width
-  //format_float( buf, _value, 4, data.precision, true, true );
-  // TODO use maxLength and right alignment
-
-  // Check how many spaces before the number
-  //byte n;
-  //for( n=0; buf[n] !=' ' && n<maxLength; n++ );
-  
-  //strncpy_P( buf, _text_P, n );
   strncpy_P( buf, _text_P, maxLength );
   buf[maxLength] = 0; // terminate
   strpad( buf, ' ', maxLength );
   
-  format_float( buf+maxLength-4, _value, 4, data.precision, true, true );
-  // TODO use maxLength and right alignment
+  format_float( buf+maxLength-5, _value, 5, data.precision, true, true );
 }
 
 byte FloatMenuItem::getEditCursorPos( byte maxLength )

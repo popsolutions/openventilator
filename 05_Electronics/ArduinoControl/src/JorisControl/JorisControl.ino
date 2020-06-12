@@ -204,7 +204,7 @@ void set_outputs()
   float Vmot = VmotOverrule;
   if( isnan(Vmot) ) {
     // No overrule, calculate normal voltage based on wanted motor speed
-    Vmot = motorSpeedSetpoint / settings[S_Kv] + measValues[M_Imot] * settings[S_Ri];
+    Vmot = motorSpeedSetpoint / settings[S_Kv] + measValues[M_Imot] * (settings[S_Ri0] + measValues[M_Imot] * settings[S_RiIdep] );
   }
   // Calculate PWM ratio based on wanted voltage, Schottky diode voltage (0.4V) and supply voltage
   //    Vmot = ( PWM * Vsup + (250-PWM) * -Vschottky ) / 250

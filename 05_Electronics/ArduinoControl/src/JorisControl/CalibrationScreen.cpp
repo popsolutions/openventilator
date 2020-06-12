@@ -318,7 +318,7 @@ void CalibrationScreen::process()
       }
       break;
 
-    case CSM_MOTOR_SLOWDOWN:
+    case CSM_MOTOR_SLOWDOWN1:
       if( _prevStep != _step ) { // First time in this case
         _subStep = 0;
       }
@@ -331,13 +331,13 @@ void CalibrationScreen::process()
         case 1: // Before measuring, waiting until park input active
           if( measValues[M_Park] == 1 ) {
             // Park switch is now active, start measurement!
-            _Iavg_slowdown = 0;
+            _Iavg_slowdown1 = 0;
             _avg_counter = 0;
             _subStep = 2;
           }
           break;
         case 2: // Measuring and waiting until park input not active
-          _Iavg_slowdown += measValues[M_Imot];
+          _Iavg_slowdown1 += measValues[M_Imot];
           _avg_counter ++;
           if( measValues[M_Park] == 0 ) {
             // Park switch not active anymore
@@ -345,40 +345,115 @@ void CalibrationScreen::process()
           }
           break;
         case 3: // Measuring and waiting until park input active
-          _Iavg_slowdown += measValues[M_Imot];
+          _Iavg_slowdown1 += measValues[M_Imot];
           _avg_counter ++;
           if( measValues[M_Park] == 1 ) {
 
             // Park switch active, cycle complete!
-            _Iavg_slowdown /= _avg_counter;
-            _t_slowdown = measValues[M_tCycl];
+            _Iavg_slowdown1 /= _avg_counter;
+            _t_slowdown1 = measValues[M_tCycl];
 
-            Serial.print( " _Iavg_slowdown = " );
-            Serial.print( _Iavg_slowdown );
-            Serial.print( " _t_slowdown = " );
-            Serial.print( _t_slowdown );
+            Serial.print( " _Iavg_slowdown1 = " );
+            Serial.print( _Iavg_slowdown1 );
+            Serial.print( " _t_slowdown1 = " );
+            Serial.print( _t_slowdown1 );
             Serial.println();
 
             // Check if conditions are met
-            if( _Iavg_slowdown < _Iavg_normal * 2 ) {
+            float Ilow  = _Iavg_normal * 1.7;
+            float Ihigh = _Iavg_normal * 2.3;
+            
+            if( _Iavg_slowdown1 < Ilow ) {
               // Current not sufficient for measurement
-              _Iavg_slowdown = 0;
+              _Iavg_slowdown1 = 0;
               _avg_counter = 0;
               _subStep = 2;
-            } else if( _Iavg_slowdown > _Iavg_normal * 3 ) {
+            } else if( _Iavg_slowdown1 > Ihigh ) {
               // Too much current for measurement
-              _Iavg_slowdown = 0;
+              _Iavg_slowdown1 = 0;
+              _avg_counter = 0;
+              _subStep = 2;
+            } else {
+              // Measurement successful
+              _step = (CalibrationScreenStep) ( (byte)_step + 1 );
+            }
+          }
+          break;
+      }
+      break;
+    
+    case CSM_MOTOR_SLOWDOWN2:
+      if( _prevStep != _step ) { // First time in this case
+        _subStep = 0;
+      }
+      switch( _subStep ) {
+        case 0: // Before measuring, waiting until park input not active
+          if( measValues[M_Park] == 0 ) {
+            _subStep++;
+          }
+          break;
+        case 1: // Before measuring, waiting until park input active
+          if( measValues[M_Park] == 1 ) {
+            // Park switch is now active, start measurement!
+            _Iavg_slowdown2 = 0;
+            _avg_counter = 0;
+            _subStep = 2;
+          }
+          break;
+        case 2: // Measuring and waiting until park input not active
+          _Iavg_slowdown2 += measValues[M_Imot];
+          _avg_counter ++;
+          if( measValues[M_Park] == 0 ) {
+            // Park switch not active anymore
+            _subStep++;
+          }
+          break;
+        case 3: // Measuring and waiting until park input active
+          _Iavg_slowdown2 += measValues[M_Imot];
+          _avg_counter ++;
+          if( measValues[M_Park] == 1 ) {
+
+            // Park switch active, cycle complete!
+            _Iavg_slowdown2 /= _avg_counter;
+            _t_slowdown2 = measValues[M_tCycl];
+
+            Serial.print( " _Iavg_slowdown = " );
+            Serial.print( _Iavg_slowdown2 );
+            Serial.print( " _t_slowdown = " );
+            Serial.print( _t_slowdown2 );
+            Serial.println();
+
+            // Check if conditions are met
+            float Ilow  = _Iavg_normal * 2.7;
+            float Ihigh = _Iavg_normal * 3.3;
+            
+            if( _Iavg_slowdown2 < Ilow ) {
+              // Current not sufficient for measurement
+              _Iavg_slowdown2 = 0;
+              _avg_counter = 0;
+              _subStep = 2;
+            } else if( _Iavg_slowdown2 > Ihigh ) {
+              // Too much current for measurement
+              _Iavg_slowdown2 = 0;
               _avg_counter = 0;
               _subStep = 2;
             } else {
               // Measurement successful
               // Calculate motor constants Ri and Kv
-              float Vmot = VmotOverrule;
-              settings[S_Ri] = (_t_slowdown * Vmot - _t_normal * Vmot) / (_Iavg_slowdown * _t_slowdown - _Iavg_normal * _t_normal);
-              settings[S_Kv] = 60 / (_t_normal * ( Vmot - _Iavg_normal * settings[S_Ri] ));
-
-              _step = CSM_COMPLETED;
-              VmotOverrule = 0; // Stop the motor
+              float Ri = (_t_slowdown1 * VmotOverrule - _t_normal * VmotOverrule) / (_Iavg_slowdown1 * _t_slowdown1 - _Iavg_normal * _t_normal);
+              float& Vmot = VmotOverrule;
+              settings[S_Kv] = (60 * (_Iavg_normal * _Iavg_normal * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _Iavg_slowdown2 * _t_slowdown2 * _t_normal - _Iavg_normal * _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal + _Iavg_normal * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2)) / (_t_slowdown1 * _t_slowdown2 * _t_normal * Vmot * (_Iavg_slowdown2 - _Iavg_normal) * (-_Iavg_normal * _Iavg_slowdown1 + _Iavg_normal * _Iavg_slowdown2 + _Iavg_slowdown1 * _Iavg_slowdown1 - _Iavg_slowdown1 * _Iavg_slowdown2));
+              settings[S_Ri0] = (Vmot * (_Iavg_normal * _Iavg_normal * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 + _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal)) / (_Iavg_normal * _Iavg_normal * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _Iavg_slowdown2 * _t_slowdown2 * _t_normal - _Iavg_normal * _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal + _Iavg_normal * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2);
+              settings[S_RiIdep] = (-_Iavg_normal * _t_slowdown1 * _t_normal * Vmot + _Iavg_normal * _t_slowdown2 * _t_normal * Vmot - _Iavg_slowdown1 * _t_slowdown1 * _t_slowdown2 * Vmot + _Iavg_slowdown1 * _t_slowdown1 * _t_normal * Vmot + _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 * Vmot - _Iavg_slowdown2 * _t_slowdown2 * _t_normal * Vmot) / (_Iavg_normal * _Iavg_normal * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _Iavg_slowdown2 * _t_slowdown2 * _t_normal - _Iavg_normal * _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal + _Iavg_normal * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2);
+              Serial.print( " Kv = " );
+              Serial.print( settings[S_Kv] );
+              Serial.print( " Ri0 = " );
+              Serial.print( settings[S_Ri0] );
+              Serial.print( " RiIdep = " );
+              Serial.print( settings[S_RiIdep] );
+              Serial.println();
+              // Measurement successful
+              _step = (CalibrationScreenStep) ( (byte)_step + 1 );
             }
           }
           break;
@@ -532,24 +607,34 @@ void CalibrationScreen::draw()
       }
       break;
 
-    case CSM_MOTOR_SLOWDOWN:
+    case CSM_MOTOR_SLOWDOWN1:
+    case CSM_MOTOR_SLOWDOWN2:
       if( _prevStep != _step ) {
         lcd.clear();
         lcd.printxy( 3, 0, F("Slow down") );
-        lcd.printxy( 1, 1, F("\x7F the motor") );
-        lcd.printxy( 1, 2, F("\x7F by hand.") );
+        lcd.printxy( 3, 1, F("the motor") );
+        lcd.printxy( 3, 2, F("by hand.") );
+        // Draw 2 arrows
+        lcd.printxy( 1, (_step == CSM_MOTOR_SLOWDOWN1) ? 2 : 0, "\x7F" );
+        lcd.printxy( 1, 1, "\x7F" );
         showButtons = Cancel;
       }
 
       // Draw a graph of motor current
-      vgraph.draw( measValues[M_Imot], 0.5 * _Iavg_normal, 4.5 * _Iavg_normal, 0, 3, 0 ); // Arrows will be between 2 and 3 * _Iavg_normal motor current
+      {
+        float Ibot  = _Iavg_normal * ( ( _step == CSM_MOTOR_SLOWDOWN1 ) ? 0.7 : 1.1 );
+        float Itop  = _Iavg_normal * ( ( _step == CSM_MOTOR_SLOWDOWN1 ) ? 3.1 : 3.5 );
+        float Ilow  = _Iavg_normal * ( ( _step == CSM_MOTOR_SLOWDOWN1 ) ? 1.7 : 2.7 );
+        float Ihigh = _Iavg_normal * ( ( _step == CSM_MOTOR_SLOWDOWN1 ) ? 2.3 : 3.3 );
+        vgraph.draw( measValues[M_Imot], Ibot, Itop, 0, 3, 0 );
 
-      if( measValues[M_Imot] < 2 * _Iavg_normal ) {
-        lcd.printxy( 3, 3, F("Use more force") );
-      } else if( measValues[M_Imot] > 3 * _Iavg_normal ) {
-        lcd.printxy( 3, 3, F("Use less force") );
-      } else {
-        lcd.printxy( 3, 3, F("Measuring...  ") );
+        if( measValues[M_Imot] < Ilow ) {
+          lcd.printxy( 3, 3, F("Use more force") );
+        } else if( measValues[M_Imot] > Ihigh ) {
+          lcd.printxy( 3, 3, F("Use less force") );
+        } else {
+          lcd.printxy( 3, 3, F("Measuring...  ") );
+        }
       }
       break;
 
