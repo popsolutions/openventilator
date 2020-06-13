@@ -151,64 +151,64 @@ void MainScreen::draw()
     vgraph.draw( col[0], 0.0, 40.0, x, 3, 0 );
     x++;
   }
-
-  // Show measurements
-  for( byte y=0; y<4; y++ ) {
-    // Which measurement to display?
-    char buf[20];
-    Meas meas = _measSel[y];
-
-    buf[0] = ' ';
-
-    // Copy string from PROGMEM
-    strcpy_P( buf+1, (char *)pgm_read_word( &(measStrings_P[meas]) ) );
-    strpad( buf+1, ' ', 6 );
-
-    // Read precision from PROGMEM
-    byte prec = pgm_read_byte( &(measPrecisions_P[meas]) );
-
-    // Format the value
-    format_float( buf+6, measValues[meas], 5, prec, true );
-    strpad( buf+6, ' ', 19-6 );
-
-    // Show alarm indicator *
-    if( false && blinker ) { // TODO check alarms
-      buf[11] = '*';
-    } else {
-      buf[11] = ' ';
-    }
-
-    if( _mode == MSM_VALUES_AND_SETPOINTS ) {
-      // Show linked setting
-      Sett linkedSetting = findMeasSett( meas );
-      if( linkedSetting ) {
-        // Read settings properties from PROGMEM
-        FloatProps settProps = getSettingsProps( linkedSetting );
-
-        format_float( buf+14, settings[linkedSetting], 5, settProps.precision, true );
-
-        // Now that we have the data, determine where edit cursor should be put
-        if( _editLine == y ) {
-          
-          char precisionShift = settProps.precision > 0 ? settProps.precision + 1 : 0;
-          char digitToModify;
-
-          // Make a simple log10-like function. The real one uses 400 program bytes or so...
-          if( settProps.stepSize < 0.1 ) { digitToModify = -3; }
-          else if( settProps.stepSize < 1 ) { digitToModify = -2; }
-          else if( settProps.stepSize < 10 ) { digitToModify = 0; }
-          else if( settProps.stepSize < 100 ) { digitToModify = 1; }
-          else { digitToModify = 2; }
-
-          cursorY = 19 - digitToModify - precisionShift;
-        }
+  if( _mode == MSM_VALUES_AND_SETPOINTS || _mode == MSM_HALF_GRAPH_AND_VALUES) {
+    // Show measurements
+    for( byte y=0; y<4; y++ ) {
+      // Which measurement to display?
+      char buf[20];
+      Meas meas = _measSel[y];
+  
+      buf[0] = ' ';
+  
+      // Copy string from PROGMEM
+      strcpy_P( buf+1, (char *)pgm_read_word( &(measStrings_P[meas]) ) );
+      strpad( buf+1, ' ', 6 );
+  
+      // Read precision from PROGMEM
+      byte prec = pgm_read_byte( &(measPrecisions_P[meas]) );
+  
+      // Format the value
+      format_float( buf+6, measValues[meas], 5, prec, true );
+      strpad( buf+6, ' ', 19-6 );
+  
+      // Show alarm indicator *
+      if( false && blinker ) { // TODO check alarms
+        buf[11] = '*';
+      } else {
+        buf[11] = ' ';
       }
-      buf[19] = 0; // terminator    WHY?
+      if( _mode == MSM_VALUES_AND_SETPOINTS ) {
+        // Show linked setting
+        Sett linkedSetting = findMeasSett( meas );
+        if( linkedSetting ) {
+          // Read settings properties from PROGMEM
+          FloatProps settProps = getSettingsProps( linkedSetting );
+  
+          format_float( buf+14, settings[linkedSetting], 5, settProps.precision, true );
+  
+          // Now that we have the data, determine where edit cursor should be put
+          if( _editLine == y ) {
+            
+            char precisionShift = settProps.precision > 0 ? settProps.precision + 1 : 0;
+            char digitToModify;
+  
+            // Make a simple log10-like function. The real one uses 400 program bytes or so...
+            if( settProps.stepSize < 0.1 ) { digitToModify = -3; }
+            else if( settProps.stepSize < 1 ) { digitToModify = -2; }
+            else if( settProps.stepSize < 10 ) { digitToModify = 0; }
+            else if( settProps.stepSize < 100 ) { digitToModify = 1; }
+            else { digitToModify = 2; }
+  
+            cursorY = 19 - digitToModify - precisionShift;
+          }
+        }
+        buf[19] = 0; // terminator    WHY?
+      }
+      else {
+        buf[12] = 0; // terminator
+      }
+      lcd.printxy( x, y, buf );
     }
-    else {
-      buf[12] = 0; // terminator
-    }
-    lcd.printxy( x, y, buf );
   }
   if ( _editLine >= 0 ) {
     lcd.setCursor( cursorY, _editLine );
