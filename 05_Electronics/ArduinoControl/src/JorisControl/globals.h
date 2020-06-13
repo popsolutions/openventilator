@@ -120,6 +120,9 @@ extern void switchScreen( Screen* newScreen );
 extern Sett findMeasSett( Meas );
 FloatProps getSettingsProps( Sett sett );
 extern bool isAlarmActiveForMeas( Meas );
+
 extern void setDefaultSettings();
+extern void loadSettingsFromEEPROM();
+extern void saveSettingsIntoEEPROM();
 
 #endif

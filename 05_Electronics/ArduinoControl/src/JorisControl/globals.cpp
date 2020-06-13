@@ -25,6 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include "globals.h"
+#include <EEPROM.h>
 
 MainScreen* mainScreen = new MainScreen;
 MenuScreen* menuScreen = new MenuScreen;
@@ -70,7 +71,7 @@ const FloatProps settingsProps_P[S_NUM_SETT] PROGMEM =
   { 1, 0, 20, 1 }, // S_RRDeviation %
   { 1, 1,  6, 0.1 }, // S_EI
   { 0, 0, 20, 1 }, // S_EIDeviation %
-  { 0,100,1000,5 }, // S_Vt
+  { 0, 0,1000,5 }, // S_Vt
   { 0, 1, 20, 1 }, // S_VtDeviation %
   { 1, 0, 20, 0.1 }, // S_VE
   { 1, 0, 20, 1 }, // S_VEDeviation %
@@ -106,6 +107,7 @@ bool& assistEnabled = (bool&) settings[S_AssistEnabled]; // This bool is stored 
 
 float VmotOverrule = NAN; // Overrule voltage for motor, NAN if in operational mode (not stored in EEPROM)
 float motorSpeedSetpoint; // Currently set motor speed in RPM/min (not stored in EEPROM)
+
 
 void strpad( char* buf, char chr, byte len )
 {
@@ -187,4 +189,37 @@ FloatProps getSettingsProps( Sett sett )
 void setDefaultSettings()
 {
   memcpy_P( settings, defaultSettings_P, sizeof(settings) );
+}
+
+void loadSettingsFromEEPROM()
+{
+  byte checksum = sizeof( settings) & 0xFF; // This way if size changes this also results in mismatch
+  byte* ptr = (byte*) &settings;
+  for( int n=0; n<sizeof(settings); n++ ) {
+    byte val = EEPROM.read( n+1 );
+    *ptr = val;
+    ptr ++;
+    checksum += val;
+  }
+  
+  if( checksum != EEPROM.read( 0 )) {
+    Serial.println( F("EEPROM checksum mismatch, setting default settings") );
+    setDefaultSettings();
+  }
+  else {
+    Serial.println( F("Loaded settings from EEPROM") );
+  }
+}
+
+void saveSettingsIntoEEPROM()
+{
+  byte checksum = sizeof( settings) & 0xFF; // This way if size changes this also results in mismatch
+  byte* ptr = (byte*) &settings;
+  for( int n=0; n<sizeof(settings); n++ ) {
+    EEPROM.update( n+1, *ptr );
+    ptr ++;
+    checksum += *((byte*) &settings + n );
+  }
+  EEPROM.update( 0, checksum );
+  Serial.println( F("Saved settings into EEPROM") );
 }

@@ -66,6 +66,7 @@ void MainScreen::process()
         case KEY_ENTER:
           if( _editLine >= 0 ) {
             _editLine = -1;
+            saveSettingsIntoEEPROM();
           }
           else {
             switchScreen( menuScreen );
@@ -75,6 +76,9 @@ void MainScreen::process()
         case KEY_1:
         case KEY_2:
         case KEY_3:
+          if ( _editLine != 0 ) {
+            saveSettingsIntoEEPROM();
+          }
           if ( _editLine != pressedKey - KEY_0 ) {
             // Check if this line has a setting
             Meas meas = _measSel[ pressedKey - KEY_0 ];
@@ -109,7 +113,7 @@ void MainScreen::process()
               // Adjust the value
               settings[linkedSetting] = coerce_float( settings[linkedSetting] + settProps.stepSize * rotMove, settProps.lowLimit, settProps.highLimit );
             }
-            // TODO: limits!
+            // TODO: special actions (Accept) for PEEP and volumes and possibly RR if minute volume regulation is chosen
           }
       }
   }

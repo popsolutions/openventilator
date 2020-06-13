@@ -469,6 +469,7 @@ void CalibrationScreen::process()
     case CSM_CANCELLED:
       if( _prevStep != _step ) { // First time in this case
         VmotOverrule = 0; // Stop the motor
+        saveSettingsIntoEEPROM();
       }
       switch( pressedKey ) {
         case KEY_0:

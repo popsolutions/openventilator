@@ -68,8 +68,9 @@ FloatMenuItem ImotOffsetMI( PSTR("ImotOffset"), settings[S_ImotOffset], true, &s
 FloatMenuItem Ri0MI( PSTR("Ri0"), settings[S_Ri0], true, &settingsProps_P[S_Ri0] );
 FloatMenuItem RiIdepMI( PSTR("RiIdep"), settings[S_RiIdep], true, &settingsProps_P[S_RiIdep] );
 FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], true, &settingsProps_P[S_Kv] );
+ActionMenuItem FactoryDefaultsMI( PSTR("Factory defaults"), setDefaultSettings );
 
-MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &ImotOffsetMI, &Ri0MI, &RiIdepMI, &KvMI, NULL};
+MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &ImotOffsetMI, &Ri0MI, &RiIdepMI, &KvMI, &FactoryDefaultsMI, NULL};
 Menu calibrationMenu( PSTR("Calibration"), calibrationMenuList );
 
 MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &measurementMenu, &calibrationMenu, NULL};
@@ -281,4 +282,5 @@ void MenuScreen::onLeave()
   Serial.println( F("MenuScreen::onLeave()") );
   lcd.noBlink();
   switchMenu( NULL );
+  saveSettingsIntoEEPROM();
 }

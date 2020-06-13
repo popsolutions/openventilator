@@ -117,10 +117,10 @@ void setup() {
 
   pinMode( DIN_MOTOR_PARK, INPUT_PULLUP );
 
-  setDefaultSettings();
-
   Serial.print( freeMemory() );
   Serial.println( F(" bytes free") );
+  
+  loadSettingsFromEEPROM();
 }
 
 void get_inputs()
