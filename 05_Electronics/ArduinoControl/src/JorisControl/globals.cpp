@@ -110,52 +110,91 @@ float motorSpeedSetpoint; // Currently set motor speed in RPM/min (not stored in
 
 
 void strpad( char* buf, char chr, byte len )
+// Always supply a buffer of at least size len + 1
 {
   // Fill string to <len> characters, and add a termination char
-  for( byte pos=strlen( buf ); pos < len; pos ++ ) buf[pos] = ' ';
+  for( byte pos=strlen( buf ); pos < len; pos ++ ) buf[pos] = chr;
   buf[len] = 0; // terminate string
 }
 
-char* format_float( char* buf, float value, byte maxlen, byte precision, bool allow_shift, bool right_align )
+
+char* format_float( char* buf, float value, byte len, byte prec, bool right_align )
 // Always supply a buffer of at least size len + 1
+// In contrast to dtostrf, this function is safe for length
 {
   buf[0] = 0;
-  if( precision + 2 > maxlen ) { return buf; } // seriously, did you really ask for this?
-
-  byte int_len;
-  byte frac_len = (precision == 0 ) ? 0 : (precision + 1);
-
-  if( value < 10 && value > -10 ) int_len = 1;
-  else if( value < 100 && value > -100 ) int_len = 2;
-  else if( value < 1000 && value > -1000 ) int_len = 3;
-  else if( value < 10000 && value > -10000 ) int_len = 4;
-  else if( value < 100000 & value > -100000 ) int_len = 5;
-  else if( value < 1000000 & value > -1000000 ) int_len = 6;
-  else int_len = 7; // Too large
-  if( value < 0 ) int_len ++; // Minus symbol
+  byte sign_len, int_len, frac_len;
+  byte pos;
   
-  if( int_len >= 7 || int_len > maxlen || ( !allow_shift && (int_len + frac_len > maxlen)  )) { // number is too large
-    for( byte n=0; n<maxlen; n++ ) buf[n] = '#'; 
-    buf[maxlen] = 0;
+  if( value == INFINITY ) {
+    if( right_align ) strpad( buf, ' ', len-4 );
+    strncpy_P( right_align?(buf+len-4):buf, PSTR("+INF"), len );
+    buf[len] = 0;
+    return buf;
+  } 
+  if( value == -INFINITY ) {
+    if( right_align ) strpad( buf, ' ', len-4 );
+    strncpy_P( right_align?(buf+len-4):buf, PSTR("-INF"), len );
+    buf[len] = 0;
     return buf;
   }
-  // From this moment on we can safely call the unsafe dtostrf function
-  // Now do alignment
-  if( right_align && int_len + frac_len < maxlen ) {
-    strpad( buf, ' ', maxlen - int_len - frac_len );
-    dtostrf( value, int_len + frac_len, precision, buf + maxlen - int_len - frac_len );
+  if( isnan( value ) ) {
+    if( right_align ) strpad( buf, ' ', len-3 );
+    strncpy_P( right_align?(buf+len-3):buf, PSTR("NAN"), len );
+    buf[len] = 0;
+    return buf;
   }
-  else {
-    dtostrf( value, maxlen, precision, buf );
-    strpad( buf, ' ', maxlen );
+
+  { // Rounding
+    long rounding = 2;
+    for( byte i = 0; i < prec; ++i )
+      rounding *= 10;     
+    if( value >= 0 ) value += 1.0 / rounding;
+    else             value -= 1.0 / rounding;
   }
-  buf[maxlen] = 0;
+  // Find out length of int part
+  for( int_len = 1; int_len < 20; int_len ++, value *= 0.1 ) // Value is divided by 10 every step
+    if( value < 10 && value > -10 ) break; // found correct size, only 1 digit before decimal point now
+
+  frac_len = ( prec == 0 ) ? 0 : prec + 1;
+  sign_len = ( value < 0 ); // Minus symbol
+
+  // Does the number fit?
+  if( len < sign_len + int_len + frac_len ) {
+    strpad( buf, '#', len );
+    return buf;
+  }
+  
+  // Determine position of first char
+  pos = 0;
+  if( right_align ) { 
+    byte first_pos = len - sign_len - int_len - frac_len;
+    for( ; pos < first_pos; pos++ ) buf[pos] = ' ';
+  }
+
+  // Place minus symbol
+  if( value < 0 ) {
+    buf[pos++] = '-';
+    value = -value;
+  }
+
+  // Print the digits
+  for( byte n=1; n < int_len + frac_len; n++ ) {
+    byte digit = (byte)value;
+    buf[pos++] = '0' + digit;
+    if( n == int_len && pos < len ) {
+      buf[pos++] = '.';
+    }
+    value = ( value - digit ) * 10;
+  }
+  buf[pos] = 0;
+  strpad( buf, ' ', len );
+  
   return buf;
 }
 
 void switchScreen( Screen* newScreen )
 {
-  Serial.println( F("switchScreen") );
   if( activeScreen != NULL ) {
     activeScreen->onLeave();
   }
@@ -175,7 +214,6 @@ Sett findMeasSett( Meas meas )
       return (Sett) a.sett;
     }
   }
-  Serial.println( "NONE" );
   return S_NONE;
 }
 

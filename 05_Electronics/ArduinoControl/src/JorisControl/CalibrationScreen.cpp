@@ -28,6 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "CalibrationScreen.h"
 #include "MenuScreen.h"
 
+// #define DEBUG_CAL
+
 CalibrationScreen::CalibrationScreen()
 :
   _step( CSM_ASK_CONTINUE )
@@ -209,22 +211,27 @@ void CalibrationScreen::process()
           if( _step == CSM_CURRENT_LOW_RUNNING ) {
             _Iavg_lowV = _Iavg;
             _motorCurrent_lowV = _editValue - _supplyCurrentIdle_lowV - (measValues[M_Vsup]-0.6)/1000 - 3.8/1000;
-            Serial.print( " _Iavg_lowV = " );
+            
+            #ifdef DEBUG_CAL
+            Serial.print( F(" _Iavg_lowV = ") );
             Serial.print( _Iavg_lowV );
-            Serial.print( " _motorCurrent_lowV = " );
+            Serial.print( F(" _motorCurrent_lowV = ") );
             Serial.print( _motorCurrent_lowV );
             Serial.println();
+            #endif
           }
           else {
             float Iavg_highV = _Iavg;
             _motorCurrent_highV = _editValue - _supplyCurrentIdle_highV - (measValues[M_Vsup]-0.6)/1000 - 3.8/1000;
-
-            Serial.print( " Iavg_highV = " );
+            
+            #ifdef DEBUG_CAL
+            Serial.print( F(" Iavg_highV = ") );
             Serial.print( Iavg_highV );
-            Serial.print( " _motorCurrent_highV = " );
+            Serial.print( F(" _motorCurrent_highV = ") );
             Serial.print( _motorCurrent_highV );
             Serial.println();
-
+            #endif
+            
             // Calculate offset, where the current crosses the axis
             float ImotOffset = _motorCurrent_highV - ( _motorCurrent_highV - _motorCurrent_lowV ) / ( Iavg_highV - _Iavg_lowV ) * Iavg_highV;
 
@@ -285,11 +292,14 @@ void CalibrationScreen::process()
             // Park switch active, cycle complete!
             _Iavg_normal /= _avg_counter;
             _t_normal = measValues[M_tCycl];
-            Serial.print( " _Iavg_normal = " );
+
+            #ifdef DEBUG_CAL
+            Serial.print( F(" _Iavg_normal = ") );
             Serial.print( _Iavg_normal );
-            Serial.print( " _t_normal = " );
+            Serial.print( F(" _t_normal = ") );
             Serial.print( _t_normal );
             Serial.println();
+            #endif
 
             // Check if conditions are met
             if( _t_normal > 4.3 ) {
@@ -353,11 +363,13 @@ void CalibrationScreen::process()
             _Iavg_slowdown1 /= _avg_counter;
             _t_slowdown1 = measValues[M_tCycl];
 
-            Serial.print( " _Iavg_slowdown1 = " );
+            #ifdef DEBUG_CAL
+            Serial.print( F(" _Iavg_slowdown1 = ") );
             Serial.print( _Iavg_slowdown1 );
-            Serial.print( " _t_slowdown1 = " );
+            Serial.print( F(" _t_slowdown1 = ") );
             Serial.print( _t_slowdown1 );
             Serial.println();
+            #endif
 
             // Check if conditions are met
             float Ilow  = _Iavg_normal * 1.7;
@@ -417,11 +429,13 @@ void CalibrationScreen::process()
             _Iavg_slowdown2 /= _avg_counter;
             _t_slowdown2 = measValues[M_tCycl];
 
-            Serial.print( " _Iavg_slowdown = " );
+            #ifdef DEBUG_CAL
+            Serial.print( F(" _Iavg_slowdown = ") );
             Serial.print( _Iavg_slowdown2 );
-            Serial.print( " _t_slowdown = " );
+            Serial.print( F(" _t_slowdown = ") );
             Serial.print( _t_slowdown2 );
             Serial.println();
+            #endif
 
             // Check if conditions are met
             float Ilow  = _Iavg_normal * 2.7;
@@ -445,13 +459,17 @@ void CalibrationScreen::process()
               settings[S_Kv] = (60 * (_Iavg_normal * _Iavg_normal * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _Iavg_slowdown2 * _t_slowdown2 * _t_normal - _Iavg_normal * _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal + _Iavg_normal * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2)) / (_t_slowdown1 * _t_slowdown2 * _t_normal * Vmot * (_Iavg_slowdown2 - _Iavg_normal) * (-_Iavg_normal * _Iavg_slowdown1 + _Iavg_normal * _Iavg_slowdown2 + _Iavg_slowdown1 * _Iavg_slowdown1 - _Iavg_slowdown1 * _Iavg_slowdown2));
               settings[S_Ri0] = (Vmot * (_Iavg_normal * _Iavg_normal * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 + _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal)) / (_Iavg_normal * _Iavg_normal * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _Iavg_slowdown2 * _t_slowdown2 * _t_normal - _Iavg_normal * _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal + _Iavg_normal * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2);
               settings[S_RiIdep] = (-_Iavg_normal * _t_slowdown1 * _t_normal * Vmot + _Iavg_normal * _t_slowdown2 * _t_normal * Vmot - _Iavg_slowdown1 * _t_slowdown1 * _t_slowdown2 * Vmot + _Iavg_slowdown1 * _t_slowdown1 * _t_normal * Vmot + _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 * Vmot - _Iavg_slowdown2 * _t_slowdown2 * _t_normal * Vmot) / (_Iavg_normal * _Iavg_normal * _Iavg_slowdown1 * _t_slowdown1 * _t_normal - _Iavg_normal * _Iavg_normal * _Iavg_slowdown2 * _t_slowdown2 * _t_normal - _Iavg_normal * _Iavg_slowdown1 * _Iavg_slowdown1 * _t_slowdown1 * _t_normal + _Iavg_normal * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown2 * _t_normal + _Iavg_slowdown1 * _Iavg_slowdown1 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2 - _Iavg_slowdown1 * _Iavg_slowdown2 * _Iavg_slowdown2 * _t_slowdown1 * _t_slowdown2);
-              Serial.print( " Kv = " );
+              
+              #ifdef DEBUG_CAL
+              Serial.print( F(" Kv = ") );
               Serial.print( settings[S_Kv] );
-              Serial.print( " Ri0 = " );
+              Serial.print( F(" Ri0 = ") );
               Serial.print( settings[S_Ri0] );
-              Serial.print( " RiIdep = " );
+              Serial.print( F(" RiIdep = ") );
               Serial.print( settings[S_RiIdep] );
               Serial.println();
+              #endif
+              
               // Measurement successful
               _step = (CalibrationScreenStep) ( (byte)_step + 1 );
             }
@@ -493,7 +511,6 @@ void CalibrationScreen::process()
 
 void CalibrationScreen::onEnter()
 {
-  Serial.println( F("CalibrationScreen::onEnter()") );
   lcd.clear();
   _step = CSM_ASK_CONTINUE;
   _prevStep = CSM_COMPLETED; // Force redraw
@@ -502,7 +519,6 @@ void CalibrationScreen::onEnter()
 
 void CalibrationScreen::onLeave()
 {
-  Serial.println( F("CalibrationScreen::onLeave()") );
 }
 
 void CalibrationScreen::draw()
@@ -551,7 +567,7 @@ void CalibrationScreen::draw()
         lcd.blink();
         showButtons = OK_Cancel;
       }
-      format_float( buf, _editValue, 4, 1, true, true );
+      format_float( buf, _editValue, 4, 1, true );
       lcd.printxy( 16, 2, buf );
       lcd.setCursor( 19, 2 ); // Force placing cursor
       break;
@@ -594,7 +610,7 @@ void CalibrationScreen::draw()
         lcd.blink();
         showButtons = OK_Cancel;
       }
-      format_float( buf, _editValue, 5, 2, true, true );
+      format_float( buf, _editValue, 5, 2, true );
       lcd.printxy( 15, 2, buf );
       lcd.setCursor( 19, 2 ); // Force placing cursor
       break;

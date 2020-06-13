@@ -122,116 +122,93 @@ void MainScreen::process()
 void MainScreen::onEnter()
 {
   vgraph.prepare();
-  Serial.println( F("MainScreen::onEnter()") );
 }
 
 void MainScreen::onLeave()
 {
-  Serial.println( F("MainScreen::onLeave()") );
 }
 
 void MainScreen::draw()
 {
   byte cursorY;
-
   bool blinker = ( ( (byte) circBuf.getHeadPos() & 7 ) < 5);
+  byte x = 0;
+  
+  lcd.noBlink();
+  if( _mode == MSM_HALF_GRAPH_AND_VALUES || _mode == MSM_FULL_GRAPH ) {
+    // Draw graph of history
+    float col[19];
+    byte num_rows = ( _mode == MSM_HALF_GRAPH_AND_VALUES ) ? 7 : 19;
+    long start_pos = (( circBuf.getHeadPos() - num_rows * _graphCompression ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
+    circBuf.getCompressedColumn( 0, start_pos, num_rows * _graphCompression, _graphCompression, col );
+    vgraph.drawMultiple( num_rows, col, 0.0, 40.0, x, 3, 0 );
+    x += num_rows;
+  }
+  {
+    float col[1];
+    // Draw single-widthbar with current pressure
+    circBuf.getColumn( 0, -1, 1, col );
+    vgraph.draw( col[0], 0.0, 40.0, x, 3, 0 );
+    x++;
+  }
 
-  switch( _mode ) {
-    case MSM_FULL_GRAPH:
-      // Draw graph of history
-      {
-        float col[20];
-        int num_rows = num_rows = 19 * _graphCompression;
-        long start_pos = (( circBuf.getHeadPos() - num_rows ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
-        circBuf.getCompressedColumn( 0, start_pos, num_rows, _graphCompression, col );
-        vgraph.drawMultiple( 19, col, 0.0, 40.0, 0, 3, 0 );
+  // Show measurements
+  for( byte y=0; y<4; y++ ) {
+    // Which measurement to display?
+    char buf[20];
+    Meas meas = _measSel[y];
 
-        // Draw single-widthbar with current pressure
-        circBuf.getColumn( 0, -1, 1, col );
-        vgraph.draw( col[0], 0.0, 40.0, 19, 3, 0 );
-      }
-      break;
-      
-    case MSM_HALF_GRAPH_AND_VALUES:
-    case MSM_VALUES_AND_SETPOINTS:
-      byte x = 0;
-      lcd.noBlink();
-      if( _mode == MSM_HALF_GRAPH_AND_VALUES ) {
-        // Draw graph of history
-        float col[20];
-        int num_rows = 7 * _graphCompression;
-        long start_pos = (( circBuf.getHeadPos() - num_rows ) / _graphCompression ) * _graphCompression; // calculate startpos with multiples of _graphCompression to prevent strange-looking scrolling
-        circBuf.getCompressedColumn( 0, start_pos, num_rows, _graphCompression, col );
-        vgraph.drawMultiple( 7, col, 0.0, 40.0, x, 3, 0 );
-        x+=7;
-      }
-      {
-        float col[1];
-        // Draw single-widthbar with current pressure
-        circBuf.getColumn( 0, -1, 1, col );
-        vgraph.draw( col[0], 0.0, 40.0, x, 3, 0 );
-        x++;
-      }
+    buf[0] = ' ';
 
-      // Show measurements
-      for( byte y=0; y<4; y++ ) {
-        // Which measurement to display?
-        char buf[20];
-        Meas meas = _measSel[y];
+    // Copy string from PROGMEM
+    strcpy_P( buf+1, (char *)pgm_read_word( &(measStrings_P[meas]) ) );
+    strpad( buf+1, ' ', 6 );
 
-        buf[0] = ' ';
+    // Read precision from PROGMEM
+    byte prec = pgm_read_byte( &(measPrecisions_P[meas]) );
 
-        // Copy string from PROGMEM
-        strcpy_P( buf+1, (char *)pgm_read_word( &(measStrings_P[meas]) ) );
-        strpad( buf+1, ' ', 6 );
- 
-        // Read precision from PROGMEM
-        byte prec = pgm_read_byte( &(measPrecisions_P[meas]) );
+    // Format the value
+    format_float( buf+6, measValues[meas], 5, prec, true );
+    strpad( buf+6, ' ', 19-6 );
 
-        // Format the value
-        format_float( buf+6, measValues[meas], 5, prec, false, true );
-        strpad( buf+6, ' ', 19-6 );
+    // Show alarm indicator *
+    if( false && blinker ) { // TODO check alarms
+      buf[11] = '*';
+    } else {
+      buf[11] = ' ';
+    }
 
-        // Show alarm indicator *
-        if( false && blinker ) { // TODO check alarms
-          buf[11] = '*';
-        } else {
-          buf[11] = ' ';
+    if( _mode == MSM_VALUES_AND_SETPOINTS ) {
+      // Show linked setting
+      Sett linkedSetting = findMeasSett( meas );
+      if( linkedSetting ) {
+        // Read settings properties from PROGMEM
+        FloatProps settProps = getSettingsProps( linkedSetting );
+
+        format_float( buf+14, settings[linkedSetting], 5, settProps.precision, true );
+
+        // Now that we have the data, determine where edit cursor should be put
+        if( _editLine == y ) {
+          
+          char precisionShift = settProps.precision > 0 ? settProps.precision + 1 : 0;
+          char digitToModify;
+
+          // Make a simple log10-like function. The real one uses 400 program bytes or so...
+          if( settProps.stepSize < 0.1 ) { digitToModify = -3; }
+          else if( settProps.stepSize < 1 ) { digitToModify = -2; }
+          else if( settProps.stepSize < 10 ) { digitToModify = 0; }
+          else if( settProps.stepSize < 100 ) { digitToModify = 1; }
+          else { digitToModify = 2; }
+
+          cursorY = 19 - digitToModify - precisionShift;
         }
-
-        if( _mode == MSM_VALUES_AND_SETPOINTS ) {
-          // Show linked setting
-          Sett linkedSetting = findMeasSett( meas );
-          if( linkedSetting ) {
-            // Read settings properties from PROGMEM
-            FloatProps settProps = getSettingsProps( linkedSetting );
-
-            format_float( buf+14, settings[linkedSetting], 5, settProps.precision, false, true );
-
-            // Now that we have the data, determine where edit cursor should be put
-            if( _editLine == y ) {
-              
-              char precisionShift = settProps.precision > 0 ? settProps.precision + 1 : 0;
-              char digitToModify;
-
-              // Make a simple log10-like function. The real one uses 400 program bytes or so...
-              if( settProps.stepSize < 0.1 ) { digitToModify = -3; }
-              else if( settProps.stepSize < 1 ) { digitToModify = -2; }
-              else if( settProps.stepSize < 10 ) { digitToModify = 0; }
-              else if( settProps.stepSize < 100 ) { digitToModify = 1; }
-              else { digitToModify = 2; }
-
-              cursorY = 19 - digitToModify - precisionShift;
-            }
-          }
-          buf[19] = 0; // terminator    WHY?
-        }
-        else {
-          buf[12] = 0; // terminator
-        }
-        lcd.printxy( x, y, buf );
       }
-      break;
+      buf[19] = 0; // terminator    WHY?
+    }
+    else {
+      buf[12] = 0; // terminator
+    }
+    lcd.printxy( x, y, buf );
   }
   if ( _editLine >= 0 ) {
     lcd.setCursor( cursorY, _editLine );

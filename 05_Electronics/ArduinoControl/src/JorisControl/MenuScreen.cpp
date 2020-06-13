@@ -43,37 +43,31 @@ FloatMenuItem EIDeviationMI( PSTR("EI deviation %"), settings[S_EIDeviation], tr
 
 MenuItem * alarmMenuList[] = {&pMaxMI, &PEEPDeviationMI, &RRDeviationMI, NULL};
 Menu alarmMenu( PSTR("Alarm"), alarmMenuList );
-
+/*
 BoolMenuItem assistEnableMI( PSTR("Assist Control"), assistEnabled, true );
 FloatMenuItem assistThresholdMI( PSTR("Assist Threshold"), settings[S_AssistThreshold], true, &settingsProps_P[S_AssistThreshold] );
 FloatMenuItem assistMaxRRMI( PSTR("Assist Max RR"), settings[S_AssistMaxRR], true, &settingsProps_P[S_AssistMaxRR] );
-
-MenuItem * settingsMenuList[] = {&assistEnableMI, &assistThresholdMI, &assistMaxRRMI, NULL};
+*/
+MenuItem * settingsMenuList[] = {/*&assistEnableMI, &assistThresholdMI, &assistMaxRRMI,*/ NULL};
 Menu settingsMenu( PSTR("Settings"), settingsMenuList );
 
-FloatMenuItem pressureMI( PSTR("Pressure"), measValues[M_p], false, PDATA( FloatProps, { 1, 0, 0, 0 } ) );
-//FloatMenuItem flowMI( PSTR("Flow"), measValues[M_Q], false, PDATA( FloatProp, { 1, 0, 0, 0 } ) ); // l/s
-FloatMenuItem VsupplyMI( PSTR("Vsupply"), measValues[M_Vsup], false, PDATA( FloatProps, { 1, 0, 0, 0 } ) );
-FloatMenuItem ImotorMI( PSTR("Imotor"), measValues[M_Imot], false, PDATA( FloatProps, { 2, 0, 0, 0 } ) );
-
-MenuItem * measurementMenuList[] = {&pressureMI, &VsupplyMI, &ImotorMI, NULL};
-Menu measurementMenu( PSTR("Measurements"), measurementMenuList );
-
 ActionMenuItem calibMI( PSTR("Calibrate"), activateCalibrationScreen );
+/*
 FloatMenuItem PoffsetMI( PSTR("pOffset"), settings[S_pOffset], false, &settingsProps_P[S_pOffset] );
 FloatMenuItem QoffsetMI( PSTR("pQoffset"), settings[S_pQoffset], false, &settingsProps_P[S_pQoffset] );
 FloatMenuItem VsupFactorMI( PSTR("VsupplyFactor"), settings[S_VsupFactor], true, &settingsProps_P[S_VsupFactor] );
 FloatMenuItem ImotShuntConductanceMI( PSTR("ImotShuntCond"), settings[S_ImotShuntConductance], true, &settingsProps_P[S_ImotShuntConductance] );
 FloatMenuItem ImotOffsetMI( PSTR("ImotOffset"), settings[S_ImotOffset], true, &settingsProps_P[S_ImotOffset] );
+*/
 FloatMenuItem Ri0MI( PSTR("Ri0"), settings[S_Ri0], true, &settingsProps_P[S_Ri0] );
 FloatMenuItem RiIdepMI( PSTR("RiIdep"), settings[S_RiIdep], true, &settingsProps_P[S_RiIdep] );
 FloatMenuItem KvMI( PSTR("Kv"), settings[S_Kv], true, &settingsProps_P[S_Kv] );
 ActionMenuItem FactoryDefaultsMI( PSTR("Factory defaults"), setDefaultSettings );
 
-MenuItem * calibrationMenuList[] = {&calibMI, &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &ImotOffsetMI, &Ri0MI, &RiIdepMI, &KvMI, &FactoryDefaultsMI, NULL};
+MenuItem * calibrationMenuList[] = {&calibMI, /* &PoffsetMI, &QoffsetMI, &VsupFactorMI, &ImotShuntConductanceMI, &ImotOffsetMI, */ &Ri0MI, &RiIdepMI, &KvMI, &FactoryDefaultsMI, NULL};
 Menu calibrationMenu( PSTR("Calibration"), calibrationMenuList );
 
-MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &measurementMenu, &calibrationMenu, NULL};
+MenuItem * mainMenuList[] = {&settingsMenu, &alarmMenu, &calibrationMenu, NULL};
 Menu mainMenu( PSTR("Menu"), mainMenuList );
 
 #define CH_TRIANGLE_LEFT 1
@@ -112,7 +106,6 @@ MenuScreen::MenuScreen()
 
 void MenuScreen::process()
 {
-  char buf[21];
   MenuItem* item = _selection > 0 ? _activeMenu->getItem( _selection - 1 ) : NULL;
 
   Key pressedKey = keySc.getKey();
@@ -255,7 +248,6 @@ void MenuScreen::draw()
 
 void MenuScreen::switchMenu( Menu* newMenu )
 {
-  Serial.println( F("MenuScreen::switchMenu()") );
   if ( _activeMenu != newMenu ) {
     _activeMenu = newMenu;
   }
@@ -267,7 +259,6 @@ void MenuScreen::switchMenu( Menu* newMenu )
 void MenuScreen::onEnter()
 {
   byte buf[8];
-  Serial.println( F("MenuScreen::onEnter()") );
   if( _activeMenu == NULL ) {
     switchMenu( &mainMenu ); // If you set a menu before going to the menu screen, that will be shown.
   }
@@ -279,7 +270,6 @@ void MenuScreen::onEnter()
 
 void MenuScreen::onLeave()
 {
-  Serial.println( F("MenuScreen::onLeave()") );
   lcd.noBlink();
   switchMenu( NULL );
   saveSettingsIntoEEPROM();

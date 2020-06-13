@@ -62,7 +62,7 @@ Key KeyScanner::getKey()
         #ifdef DEBUG_KEYS
           Serial.print( F("directKey pressed at ") );
           Serial.print( x );
-          Serial.print( ": " );
+          Serial.print( F(": ") );
           Serial.println( foundKey );
         #endif
         break;
@@ -80,9 +80,9 @@ Key KeyScanner::getKey()
             #ifdef DEBUG_KEYS
               Serial.print( F("matrixKey pressed at ") );
               Serial.print( x );
-              Serial.print( ", " );
+              Serial.print( F(", ") );
               Serial.print( y );
-              Serial.print( ": " );
+              Serial.print( F(": ") );
               Serial.println( foundKey );
             #endif
             break;

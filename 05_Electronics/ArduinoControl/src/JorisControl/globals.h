@@ -112,7 +112,7 @@ inline int coerce_int( int in, int low, int high )
 
 extern void strpad( char* buf, char chr, byte len );
 
-extern char* format_float( char* buf, float value, byte len, byte precision, bool allow_shift, bool right_align );
+extern char* format_float( char* buf, float value, byte len, byte precision, bool right_align );
 // Always supply a buffer of at least size len + 1
 
 extern void switchScreen( Screen* newScreen );

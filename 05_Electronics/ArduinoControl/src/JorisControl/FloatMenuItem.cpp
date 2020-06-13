@@ -48,7 +48,7 @@ void FloatMenuItem::generateText( char* buf, byte maxLength )
   buf[maxLength] = 0; // terminate
   strpad( buf, ' ', maxLength );
   
-  format_float( buf+maxLength-5, _value, 5, data.precision, true, true );
+  format_float( buf+maxLength-5, _value, 5, data.precision, true );
 }
 
 byte FloatMenuItem::getEditCursorPos( byte maxLength )

@@ -98,8 +98,8 @@ long peak_ts = 0;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin( 115200 );
-  if( circBuf.init( 1, 160 ) != 0 ) {
-    Serial.println( "Buffer allocation failed" );
+  if( circBuf.init( 1, 200 ) != 0 ) {
+    Serial.println( F("Buffer allocation failed") );
   }
   ADCR.init( 125 ); // This sets averaging. On Arduino Uno (on 16 MHz), you will get 250 samples per 13 seconds (sorry I couldn't get a nicer fraction). That's one every 52 ms exactly.
   keySc.init();
@@ -143,13 +143,6 @@ void get_inputs()
   // => Vmot = ( PWM * (Vsup+Vschottky) + 250 * -Vschottky ) / 250
   Vmot = ( OCR1B * (Vsup+0.4) - 100 ) / 250; // This is calculated one cycle after setting it, to have all the measured values be from the same moment in time
   park = digitalRead( DIN_MOTOR_PARK );
-
-/*
-  Serial.print( " VA[0]=" );
-  Serial.print( VA[0] );
-  Serial.print( " VA[1]=" );
-  Serial.print( VA[1] );
-*/
 
   // Add data to circular buffer
   float row[1];
@@ -197,9 +190,20 @@ void set_outputs()
 {
   float Vsup = measValues[M_Vsup];
 
+  float new_motorSpeedSetpoint;
   // Calculate new speed setpoint
-  motorSpeedSetpoint = settings[S_RR];
-
+  if( measValues[M_Pos] < 180 ) {
+    // tInsp / tExp = IE;
+    // tInsp = 1 / (settings[S_EI]+1) * 60 / settings[S_RR];
+    // tExp = (settings[S_EI] / (settings[S_EI]+1)) * 60 / settings[S_RR];
+    // motorSpeedSetpoint = 60 / (2 * t);
+    new_motorSpeedSetpoint = settings[S_RR] * ( settings[S_EI] + 1 ) / 2;
+  }
+  else {
+    new_motorSpeedSetpoint = settings[S_RR] * ( settings[S_EI] + 1 ) / ( 2 * settings[S_EI] );
+  }
+  motorSpeedSetpoint = coerce_float( new_motorSpeedSetpoint, motorSpeedSetpoint-4, motorSpeedSetpoint+4 ); // Prevent rising too quickly
+  
   // Is voltage overrule set?
   float Vmot = VmotOverrule;
   if( isnan(Vmot) ) {
@@ -219,23 +223,6 @@ void set_outputs()
   // =>  PWM = (250 * (Vmot + Vschottky)) / (Vsup + Vschottky)
   byte PWM = Vmot == 0 ? 0 : coerce_int( (249 * (Vmot + 0.4)) / (Vsup + 0.4), 0, 249 );
   analogWrite( DOUT_MOTOR_PWM, PWM );
-
-/*
-  // Debug output: current values (this takes a while, that's why it's done after setting output)
-  Serial.print( " Vsup=" );
-  Serial.print( measValues[M_Vsup] );
-  Serial.print( " Imot=" );
-  Serial.print( measValues[M_Imot] );
-  Serial.print( " p=" );
-  Serial.print( measValues[M_p] );
-  Serial.print( " Q=" );
-  Serial.print( measValues[M_Q] );
-  Serial.print( " park=" );
-  Serial.print( measValues[M_Park] );
-  Serial.print( " Vmot=" );
-  Serial.print( measValues[M_Vmot] );
-  Serial.println();
-*/
 }
 
 void loop() {
