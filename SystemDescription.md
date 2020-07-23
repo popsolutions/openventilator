@@ -86,7 +86,7 @@ Because the pressure on the PUMP port is low (even lower than the ambient pressu
 
 _Figure: Inspiration phase, overpressure condition_
 
-The highest pressure in the pump or lung is always present on the OVP tube. The maximum allowable pressure in the system can be set with the depth of the OVP tube. If the pressure is higher than the hydrostatic pressure of the water at the end of the tube, the air will bubble out. There is a one-way valve in this line, so that the peak pressure stays present in the tube for some time after a pump stroke. This prevents excessive water level changes. In a water column with transparent tubes, you can therefore read the peak pressure on the OVP tube.
+The maximum allowable pressure in the system can be set with the depth of the OVP tube in the water column. If the pressure on the PUMP or EXP port is higher than the hydrostatic pressure of the water at the end of the OVP tube, the air will escape through the OVP port into the water column. There is a one-way valve in this line, so that the peak pressure stays present in the tube for some time after a pump stroke. This prevents excessive water level changes. In a water column with transparent tubes, you can therefore read the peak pressure on the OVP tube.
 
 The overpressure condition does not damage the machine. The set maximum pressure can even be used to get Pressure Control mode of ventilation, by selecting a large air displacement volume and a limited maximum pressure.
 
