@@ -16,7 +16,7 @@ It does not give a phase signal (such as present in the Spartan model), indicati
 
 - 0.6 m Wooden beam of 20x40 mm up to 25x50 mm
 
-- A piece of roughly 6 mm thick MDF to make the motor mount and the disks from. Not too thick or the motor doesn't fit. Not too thin or it doesn't clamp the bellows well. Instead you can use 5 or 6 mm acylic, which doesn't release fibers. (Maybe for hygiene issues too, although exhaled air never comes in the pump). 
+- A piece of roughly 6 mm thick MDF to make the motor mount and the disks from. Not too thick or the motor doesn't fit. Not too thin or it doesn't clamp the bellows well. Instead you can use 5 or 6 mm acrylic, which doesn't release fibers. (Maybe for hygiene issues too, although exhaled air never comes in the pump). 
 
 - 1 m Aluminium, copper or steel rods or tubes of around 10 mm. Slightly different size will also work. Make sure to have a drill for this size.
 
