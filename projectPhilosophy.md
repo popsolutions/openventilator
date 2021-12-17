@@ -4,7 +4,7 @@
 
 Do you have a solution for a problem that only works in your country or city? So then it isn`t a solutions is a new problem. The day humanity starts thinking about a global and interconected society as a hole we will evolve as a society to a new level. 
 
-A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism projects. We believe in a OpenSource and Free Society where knoledges and essential resources are determined and distributed by the needs of eachone and not by how much you can pay for it.
+A solution that can only be reproduced in rich countries is selfish and a characteristic of imperialism projects. We believe in a OpenSource and Free Society where knowledges and essential resources are determined and distributed by the needs of eachone and not by how much you can pay for it.
 
 This is not Socialism and neither a Capitalism ideal, this is a Hippie idea that began in the 1960s. The idea of free knowledge, the idea of Ubuntu, free software, open access to knowledge sources. The idea that if alone we can go fast, together we can go further. 
 
