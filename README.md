@@ -20,7 +20,7 @@ Design, Build, Validate a reliable Ventilation Medical Equipment Project for peo
 
 ## Technical highlights
 
-OpenVentilor has adjustable PEEP and maximum pressure threshold, with a wide range. It has adjustable timing for the inspiratory and expiratory phases, allowing a wide range of BPM and I/E. The volume per breath is adjustable mechanically.
+OpenVentilator has adjustable PEEP and maximum pressure threshold, with a wide range. It has adjustable timing for the inspiratory and expiratory phases, allowing a wide range of BPM and I/E. The volume per breath is adjustable mechanically.
 
 # Getting Started
 Summary
